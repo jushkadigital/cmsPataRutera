@@ -18,6 +18,7 @@ config/secrets.yml
 # Ignorar directorios específicos
 node_modules/
 /assets/
+/public/media
 /.idea/*
 !/.idea/runConfigurations
 
