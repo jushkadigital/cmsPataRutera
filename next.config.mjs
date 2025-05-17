@@ -14,6 +14,7 @@ const nextConfig = {
 
         return config
     },
+   output: 'standalone',
   images: {
     remotePatterns: [
       ...[NEXT_PUBLIC_SERVER_URL /* 'https://example.com' */].map((item) => {
