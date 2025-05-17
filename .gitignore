@@ -19,6 +19,7 @@ config/secrets.yml
 node_modules/
 /assets/
 public/media/*
+!public/media/.gitkeep
 /.idea/*
 !/.idea/runConfigurations
 
