@@ -25,14 +25,17 @@
     "@payloadcms/plugin-seo": "3.33.0",
     "@payloadcms/richtext-lexical": "3.33.0",
     "@payloadcms/translations": "3.33.0",
+    "@payloadcms/ui": "^3.38.0",
     "@tailwindcss/postcss": "^4.1.4",
+    "clsx": "^2.1.1",
     "cross-env": "^7.0.3",
     "graphql": "^16.8.1",
     "next": "15.3.0",
     "payload": "3.33.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "sharp": "0.32.6"
+    "sharp": "0.32.6",
+    "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
