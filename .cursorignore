@@ -1,0 +1,13 @@
+# Ignorar todos los archivos en el directorio dist
+.next
+.pnpm-store
+
+# Ignorar todos los archivos con extensión .log
+*.log
+
+# Ignorar archivos de configuración sensibles
+config/secrets.yml
+**/credentials.json
+
+# Ignorar directorios específicos
+node_modules/

@@ -1,0 +1,48 @@
+//@import "tailwindcss";
+
+// --- Custom List Item Icon Styles ---
+
+/* Hide default list marker when a custom icon is active */
+.custom-list-item-active {
+  list-style: none !important; /* Use !important to override potential theme styles */
+  position: relative; /* Needed for absolute positioning of pseudo-element */
+  /* Add some padding to make space for the icon */
+  padding-left: 2em; /* Adjust as needed */
+}
+
+/* Style the ::before pseudo-element to show the icon */
+.custom-list-item-active::before {
+  content: ''; /* Default empty content */
+  position: absolute;
+  left: 0;
+  top: 0.1em; /* Adjust vertical alignment slightly */
+  width: 1.5em; /* Adjust size */
+  height: 1.5em; /* Adjust size */
+  line-height: 1.5em; /* Match height for vertical centering */
+  text-align: center;
+  /* Prevent text selection */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Specific icon content */
+.custom-list-item-check::before {
+  content: '✅';
+}
+
+.custom-list-item-warning::before {
+  content: '⚠️';
+}
+
+/* Optional: Adjust alignment for ordered lists if needed */
+/* ol > li.custom-list-item-active { */
+  /* Maybe different padding or positioning needed for OL numbers */
+/* } */
+
+/* Optional: Style adjustments for checklist items if derived from ListItemNode */
+/* li[role="checkbox"].custom-list-item-active { */
+  /* Different styling/positioning might be needed */
+/* } */
+

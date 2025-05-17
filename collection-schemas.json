@@ -1,0 +1,740 @@
+[
+  {
+    "slug": "users",
+    "labels": {
+      "singular": "User",
+      "plural": "Users"
+    },
+    "admin": {
+      "useAsTitle": "email"
+    },
+    "timestamps": true,
+    "auth": {
+      "cookies": {
+        "sameSite": "Lax",
+        "secure": false
+      },
+      "forgotPassword": {},
+      "lockTime": 600000,
+      "loginWithUsername": false,
+      "maxLoginAttempts": 5,
+      "tokenExpiration": 7200,
+      "verify": false,
+      "strategies": []
+    },
+    "fields": [
+      {
+        "name": "firstName",
+        "type": "text",
+        "label": "First Name",
+        "admin": {}
+      },
+      {
+        "name": "lastName",
+        "type": "text",
+        "label": "Last Name",
+        "admin": {}
+      },
+      {
+        "name": "roles",
+        "type": "select",
+        "label": "Roles",
+        "required": true,
+        "admin": {},
+        "options": [
+          {
+            "label": "Admin",
+            "value": "admin"
+          },
+          {
+            "label": "Editor",
+            "value": "editor"
+          },
+          {
+            "label": "User",
+            "value": "user"
+          }
+        ]
+      },
+      {
+        "name": "updatedAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      },
+      {
+        "name": "createdAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      },
+      {
+        "name": "email",
+        "type": "email",
+        "required": true,
+        "unique": true,
+        "admin": {}
+      },
+      {
+        "name": "resetPasswordToken",
+        "type": "text"
+      },
+      {
+        "name": "resetPasswordExpiration",
+        "type": "date"
+      },
+      {
+        "name": "salt",
+        "type": "text"
+      },
+      {
+        "name": "hash",
+        "type": "text"
+      },
+      {
+        "name": "loginAttempts",
+        "type": "number",
+        "defaultValue": 0
+      },
+      {
+        "name": "lockUntil",
+        "type": "date"
+      }
+    ]
+  },
+  {
+    "slug": "media",
+    "labels": {
+      "singular": "Media",
+      "plural": "Media"
+    },
+    "admin": {
+      "useAsTitle": "filename"
+    },
+    "timestamps": true,
+    "fields": [
+      {
+        "name": "alt",
+        "type": "text",
+        "label": "Alt",
+        "required": true,
+        "admin": {}
+      },
+      {
+        "name": "updatedAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      },
+      {
+        "name": "createdAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      },
+      {
+        "name": "url",
+        "type": "text",
+        "label": "URL",
+        "admin": {
+          "readOnly": true,
+          "hidden": true
+        }
+      },
+      {
+        "name": "thumbnailURL",
+        "type": "text",
+        "label": "Thumbnail URL",
+        "admin": {
+          "readOnly": true,
+          "hidden": true
+        }
+      },
+      {
+        "name": "filename",
+        "type": "text",
+        "unique": true,
+        "index": true,
+        "admin": {
+          "readOnly": true,
+          "hidden": true
+        }
+      },
+      {
+        "name": "mimeType",
+        "type": "text",
+        "label": "MIME Type",
+        "admin": {
+          "readOnly": true,
+          "hidden": true
+        }
+      },
+      {
+        "name": "filesize",
+        "type": "number",
+        "admin": {
+          "readOnly": true,
+          "hidden": true
+        }
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "admin": {
+          "readOnly": true,
+          "hidden": true
+        }
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "admin": {
+          "readOnly": true,
+          "hidden": true
+        }
+      },
+      {
+        "name": "focalX",
+        "type": "number",
+        "label": "Focal X",
+        "admin": {
+          "hidden": true,
+          "width": "50%",
+          "description": "Focal point X coordinate (e.g., 0-100)"
+        }
+      },
+      {
+        "name": "focalY",
+        "type": "number",
+        "label": "Focal Y",
+        "admin": {
+          "hidden": true,
+          "width": "50%",
+          "description": "Focal point Y coordinate (e.g., 0-100)"
+        }
+      },
+      {
+        "name": "sizes",
+        "type": "group",
+        "fields": [
+          {
+            "name": "thumbnail",
+            "type": "group",
+            "label": "thumbnail",
+            "fields": [
+              {
+                "name": "url",
+                "type": "text",
+                "label": "URL",
+                "admin": {
+                  "readOnly": true,
+                  "hidden": true
+                }
+              },
+              {
+                "name": "width",
+                "type": "number",
+                "admin": {
+                  "readOnly": true,
+                  "hidden": true
+                }
+              },
+              {
+                "name": "height",
+                "type": "number",
+                "admin": {
+                  "readOnly": true,
+                  "hidden": true
+                }
+              },
+              {
+                "name": "mimeType",
+                "type": "text",
+                "label": "MIME Type",
+                "admin": {
+                  "readOnly": true,
+                  "hidden": true
+                }
+              },
+              {
+                "name": "filesize",
+                "type": "number",
+                "admin": {
+                  "readOnly": true,
+                  "hidden": true
+                }
+              },
+              {
+                "name": "filename",
+                "type": "text",
+                "unique": false,
+                "index": true,
+                "admin": {
+                  "readOnly": true,
+                  "hidden": true
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "pages",
+    "labels": {
+      "singular": "Page",
+      "plural": "Pages"
+    },
+    "admin": {
+      "useAsTitle": "title",
+      "defaultColumns": [
+        "title",
+        "slug",
+        "updatedAt"
+      ]
+    },
+    "timestamps": true,
+    "versions": {
+      "drafts": {
+        "autosave": {
+          "interval": 100
+        },
+        "schedulePublish": true,
+        "validate": false
+      },
+      "maxPerDoc": 50
+    },
+    "fields": [
+      {
+        "name": "title",
+        "type": "text",
+        "label": "Title",
+        "required": true,
+        "admin": {}
+      },
+      {
+        "type": "tabs"
+      },
+      {
+        "name": "publishedAt",
+        "type": "date",
+        "label": "Published At",
+        "admin": {
+          "position": "sidebar"
+        }
+      },
+      {
+        "name": "slug",
+        "type": "text",
+        "label": "Slug",
+        "index": true,
+        "admin": {
+          "position": "sidebar"
+        }
+      },
+      {
+        "name": "slugLock",
+        "type": "checkbox",
+        "label": "Slug Lock",
+        "defaultValue": true,
+        "admin": {
+          "hidden": true,
+          "position": "sidebar"
+        }
+      },
+      {
+        "name": "updatedAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      },
+      {
+        "name": "createdAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      },
+      {
+        "name": "_status",
+        "type": "select",
+        "index": true,
+        "defaultValue": "draft",
+        "admin": {}
+      }
+    ]
+  },
+  {
+    "slug": "tours",
+    "labels": {
+      "singular": "Tour",
+      "plural": "Tours"
+    },
+    "admin": {
+      "useAsTitle": "title",
+      "defaultColumns": [
+        "title",
+        "slug",
+        "updatedAt"
+      ]
+    },
+    "timestamps": true,
+    "fields": [
+      {
+        "name": "title",
+        "type": "text",
+        "label": "Title",
+        "required": true,
+        "admin": {}
+      },
+      {
+        "type": "tabs"
+      },
+      {
+        "name": "updatedAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      },
+      {
+        "name": "createdAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      }
+    ]
+  },
+  {
+    "slug": "ofertas",
+    "labels": {
+      "singular": "Oferta",
+      "plural": "Ofertas"
+    },
+    "admin": {
+      "useAsTitle": "title",
+      "description": "Manage special offers related to tours.",
+      "defaultColumns": [
+        "title",
+        "tourRelacionado",
+        "descuentoPorcentaje",
+        "updatedAt"
+      ]
+    },
+    "timestamps": true,
+    "fields": [
+      {
+        "name": "title",
+        "type": "text",
+        "label": "Offer Title",
+        "required": true,
+        "admin": {}
+      },
+      {
+        "name": "descripcion",
+        "type": "textarea",
+        "label": "Description",
+        "required": false,
+        "admin": {}
+      },
+      {
+        "name": "descuentoPorcentaje",
+        "type": "number",
+        "label": "Discount Percentage",
+        "required": true,
+        "admin": {
+          "description": "Enter the discount percentage (e.g., 10 for 10%)."
+        }
+      },
+      {
+        "name": "tourRelacionado",
+        "type": "relationship",
+        "label": "Related Tour",
+        "required": true,
+        "admin": {
+          "position": "sidebar"
+        },
+        "relationTo": "tours",
+        "hasMany": false
+      },
+      {
+        "name": "updatedAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      },
+      {
+        "name": "createdAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      }
+    ]
+  },
+  {
+    "slug": "payload-jobs",
+    "labels": {
+      "singular": "Payload Job",
+      "plural": "Payload Jobs"
+    },
+    "admin": {
+      "useAsTitle": "id",
+      "group": "System",
+      "hidden": true
+    },
+    "timestamps": true,
+    "fields": [
+      {
+        "name": "input",
+        "type": "json",
+        "label": "Input",
+        "admin": {
+          "description": "Input data provided to the job"
+        }
+      },
+      {
+        "name": "taskStatus",
+        "type": "json",
+        "label": "Task Status",
+        "admin": {}
+      },
+      {
+        "type": "tabs"
+      },
+      {
+        "name": "taskSlug",
+        "type": "select",
+        "label": "Task Slug",
+        "required": false,
+        "index": true,
+        "admin": {
+          "position": "sidebar"
+        },
+        "options": [
+          "inline",
+          "schedulePublish"
+        ]
+      },
+      {
+        "name": "queue",
+        "type": "text",
+        "label": "Queue",
+        "index": true,
+        "defaultValue": "default",
+        "admin": {
+          "position": "sidebar"
+        }
+      },
+      {
+        "name": "waitUntil",
+        "type": "date",
+        "label": "Wait Until",
+        "index": true,
+        "admin": {}
+      },
+      {
+        "name": "processing",
+        "type": "checkbox",
+        "label": "Processing",
+        "index": true,
+        "defaultValue": false,
+        "admin": {
+          "position": "sidebar"
+        }
+      },
+      {
+        "name": "updatedAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      },
+      {
+        "name": "createdAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      }
+    ]
+  },
+  {
+    "slug": "payload-locked-documents",
+    "labels": {
+      "singular": "Payload Locked Document",
+      "plural": "Payload Locked Documents"
+    },
+    "admin": {
+      "useAsTitle": "id",
+      "hidden": true
+    },
+    "timestamps": true,
+    "fields": [
+      {
+        "name": "document",
+        "type": "relationship",
+        "label": "Document",
+        "index": true,
+        "admin": {},
+        "relationTo": [
+          "users",
+          "media",
+          "pages",
+          "tours",
+          "ofertas",
+          "payload-jobs"
+        ]
+      },
+      {
+        "name": "globalSlug",
+        "type": "text",
+        "label": "Global Slug",
+        "index": true,
+        "admin": {}
+      },
+      {
+        "name": "user",
+        "type": "relationship",
+        "label": "User",
+        "required": true,
+        "admin": {},
+        "relationTo": [
+          "users"
+        ]
+      },
+      {
+        "name": "updatedAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      },
+      {
+        "name": "createdAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      }
+    ]
+  },
+  {
+    "slug": "payload-preferences",
+    "labels": {
+      "singular": "Payload Preference",
+      "plural": "Payload Preferences"
+    },
+    "admin": {
+      "useAsTitle": "id",
+      "hidden": true
+    },
+    "timestamps": true,
+    "fields": [
+      {
+        "name": "user",
+        "type": "relationship",
+        "label": "User",
+        "required": true,
+        "index": true,
+        "admin": {},
+        "relationTo": [
+          "users"
+        ]
+      },
+      {
+        "name": "key",
+        "type": "text",
+        "label": "Key",
+        "index": true,
+        "admin": {}
+      },
+      {
+        "name": "value",
+        "type": "json",
+        "label": "Value",
+        "admin": {}
+      },
+      {
+        "name": "updatedAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      },
+      {
+        "name": "createdAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      }
+    ]
+  },
+  {
+    "slug": "payload-migrations",
+    "labels": {
+      "singular": "Payload Migration",
+      "plural": "Payload Migrations"
+    },
+    "admin": {
+      "useAsTitle": "id",
+      "hidden": true
+    },
+    "timestamps": true,
+    "fields": [
+      {
+        "name": "name",
+        "type": "text",
+        "label": "Name",
+        "admin": {}
+      },
+      {
+        "name": "batch",
+        "type": "number",
+        "label": "Batch",
+        "admin": {}
+      },
+      {
+        "name": "updatedAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      },
+      {
+        "name": "createdAt",
+        "type": "date",
+        "index": true,
+        "admin": {
+          "hidden": true
+        }
+      }
+    ]
+  }
+]

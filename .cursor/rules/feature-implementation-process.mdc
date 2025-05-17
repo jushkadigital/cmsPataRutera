@@ -1,0 +1,35 @@
+---
+description: Guidelines for implementing new features - review /websitePayload/ directory demos first
+globs: 
+alwaysApply: false
+---
+# Feature Implementation Process
+
+When implementing a new feature, follow this thought process:
+
+1. **FIRST: Review Existing Demos in websitePayload**
+   - Look for similar features already implemented in the `/home/node/websitePayload` project
+   - Study the implementation patterns, component structure, and API usage
+   - Understand how the feature integrates with the rest of the application
+
+2. **Analyze Requirements**
+   - Break down the feature requirements
+   - Identify the components needed
+   - Map out data flow and state management
+
+3. **Plan Implementation**
+   - Determine which existing components can be reused
+   - Identify new components to be created
+   - Plan API integration strategy
+
+4. **Implement Following Project Patterns**
+   - Follow the same coding style, patterns, and architecture
+   - Maintain consistency with existing features
+   - Reuse existing utilities and helpers
+
+5. **Test and Validate**
+   - Ensure functionality works as expected
+   - Verify integration with existing systems
+   - Check for edge cases
+
+Always start by examining how similar features are implemented in the websitePayload project before writing new code. This ensures consistency and leverages existing solutions.
