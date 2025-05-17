@@ -95,8 +95,8 @@ export default buildConfig({
     fallbackLanguage: 'en'
   },
   // Add CORS configurationauthenticatedOrPublished
-  serverURL: 'http://localhost:3000',
-  cors: ['http://localhost:3000', 'http://localhost:4000'],
+  serverURL: process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000',
+  cors: [process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000', 'http://localhost:4000'],
   // Implementing endpoints
   endpoints: [
     healthCheckEndpoint,
