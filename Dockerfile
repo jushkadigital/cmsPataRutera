@@ -35,7 +35,7 @@ RUN npm install -g corepack@latest
 
 RUN if [ -f yarn.lock ]; then yarn run build; \
     elif [ -f package-lock.json ]; then npm run build; \
-    elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm build; \
+    elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm ci; \
     else echo "Lockfile not found." && exit 1; \
     fi
 
