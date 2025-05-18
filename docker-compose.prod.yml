@@ -4,12 +4,15 @@ services:
     build: .
     env_file:
       - .env
+    depends_on:
+      - postgres
     networks:
       # Conecta el servicio payload a la red externa para comunicarse con el proxy
       - proxiable
       # Conecta el servicio payload a la nueva red interna para comunicarse con la base de datos
       - db_network
 
+  
   postgres:
     restart: always
     image: postgres:latest
