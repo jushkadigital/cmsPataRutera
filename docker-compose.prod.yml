@@ -17,15 +17,12 @@ services:
       - db_network
 
   payload:
-    image: node:22-slim
+    build: .
     ports:
       - '3000:3000'
-    volumes:
-      - .:/home/node/app
     env_file:
       - .env
     working_dir: /home/node/app/
-    command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm install && pnpm dev"
     networks:
       # Conecta el servicio payload a la red externa para comunicarse con el proxy
       - proxiable
