@@ -40,6 +40,9 @@ import type { Page, Post as PostType } from './payload-types'
 // import { usersPlugin } from './plugins/core/users'
 // import { mediaPlugin } from './plugins/core/media'
 
+//Migrations
+import { migrations } from './migrations'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -77,6 +80,9 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
+    migrationDir: './src/migrations',
+    prodMigrations: migrations
+
   }),
   // database-adapter-config-end
   sharp,
