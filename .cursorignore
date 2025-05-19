@@ -1,7 +1,7 @@
 # Ignorar todos los archivos en el directorio dist
 .next
 .pnpm-store
-
+aoeu
 # Ignorar todos los archivos con extensión .log
 *.log
 
