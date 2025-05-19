@@ -27,6 +27,14 @@ services:
       - proxiable
       # Conecta el servicio payload a la nueva red interna para comunicarse con la base de datos
       - db_network
+  runner-dev:
+    build:
+      context: .
+      target: builder
+    command: sh
+    volumes:
+      - .:/home/node/app
+    tty: true
 volumes:
   pgdata:
 
