@@ -27,19 +27,19 @@ services:
       - proxiable
       # Conecta el servicio payload a la nueva red interna para comunicarse con la base de datos
       - db_network
-        #runner-dev:
-        #build:
-        #context: .
-        #target: builder
-        #command: sh
-        #volumes:
-        #- .:/home/node/app
-        #env_file:
-        #- .env
-        #tty: true
-        #networks:
+  runner-dev:
+    build:
+      context: .
+      target: builder
+    command: sh
+    volumes:
+      - .:/home/node/app
+    env_file:
+      - .env
+    tty: true
+    networks:
       # Conecta el servicio postgres a la nueva red interna para comunicarse con la aplicación
-      #- db_network
+      - db_network
 
 volumes:
   pgdata:
