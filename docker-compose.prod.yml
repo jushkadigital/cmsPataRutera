@@ -22,7 +22,6 @@ services:
       - '3000:3000'
     env_file:
       - .env
-    working_dir: /home/node/app/
     networks:
       # Conecta el servicio payload a la red externa para comunicarse con el proxy
       - proxiable
