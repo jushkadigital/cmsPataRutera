@@ -34,6 +34,8 @@ services:
     command: sh
     volumes:
       - .:/home/node/app
+    env_file:
+      - .env
     tty: true
     networks:
       # Conecta el servicio postgres a la nueva red interna para comunicarse con la aplicación
