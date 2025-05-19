@@ -35,6 +35,10 @@ services:
     volumes:
       - .:/home/node/app
     tty: true
+    networks:
+      # Conecta el servicio postgres a la nueva red interna para comunicarse con la aplicación
+      - db_network
+
 volumes:
   pgdata:
 
