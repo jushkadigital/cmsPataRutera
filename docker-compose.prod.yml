@@ -6,12 +6,10 @@ services:
       - .env
     depends_on:
       - postgres
-    networks:
-      # Conecta el servicio payload a la red externa para comunicarse con el proxy
-      - proxiable
-      # Conecta el servicio payload a la nueva red interna para comunicarse con la base de datos
-      - db_network
+    ports:
+      - '3000:3000'
 
+    
   
   postgres:
     restart: always
@@ -21,24 +19,12 @@ services:
     ports:
       - '5432:5432'
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: josue
       POSTGRES_DB: josue
-    networks:
-      # Conecta el servicio postgres a la nueva red interna para comunicarse con la aplicación
-      - db_network
+      POSTGRES_HOST_AUTH_METHOD: trust
 
+        
+    
 volumes:
   pgdata:
   node_modules:
-
-networks:
-  # Define la red externa existente para la comunicación con el proxy
-  proxiable:
-    external: true
-    name: proxiable # Asegúrate de que este nombre coincida exactamente con tu red externa
-
-  # Define una nueva red bridge interna para la comunicación entre la aplicación y la base de datos
-  db_network:
-    driver: bridge
-    # Docker Compose creará y gestionará esta red automáticamente
