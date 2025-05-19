@@ -3,7 +3,7 @@ services:
   
   postgres:
     restart: always
-    image: postgres:15
+    image: postgres:latest
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
@@ -17,13 +17,13 @@ services:
       - db_network
 
   payload:
-    build: .
-    depends_on:
-      - postgres
-    env_file:
-      - .env
+    image: node:22-slim
     ports:
       - '3000:3000'
+    volumes:
+      - .:/home/node/app
+    working_dir: /home/node/app/
+    command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm install && pnpm dev"
     networks:
       # Conecta el servicio payload a la red externa para comunicarse con el proxy
       - proxiable
