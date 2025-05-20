@@ -1,40 +1,25 @@
-import type { Payload, PayloadRequest, CollectionSlug } from 'payload'
+import { Endpoint, PayloadRequest } from 'payload'
 
-const collections: CollectionSlug[] = ['users', 'media']
+// Import your seed function (adjust the path if needed)
+import { seed } from '../../../seed'
 
-export const seed = async ({
-  payload,
-  req,
-}: {
-  payload: Payload
-  req: PayloadRequest
-}): Promise<void> => {
-  payload.logger.info('Seeding database...')
-
-  // Clear existing collections
-  payload.logger.info(`— Clearing collections...`)
-  await Promise.all(
-    collections.map((collection) => payload.db.deleteMany({ collection, req, where: {} })),
-  )
-
-  // Clear versions if the collection has versioning enabled
-  await Promise.all(
-    collections
-      .filter((collection) => Boolean(payload.collections[collection]?.config.versions))
-      .map((collection) => payload.db.deleteVersions({ collection, req, where: {} })),
-  )
-
-  payload.logger.info(`— Creating admin user...`)
-  
-  // Create admin user
-  await payload.create({
-    collection: 'users',
-    data: {
-      email: 'admin@example.com',
-      password: 'password',
-      roles: ['admin'],
-    },
-  })
-
-  payload.logger.info('✅ Seed completed successfully!')
-} 
+export const seedEndpoint: Endpoint = {
+  path: '/seed',
+  method: 'post',
+  handler: async (req: PayloadRequest) => {
+    try {
+      await seed()
+      return Response.json({
+        status: 'ok',
+        message: 'Seed completed successfully',
+        timestamp: new Date().toISOString(),
+      })
+    } catch (error: any) {
+      return Response.json({
+        status: 'error',
+        message: error.message,
+        timestamp: new Date().toISOString(),
+      }, { status: 500 })
+    }
+  },
+}

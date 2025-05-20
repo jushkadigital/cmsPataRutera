@@ -39,7 +39,7 @@ const readAssetAsBuffer = async (filename: string): Promise<{ buffer: Buffer, fi
 };
 
 
-const seed = async () => {
+export const seed = async () => {
     const payload = await getPayload({ config });
     await payload.logger.info('Seeding data...');
     payload.logger.info(`— Creating admin user...`)
@@ -1307,4 +1307,3 @@ const seed = async () => {
 }
 
 
-await seed()
