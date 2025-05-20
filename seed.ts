@@ -52,7 +52,7 @@ export const seed = async () => {
             roles: ['admin'],
         },
     })
-    const admin = await payload.create({
+    const admin2 = await payload.create({
         collection: 'users',
         data: {
             email: 'dorregaray20@gmail.com',
@@ -60,7 +60,7 @@ export const seed = async () => {
             roles: ['admin'],
         },
     })
-    const admin = await payload.create({
+    const admin3 = await payload.create({
         collection: 'users',
         data: {
             email: 'perudestinoseguro@gmail.com',
