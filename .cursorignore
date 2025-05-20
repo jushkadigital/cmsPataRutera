@@ -5,6 +5,7 @@ aoeu
 # Ignorar todos los archivos con extensión .log
 *.log
 
+
 # Ignorar archivos de configuración sensibles
 config/secrets.yml
 **/credentials.json
