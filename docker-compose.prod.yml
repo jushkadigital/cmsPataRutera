@@ -22,6 +22,8 @@ services:
       - '3000:3000'
     env_file:
       - .env
+    volumes:
+      - assets:/app/assets
     networks:
       # Conecta el servicio payload a la red externa para comunicarse con el proxy
       - proxiable
