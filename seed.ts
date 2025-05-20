@@ -52,6 +52,22 @@ export const seed = async () => {
             roles: ['admin'],
         },
     })
+    const admin = await payload.create({
+        collection: 'users',
+        data: {
+            email: 'dorregaray20@gmail.com',
+            password: '12345',
+            roles: ['admin'],
+        },
+    })
+    const admin = await payload.create({
+        collection: 'users',
+        data: {
+            email: 'perudestinoseguro@gmail.com',
+            password: '12345',
+            roles: ['admin'],
+        },
+    })
     payload.logger.info(`— Admin user created...`)
 
     // --- Example Reading Buffers (Async) ---
