@@ -43,6 +43,7 @@ import type { Page, Post as PostType } from './payload-types'
 //Migrations
 import { migrations } from './migrations'
 import { seedEndpoint } from './endpoints/seed'
+import { seeddEndpoint } from './endpoints/seedd'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -108,7 +109,8 @@ export default buildConfig({
   endpoints: [
     healthCheckEndpoint,
     configEndpoint,
-    seedEndpoint
+    seedEndpoint,
+    seeddEndpoint
   ],
   // Configure job queue for background tasks (if needed)
   jobs: {
