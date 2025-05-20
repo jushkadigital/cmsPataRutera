@@ -70,6 +70,7 @@ export const seed = async () => {
         readAssetAsBuffer('iconInfo.svg')
     ])
 
+    payload.logger.info(`— Complete read asset buffers (async)...`);
     const [icon1Doc, icon2Doc, icon3Doc, icon4Doc, icon5Doc, icon6Doc, icon7Doc, icon8Doc] = await Promise.all([
         payload.create(
             {
