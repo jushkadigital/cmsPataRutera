@@ -4,7 +4,7 @@ import { getPayload, RequiredDataFromCollectionSlug } from 'payload';
 import config from '@payload-config';
 import type { Media, TourCategory, Destination } from '@/payload-types'
 // Assuming 'assets' is relative to the Current Working Directory (CWD)
-const assetsDir = path.resolve('assets'); // Resolve assets dir relative to CWD
+//const assetsDir = path.resolve('assets'); // Resolve assets dir relative to CWD
 
 /**
  * Asynchronously reads an asset file into a Buffer.
@@ -13,9 +13,9 @@ const assetsDir = path.resolve('assets'); // Resolve assets dir relative to CWD
  * @returns A Promise resolving to a Buffer containing the file data.
  */
 const readAssetAsBuffer = async (filename: string): Promise<{ buffer: Buffer, filename: string }> => {
-    const filePath = path.join(assetsDir, filename);
+    //const filePath = path.join(assetsDir, filename);
+    const filePath = path.resolve('/app/assets',filename);
     console.log(`[readAssetAsBuffer] Attempting to access asset at: ${filePath}`);
-
     try {
         // Check if file exists and is accessible (async)
         await access(filePath); // Throws error if fails
