@@ -29,7 +29,7 @@ const readAssetAsBuffer = async (filename: string): Promise<{ buffer: Buffer, fi
         // Log specific error details
         if (error.code === 'ENOENT') {
             console.error(`[readAssetAsBuffer] Asset file not found at path: ${filePath}`);
-            console.error(`[readAssetAsBuffer] Assets directory resolved relative to CWD: ${assetsDir}`);
+            //console.error(`[readAssetAsBuffer] Assets directory resolved relative to CWD: ${assetsDir}`);
             throw new Error(`Asset file not found: ${filename}`);
         } else {
             console.error(`[readAssetAsBuffer] Error accessing or reading file ${filePath}:`, error);
