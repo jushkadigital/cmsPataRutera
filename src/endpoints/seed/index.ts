@@ -5,7 +5,7 @@ import { seed } from '../../../seed'
 
 export const seedEndpoint: Endpoint = {
   path: '/seed',
-  method: 'post',
+  method: 'get',
   handler: async (req: PayloadRequest) => {
     try {
       await seed()
