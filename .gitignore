@@ -22,6 +22,7 @@ public/media/*
 !public/media/.gitkeep
 /.idea/*
 !/.idea/runConfigurations
+/assetsCC/
 
 # testing
 /coverage
