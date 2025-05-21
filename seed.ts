@@ -3,6 +3,7 @@ import { access, readFile } from 'fs/promises'; // Import promise-based function
 import { getPayload, RequiredDataFromCollectionSlug } from 'payload';
 import config from '@payload-config';
 import type { Media, TourCategory, Destination } from '@/payload-types'
+import { projectGetSourceForAsset } from 'next/dist/build/swc/generated-native';
 // Assuming 'assets' is relative to the Current Working Directory (CWD)
 const assetsDir = path.resolve('assets'); // Resolve assets dir relative to CWD
 
@@ -42,6 +43,8 @@ const readAssetAsBuffer = async (filename: string): Promise<{ buffer: Buffer, fi
 export const seed = async () => {
     const payload = await getPayload({ config });
     await payload.logger.info('Seeding data...');
+
+    payload.logger.info(process.env.NODE_ENV)
     payload.logger.info(`— Creating admin user...`)
     // Create admin user
     const admin = await payload.create({

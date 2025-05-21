@@ -1,17 +1,17 @@
 import { Endpoint, PayloadRequest } from 'payload'
 
 // Import your seed function (adjust the path if needed)
-import { seed } from '../../../seed'
+import { removeSeed } from '../../../seedRemove'
 
-export const seeddEndpoint: Endpoint = {
-    path: '/seedd',
+export const removeSeedEndpoint: Endpoint = {
+    path: '/removeseed',
     method: 'get',
     handler: async (req: PayloadRequest) => {
         try {
-            await seed()
+            await removeSeed({ req })
             return Response.json({
                 status: 'ok',
-                message: 'Seed completed successfully',
+                message: 'Seed removed successfully',
                 timestamp: new Date().toISOString(),
             })
         } catch (error: any) {
