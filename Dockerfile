@@ -52,6 +52,7 @@ RUN adduser --system --uid 1001 nextjs
 
 # Remove this line if you do not have this folder
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/seed ./seed
 
 RUN chown -R nextjs:nodejs /app/public
 RUN chown -R nextjs:nodejs /app/seed
