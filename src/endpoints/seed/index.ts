@@ -11,7 +11,7 @@ export const seedEndpoint: Endpoint = {
     try {
       if (process.env.NODE_ENV === 'production') {
         const pathProd = '/app/seed/seed.js'
-        const seedModule = await import(pathProd)
+        const seedModule = await import('file://' + pathProd)
         await seedModule.seed()
         return Response.json({
           status: 'ok',
