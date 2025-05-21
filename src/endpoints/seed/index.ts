@@ -10,7 +10,7 @@ export const seedEndpoint: Endpoint = {
   handler: async (req: PayloadRequest) => {
     try {
       if (process.env.NODE_ENV === 'production') {
-        const pathProd = 'file://app/seed/seed.js'
+        const pathProd = 'file:///app/seed/seed.js'
         const seedModule = await import(pathProd)
         await seedModule.seed()
         return Response.json({
