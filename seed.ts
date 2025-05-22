@@ -1312,7 +1312,7 @@ export const seed = async () => {
                         titleText: "Destinos",
                         tag: "h2",
                         size: "medium",
-                        textColor: "#2970B7",
+                        textColor: "#FFFFFF",
                         underlineColor: "#EFBA06"
                     }
                 }
