@@ -9,23 +9,12 @@ export const seedEndpoint: Endpoint = {
   method: 'get',
   handler: async (req: PayloadRequest) => {
     try {
-      if (process.env.NODE_ENV === 'production') {
-        const pathProd = '/app/seed/seed.js'
-        const seedModule = await import(pathProd)
-        await seedModule.seed()
-        return Response.json({
-          status: 'ok',
-          message: 'Seed completed successfully',
-          timestamp: new Date().toISOString(),
-        })
-      } else {
-        await seed()
-        return Response.json({
-          status: 'ok',
-          message: 'Seed completed successfully',
-          timestamp: new Date().toISOString(),
-        })
-      }
+      await seed()
+      return Response.json({
+        status: 'ok',
+        message: 'Seed completed successfully',
+        timestamp: new Date().toISOString(),
+      })
     } catch (error: any) {
       return Response.json({
         status: 'error',
