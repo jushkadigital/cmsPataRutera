@@ -24,7 +24,6 @@ services:
       - .env
     volumes:
       - ./assets:/app/assets
-      - ./seed:/app/seed
     networks:
       # Conecta el servicio payload a la red externa para comunicarse con el proxy
       - proxiable
