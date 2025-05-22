@@ -296,7 +296,7 @@ export const Paquetes: CollectionConfig = {
     versions: {
         drafts: {
             autosave: {
-                interval: 3000, // We set this interval for optimal live preview
+                interval: 350, // We set this interval for optimal live preview
             },
             schedulePublish: true,
         },

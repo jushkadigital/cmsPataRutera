@@ -307,7 +307,7 @@ export const Tours: CollectionConfig = {
     versions: {
         drafts: {
             autosave: {
-                interval: 375 // We set this interval for optimal live preview
+                interval: 350 // We set this interval for optimal live preview
             },
             schedulePublish: true,
         },
