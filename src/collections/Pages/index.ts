@@ -26,6 +26,9 @@ import { ReconocimientosBlock } from '@/blocks/Reconocimientos/config'
 import { OfertasBlock } from '@/blocks/Ofertas/config'
 import { CarouselDestination } from '@/blocks/CarouselDestination/config'
 import { anyone } from '@/access/anyone'
+import { TikTokLinksBlock } from '@/blocks/TikTokLinksBlock/config'
+import { BeneficiosBlock } from '@/blocks/Beneficios/config'
+import { EstadisticasBlock } from '@/blocks/EstadisticasBlock/config'
 
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -82,7 +85,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [RowBlock, GridTours, MediaBlock, PostRelationTourBlock, SociosBlock, ReconocimientosBlock, OfertasBlock, CarouselDestination],
+              blocks: [RowBlock, GridTours, MediaBlock, PostRelationTourBlock, SociosBlock, ReconocimientosBlock, OfertasBlock, CarouselDestination, TikTokLinksBlock, BeneficiosBlock, EstadisticasBlock],
               required: true,
               admin: {
                 initCollapsed: true,
