@@ -1316,6 +1316,33 @@ export const seed = async () => {
                         underlineColor: "#EFBA06"
                     }
                 }
+                , {
+                    blockName: null,
+
+                    videoLinks: [
+
+                        {
+                            url: "https://www.tiktok.com/@pdsviajes/video/7463977023497719046?is_from_webapp=1&sender_device=pc&web_id=7507389016896636421"
+                        },
+
+                        {
+                            url: "https://www.tiktok.com/@pdsviajes/video/7463977023497719046?is_from_webapp=1&sender_device=pc&web_id=7507389016896636421"
+                        },
+
+                        {
+                            url: "https://www.tiktok.com/@pdsviajes/video/7505161504463801655?is_from_webapp=1&sender_device=pc&web_id=7507389016896636421"
+                        }
+                    ],
+                    blockType: "tikTokLinks",
+                    blockTitle: {
+                        titleText: "Curiosidades",
+                        tag: "h2",
+                        size: "medium",
+                        textColor: "#2970B7",
+                        underlineColor: "#EFBA06"
+                    }
+
+                }
             ],
             publishedAt: new Date().toISOString(),
             slug: "home",
