@@ -42,6 +42,7 @@ import type { Page, Post as PostType } from './payload-types'
 
 //Migrations
 import { migrations } from './migrations'
+
 import { seedEndpoint } from './endpoints/seed'
 import { removeSeedEndpoint } from './endpoints/removeSeed'
 
