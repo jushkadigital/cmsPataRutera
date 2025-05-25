@@ -52,7 +52,6 @@ export const DescrPrice: Block = {
                             editor: lexicalEditor({
                                 features: ({ defaultFeatures }) => [
                                     ...defaultFeatures,
-                                    ParagraphFeature(),
                                 ],
                             }), // Use the default lexical editor config
                             required: true,

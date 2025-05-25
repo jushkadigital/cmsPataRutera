@@ -2,6 +2,17 @@
 
 import type { Block } from 'payload';
 import { GridTours } from '../GridTours/config';
+import { MediaBlock } from '../MediaBlock/config';
+import { PostRelationTourBlock } from '../PostRelationTour/config';
+import { SociosBlock } from '../Socios/config';
+import { ReconocimientosBlock } from '../Reconocimientos/config';
+import OfertasBlock from '../Ofertas/config';
+import CarouselDestination from '../CarouselDestination/config';
+import { TikTokLinksBlock } from '../TikTokLinksBlock/config';
+import { BeneficiosBlock } from '../Beneficios/config';
+import { EstadisticasBlock } from '../EstadisticasBlock/config';
+import { TextContentBlock } from '../TextContentBlock/config';
+import { GridImages } from '../GridImages/config';
 // Importa los bloques típicos que quieres permitir DENTRO de las columnas
 // Importa cualquier otro bloque típico que deba poder ir en una columna
 
@@ -24,19 +35,53 @@ export const RowBlock: Block = {
                 // Este campo permite a los editores añadir MULTIPLES bloques
                 // DENTRO de CADA COLUMNA individual.
                 {
+                    name: 'columnWidth',
+                    type: 'select',
+                    label: 'Ancho de la Columna',
+                    required: true,
+                    defaultValue: '50', // Puedes establecer un valor por defecto si lo deseas
+                    options: [
+                        {
+                            label: '25%',
+                            value: '25', // Almacena el número como string o number
+                        },
+                        {
+                            label: '33.33%',
+                            value: '33.333333',
+                        },
+                        {
+                            label: '50%',
+                            value: '50',
+                        },
+                        {
+                            label: '66.67%',
+                            value: '66.666667',
+                        },
+                        {
+                            label: '75%',
+                            value: '75',
+                        },
+                        {
+                            label: '100%',
+                            value: '100',
+                        },
+                    ],
+                },
+                {
                     name: 'columnBlocks', // Nombre del campo que contendrá los bloques de esta columna
                     label: 'Content Blocks for this Column',
                     type: 'blocks', // <-- Es de tipo 'blocks'
                     // Aquí listas los bloques que están permitidos DENTRO de ESTA COLUMNA
                     blocks: [
-                        GridTours, // Referencia a la definición del bloque de texto simple
-                        // ButtonBlock,   // Añade referencias a otros bloques permitidos
+                        GridTours, MediaBlock, PostRelationTourBlock, SociosBlock, ReconocimientosBlock, OfertasBlock,
+                        CarouselDestination, TikTokLinksBlock, BeneficiosBlock, EstadisticasBlock, TextContentBlock, GridImages
                         // QuoteBlock,
-
                         // IMPORTANTE: NO te añadas a ti mismo (LayoutRowBlock) aquí dentro,
                         // podrías crear una recursión infinita en el Admin y la data.
                         // Solo incluye bloques de contenido atómicos o contenedores NO recursivos.
                     ],
+                    maxRows: 1,
+                    minRows: 1,
                     required: true, // Cada columna debe tener al menos un bloque dentro
                     admin: {
                         description: 'Añade los bloques de contenido que irán en esta columna.',

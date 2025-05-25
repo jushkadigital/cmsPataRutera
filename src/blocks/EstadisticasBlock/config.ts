@@ -13,62 +13,50 @@ export const EstadisticasBlock: Block = {
     },
     fields: [
         {
-            type: 'row',
+            type: 'group',
+            name: 'estadisticasText',
+            label: 'Estadisticas Text',
             fields: [
                 {
-                    type: 'array',
-                    name: 'estadisticasImage',
-                    label: 'Estadisticas Image',
-                    fields: [
-                        {
-                            type: 'upload',
-                            name: 'image',
-                            label: 'Image',
-                            relationTo: 'media',
-                        }
-                    ]
+                    type: 'text',
+                    name: 'title',
+                    label: 'Title',
                 },
                 {
-                    type: 'group',
-                    name: 'estadisticasText',
-                    label: 'Estadisticas Text',
+                    name: 'description',
+                    label: 'Descripción del Tour',
+                    type: 'richText',
+                    editor: lexicalEditor({
+                        features: ({ defaultFeatures }) => [
+                            ...defaultFeatures,
+                        ],
+                    }), // Use the default lexical editor config
+                    required: true,
+                },
+                {
+                    type: 'text',
+                    name: 'colorBox',
+                    label: 'Color Box',
+                },
+                {
+                    type: 'array',
+                    name: 'estadisticasBox',
+                    label: 'Estadisticas Box',
                     fields: [
                         {
                             type: 'text',
-                            name: 'title',
-                            label: 'Title',
+                            name: 'numbers',
+                            label: 'Numeros',
                         },
                         {
                             type: 'text',
                             name: 'description',
                             label: 'Description',
-                        },
-                        {
-                            type: 'text',
-                            name: 'colorBox',
-                            label: 'Color Box',
-                        },
-                        {
-                            type: 'array',
-                            name: 'estadisticasBox',
-                            label: 'Estadisticas Box',
-                            fields: [
-                                {
-                                    type: 'text',
-                                    name: 'numbers',
-                                    label: 'Numeros',
-                                },
-                                {
-                                    type: 'text',
-                                    name: 'description',
-                                    label: 'Description',
-                                }
-                            ]
                         }
                     ]
                 }
-            ],
-        },
+            ]
+        }
 
     ]
 }

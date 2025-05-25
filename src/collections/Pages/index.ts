@@ -29,6 +29,8 @@ import { anyone } from '@/access/anyone'
 import { TikTokLinksBlock } from '@/blocks/TikTokLinksBlock/config'
 import { BeneficiosBlock } from '@/blocks/Beneficios/config'
 import { EstadisticasBlock } from '@/blocks/EstadisticasBlock/config'
+import { TextContentBlock } from '@/blocks/TextContentBlock/config'
+import { GridImages } from '@/blocks/GridImages/config'
 
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -85,7 +87,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [RowBlock, GridTours, MediaBlock, PostRelationTourBlock, SociosBlock, ReconocimientosBlock, OfertasBlock, CarouselDestination, TikTokLinksBlock, BeneficiosBlock, EstadisticasBlock],
+              blocks: [RowBlock, GridTours, MediaBlock, PostRelationTourBlock, SociosBlock, ReconocimientosBlock, OfertasBlock, CarouselDestination, TikTokLinksBlock, BeneficiosBlock, EstadisticasBlock, TextContentBlock, GridImages],
               required: true,
               admin: {
                 initCollapsed: true,
