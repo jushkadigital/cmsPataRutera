@@ -4,6 +4,8 @@ import { getPayload, RequiredDataFromCollectionSlug } from 'payload';
 import config from '@payload-config';
 import type { Media, TourCategory, Destination } from '@/payload-types'
 import { projectGetSourceForAsset } from 'next/dist/build/swc/generated-native';
+import { allFieldComponents } from '@payloadcms/ui';
+import { promise } from 'node_modules/payload/dist/fields/hooks/afterRead/promise';
 // Assuming 'assets' is relative to the Current Working Directory (CWD)
 const assetsDir = path.resolve('assets'); // Resolve assets dir relative to CWD
 
@@ -200,7 +202,150 @@ export const seed = async () => {
             }
         })
     ])
-
+    //SOCIOS y Reconocimento IMAGES
+    const [buff1, buff2, buff3, buff4, buff5, buff6, buff7, buff8, buff9, buff10] = await Promise.all([
+        readAssetAsBuffer('travelerLogo.svg'),
+        readAssetAsBuffer('traveler2Logo.svg'),
+        readAssetAsBuffer('isoLogo.svg'),
+        readAssetAsBuffer('iso2Logo.svg'),
+        readAssetAsBuffer('traveler3Logo.svg'),
+        readAssetAsBuffer('pdsLogo.svg'),
+        readAssetAsBuffer('peruDLogo.svg'),
+        readAssetAsBuffer('jushkaLogo.png'),
+        readAssetAsBuffer('agoLogo.png'),
+        readAssetAsBuffer('atipajLogo.svg')
+    ])
+    const [logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8, logo9, logo10] = await Promise.all([
+        payload.create({
+            collection: 'media',
+            data: {
+                alt: 'Icono Info',
+            },
+            file: {
+                data: buff1.buffer,
+                mimetype: 'image/svg+xml',
+                name: buff1.filename,
+                size: buff1.buffer.length,
+            }
+        })
+        ,
+        payload.create({
+            collection: 'media',
+            data: {
+                alt: 'Icono Info',
+            },
+            file: {
+                data: buff2.buffer,
+                mimetype: 'image/svg+xml',
+                name: buff2.filename,
+                size: buff2.buffer.length,
+            }
+        })
+        ,
+        payload.create({
+            collection: 'media',
+            data: {
+                alt: 'Icono Info',
+            },
+            file: {
+                data: buff3.buffer,
+                mimetype: 'image/svg+xml',
+                name: buff3.filename,
+                size: buff3.buffer.length,
+            }
+        })
+        ,
+        payload.create({
+            collection: 'media',
+            data: {
+                alt: 'Icono Info',
+            },
+            file: {
+                data: buff4.buffer,
+                mimetype: 'image/svg+xml',
+                name: buff4.filename,
+                size: buff4.buffer.length,
+            }
+        })
+        ,
+        payload.create({
+            collection: 'media',
+            data: {
+                alt: 'Icono Info',
+            },
+            file: {
+                data: buff5.buffer,
+                mimetype: 'image/svg+xml',
+                name: buff5.filename,
+                size: buff5.buffer.length,
+            }
+        })
+        ,
+        payload.create({
+            collection: 'media',
+            data: {
+                alt: 'Icono Info',
+            },
+            file: {
+                data: buff6.buffer,
+                mimetype: 'image/svg+xml',
+                name: buff6.filename,
+                size: buff6.buffer.length,
+            }
+        })
+        ,
+        payload.create({
+            collection: 'media',
+            data: {
+                alt: 'Icono Info',
+            },
+            file: {
+                data: buff7.buffer,
+                mimetype: 'image/svg+xml',
+                name: buff7.filename,
+                size: buff7.buffer.length,
+            }
+        })
+        ,
+        payload.create({
+            collection: 'media',
+            data: {
+                alt: 'Icono Info',
+            },
+            file: {
+                data: buff8.buffer,
+                mimetype: 'image/svg+xml',
+                name: buff8.filename,
+                size: buff8.buffer.length,
+            }
+        })
+        ,
+        payload.create({
+            collection: 'media',
+            data: {
+                alt: 'Icono Info',
+            },
+            file: {
+                data: buff9.buffer,
+                mimetype: 'image/svg+xml',
+                name: buff9.filename,
+                size: buff9.buffer.length,
+            }
+        })
+        ,
+        payload.create({
+            collection: 'media',
+            data: {
+                alt: 'Icono Info',
+            },
+            file: {
+                data: buff10.buffer,
+                mimetype: 'image/svg+xml',
+                name: buff10.filename,
+                size: buff10.buffer.length,
+            }
+        })
+    ])
 
     // Seed Categories
     payload.logger.info(`— Seeding Categories...`)
@@ -1396,33 +1541,33 @@ export const seed = async () => {
                     beneficios: [
 
                         {
-                            "beneficioText": "Soporte 24/7",
-                            "beneficioImage": null
+                            beneficioText: "Soporte 24/7",
+                            beneficioImage: icon8Doc
                         },
 
                         {
-                            "beneficioText": "Destinos únicos",
-                            "beneficioImage": null
+                            beneficioText: "Destinos únicos",
+                            beneficioImage: icon8Doc
                         },
 
                         {
-                            "beneficioText": "Atención personalizada",
-                            "beneficioImage": null
+                            beneficioText: "Atención personalizada",
+                            beneficioImage: icon8Doc
                         },
 
                         {
-                            "beneficioText": "Guías capacitados",
-                            "beneficioImage": null
+                            beneficioText: "Guías capacitados",
+                            beneficioImage: icon8Doc
                         },
 
                         {
-                            "beneficioText": "Experiencias 100% seguras",
-                            "beneficioImage": null
+                            beneficioText: "Experiencias 100% seguras",
+                            beneficioImage: icon8Doc
                         },
 
                         {
-                            "beneficioText": "Transportes cómodos y puntuales ",
-                            "beneficioImage": null
+                            beneficioText: "Transportes cómodos y puntuales ",
+                            beneficioImage: icon8Doc
                         }
                     ],
                     blockType: "beneficios",
@@ -1739,6 +1884,71 @@ export const seed = async () => {
                     ]
                     ,
                     blockType: "rowBlock"
+                },
+                {
+                    blockName: null,
+                    reconocimientos: [
+                        {
+                            image: logo1
+                        },
+                        {
+                            image: logo2
+                        },
+                        {
+                            image: logo3
+                        }
+                        , {
+                            image: logo5
+                        }
+                        ,
+                        {
+                            image: logo4
+                        },
+                        {
+                            image: logo2
+                        },
+                        {
+                            image: logo1
+                        }
+                    ],
+                    blockType: "reconocimientos",
+                    blockTitle: {
+                        titleText: "aoeu",
+                        tag: "h2",
+                        size: "medium",
+                        textColor: "#2970B7",
+                        underlineColor: "#EFBA06"
+                    }
+                }
+                ,
+
+                {
+                    blockName: null,
+                    socios: [
+                        {
+                            image: logo10
+                        },
+                        {
+                            image: logo6
+                        },
+                        {
+                            image: logo7
+                        },
+                        {
+                            image: logo8
+                        },
+                        {
+                            image: logo9
+                        },
+                    ],
+                    blockType: "socios",
+                    blockTitle: {
+                        titleText: "oeu",
+                        tag: "h2",
+                        size: "medium",
+                        textColor: "#2970B7",
+                        underlineColor: "#EFBA06"
+                    }
                 }
             ],
             publishedAt: new Date().toISOString(),
