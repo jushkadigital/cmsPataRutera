@@ -1,7 +1,7 @@
 import { Endpoint, PayloadRequest } from 'payload'
 
 // Import your seed function (adjust the path if needed)
-import { seed } from '../../../seed'
+import { seed } from '../../../seed2'
 
 
 export const seedEndpoint: Endpoint = {
