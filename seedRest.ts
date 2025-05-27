@@ -7,7 +7,7 @@ import type { Media, TourCategory, Destination } from '@/payload-types'
 import { getPayload, RequiredDataFromCollectionSlug } from 'payload';
 
 let TOKEN = '';
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://cms.patarutera.pe';
 const assetsDir = path.resolve('./assets');
 
 interface AssetBuffer {
