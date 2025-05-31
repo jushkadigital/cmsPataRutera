@@ -1,5 +1,5 @@
 {
-  "id": "bf12059c-f47e-401c-9159-0e0c9be04364",
+  "id": "f1328e68-af3c-4e8c-96d8-6186d371b496",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -8955,6 +8955,159 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.tours_blocks_text_content": {
+      "name": "tours_blocks_text_content",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum_tours_blocks_text_content_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum_tours_blocks_text_content_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "description": {
+          "name": "description",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description_alignment": {
+          "name": "description_alignment",
+          "type": "enum_tours_blocks_text_content_description_alignment",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'left'"
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "tours_blocks_text_content_order_idx": {
+          "name": "tours_blocks_text_content_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "tours_blocks_text_content_parent_id_idx": {
+          "name": "tours_blocks_text_content_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "tours_blocks_text_content_path_idx": {
+          "name": "tours_blocks_text_content_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "tours_blocks_text_content_parent_id_fk": {
+          "name": "tours_blocks_text_content_parent_id_fk",
+          "tableFrom": "tours_blocks_text_content",
+          "tableTo": "tours",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.tours": {
       "name": "tours",
       "schema": "",
@@ -11381,6 +11534,165 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public._tours_v_blocks_text_content": {
+      "name": "_tours_v_blocks_text_content",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum__tours_v_blocks_text_content_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum__tours_v_blocks_text_content_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "description": {
+          "name": "description",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description_alignment": {
+          "name": "description_alignment",
+          "type": "enum__tours_v_blocks_text_content_description_alignment",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'left'"
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_tours_v_blocks_text_content_order_idx": {
+          "name": "_tours_v_blocks_text_content_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_tours_v_blocks_text_content_parent_id_idx": {
+          "name": "_tours_v_blocks_text_content_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_tours_v_blocks_text_content_path_idx": {
+          "name": "_tours_v_blocks_text_content_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_tours_v_blocks_text_content_parent_id_fk": {
+          "name": "_tours_v_blocks_text_content_parent_id_fk",
+          "tableFrom": "_tours_v_blocks_text_content",
+          "tableTo": "_tours_v",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public._tours_v": {
       "name": "_tours_v",
       "schema": "",
@@ -11982,11 +12294,11 @@
           "primaryKey": false,
           "notNull": true
         },
-        "descripcion": {
-          "name": "descripcion",
+        "type": {
+          "name": "type",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "descuento_porcentaje": {
           "name": "descuento_porcentaje",
@@ -11994,11 +12306,30 @@
           "primaryKey": false,
           "notNull": true
         },
+        "persona": {
+          "name": "persona",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'por persona'"
+        },
         "imagen_id": {
           "name": "imagen_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
+        },
+        "price": {
+          "name": "price",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "slug": {
+          "name": "slug",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
         },
         "tour_relacionado_id": {
           "name": "tour_relacionado_id",
@@ -21344,6 +21675,37 @@
         "xlarge"
       ]
     },
+    "public.enum_tours_blocks_text_content_block_title_tag": {
+      "name": "enum_tours_blocks_text_content_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum_tours_blocks_text_content_block_title_size": {
+      "name": "enum_tours_blocks_text_content_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum_tours_blocks_text_content_description_alignment": {
+      "name": "enum_tours_blocks_text_content_description_alignment",
+      "schema": "public",
+      "values": [
+        "left",
+        "center",
+        "right"
+      ]
+    },
     "public.enum_tours_difficulty": {
       "name": "enum_tours_difficulty",
       "schema": "public",
@@ -21513,6 +21875,37 @@
         "medium",
         "large",
         "xlarge"
+      ]
+    },
+    "public.enum__tours_v_blocks_text_content_block_title_tag": {
+      "name": "enum__tours_v_blocks_text_content_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum__tours_v_blocks_text_content_block_title_size": {
+      "name": "enum__tours_v_blocks_text_content_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum__tours_v_blocks_text_content_description_alignment": {
+      "name": "enum__tours_v_blocks_text_content_description_alignment",
+      "schema": "public",
+      "values": [
+        "left",
+        "center",
+        "right"
       ]
     },
     "public.enum__tours_v_version_difficulty": {

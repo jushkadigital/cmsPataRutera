@@ -34,6 +34,7 @@ export const SociosBlock: Block = {
                     label: 'Image',
                     type: 'upload', // Assuming an 'media' or similar collection exists
                     relationTo: 'media', // Adjust if your media collection slug is different
+                    required: true
                 }
             ]
         }

@@ -9,11 +9,8 @@ export const OfertasBlock: Block = {
     plural: 'Ofertas',
   },
   fields: [
-    titleGroup
-
+    titleGroup,
     // No other fields are needed here, as the data comes from the collection itself.
-    // The frontend component associated with this slug ('destinationsList')
-    // will be responsible for fetching and displaying all Destination entries.
   ],
 }
 

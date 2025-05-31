@@ -2,6 +2,8 @@ import type { CollectionConfig } from 'payload'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { authenticated } from '@/access/authenticated'
 import { anyone } from '@/access/anyone';
+import { getPayload, RequiredDataFromCollectionSlug } from 'payload';
+import config from '@payload-config';
 
 export const Ofertas: CollectionConfig = {
     slug: 'ofertas',
@@ -25,15 +27,17 @@ export const Ofertas: CollectionConfig = {
             required: true,
         },
         {
-            name: 'descripcion',
-            label: 'Descripción',
-            type: 'textarea',
-            required: false,
+            name: 'type',
+            label: 'Tipo',
+            type: 'text',
+            required: true,
         },
         {
             name: 'descuentoPorcentaje',
             label: 'Descuento en %',
             type: 'number',
+            min: 0,
+            max: 100,
             required: true,
             admin: {
                 description: 'Ingrese el descuento en % (e.g., 10 para 10%).',
@@ -42,11 +46,32 @@ export const Ofertas: CollectionConfig = {
             // Add validation if needed (e.g., min: 0, max: 100)
         },
         {
+            name: 'persona',
+            label: 'Texto persona',
+            type: 'text',
+            defaultValue: 'por persona',
+            required: true,
+        },
+        {
             name: 'imagen',
             label: 'Image',
             type: 'upload',
             relationTo: 'media',
             required: true,
+        },
+        {
+            name: 'price',
+            type: 'number',
+            admin: {
+                readOnly: true, // Opcional, para evitar edición manual
+            },
+        },
+        {
+            name: 'slug',
+            type: 'text',
+            admin: {
+                readOnly: true, // Opcional, para evitar edición manual
+            },
         },
         {
             name: 'tourRelacionado',
@@ -60,6 +85,30 @@ export const Ofertas: CollectionConfig = {
             },
         },
     ],
+    hooks: {
+        beforeChange: [
+            async ({ data, req }) => {
+
+                const tourID = typeof data.tourRelacionado === 'string' ? data.tourRelacionado : data.tourRelacionado;
+                const tourDoc = await req.payload.findByID({
+                    collection: 'tours',
+                    id: tourID,
+                });
+
+
+                if (tourDoc?.price) {
+
+                    data.price = tourDoc!.price
+                }
+
+                if (tourDoc?.slug) {
+                    data.slug = tourDoc!.slug
+                }
+
+                return data;
+            },
+        ]
+    }
 }
 
 export default Ofertas;

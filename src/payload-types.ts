@@ -491,7 +491,7 @@ export interface ReconocimientosBlockType {
   blockTitle: TitleGroup;
   reconocimientos?:
     | {
-        image?: (number | null) | Media;
+        image: number | Media;
         id?: string | null;
       }[]
     | null;
@@ -507,7 +507,7 @@ export interface SociosBlockType {
   blockTitle: TitleGroup;
   socios?:
     | {
-        image?: (number | null) | Media;
+        image: number | Media;
         id?: string | null;
       }[]
     | null;
@@ -677,6 +677,7 @@ export interface Tour {
     | YouTubeLinksBlockType
     | SociosBlockType
     | ReconocimientosBlockType
+    | TextContentBlockType
   )[];
   featuredImage: number | Media;
   miniDescription: {
@@ -911,12 +912,15 @@ export interface YouTubeLinksBlockType {
 export interface Oferta {
   id: number;
   title: string;
-  descripcion?: string | null;
+  type: string;
   /**
    * Ingrese el descuento en % (e.g., 10 para 10%).
    */
   descuentoPorcentaje: number;
+  persona: string;
   imagen: number | Media;
+  price?: number | null;
+  slug?: string | null;
   tourRelacionado: number | Tour;
   updatedAt: string;
   createdAt: string;
@@ -1568,6 +1572,7 @@ export interface ToursSelect<T extends boolean = true> {
         youTubeLinks?: T | YouTubeLinksBlockTypeSelect<T>;
         socios?: T | SociosBlockTypeSelect<T>;
         reconocimientos?: T | ReconocimientosBlockTypeSelect<T>;
+        textContent?: T | TextContentBlockTypeSelect<T>;
       };
   featuredImage?: T;
   miniDescription?: T;
@@ -1699,9 +1704,12 @@ export interface YouTubeLinksBlockTypeSelect<T extends boolean = true> {
  */
 export interface OfertasSelect<T extends boolean = true> {
   title?: T;
-  descripcion?: T;
+  type?: T;
   descuentoPorcentaje?: T;
+  persona?: T;
   imagen?: T;
+  price?: T;
+  slug?: T;
   tourRelacionado?: T;
   updatedAt?: T;
   createdAt?: T;

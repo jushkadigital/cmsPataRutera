@@ -30,6 +30,7 @@ import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { heroTour } from '@/heros/TourHero'
 import { getPayload, RequiredDataFromCollectionSlug } from 'payload';
 import config from '@payload-config';
+import { TextContentBlock } from '@/blocks/TextContentBlock/config'
 
 // Import the custom feature
 
@@ -92,7 +93,7 @@ export const Tours: CollectionConfig = {
                         {
                             name: 'layout',
                             type: 'blocks',
-                            blocks: [DescrPrice, GuiaTour, GridTours, PostRelationTourBlock, YouTubeLinksBlock, SociosBlock, ReconocimientosBlock],
+                            blocks: [DescrPrice, GuiaTour, GridTours, PostRelationTourBlock, YouTubeLinksBlock, SociosBlock, ReconocimientosBlock, TextContentBlock],
                             //blocks: [],
                             required: true,
                         },
@@ -137,6 +138,7 @@ export const Tours: CollectionConfig = {
                                             type: 'number',
                                             name: 'price',
                                             required: true,
+
                                         },
                                         {
                                             type: 'text',

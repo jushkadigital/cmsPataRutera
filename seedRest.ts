@@ -7,7 +7,8 @@ import type { Media, TourCategory, Destination } from '@/payload-types'
 import { getPayload, RequiredDataFromCollectionSlug } from 'payload';
 
 let TOKEN = '';
-const BASE_URL = 'https://cms.patarutera.pe';
+//const BASE_URL = 'https://cms.patarutera.pe';
+const BASE_URL = 'http://localhost:3000';
 const assetsDir = path.resolve('./assets');
 
 interface AssetBuffer {
@@ -184,7 +185,8 @@ type TourArgs = {
   price: number
   Images: Media[]
   Categories: TourCategory[]
-  Destinos: Destination
+  Destinos: Destination,
+  imagenesLogos: Media[]
 }
 const Tour = ({
   slug,
@@ -192,7 +194,8 @@ const Tour = ({
   price,
   Images,
   Categories,
-  Destinos
+  Destinos,
+  imagenesLogos
 }: TourArgs): RequiredDataFromCollectionSlug<'tours'> => {
   return {
     slug,
@@ -445,7 +448,7 @@ const Tour = ({
                   version: 1,
                   children: [
                     {
-                      type: "custom-list-item",
+                      type: "listitem",
                       value: 1,
                       format: "",
                       indent: 0,
@@ -459,11 +462,17 @@ const Tour = ({
                           detail: 0,
                           format: 0,
                           version: 1
-                        },
-                        {
-                          type: "linebreak",
-                          version: 1
-                        },
+                        }
+                      ],
+                      direction: "ltr"
+                    },
+                    {
+                      type: "listitem",
+                      value: 2,
+                      format: "",
+                      indent: 0,
+                      version: 1,
+                      children: [
                         {
                           mode: "normal",
                           text: "Lo primero que haremos dentro el servicio Camino del Inca Tour Grupal 4D/3N será recogerte directamente en el hotel en Cusco, Urubamba u Ollantaytambo. En el caso de Cusco, te buscamos a las 4:30 AM, desde Urubamba a las 5:30 AM, y si te hospedas en Ollantaytambo, podrás descansar un poco más, ya que pasaremos por ti a las 6:30 AM.",
@@ -491,12 +500,11 @@ const Tour = ({
                           version: 1
                         }
                       ],
-                      iconType: "check",
                       direction: "ltr"
                     },
                     {
-                      type: "custom-list-item",
-                      value: 2,
+                      type: "listitem",
+                      value: 3,
                       format: "",
                       indent: 0,
                       version: 1,
@@ -513,7 +521,17 @@ const Tour = ({
                         {
                           type: "linebreak",
                           version: 1
-                        },
+                        }
+                      ],
+                      direction: "ltr"
+                    },
+                    {
+                      type: "listitem",
+                      value: 4,
+                      format: "",
+                      indent: 0,
+                      version: 1,
+                      children: [
                         {
                           mode: "normal",
                           text: "El inicio del día será muy temprano, ya que el recorrido es más largo. Caminaremos durante aproximadamente 4 horas hasta el paso más alto de la caminata, el Paso de la Mujer Muerta (4215 metros/13829 pies). Al llegar al paso, tendremos un breve descanso para disfrutar de las vistas, para luego partir de nuevo y descender al siguiente valle, el Valle de Pacaymayu – Río Oculto. Es otra hora y media por el lado del valle hasta nuestro lugar para almorzar, donde tendrás la oportunidad de recargar tus botellas de agua.",
@@ -530,7 +548,17 @@ const Tour = ({
                         {
                           type: "linebreak",
                           version: 1
-                        },
+                        }
+                      ],
+                      direction: "ltr"
+                    },
+                    {
+                      type: "listitem",
+                      value: 5,
+                      format: "",
+                      indent: 0,
+                      version: 1,
+                      children: [
                         {
                           mode: "normal",
                           text: "Luego del almuerzo, comenzamos a ascender de nuevo al segundo paso de la caminata. Son 2 horas sobre el paso donde nos detendremos en un pequeño sitio inca llamado Runcu Raccay y veremos dos enormes cascadas por el lado opuesto del valle.",
@@ -541,7 +569,6 @@ const Tour = ({
                           version: 1
                         }
                       ],
-                      iconType: "check",
                       direction: "ltr"
                     }
                   ],
@@ -572,7 +599,7 @@ const Tour = ({
                   version: 1,
                   children: [
                     {
-                      type: "custom-list-item",
+                      type: "listitem",
                       value: 1,
                       format: "",
                       indent: 0,
@@ -586,11 +613,17 @@ const Tour = ({
                           detail: 0,
                           format: 0,
                           version: 1
-                        },
-                        {
-                          type: "linebreak",
-                          version: 1
-                        },
+                        }
+                      ],
+                      direction: "ltr"
+                    },
+                    {
+                      type: "listitem",
+                      value: 2,
+                      format: "",
+                      indent: 0,
+                      version: 1,
+                      children: [
                         {
                           mode: "normal",
                           text: "Lo primero que haremos dentro el servicio Camino del Inca Tour Grupal 4D/3N será recogerte directamente en el hotel en Cusco, Urubamba u Ollantaytambo. En el caso de Cusco, te buscamos a las 4:30 AM, desde Urubamba a las 5:30 AM, y si te hospedas en Ollantaytambo, podrás descansar un poco más, ya que pasaremos por ti a las 6:30 AM.",
@@ -618,12 +651,11 @@ const Tour = ({
                           version: 1
                         }
                       ],
-                      iconType: "check",
                       direction: "ltr"
                     },
                     {
-                      type: "custom-list-item",
-                      value: 2,
+                      type: "listitem",
+                      value: 3,
                       format: "",
                       indent: 0,
                       version: 1,
@@ -640,7 +672,17 @@ const Tour = ({
                         {
                           type: "linebreak",
                           version: 1
-                        },
+                        }
+                      ],
+                      direction: "ltr"
+                    },
+                    {
+                      type: "listitem",
+                      value: 4,
+                      format: "",
+                      indent: 0,
+                      version: 1,
+                      children: [
                         {
                           mode: "normal",
                           text: "El inicio del día será muy temprano, ya que el recorrido es más largo. Caminaremos durante aproximadamente 4 horas hasta el paso más alto de la caminata, el Paso de la Mujer Muerta (4215 metros/13829 pies). Al llegar al paso, tendremos un breve descanso para disfrutar de las vistas, para luego partir de nuevo y descender al siguiente valle, el Valle de Pacaymayu – Río Oculto. Es otra hora y media por el lado del valle hasta nuestro lugar para almorzar, donde tendrás la oportunidad de recargar tus botellas de agua.",
@@ -657,7 +699,17 @@ const Tour = ({
                         {
                           type: "linebreak",
                           version: 1
-                        },
+                        }
+                      ],
+                      direction: "ltr"
+                    },
+                    {
+                      type: "listitem",
+                      value: 5,
+                      format: "",
+                      indent: 0,
+                      version: 1,
+                      children: [
                         {
                           mode: "normal",
                           text: "Luego del almuerzo, comenzamos a ascender de nuevo al segundo paso de la caminata. Son 2 horas sobre el paso donde nos detendremos en un pequeño sitio inca llamado Runcu Raccay y veremos dos enormes cascadas por el lado opuesto del valle.",
@@ -668,7 +720,6 @@ const Tour = ({
                           version: 1
                         }
                       ],
-                      iconType: "check",
                       direction: "ltr"
                     }
                   ],
@@ -699,7 +750,7 @@ const Tour = ({
                   version: 1,
                   children: [
                     {
-                      type: "custom-list-item",
+                      type: "listitem",
                       value: 1,
                       format: "",
                       indent: 0,
@@ -713,11 +764,17 @@ const Tour = ({
                           detail: 0,
                           format: 0,
                           version: 1
-                        },
-                        {
-                          type: "linebreak",
-                          version: 1
-                        },
+                        }
+                      ],
+                      direction: "ltr"
+                    },
+                    {
+                      type: "listitem",
+                      value: 2,
+                      format: "",
+                      indent: 0,
+                      version: 1,
+                      children: [
                         {
                           mode: "normal",
                           text: "Lo primero que haremos dentro el servicio Camino del Inca Tour Grupal 4D/3N será recogerte directamente en el hotel en Cusco, Urubamba u Ollantaytambo. En el caso de Cusco, te buscamos a las 4:30 AM, desde Urubamba a las 5:30 AM, y si te hospedas en Ollantaytambo, podrás descansar un poco más, ya que pasaremos por ti a las 6:30 AM.",
@@ -745,12 +802,11 @@ const Tour = ({
                           version: 1
                         }
                       ],
-                      iconType: "check",
                       direction: "ltr"
                     },
                     {
-                      type: "custom-list-item",
-                      value: 2,
+                      type: "listitem",
+                      value: 3,
                       format: "",
                       indent: 0,
                       version: 1,
@@ -767,7 +823,17 @@ const Tour = ({
                         {
                           type: "linebreak",
                           version: 1
-                        },
+                        }
+                      ],
+                      direction: "ltr"
+                    },
+                    {
+                      type: "listitem",
+                      value: 4,
+                      format: "",
+                      indent: 0,
+                      version: 1,
+                      children: [
                         {
                           mode: "normal",
                           text: "El inicio del día será muy temprano, ya que el recorrido es más largo. Caminaremos durante aproximadamente 4 horas hasta el paso más alto de la caminata, el Paso de la Mujer Muerta (4215 metros/13829 pies). Al llegar al paso, tendremos un breve descanso para disfrutar de las vistas, para luego partir de nuevo y descender al siguiente valle, el Valle de Pacaymayu – Río Oculto. Es otra hora y media por el lado del valle hasta nuestro lugar para almorzar, donde tendrás la oportunidad de recargar tus botellas de agua.",
@@ -784,7 +850,17 @@ const Tour = ({
                         {
                           type: "linebreak",
                           version: 1
-                        },
+                        }
+                      ],
+                      direction: "ltr"
+                    },
+                    {
+                      type: "listitem",
+                      value: 5,
+                      format: "",
+                      indent: 0,
+                      version: 1,
+                      children: [
                         {
                           mode: "normal",
                           text: "Luego del almuerzo, comenzamos a ascender de nuevo al segundo paso de la caminata. Son 2 horas sobre el paso donde nos detendremos en un pequeño sitio inca llamado Runcu Raccay y veremos dos enormes cascadas por el lado opuesto del valle.",
@@ -795,7 +871,6 @@ const Tour = ({
                           version: 1
                         }
                       ],
-                      iconType: "check",
                       direction: "ltr"
                     }
                   ],
@@ -826,7 +901,7 @@ const Tour = ({
                   version: 1,
                   children: [
                     {
-                      type: "custom-list-item",
+                      type: "listitem",
                       value: 1,
                       format: "",
                       indent: 0,
@@ -840,11 +915,17 @@ const Tour = ({
                           detail: 0,
                           format: 0,
                           version: 1
-                        },
-                        {
-                          type: "linebreak",
-                          version: 1
-                        },
+                        }
+                      ],
+                      direction: "ltr"
+                    },
+                    {
+                      type: "listitem",
+                      value: 2,
+                      format: "",
+                      indent: 0,
+                      version: 1,
+                      children: [
                         {
                           mode: "normal",
                           text: "Lo primero que haremos dentro el servicio Camino del Inca Tour Grupal 4D/3N será recogerte directamente en el hotel en Cusco, Urubamba u Ollantaytambo. En el caso de Cusco, te buscamos a las 4:30 AM, desde Urubamba a las 5:30 AM, y si te hospedas en Ollantaytambo, podrás descansar un poco más, ya que pasaremos por ti a las 6:30 AM.",
@@ -872,12 +953,11 @@ const Tour = ({
                           version: 1
                         }
                       ],
-                      iconType: "check",
                       direction: "ltr"
                     },
                     {
-                      type: "custom-list-item",
-                      value: 2,
+                      type: "listitem",
+                      value: 3,
                       format: "",
                       indent: 0,
                       version: 1,
@@ -894,7 +974,17 @@ const Tour = ({
                         {
                           type: "linebreak",
                           version: 1
-                        },
+                        }
+                      ],
+                      direction: "ltr"
+                    },
+                    {
+                      type: "listitem",
+                      value: 4,
+                      format: "",
+                      indent: 0,
+                      version: 1,
+                      children: [
                         {
                           mode: "normal",
                           text: "El inicio del día será muy temprano, ya que el recorrido es más largo. Caminaremos durante aproximadamente 4 horas hasta el paso más alto de la caminata, el Paso de la Mujer Muerta (4215 metros/13829 pies). Al llegar al paso, tendremos un breve descanso para disfrutar de las vistas, para luego partir de nuevo y descender al siguiente valle, el Valle de Pacaymayu – Río Oculto. Es otra hora y media por el lado del valle hasta nuestro lugar para almorzar, donde tendrás la oportunidad de recargar tus botellas de agua.",
@@ -911,7 +1001,17 @@ const Tour = ({
                         {
                           type: "linebreak",
                           version: 1
-                        },
+                        }
+                      ],
+                      direction: "ltr"
+                    },
+                    {
+                      type: "listitem",
+                      value: 5,
+                      format: "",
+                      indent: 0,
+                      version: 1,
+                      children: [
                         {
                           mode: "normal",
                           text: "Luego del almuerzo, comenzamos a ascender de nuevo al segundo paso de la caminata. Son 2 horas sobre el paso donde nos detendremos en un pequeño sitio inca llamado Runcu Raccay y veremos dos enormes cascadas por el lado opuesto del valle.",
@@ -922,7 +1022,6 @@ const Tour = ({
                           version: 1
                         }
                       ],
-                      iconType: "check",
                       direction: "ltr"
                     }
                   ],
@@ -933,6 +1032,70 @@ const Tour = ({
               direction: "ltr"
             }
           }
+        }
+      },
+      {
+        blockName: null,
+        reconocimientos: [
+          {
+            image: imagenesLogos[0]!.id
+          },
+          {
+            image: imagenesLogos[1]!.id
+          },
+          {
+            image: imagenesLogos[2]!.id
+          }
+          , {
+            image: imagenesLogos[4]!.id
+          }
+          ,
+          {
+            image: imagenesLogos[3]!.id
+          },
+          {
+            image: imagenesLogos[1]!.id
+          },
+          {
+            image: imagenesLogos[0]!.id
+          }
+        ],
+        blockType: "reconocimientos",
+        blockTitle: {
+          titleText: "Nuestros reconocimientos",
+          tag: "h2",
+          size: "medium",
+          textColor: "#2970B7",
+          underlineColor: "#EFBA06"
+        }
+      },
+      {
+
+        blockName: null,
+        socios: [
+          {
+            image: imagenesLogos[9]!.id
+          },
+          {
+            image: imagenesLogos[5]!.id
+          },
+          {
+            image: imagenesLogos[6]!.id
+          },
+          {
+            image: imagenesLogos[7]!.id
+          },
+          {
+            image: imagenesLogos[8]!.id
+          },
+        ],
+        blockType: "socios",
+        blockTitle: {
+          titleText: "Nuestros Socios",
+          tag: "h2",
+          size: "medium",
+          textColor: "#2970B7",
+          underlineColor: "#EFBA06"
         }
       }
     ],
@@ -1011,6 +1174,66 @@ async function createDestinationSingular(name: string, images: any[]) {
   }
 
 }
+async function createOfertas(images: any[], tours: any[]) {
+  const url = `${BASE_URL}/api/ofertas`;
+  try {
+    const { data } = await axios.post(url, {
+      title: "Cusco",
+      type: "City Tour",
+      descuentoPorcentaje: 0,
+      persona: "por persona",
+      imagen: images[0],
+      price: 150,
+      tourRelacionado: tours[0]
+    }, {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error: any) {
+    console.error(`Error al crear :`, error.response?.data || error.message);
+  }
+
+  try {
+    const { data } = await axios.post(url, {
+      title: "Montaña",
+      type: "City Tour",
+      descuentoPorcentaje: 0,
+      persona: "por persona",
+      imagen: images[1],
+      price: 150,
+      tourRelacionado: tours[1]
+    }, {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error: any) {
+    console.error(`Error al crear :`, error.response?.data || error.message);
+  }
+
+  try {
+    const { data } = await axios.post(url, {
+      title: "Caccaccollo",
+      type: "City Tour",
+      descuentoPorcentaje: 0,
+      persona: "por persona",
+      imagen: images[2],
+      price: 150,
+      tourRelacionado: tours[2]
+    }, {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error: any) {
+    console.error(`Error al crear :`, error.response?.data || error.message);
+  }
+
+}
 
 async function main() {
   await loginAndGetToken();
@@ -1033,14 +1256,15 @@ async function main() {
 
   const tours =
     [
-      Tour({ slug: 'tour-valle-sagrado', title: 'Tour Valle Sagrado', price: 150, Images: [iconCusco, iconIca, iconPmaldonado, backgroundIca, ...imagesIconosSvg.slice(2), iconCusco, ...imagesIconosSvg.slice(0, 2)], Categories: [...toursCategorias], Destinos: cuscoDestino }),
-      Tour({ slug: 'oasis-huacachina', title: 'Oasis Huacachina', price: 150, Images: [iconCusco, iconIca, iconPmaldonado, backgroundIca, ...imagesIconosSvg.slice(2), iconCusco, ...imagesIconosSvg.slice(0, 2)], Categories: [...toursCategorias], Destinos: cuscoDestino }),
-      Tour({ slug: 'lago-sandoval', title: 'Lago Sandoval', price: 150, Images: [iconCusco, iconIca, iconPmaldonado, backgroundIca, ...imagesIconosSvg.slice(2), iconCusco, ...imagesIconosSvg.slice(0, 2)], Categories: [...toursCategorias], Destinos: cuscoDestino }),
-      Tour({ slug: 'ccaccaccollo', title: 'Ccaccaccollo', price: 150, Images: [iconCusco, iconIca, iconPmaldonado, backgroundIca, ...imagesIconosSvg.slice(2), iconCusco, ...imagesIconosSvg.slice(0, 2)], Categories: [...toursCategorias], Destinos: cuscoDestino }),
-      Tour({ slug: 'laguna-humantay', title: 'Laguna Humantay', price: 150, Images: [iconCusco, iconIca, iconPmaldonado, backgroundIca, ...imagesIconosSvg.slice(2), iconCusco, ...imagesIconosSvg.slice(0, 2)], Categories: [...toursCategorias], Destinos: cuscoDestino }),
-      Tour({ slug: 'city-tour-ica', title: 'City Tour Ica', price: 150, Images: [iconCusco, iconIca, iconPmaldonado, backgroundIca, ...imagesIconosSvg.slice(2), iconCusco, ...imagesIconosSvg.slice(0, 2)], Categories: [...toursCategorias], Destinos: cuscoDestino }),
+      Tour({ slug: 'tour-valle-sagrado', title: 'Tour Valle Sagrado', price: 150, Images: [iconCusco, iconIca, iconPmaldonado, backgroundIca, ...imagesIconosSvg.slice(2), iconCusco, ...imagesIconosSvg.slice(0, 2)], Categories: [...toursCategorias], Destinos: cuscoDestino, imagenesLogos: imagenesLogos }),
+      Tour({ slug: 'oasis-huacachina', title: 'Oasis Huacachina', price: 150, Images: [iconCusco, iconIca, iconPmaldonado, backgroundIca, ...imagesIconosSvg.slice(2), iconCusco, ...imagesIconosSvg.slice(0, 2)], Categories: [...toursCategorias], Destinos: cuscoDestino, imagenesLogos: imagenesLogos }),
+      Tour({ slug: 'lago-sandoval', title: 'Lago Sandoval', price: 150, Images: [iconCusco, iconIca, iconPmaldonado, backgroundIca, ...imagesIconosSvg.slice(2), iconCusco, ...imagesIconosSvg.slice(0, 2)], Categories: [...toursCategorias], Destinos: cuscoDestino, imagenesLogos: imagenesLogos }),
+      Tour({ slug: 'ccaccaccollo', title: 'Ccaccaccollo', price: 150, Images: [iconCusco, iconIca, iconPmaldonado, backgroundIca, ...imagesIconosSvg.slice(2), iconCusco, ...imagesIconosSvg.slice(0, 2)], Categories: [...toursCategorias], Destinos: cuscoDestino, imagenesLogos: imagenesLogos }),
+      Tour({ slug: 'laguna-humantay', title: 'Laguna Humantay', price: 150, Images: [iconCusco, iconIca, iconPmaldonado, backgroundIca, ...imagesIconosSvg.slice(2), iconCusco, ...imagesIconosSvg.slice(0, 2)], Categories: [...toursCategorias], Destinos: cuscoDestino, imagenesLogos: imagenesLogos }),
+      Tour({ slug: 'city-tour-ica', title: 'City Tour Ica', price: 150, Images: [iconCusco, iconIca, iconPmaldonado, backgroundIca, ...imagesIconosSvg.slice(2), iconCusco, ...imagesIconosSvg.slice(0, 2)], Categories: [...toursCategorias], Destinos: cuscoDestino, imagenesLogos: imagenesLogos }),
     ]
 
+  const Tours = []
   for (const tour of tours) {
     const urlTour = `${BASE_URL}/api/tours`;
     try {
@@ -1051,6 +1275,7 @@ async function main() {
         },
       });
       console.log(`Tour toru creada`, data);
+      Tours.push(data.doc)
     } catch (error: any) {
       console.error(`Error al crear :`, error.response?.data || error.message);
     }
@@ -1063,8 +1288,6 @@ async function main() {
       {
         title: "destinos",
         layout: [
-
-
           {
             overrideDefaults: true,
             gridColumns: null,
@@ -1113,14 +1336,24 @@ async function main() {
     const { data } = await axios.post(urlPage, {
       title: "home",
       heroPageBlocks: [
-
         {
           blockName: null,
           blockType: "carouselHeroPage"
         }
-
       ],
       layout: [
+        {
+          blockName: null,
+          blockType: "ofertas",
+          title: {
+            titleText: "Nuestras Ofertas",
+            tag: "h2",
+            size: "medium",
+            textColor: "#2970B7",
+            underlineColor: "#EFBA06"
+          }
+        }
+        ,
         {
           overrideDefaults: false,
           gridColumns: 6,
@@ -1385,7 +1618,7 @@ async function main() {
           ],
           blockType: "reconocimientos",
           blockTitle: {
-            titleText: "aoeu",
+            titleText: "Nuestros reconocimientos",
             tag: "h2",
             size: "medium",
             textColor: "#2970B7",
@@ -1395,6 +1628,7 @@ async function main() {
         ,
 
         {
+
           blockName: null,
           socios: [
             {
@@ -1415,7 +1649,7 @@ async function main() {
           ],
           blockType: "socios",
           blockTitle: {
-            titleText: "oeu",
+            titleText: "Nuestros Socios",
             tag: "h2",
             size: "medium",
             textColor: "#2970B7",
@@ -1438,6 +1672,8 @@ async function main() {
   } catch (error: any) {
     console.error(`Error al crear :`, error.response?.data || error.message);
   }
+
+  await createOfertas([backgroundCusco, backgroundIca, backgroundPmaldonado], [Tours[0], Tours[1], Tours[2]])
 
 
 }

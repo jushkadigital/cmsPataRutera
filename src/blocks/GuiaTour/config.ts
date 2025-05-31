@@ -103,7 +103,7 @@ export const GuiaTour: Block = { // Renamed constant
                                 lexicalEditor({
                                     features: ({ defaultFeatures }) => [
                                         ...defaultFeatures,
-                                        CustomListServerFeature(),
+                                        //CustomListServerFeature(),
                                     ],
                                 }),
                             required: true,
@@ -186,7 +186,7 @@ export const GuiaTour: Block = { // Renamed constant
                                 lexicalEditor({
                                     features: ({ defaultFeatures }) => [
                                         ...defaultFeatures,
-                                        CustomListServerFeature(),
+                                        //CustomListServerFeature(),
                                     ],
                                 }),
                             required: true,
@@ -269,7 +269,7 @@ export const GuiaTour: Block = { // Renamed constant
                                 lexicalEditor({
                                     features: ({ defaultFeatures }) => [
                                         ...defaultFeatures,
-                                        CustomListServerFeature(),
+                                        //CustomListServerFeature(),
                                     ],
                                 }),
                             required: true,
@@ -352,7 +352,7 @@ export const GuiaTour: Block = { // Renamed constant
                                 lexicalEditor({
                                     features: ({ defaultFeatures }) => [
                                         ...defaultFeatures,
-                                        CustomListServerFeature(),
+                                        //CustomListServerFeature(),
                                     ],
                                 }),
                             required: true,

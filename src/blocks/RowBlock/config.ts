@@ -74,7 +74,8 @@ export const RowBlock: Block = {
                     // Aquí listas los bloques que están permitidos DENTRO de ESTA COLUMNA
                     blocks: [
                         GridTours, MediaBlock, PostRelationTourBlock, SociosBlock, ReconocimientosBlock, OfertasBlock,
-                        CarouselDestination, TikTokLinksBlock, BeneficiosBlock, EstadisticasBlock, TextContentBlock, GridImages
+                        CarouselDestination, TikTokLinksBlock, BeneficiosBlock, EstadisticasBlock, TextContentBlock, GridImages,
+                        OfertasBlock
                         // QuoteBlock,
                         // IMPORTANTE: NO te añadas a ti mismo (LayoutRowBlock) aquí dentro,
                         // podrías crear una recursión infinita en el Admin y la data.

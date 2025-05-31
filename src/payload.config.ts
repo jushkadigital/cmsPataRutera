@@ -85,7 +85,6 @@ export default buildConfig({
     },
     migrationDir: './src/migrations',
     prodMigrations: migrations
-
   }),
   // database-adapter-config-end
   sharp,
