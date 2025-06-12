@@ -41,7 +41,7 @@ import type { Page, Post as PostType } from './payload-types'
 // import { mediaPlugin } from './plugins/core/media'
 
 //Migrations
-//import { migrations } from './migrations'
+import { migrations } from './migrations'
 
 import { seedEndpoint } from './endpoints/seed'
 import { removeSeedEndpoint } from './endpoints/removeSeed'
@@ -86,8 +86,8 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
-    //migrationDir: './src/migrations',
-    //prodMigrations: migrations
+    migrationDir: './src/migrations',
+    prodMigrations: migrations
   }),
   // database-adapter-config-end
   sharp,
