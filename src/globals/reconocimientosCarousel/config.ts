@@ -1,10 +1,8 @@
-// globals/CommonCarousel.ts
-
 import { GlobalConfig } from "payload";
 
-export const CarouselInfinite: GlobalConfig = {
-    slug: 'carouselInfinite',
-    label: 'Carrusel de Imágenes Común',
+export const ReconocimientosCarousel: GlobalConfig = {
+    slug: 'reconocimientosCarousel',
+    label: 'Carrusel de Imágene',
     access: {
         read: () => true,
     },

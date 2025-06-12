@@ -10,6 +10,35 @@ export const OfertasBlock: Block = {
   },
   fields: [
     titleGroup,
+    {
+      name: 'typeGrid',
+      type: 'select',
+      defaultValue: 'grid',
+      label: 'Type Grid',
+      options: [
+        {
+          label: 'Masonry',
+          value: 'masonry',
+        },
+        {
+          label: 'Overlapping',
+          value: 'overlapping',
+        },
+        {
+          label: 'List',
+          value: 'list',
+        }
+        , {
+          label: 'Mosaic',
+          value: 'mosaic',
+        },
+        {
+          label: 'Grid',
+          value: 'grid',
+        }
+      ],
+      required: true,
+    },
     // No other fields are needed here, as the data comes from the collection itself.
   ],
 }

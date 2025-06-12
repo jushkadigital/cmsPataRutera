@@ -17,9 +17,11 @@ export const removeSeed = async ({ req }: { req: PayloadRequest }) => {
     const payload = await getPayload({ config });
     await payload.logger.info('Removing seed data...');
 
+
     await Promise.all(
         collections.map((collection) => payload.db.deleteMany({ collection, req, where: {} })),
     )
+
 
     await Promise.all(
         collections

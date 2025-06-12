@@ -31,6 +31,7 @@ import { BeneficiosBlock } from '@/blocks/Beneficios/config'
 import { EstadisticasBlock } from '@/blocks/EstadisticasBlock/config'
 import { TextContentBlock } from '@/blocks/TextContentBlock/config'
 import { GridImages } from '@/blocks/GridImages/config'
+import { GridPaquetes } from '@/blocks/GridPaquetes/config'
 
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -87,7 +88,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [RowBlock, GridTours, MediaBlock, PostRelationTourBlock, SociosBlock, ReconocimientosBlock, OfertasBlock, CarouselDestination, TikTokLinksBlock, BeneficiosBlock, EstadisticasBlock, TextContentBlock, GridImages, OfertasBlock],
+              blocks: [RowBlock, GridTours, MediaBlock, PostRelationTourBlock, SociosBlock, ReconocimientosBlock, OfertasBlock, CarouselDestination, TikTokLinksBlock, BeneficiosBlock, EstadisticasBlock, TextContentBlock, GridImages, OfertasBlock, GridPaquetes],
               required: true,
               admin: {
                 initCollapsed: true,

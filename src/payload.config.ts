@@ -41,10 +41,12 @@ import type { Page, Post as PostType } from './payload-types'
 // import { mediaPlugin } from './plugins/core/media'
 
 //Migrations
-import { migrations } from './migrations'
+//import { migrations } from './migrations'
 
 import { seedEndpoint } from './endpoints/seed'
 import { removeSeedEndpoint } from './endpoints/removeSeed'
+import { SociosCarousel } from './globals/sociosCarousel/config'
+import { ReconocimientosCarousel } from './globals/reconocimientosCarousel/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -71,6 +73,7 @@ export default buildConfig({
     // We'll add more components here later as needed
   },
   collections: [Users, Media, Pages, Tours, Ofertas, TourCategory, Destinations, BlogCategory, Post, Paquetes],
+  globals: [ReconocimientosCarousel, SociosCarousel],
   editor: lexicalEditor({
     // Configure default lexical editor options
   }),
@@ -83,8 +86,8 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
-    migrationDir: './src/migrations',
-    prodMigrations: migrations
+    //migrationDir: './src/migrations',
+    //prodMigrations: migrations
   }),
   // database-adapter-config-end
   sharp,

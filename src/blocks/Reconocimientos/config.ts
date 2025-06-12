@@ -24,20 +24,7 @@ export const ReconocimientosBlock: Block = {
                 },
             ]
         },
-        {
-            type: 'array',
-            name: 'reconocimientos',
-            label: 'Reconocimientos',
-            fields: [
-                {
-                    name: 'image',
-                    label: 'Image',
-                    type: 'upload', // Assuming an 'media' or similar collection exists
-                    relationTo: 'media', // Adjust if your media collection slug is different
-                    required: true
-                }
-            ]
-        }
+
     ]
 
 }
