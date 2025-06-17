@@ -31,6 +31,7 @@ import { heroTour } from '@/heros/TourHero'
 import { getPayload, RequiredDataFromCollectionSlug } from 'payload';
 import config from '@payload-config';
 import { TextContentBlock } from '@/blocks/TextContentBlock/config'
+import { GridBlogs } from '@/blocks/GridBlogs/config'
 
 // Import the custom feature
 
@@ -93,7 +94,7 @@ export const Tours: CollectionConfig = {
                         {
                             name: 'layout',
                             type: 'blocks',
-                            blocks: [DescrPrice, GuiaTour, GridTours, PostRelationTourBlock, YouTubeLinksBlock, SociosBlock, ReconocimientosBlock, TextContentBlock],
+                            blocks: [DescrPrice, GuiaTour, GridTours, PostRelationTourBlock, YouTubeLinksBlock, SociosBlock, ReconocimientosBlock],
                             //blocks: [],
                             required: true,
                         },

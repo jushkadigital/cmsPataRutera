@@ -7,8 +7,8 @@ import type { Media, TourCategory, Destination } from '@/payload-types'
 import { getPayload, RequiredDataFromCollectionSlug } from 'payload';
 
 let TOKEN = '';
-const BASE_URL = 'https://cms.patarutera.pe';
-//const BASE_URL = 'http://localhost:3000';
+//const BASE_URL = 'https://cms.patarutera.pe';
+const BASE_URL = 'http://localhost:3000';
 const assetsDir = path.resolve('./assets');
 
 interface AssetBuffer {
@@ -2207,6 +2207,119 @@ async function main() {
   }
 
 
+  try {
+    const urlPage = `${BASE_URL}/api/globals/footer`;
+    const { data } = await axios.post(urlPage,
+      {
+        navItems: [
+          {
+            nameColumn: "INFORMACIÓN DE CONTACTO",
+            links: [
+              {
+                id: "68518575dfdc1679a6aeaffb",
+                link: {
+                  type: "text",
+                  newTab: null,
+                  url: null,
+                  textInfo: "+51 930 770 103",
+                  label: null,
+                  icon: "Phone"
+                }
+              },
+              {
+                link: {
+                  type: "text",
+                  newTab: null,
+                  url: null,
+                  textInfo: "ventas@patarutera.com",
+                  label: null,
+                  icon: "Mail"
+                }
+              },
+              {
+                link: {
+                  type: "text",
+                  newTab: null,
+                  url: null,
+                  textInfo: "Av. Tacna 168 Wánchaq - Cusco",
+                  label: null,
+                  icon: "MapPin"
+                }
+              }
+            ]
+          },
+          {
+            nameColumn: "Destinos",
+            links: [
+              {
+                link: {
+                  type: "custom",
+                  newTab: null,
+                  url: "destinos?destination=Cusco&categories=",
+                  textInfo: null,
+                  label: "Cusco",
+                  icon: "ChevronRight"
+                }
+              },
+              {
+                link: {
+                  type: "custom",
+                  newTab: null,
+                  url: "destinos?destination=Ica&categories=",
+                  textInfo: null,
+                  label: "Ica",
+                  icon: "ChevronRight"
+                }
+              },
+              {
+                link: {
+                  type: "custom",
+                  newTab: null,
+                  url: "destinos?destination=Puerto%20Maldonado&categories=",
+                  textInfo: null,
+                  label: "Puerto Maldonado",
+                  icon: "ChevronRight"
+                }
+              }
+            ]
+          },
+          {
+            nameColumn: "Horarios",
+            links: [
+              {
+                link: {
+                  type: "reference",
+                  newTab: null,
+                  reference: {
+                    relationTo: "tours",
+                    value: {
+                      id: 1,
+                      title: "Tour Valle Sagrado",
+                      slug: "tour-valle-sagrado"
+                    }
+                  },
+                  url: null,
+                  textInfo: null,
+                  label: "Pagina Prueba",
+                  icon: null
+                }
+              }
+            ]
+          }
+        ],
+        globalType: "footer"
+      }
+      ,
+      {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+          'Content-Type': 'application/json',
+        },
+      });
+    console.log(`Globals Globals creada`, data);
+  } catch (error: any) {
+    console.error(`Error al crear :`, error.response?.data || error.message);
+  }
 
   const tours =
     [

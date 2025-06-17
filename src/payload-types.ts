@@ -105,10 +105,12 @@ export interface Config {
   globals: {
     reconocimientosCarousel: ReconocimientosCarousel;
     sociosCarousel: SociosCarousel;
+    footer: Footer;
   };
   globalsSelect: {
     reconocimientosCarousel: ReconocimientosCarouselSelect<false> | ReconocimientosCarouselSelect<true>;
     sociosCarousel: SociosCarouselSelect<false> | SociosCarouselSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
   };
   locale: null;
   user: User & {
@@ -263,6 +265,12 @@ export interface Page {
     | TextContentBlockType
     | GridImagesBlockType
     | GridPaquetesBlock
+    | {
+        trackingCode: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'formBitrixBlock';
+      }
   )[];
   publishedAt?: string | null;
   slug?: string | null;
@@ -322,6 +330,12 @@ export interface RowBlock {
           | EstadisticasBlockType
           | TextContentBlockType
           | GridImagesBlockType
+          | {
+              trackingCode: string;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'formBitrixBlock';
+            }
         )[];
         id?: string | null;
       }[]
@@ -455,32 +469,19 @@ export interface PostRelationTourBlockType {
 export interface Post {
   id: number;
   title: string;
+  heroPost?: BannerBlock[] | null;
   featuredImage: number | Media;
   description?: string | null;
-  backgroundImage?: (number | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  gallery?:
-    | {
-        image: number | Media;
-        caption?: string | null;
-        id?: string | null;
-      }[]
+  blocks?:
+    | (
+        | ReconocimientosBlockType
+        | SociosBlockType
+        | GridBlogsBlock
+        | GridImagesBlockType
+        | TextContentBlockType
+        | YouTubeLinksBlockType
+      )[]
     | null;
-  blocks?: (ReconocimientosBlockType | SociosBlockType)[] | null;
   author: number | User;
   categories?: (number | BlogCategory)[] | null;
   publishedDate?: string | null;
@@ -509,6 +510,76 @@ export interface SociosBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'socios';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GridBlogsBlock".
+ */
+export interface GridBlogsBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gridBlogs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gridImagesBlockType".
+ */
+export interface GridImagesBlockType {
+  typeGrid: 'masonry' | 'overlapping' | 'list' | 'mosaic' | 'grid';
+  Image?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gridImages';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextContentBlockType".
+ */
+export interface TextContentBlockType {
+  blockTitle: TitleGroup;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Controls the text alignment of the description content.
+   */
+  descriptionAlignment?: ('left' | 'center' | 'right' | 'justify') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textContent';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "YouTubeLinksBlockType".
+ */
+export interface YouTubeLinksBlockType {
+  blockTitle: TitleGroup;
+  videoLinks?:
+    | {
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'youTubeLinks';
 }
 /**
  * Categories for blog posts.
@@ -614,51 +685,6 @@ export interface EstadisticasBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TextContentBlockType".
- */
-export interface TextContentBlockType {
-  blockTitle: TitleGroup;
-  description: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  /**
-   * Controls the text alignment of the description content.
-   */
-  descriptionAlignment?: ('left' | 'center' | 'right') | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'textContent';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "gridImagesBlockType".
- */
-export interface GridImagesBlockType {
-  typeGrid: 'masonry' | 'overlapping' | 'list' | 'mosaic' | 'grid';
-  Image?:
-    | {
-        image: number | Media;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'gridImages';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "GridPaquetesBlock".
  */
 export interface GridPaquetesBlock {
@@ -696,7 +722,6 @@ export interface Tour {
     | YouTubeLinksBlockType
     | SociosBlockType
     | ReconocimientosBlockType
-    | TextContentBlockType
   )[];
   featuredImage: number | Media;
   miniDescription: {
@@ -907,22 +932,6 @@ export interface GuiaTourBlock {
   blockType: 'guiaTour';
 }
 /**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "YouTubeLinksBlockType".
- */
-export interface YouTubeLinksBlockType {
-  blockTitle: TitleGroup;
-  videoLinks?:
-    | {
-        url: string;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'youTubeLinks';
-}
-/**
  * Ofertas especiales de Tours
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -957,10 +966,18 @@ export interface Paquete {
         | DescrPriceBlock
         | GuiaTourBlock
         | GridToursBlock
+        | GridBlogsBlock
         | PostRelationTourBlockType
         | YouTubeLinksBlockType
+        | TextContentBlockType
         | SociosBlockType
         | ReconocimientosBlockType
+        | {
+            trackingCode: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'formBitrixBlock';
+          }
       )[]
     | null;
   featuredImage: number | Media;
@@ -1341,6 +1358,13 @@ export interface PagesSelect<T extends boolean = true> {
         textContent?: T | TextContentBlockTypeSelect<T>;
         gridImages?: T | GridImagesBlockTypeSelect<T>;
         gridPaquetes?: T | GridPaquetesBlockSelect<T>;
+        formBitrixBlock?:
+          | T
+          | {
+              trackingCode?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   publishedAt?: T;
   slug?: T;
@@ -1392,6 +1416,13 @@ export interface RowBlockSelect<T extends boolean = true> {
               estadisticas?: T | EstadisticasBlockTypeSelect<T>;
               textContent?: T | TextContentBlockTypeSelect<T>;
               gridImages?: T | GridImagesBlockTypeSelect<T>;
+              formBitrixBlock?:
+                | T
+                | {
+                    trackingCode?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
             };
         id?: T;
       };
@@ -1594,7 +1625,6 @@ export interface ToursSelect<T extends boolean = true> {
         youTubeLinks?: T | YouTubeLinksBlockTypeSelect<T>;
         socios?: T | SociosBlockTypeSelect<T>;
         reconocimientos?: T | ReconocimientosBlockTypeSelect<T>;
-        textContent?: T | TextContentBlockTypeSelect<T>;
       };
   featuredImage?: T;
   miniDescription?: T;
@@ -1772,22 +1802,22 @@ export interface BlogCategoriesSelect<T extends boolean = true> {
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
-  featuredImage?: T;
-  description?: T;
-  backgroundImage?: T;
-  content?: T;
-  gallery?:
+  heroPost?:
     | T
     | {
-        image?: T;
-        caption?: T;
-        id?: T;
+        banner?: T | BannerBlockSelect<T>;
       };
+  featuredImage?: T;
+  description?: T;
   blocks?:
     | T
     | {
         reconocimientos?: T | ReconocimientosBlockTypeSelect<T>;
         socios?: T | SociosBlockTypeSelect<T>;
+        gridBlogs?: T | GridBlogsBlockSelect<T>;
+        gridImages?: T | GridImagesBlockTypeSelect<T>;
+        textContent?: T | TextContentBlockTypeSelect<T>;
+        youTubeLinks?: T | YouTubeLinksBlockTypeSelect<T>;
       };
   author?: T;
   categories?: T;
@@ -1797,6 +1827,14 @@ export interface PostsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GridBlogsBlock_select".
+ */
+export interface GridBlogsBlockSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1815,10 +1853,19 @@ export interface PaquetesSelect<T extends boolean = true> {
         descrPrice?: T | DescrPriceBlockSelect<T>;
         guiaTour?: T | GuiaTourBlockSelect<T>;
         gridTours?: T | GridToursBlockSelect<T>;
+        gridBlogs?: T | GridBlogsBlockSelect<T>;
         postRelationTour?: T | PostRelationTourBlockTypeSelect<T>;
         youTubeLinks?: T | YouTubeLinksBlockTypeSelect<T>;
+        textContent?: T | TextContentBlockTypeSelect<T>;
         socios?: T | SociosBlockTypeSelect<T>;
         reconocimientos?: T | ReconocimientosBlockTypeSelect<T>;
+        formBitrixBlock?:
+          | T
+          | {
+              trackingCode?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   featuredImage?: T;
   miniDescription?: T;
@@ -1955,6 +2002,51 @@ export interface SociosCarousel {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: number;
+  navItems?:
+    | {
+        nameColumn: string;
+        links?:
+          | {
+              link?: {
+                type?: ('reference' | 'custom' | 'text') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: number | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'tours';
+                      value: number | Tour;
+                    } | null)
+                  | ({
+                      relationTo: 'paquetes';
+                      value: number | Paquete;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: number | Post;
+                    } | null);
+                url?: string | null;
+                textInfo?: string | null;
+                label?: string | null;
+                icon?: string | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reconocimientosCarousel_select".
  */
 export interface ReconocimientosCarouselSelect<T extends boolean = true> {
@@ -1977,6 +2069,37 @@ export interface SociosCarouselSelect<T extends boolean = true> {
     | T
     | {
         image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  navItems?:
+    | T
+    | {
+        nameColumn?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    textInfo?: T;
+                    label?: T;
+                    icon?: T;
+                  };
+              id?: T;
+            };
         id?: T;
       };
   updatedAt?: T;

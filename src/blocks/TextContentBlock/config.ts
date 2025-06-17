@@ -55,6 +55,10 @@ export const TextContentBlock: Block = {
           label: 'Right',
           value: 'right',
         },
+        {
+          label: 'Justify',
+          value: 'justify'
+        }
       ],
       defaultValue: 'left',
       admin: {

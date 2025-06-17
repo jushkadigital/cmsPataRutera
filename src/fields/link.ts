@@ -49,6 +49,10 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
                 label: 'Custom URL',
                 value: 'custom',
               },
+              {
+                label: 'Info text',
+                value: 'text'
+              }
             ],
           },
           {
@@ -75,7 +79,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
         condition: (_, siblingData) => siblingData?.type === 'reference',
       },
       label: 'Document to link to',
-      relationTo: ['pages'],
+      relationTo: ['pages', 'tours', 'paquetes', 'posts'],
       required: true,
     },
     {
@@ -87,6 +91,15 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       label: 'Custom URL',
       required: true,
     },
+    {
+      name: 'textInfo',
+      type: 'text',
+      admin: {
+        condition: (_, siblingData) => siblingData?.type === 'text',
+      },
+      label: 'infoText',
+      required: true,
+    }
   ]
 
   if (!disableLabel) {
@@ -106,11 +119,16 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
           name: 'label',
           type: 'text',
           admin: {
-            width: '50%',
           },
           label: 'Label',
-          required: true,
         },
+        {
+          name: 'icon',
+          type: 'text',
+          admin: {
+          },
+          label: 'Icon',
+        }
       ],
     })
   } else {

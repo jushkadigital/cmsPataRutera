@@ -9,6 +9,11 @@ import { generatePreviewPath } from '@/utilities/generatePreviewPath';
 import { slugField } from '@/fields/slug';
 import { populatePublishedAt } from '@/hooks/populatePublishedAt';
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost';
+import { GridBlogs } from '@/blocks/GridBlogs/config';
+import { GridImages } from '@/blocks/GridImages/config';
+import { TextContentBlock } from '@/blocks/TextContentBlock/config';
+import { YouTubeLinksBlock } from '@/blocks/YouTubeLinksBlock/config';
+import { heroPost } from '@/heros/PostHero';
 
 export const Post: CollectionConfig = {
     slug: 'posts',
@@ -53,12 +58,17 @@ export const Post: CollectionConfig = {
             required: true,
         },
 
-        // Add Author and Published Date to sidebar if uncommented
-
         // Tabs field containing the main content structure
         {
             type: 'tabs',
             tabs: [
+                {
+                    fields: [
+                        heroPost
+                    ],
+                    label: 'Hero'
+
+                },
                 // Thumbnail Tab
                 {
                     label: 'Thumbnail',
@@ -78,54 +88,16 @@ export const Post: CollectionConfig = {
                         },
                     ],
                 },
+
                 // Content Tab
                 {
                     label: 'Content',
                     fields: [
                         {
-                            name: 'backgroundImage',
-                            label: 'Background Image',
-                            type: 'upload',
-                            relationTo: 'media',
-                            required: false,
-                        },
-                        {
-                            name: 'content',
-                            label: 'Main Content',
-                            type: 'richText',
-                            editor: lexicalEditor({
-                                features: ({ defaultFeatures }) => [
-                                    ...defaultFeatures,
-                                    //CustomListServerFeature(),
-                                ],
-                            }),
-                            required: true,
-                        },
-                        {
-                            name: 'gallery',
-                            label: 'Image Gallery',
-                            type: 'array',
-                            minRows: 0,
-                            fields: [
-                                {
-                                    name: 'image',
-                                    label: 'Image',
-                                    type: 'upload',
-                                    relationTo: 'media',
-                                    required: true,
-                                },
-                                {
-                                    name: 'caption',
-                                    label: 'Caption',
-                                    type: 'text',
-                                },
-                            ],
-                        },
-                        {
                             type: 'blocks',
                             name: 'blocks',
                             label: 'Blocks',
-                            blocks: [ReconocimientosBlock, SociosBlock],
+                            blocks: [ReconocimientosBlock, SociosBlock, GridBlogs, GridImages, TextContentBlock, GridImages, YouTubeLinksBlock],
                         }
                     ],
                 },

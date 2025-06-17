@@ -30,6 +30,9 @@ import { ReconocimientosBlock } from '@/blocks/Reconocimientos/config'
 import { anyone } from '@/access/anyone'
 import { revalidateDelete, revalidatePaquete } from './hooks/revalidatePaquete'
 import { PaqueteHerocar } from '@/blocks/PaqueteHerocar/config'
+import { TextContentBlock } from '@/blocks/TextContentBlock/config'
+import { GridBlogs } from '@/blocks/GridBlogs/config'
+import { FormBitrixBlock } from '@/blocks/FormBitrix/config'
 
 // Import the custom feature
 
@@ -92,7 +95,7 @@ export const Paquetes: CollectionConfig = {
                         {
                             name: 'layout',
                             type: 'blocks',
-                            blocks: [DescrPrice, GuiaTour, GridTours, PostRelationTourBlock, YouTubeLinksBlock, SociosBlock, ReconocimientosBlock],
+                            blocks: [DescrPrice, GuiaTour, GridTours, GridBlogs, PostRelationTourBlock, YouTubeLinksBlock, TextContentBlock, SociosBlock, ReconocimientosBlock, FormBitrixBlock],
                         },
                     ],
                     label: 'Content'

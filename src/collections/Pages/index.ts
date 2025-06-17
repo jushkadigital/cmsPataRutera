@@ -32,6 +32,7 @@ import { EstadisticasBlock } from '@/blocks/EstadisticasBlock/config'
 import { TextContentBlock } from '@/blocks/TextContentBlock/config'
 import { GridImages } from '@/blocks/GridImages/config'
 import { GridPaquetes } from '@/blocks/GridPaquetes/config'
+import { FormBitrixBlock } from '@/blocks/FormBitrix/config'
 
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -88,7 +89,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [RowBlock, GridTours, MediaBlock, PostRelationTourBlock, SociosBlock, ReconocimientosBlock, OfertasBlock, CarouselDestination, TikTokLinksBlock, BeneficiosBlock, EstadisticasBlock, TextContentBlock, GridImages, OfertasBlock, GridPaquetes],
+              blocks: [RowBlock, GridTours, MediaBlock, PostRelationTourBlock, SociosBlock, ReconocimientosBlock, OfertasBlock, CarouselDestination, TikTokLinksBlock, BeneficiosBlock, EstadisticasBlock, TextContentBlock, GridImages, OfertasBlock, GridPaquetes, FormBitrixBlock],
               required: true,
               admin: {
                 initCollapsed: true,
