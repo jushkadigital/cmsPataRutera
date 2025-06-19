@@ -97,6 +97,7 @@ export const Paquetes: CollectionConfig = {
                             name: 'layout',
                             type: 'blocks',
                             blocks: [DescrPrice, GuiaTour, GridTours, GridBlogs, PostRelationTourBlock, YouTubeLinksBlock, TextContentBlock, SociosBlock, ReconocimientosBlock, FormBitrixBlock, RevistaBlock],
+                            required: true,
                         },
                     ],
                     label: 'Content'

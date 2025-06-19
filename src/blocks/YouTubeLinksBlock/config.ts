@@ -37,6 +37,12 @@ export const YouTubeLinksBlock: Block = {
       },
       fields: [
         {
+          name: 'image',
+          label: 'Background',
+          type: 'upload',
+          relationTo: 'media',
+        },
+        {
           name: 'url',
           label: 'YouTube Video URL',
           type: 'text',

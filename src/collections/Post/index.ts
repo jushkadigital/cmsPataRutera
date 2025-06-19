@@ -94,10 +94,11 @@ export const Post: CollectionConfig = {
                     label: 'Content',
                     fields: [
                         {
+                            name: 'layout',
                             type: 'blocks',
-                            name: 'blocks',
                             label: 'Blocks',
                             blocks: [ReconocimientosBlock, SociosBlock, GridBlogs, GridImages, TextContentBlock, GridImages, YouTubeLinksBlock],
+                            required: true,
                         }
                     ],
                 },

@@ -4,6 +4,7 @@ import { Block } from 'payload';
 
 export const RevistaBlock: Block = {
     slug: 'revistaBlock',
+    interfaceName: 'RevistaBlock',
     labels: {
         singular: 'Revista Block',
         plural: 'Revista Blocks',
@@ -23,6 +24,7 @@ export const RevistaBlock: Block = {
                 },
             ]
         },
+
         {
             name: 'revistasLinks',
             label: 'Revistas Links',
@@ -35,6 +37,12 @@ export const RevistaBlock: Block = {
             admin: {
             },
             fields: [
+                {
+                    name: 'image',
+                    label: 'Background',
+                    type: 'upload',
+                    relationTo: 'media',
+                },
                 {
                     name: 'url',
                     label: 'Revista URL',

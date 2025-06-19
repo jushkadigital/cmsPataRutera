@@ -2078,7 +2078,7 @@ const Post = ({
     ],
     featuredImage: Images[1]!,
     description: "aoeuthaoenuthaoentuhaeotnu aoeuaoeuoaeuaoe aoeuaoeuaoeu",
-    blocks: [
+    layout: [
       {
         description: {
           root: {
