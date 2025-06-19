@@ -6,13 +6,13 @@
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=4096 next build",
-    "dev": "cross-env NODE_OPTIONS=--max-old-space-size=4096 next dev",
+    "dev": "cross-env NODE_OPTIONS=--max-old-space-size=8192 next dev",
     "ci": "cross-env NODE_OPTIONS=--no-deprecation payload migrate && next build",
     "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
-    "payload": "cross-env NODE_OPTIONS=--max-old-space-size=4096 payload",
+    "payload": "cross-env NODE_OPTIONS=--max-old-space-size=8192 payload",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "seedTest": "cross-env NODE_OPTIONS=--max-old-space-size=4096 payload run testSeed.ts ",
     "seed": "cross-env NODE_OPTIONS=--max-old-space-size=4096 payload run seed.ts "

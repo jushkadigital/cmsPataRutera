@@ -1,5 +1,5 @@
 {
-  "id": "74127ebf-5ced-4ead-8dd9-5e2ffa0e503d",
+  "id": "52974ee8-d10e-42c5-94c1-faf6869182e6",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -3207,6 +3207,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "url": {
           "name": "url",
           "type": "varchar",
@@ -3244,9 +3250,37 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "pages_blocks_revista_block_revistas_links_image_idx": {
+          "name": "pages_blocks_revista_block_revistas_links_image_idx",
+          "columns": [
+            {
+              "expression": "image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
+        "pages_blocks_revista_block_revistas_links_image_id_media_id_fk": {
+          "name": "pages_blocks_revista_block_revistas_links_image_id_media_id_fk",
+          "tableFrom": "pages_blocks_revista_block_revistas_links",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "pages_blocks_revista_block_revistas_links_parent_id_fk": {
           "name": "pages_blocks_revista_block_revistas_links_parent_id_fk",
           "tableFrom": "pages_blocks_revista_block_revistas_links",
@@ -6893,6 +6927,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "url": {
           "name": "url",
           "type": "varchar",
@@ -6936,9 +6976,37 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "_pages_v_blocks_revista_block_revistas_links_image_idx": {
+          "name": "_pages_v_blocks_revista_block_revistas_links_image_idx",
+          "columns": [
+            {
+              "expression": "image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
+        "_pages_v_blocks_revista_block_revistas_links_image_id_media_id_fk": {
+          "name": "_pages_v_blocks_revista_block_revistas_links_image_id_media_id_fk",
+          "tableFrom": "_pages_v_blocks_revista_block_revistas_links",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "_pages_v_blocks_revista_block_revistas_links_parent_id_fk": {
           "name": "_pages_v_blocks_revista_block_revistas_links_parent_id_fk",
           "tableFrom": "_pages_v_blocks_revista_block_revistas_links",
@@ -9496,6 +9564,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "url": {
           "name": "url",
           "type": "varchar",
@@ -9533,9 +9607,37 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "tours_blocks_you_tube_links_video_links_image_idx": {
+          "name": "tours_blocks_you_tube_links_video_links_image_idx",
+          "columns": [
+            {
+              "expression": "image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
+        "tours_blocks_you_tube_links_video_links_image_id_media_id_fk": {
+          "name": "tours_blocks_you_tube_links_video_links_image_id_media_id_fk",
+          "tableFrom": "tours_blocks_you_tube_links_video_links",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "tours_blocks_you_tube_links_video_links_parent_id_fk": {
           "name": "tours_blocks_you_tube_links_video_links_parent_id_fk",
           "tableFrom": "tours_blocks_you_tube_links_video_links",
@@ -10257,6 +10359,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "url": {
           "name": "url",
           "type": "varchar",
@@ -10294,9 +10402,37 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "tours_blocks_revista_block_revistas_links_image_idx": {
+          "name": "tours_blocks_revista_block_revistas_links_image_idx",
+          "columns": [
+            {
+              "expression": "image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
+        "tours_blocks_revista_block_revistas_links_image_id_media_id_fk": {
+          "name": "tours_blocks_revista_block_revistas_links_image_id_media_id_fk",
+          "tableFrom": "tours_blocks_revista_block_revistas_links",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "tours_blocks_revista_block_revistas_links_parent_id_fk": {
           "name": "tours_blocks_revista_block_revistas_links_parent_id_fk",
           "tableFrom": "tours_blocks_revista_block_revistas_links",
@@ -12365,6 +12501,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "url": {
           "name": "url",
           "type": "varchar",
@@ -12408,9 +12550,37 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "_tours_v_blocks_you_tube_links_video_links_image_idx": {
+          "name": "_tours_v_blocks_you_tube_links_video_links_image_idx",
+          "columns": [
+            {
+              "expression": "image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
+        "_tours_v_blocks_you_tube_links_video_links_image_id_media_id_fk": {
+          "name": "_tours_v_blocks_you_tube_links_video_links_image_id_media_id_fk",
+          "tableFrom": "_tours_v_blocks_you_tube_links_video_links",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "_tours_v_blocks_you_tube_links_video_links_parent_id_fk": {
           "name": "_tours_v_blocks_you_tube_links_video_links_parent_id_fk",
           "tableFrom": "_tours_v_blocks_you_tube_links_video_links",
@@ -13162,6 +13332,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "url": {
           "name": "url",
           "type": "varchar",
@@ -13205,9 +13381,37 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "_tours_v_blocks_revista_block_revistas_links_image_idx": {
+          "name": "_tours_v_blocks_revista_block_revistas_links_image_idx",
+          "columns": [
+            {
+              "expression": "image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
+        "_tours_v_blocks_revista_block_revistas_links_image_id_media_id_fk": {
+          "name": "_tours_v_blocks_revista_block_revistas_links_image_id_media_id_fk",
+          "tableFrom": "_tours_v_blocks_revista_block_revistas_links",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "_tours_v_blocks_revista_block_revistas_links_parent_id_fk": {
           "name": "_tours_v_blocks_revista_block_revistas_links_parent_id_fk",
           "tableFrom": "_tours_v_blocks_revista_block_revistas_links",
@@ -15520,6 +15724,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "url": {
           "name": "url",
           "type": "varchar",
@@ -15557,9 +15767,37 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "posts_blocks_you_tube_links_video_links_image_idx": {
+          "name": "posts_blocks_you_tube_links_video_links_image_idx",
+          "columns": [
+            {
+              "expression": "image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
+        "posts_blocks_you_tube_links_video_links_image_id_media_id_fk": {
+          "name": "posts_blocks_you_tube_links_video_links_image_id_media_id_fk",
+          "tableFrom": "posts_blocks_you_tube_links_video_links",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "posts_blocks_you_tube_links_video_links_parent_id_fk": {
           "name": "posts_blocks_you_tube_links_video_links_parent_id_fk",
           "tableFrom": "posts_blocks_you_tube_links_video_links",
@@ -17128,6 +17366,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "url": {
           "name": "url",
           "type": "varchar",
@@ -17171,9 +17415,37 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "_posts_v_blocks_you_tube_links_video_links_image_idx": {
+          "name": "_posts_v_blocks_you_tube_links_video_links_image_idx",
+          "columns": [
+            {
+              "expression": "image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
+        "_posts_v_blocks_you_tube_links_video_links_image_id_media_id_fk": {
+          "name": "_posts_v_blocks_you_tube_links_video_links_image_id_media_id_fk",
+          "tableFrom": "_posts_v_blocks_you_tube_links_video_links",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "_posts_v_blocks_you_tube_links_video_links_parent_id_fk": {
           "name": "_posts_v_blocks_you_tube_links_video_links_parent_id_fk",
           "tableFrom": "_posts_v_blocks_you_tube_links_video_links",
@@ -19190,6 +19462,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "url": {
           "name": "url",
           "type": "varchar",
@@ -19227,9 +19505,37 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "paquetes_blocks_you_tube_links_video_links_image_idx": {
+          "name": "paquetes_blocks_you_tube_links_video_links_image_idx",
+          "columns": [
+            {
+              "expression": "image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
+        "paquetes_blocks_you_tube_links_video_links_image_id_media_id_fk": {
+          "name": "paquetes_blocks_you_tube_links_video_links_image_id_media_id_fk",
+          "tableFrom": "paquetes_blocks_you_tube_links_video_links",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "paquetes_blocks_you_tube_links_video_links_parent_id_fk": {
           "name": "paquetes_blocks_you_tube_links_video_links_parent_id_fk",
           "tableFrom": "paquetes_blocks_you_tube_links_video_links",
@@ -19951,6 +20257,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "url": {
           "name": "url",
           "type": "varchar",
@@ -19988,9 +20300,37 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "paquetes_blocks_revista_block_revistas_links_image_idx": {
+          "name": "paquetes_blocks_revista_block_revistas_links_image_idx",
+          "columns": [
+            {
+              "expression": "image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
+        "paquetes_blocks_revista_block_revistas_links_image_id_media_id_fk": {
+          "name": "paquetes_blocks_revista_block_revistas_links_image_id_media_id_fk",
+          "tableFrom": "paquetes_blocks_revista_block_revistas_links",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "paquetes_blocks_revista_block_revistas_links_parent_id_fk": {
           "name": "paquetes_blocks_revista_block_revistas_links_parent_id_fk",
           "tableFrom": "paquetes_blocks_revista_block_revistas_links",
@@ -22059,6 +22399,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "url": {
           "name": "url",
           "type": "varchar",
@@ -22102,9 +22448,37 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "_paquetes_v_blocks_you_tube_links_video_links_image_idx": {
+          "name": "_paquetes_v_blocks_you_tube_links_video_links_image_idx",
+          "columns": [
+            {
+              "expression": "image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
+        "_paquetes_v_blocks_you_tube_links_video_links_image_id_media_id_fk": {
+          "name": "_paquetes_v_blocks_you_tube_links_video_links_image_id_media_id_fk",
+          "tableFrom": "_paquetes_v_blocks_you_tube_links_video_links",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "_paquetes_v_blocks_you_tube_links_video_links_parent_id_fk": {
           "name": "_paquetes_v_blocks_you_tube_links_video_links_parent_id_fk",
           "tableFrom": "_paquetes_v_blocks_you_tube_links_video_links",
@@ -22856,6 +23230,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "url": {
           "name": "url",
           "type": "varchar",
@@ -22899,9 +23279,37 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "_paquetes_v_blocks_revista_block_revistas_links_image_idx": {
+          "name": "_paquetes_v_blocks_revista_block_revistas_links_image_idx",
+          "columns": [
+            {
+              "expression": "image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
+        "_paquetes_v_blocks_revista_block_revistas_links_image_id_media_id_fk": {
+          "name": "_paquetes_v_blocks_revista_block_revistas_links_image_id_media_id_fk",
+          "tableFrom": "_paquetes_v_blocks_revista_block_revistas_links",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "_paquetes_v_blocks_revista_block_revistas_links_parent_id_fk": {
           "name": "_paquetes_v_blocks_revista_block_revistas_links_parent_id_fk",
           "tableFrom": "_paquetes_v_blocks_revista_block_revistas_links",
