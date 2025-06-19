@@ -40,6 +40,9 @@ export const GridTours: Block = { // Renamed constant
             name: 'gridColumns',
             label: 'Número de Items',
             defaultValue: 6,
+            admin: {
+                step: 1
+            }
         }) as Field,
         {
             name: 'gridStyle',
@@ -61,7 +64,7 @@ export const GridTours: Block = { // Renamed constant
                 description: 'Si se selecciona una categoría, solo se mostrarán las tours de esa categoría.',
             },
         },
-        {
+        applyConditionalDefaults({
             name: 'destination',
             type: 'relationship',
             label: 'Destino',
@@ -69,6 +72,6 @@ export const GridTours: Block = { // Renamed constant
             admin: {
                 description: 'Si se selecciona un destino, solo se mostrarán las tours de ese destino.',
             },
-        }
+        }) as Field
     ]
 }

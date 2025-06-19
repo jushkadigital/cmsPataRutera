@@ -1,5 +1,5 @@
 {
-  "id": "1b546621-564d-4345-a0ac-536d5da2368f",
+  "id": "74127ebf-5ced-4ead-8dd9-5e2ffa0e503d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -3185,6 +3185,227 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.pages_blocks_revista_block_revistas_links": {
+      "name": "pages_blocks_revista_block_revistas_links",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "pages_blocks_revista_block_revistas_links_order_idx": {
+          "name": "pages_blocks_revista_block_revistas_links_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "pages_blocks_revista_block_revistas_links_parent_id_idx": {
+          "name": "pages_blocks_revista_block_revistas_links_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "pages_blocks_revista_block_revistas_links_parent_id_fk": {
+          "name": "pages_blocks_revista_block_revistas_links_parent_id_fk",
+          "tableFrom": "pages_blocks_revista_block_revistas_links",
+          "tableTo": "pages_blocks_revista_block",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.pages_blocks_revista_block": {
+      "name": "pages_blocks_revista_block",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum_pages_blocks_revista_block_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum_pages_blocks_revista_block_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "pages_blocks_revista_block_order_idx": {
+          "name": "pages_blocks_revista_block_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "pages_blocks_revista_block_parent_id_idx": {
+          "name": "pages_blocks_revista_block_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "pages_blocks_revista_block_path_idx": {
+          "name": "pages_blocks_revista_block_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "pages_blocks_revista_block_parent_id_fk": {
+          "name": "pages_blocks_revista_block_parent_id_fk",
+          "tableFrom": "pages_blocks_revista_block",
+          "tableTo": "pages",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.pages_blocks_row_block_columns": {
       "name": "pages_blocks_row_block_columns",
       "schema": "",
@@ -3355,6 +3576,182 @@
         "pages_blocks_row_block_parent_id_fk": {
           "name": "pages_blocks_row_block_parent_id_fk",
           "tableFrom": "pages_blocks_row_block",
+          "tableTo": "pages",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.pages_blocks_grid_blogs": {
+      "name": "pages_blocks_grid_blogs",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "override_defaults": {
+          "name": "override_defaults",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum_pages_blocks_grid_blogs_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum_pages_blocks_grid_blogs_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "general_style": {
+          "name": "general_style",
+          "type": "enum_pages_blocks_grid_blogs_general_style",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'grid'"
+        },
+        "grid_style": {
+          "name": "grid_style",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "populate_by": {
+          "name": "populate_by",
+          "type": "enum_pages_blocks_grid_blogs_populate_by",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'collection'"
+        },
+        "limit": {
+          "name": "limit",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 3
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "pages_blocks_grid_blogs_order_idx": {
+          "name": "pages_blocks_grid_blogs_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "pages_blocks_grid_blogs_parent_id_idx": {
+          "name": "pages_blocks_grid_blogs_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "pages_blocks_grid_blogs_path_idx": {
+          "name": "pages_blocks_grid_blogs_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "pages_blocks_grid_blogs_parent_id_fk": {
+          "name": "pages_blocks_grid_blogs_parent_id_fk",
+          "tableFrom": "pages_blocks_grid_blogs",
           "tableTo": "pages",
           "columnsFrom": [
             "_parent_id"
@@ -3699,6 +4096,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "blog_categories_id": {
+          "name": "blog_categories_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "destinations_id": {
           "name": "destinations_id",
           "type": "integer",
@@ -3782,6 +4185,21 @@
           "method": "btree",
           "with": {}
         },
+        "pages_rels_blog_categories_id_idx": {
+          "name": "pages_rels_blog_categories_id_idx",
+          "columns": [
+            {
+              "expression": "blog_categories_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "pages_rels_destinations_id_idx": {
           "name": "pages_rels_destinations_id_idx",
           "columns": [
@@ -3831,6 +4249,19 @@
           "tableTo": "posts",
           "columnsFrom": [
             "posts_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "pages_rels_blog_categories_fk": {
+          "name": "pages_rels_blog_categories_fk",
+          "tableFrom": "pages_rels",
+          "tableTo": "blog_categories",
+          "columnsFrom": [
+            "blog_categories_id"
           ],
           "columnsTo": [
             "id"
@@ -6440,6 +6871,239 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public._pages_v_blocks_revista_block_revistas_links": {
+      "name": "_pages_v_blocks_revista_block_revistas_links",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_pages_v_blocks_revista_block_revistas_links_order_idx": {
+          "name": "_pages_v_blocks_revista_block_revistas_links_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_pages_v_blocks_revista_block_revistas_links_parent_id_idx": {
+          "name": "_pages_v_blocks_revista_block_revistas_links_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_pages_v_blocks_revista_block_revistas_links_parent_id_fk": {
+          "name": "_pages_v_blocks_revista_block_revistas_links_parent_id_fk",
+          "tableFrom": "_pages_v_blocks_revista_block_revistas_links",
+          "tableTo": "_pages_v_blocks_revista_block",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public._pages_v_blocks_revista_block": {
+      "name": "_pages_v_blocks_revista_block",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum__pages_v_blocks_revista_block_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum__pages_v_blocks_revista_block_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_pages_v_blocks_revista_block_order_idx": {
+          "name": "_pages_v_blocks_revista_block_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_pages_v_blocks_revista_block_parent_id_idx": {
+          "name": "_pages_v_blocks_revista_block_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_pages_v_blocks_revista_block_path_idx": {
+          "name": "_pages_v_blocks_revista_block_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_pages_v_blocks_revista_block_parent_id_fk": {
+          "name": "_pages_v_blocks_revista_block_parent_id_fk",
+          "tableFrom": "_pages_v_blocks_revista_block",
+          "tableTo": "_pages_v",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public._pages_v_blocks_row_block_columns": {
       "name": "_pages_v_blocks_row_block_columns",
       "schema": "",
@@ -6622,6 +7286,188 @@
         "_pages_v_blocks_row_block_parent_id_fk": {
           "name": "_pages_v_blocks_row_block_parent_id_fk",
           "tableFrom": "_pages_v_blocks_row_block",
+          "tableTo": "_pages_v",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public._pages_v_blocks_grid_blogs": {
+      "name": "_pages_v_blocks_grid_blogs",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "override_defaults": {
+          "name": "override_defaults",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum__pages_v_blocks_grid_blogs_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum__pages_v_blocks_grid_blogs_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "general_style": {
+          "name": "general_style",
+          "type": "enum__pages_v_blocks_grid_blogs_general_style",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'grid'"
+        },
+        "grid_style": {
+          "name": "grid_style",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "populate_by": {
+          "name": "populate_by",
+          "type": "enum__pages_v_blocks_grid_blogs_populate_by",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'collection'"
+        },
+        "limit": {
+          "name": "limit",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 3
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_pages_v_blocks_grid_blogs_order_idx": {
+          "name": "_pages_v_blocks_grid_blogs_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_pages_v_blocks_grid_blogs_parent_id_idx": {
+          "name": "_pages_v_blocks_grid_blogs_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_pages_v_blocks_grid_blogs_path_idx": {
+          "name": "_pages_v_blocks_grid_blogs_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_pages_v_blocks_grid_blogs_parent_id_fk": {
+          "name": "_pages_v_blocks_grid_blogs_parent_id_fk",
+          "tableFrom": "_pages_v_blocks_grid_blogs",
           "tableTo": "_pages_v",
           "columnsFrom": [
             "_parent_id"
@@ -7091,6 +7937,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "blog_categories_id": {
+          "name": "blog_categories_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "destinations_id": {
           "name": "destinations_id",
           "type": "integer",
@@ -7174,6 +8026,21 @@
           "method": "btree",
           "with": {}
         },
+        "_pages_v_rels_blog_categories_id_idx": {
+          "name": "_pages_v_rels_blog_categories_id_idx",
+          "columns": [
+            {
+              "expression": "blog_categories_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "_pages_v_rels_destinations_id_idx": {
           "name": "_pages_v_rels_destinations_id_idx",
           "columns": [
@@ -7223,6 +8090,19 @@
           "tableTo": "posts",
           "columnsFrom": [
             "posts_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_pages_v_rels_blog_categories_fk": {
+          "name": "_pages_v_rels_blog_categories_fk",
+          "tableFrom": "_pages_v_rels",
+          "tableTo": "blog_categories",
+          "columnsFrom": [
+            "blog_categories_id"
           ],
           "columnsTo": [
             "id"
@@ -8273,6 +9153,182 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.tours_blocks_grid_blogs": {
+      "name": "tours_blocks_grid_blogs",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "override_defaults": {
+          "name": "override_defaults",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum_tours_blocks_grid_blogs_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum_tours_blocks_grid_blogs_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "general_style": {
+          "name": "general_style",
+          "type": "enum_tours_blocks_grid_blogs_general_style",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'grid'"
+        },
+        "grid_style": {
+          "name": "grid_style",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "populate_by": {
+          "name": "populate_by",
+          "type": "enum_tours_blocks_grid_blogs_populate_by",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'collection'"
+        },
+        "limit": {
+          "name": "limit",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 3
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "tours_blocks_grid_blogs_order_idx": {
+          "name": "tours_blocks_grid_blogs_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "tours_blocks_grid_blogs_parent_id_idx": {
+          "name": "tours_blocks_grid_blogs_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "tours_blocks_grid_blogs_path_idx": {
+          "name": "tours_blocks_grid_blogs_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "tours_blocks_grid_blogs_parent_id_fk": {
+          "name": "tours_blocks_grid_blogs_parent_id_fk",
+          "tableFrom": "tours_blocks_grid_blogs",
+          "tableTo": "tours",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.tours_blocks_post_relation_tour": {
       "name": "tours_blocks_post_relation_tour",
       "schema": "",
@@ -8639,6 +9695,159 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.tours_blocks_text_content": {
+      "name": "tours_blocks_text_content",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum_tours_blocks_text_content_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum_tours_blocks_text_content_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "description": {
+          "name": "description",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description_alignment": {
+          "name": "description_alignment",
+          "type": "enum_tours_blocks_text_content_description_alignment",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'left'"
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "tours_blocks_text_content_order_idx": {
+          "name": "tours_blocks_text_content_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "tours_blocks_text_content_parent_id_idx": {
+          "name": "tours_blocks_text_content_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "tours_blocks_text_content_path_idx": {
+          "name": "tours_blocks_text_content_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "tours_blocks_text_content_parent_id_fk": {
+          "name": "tours_blocks_text_content_parent_id_fk",
+          "tableFrom": "tours_blocks_text_content",
+          "tableTo": "tours",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.tours_blocks_socios": {
       "name": "tours_blocks_socios",
       "schema": "",
@@ -8900,6 +10109,336 @@
         "tours_blocks_reconocimientos_parent_id_fk": {
           "name": "tours_blocks_reconocimientos_parent_id_fk",
           "tableFrom": "tours_blocks_reconocimientos",
+          "tableTo": "tours",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.tours_blocks_form_bitrix_block": {
+      "name": "tours_blocks_form_bitrix_block",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "tracking_code": {
+          "name": "tracking_code",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "tours_blocks_form_bitrix_block_order_idx": {
+          "name": "tours_blocks_form_bitrix_block_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "tours_blocks_form_bitrix_block_parent_id_idx": {
+          "name": "tours_blocks_form_bitrix_block_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "tours_blocks_form_bitrix_block_path_idx": {
+          "name": "tours_blocks_form_bitrix_block_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "tours_blocks_form_bitrix_block_parent_id_fk": {
+          "name": "tours_blocks_form_bitrix_block_parent_id_fk",
+          "tableFrom": "tours_blocks_form_bitrix_block",
+          "tableTo": "tours",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.tours_blocks_revista_block_revistas_links": {
+      "name": "tours_blocks_revista_block_revistas_links",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "tours_blocks_revista_block_revistas_links_order_idx": {
+          "name": "tours_blocks_revista_block_revistas_links_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "tours_blocks_revista_block_revistas_links_parent_id_idx": {
+          "name": "tours_blocks_revista_block_revistas_links_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "tours_blocks_revista_block_revistas_links_parent_id_fk": {
+          "name": "tours_blocks_revista_block_revistas_links_parent_id_fk",
+          "tableFrom": "tours_blocks_revista_block_revistas_links",
+          "tableTo": "tours_blocks_revista_block",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.tours_blocks_revista_block": {
+      "name": "tours_blocks_revista_block",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum_tours_blocks_revista_block_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum_tours_blocks_revista_block_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "tours_blocks_revista_block_order_idx": {
+          "name": "tours_blocks_revista_block_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "tours_blocks_revista_block_parent_id_idx": {
+          "name": "tours_blocks_revista_block_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "tours_blocks_revista_block_path_idx": {
+          "name": "tours_blocks_revista_block_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "tours_blocks_revista_block_parent_id_fk": {
+          "name": "tours_blocks_revista_block_parent_id_fk",
+          "tableFrom": "tours_blocks_revista_block",
           "tableTo": "tours",
           "columnsFrom": [
             "_parent_id"
@@ -9253,6 +10792,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "blog_categories_id": {
+          "name": "blog_categories_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "posts_id": {
           "name": "posts_id",
           "type": "integer",
@@ -9321,6 +10866,21 @@
           "method": "btree",
           "with": {}
         },
+        "tours_rels_blog_categories_id_idx": {
+          "name": "tours_rels_blog_categories_id_idx",
+          "columns": [
+            {
+              "expression": "blog_categories_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "tours_rels_posts_id_idx": {
           "name": "tours_rels_posts_id_idx",
           "columns": [
@@ -9357,6 +10917,19 @@
           "tableTo": "tour_category",
           "columnsFrom": [
             "tour_category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "tours_rels_blog_categories_fk": {
+          "name": "tours_rels_blog_categories_fk",
+          "tableFrom": "tours_rels",
+          "tableTo": "blog_categories",
+          "columnsFrom": [
+            "blog_categories_id"
           ],
           "columnsTo": [
             "id"
@@ -10437,6 +12010,188 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public._tours_v_blocks_grid_blogs": {
+      "name": "_tours_v_blocks_grid_blogs",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "override_defaults": {
+          "name": "override_defaults",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum__tours_v_blocks_grid_blogs_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum__tours_v_blocks_grid_blogs_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "general_style": {
+          "name": "general_style",
+          "type": "enum__tours_v_blocks_grid_blogs_general_style",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'grid'"
+        },
+        "grid_style": {
+          "name": "grid_style",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "populate_by": {
+          "name": "populate_by",
+          "type": "enum__tours_v_blocks_grid_blogs_populate_by",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'collection'"
+        },
+        "limit": {
+          "name": "limit",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 3
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_tours_v_blocks_grid_blogs_order_idx": {
+          "name": "_tours_v_blocks_grid_blogs_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_tours_v_blocks_grid_blogs_parent_id_idx": {
+          "name": "_tours_v_blocks_grid_blogs_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_tours_v_blocks_grid_blogs_path_idx": {
+          "name": "_tours_v_blocks_grid_blogs_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_tours_v_blocks_grid_blogs_parent_id_fk": {
+          "name": "_tours_v_blocks_grid_blogs_parent_id_fk",
+          "tableFrom": "_tours_v_blocks_grid_blogs",
+          "tableTo": "_tours_v",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public._tours_v_blocks_post_relation_tour": {
       "name": "_tours_v_blocks_post_relation_tour",
       "schema": "",
@@ -10821,6 +12576,165 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public._tours_v_blocks_text_content": {
+      "name": "_tours_v_blocks_text_content",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum__tours_v_blocks_text_content_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum__tours_v_blocks_text_content_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "description": {
+          "name": "description",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description_alignment": {
+          "name": "description_alignment",
+          "type": "enum__tours_v_blocks_text_content_description_alignment",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'left'"
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_tours_v_blocks_text_content_order_idx": {
+          "name": "_tours_v_blocks_text_content_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_tours_v_blocks_text_content_parent_id_idx": {
+          "name": "_tours_v_blocks_text_content_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_tours_v_blocks_text_content_path_idx": {
+          "name": "_tours_v_blocks_text_content_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_tours_v_blocks_text_content_parent_id_fk": {
+          "name": "_tours_v_blocks_text_content_parent_id_fk",
+          "tableFrom": "_tours_v_blocks_text_content",
+          "tableTo": "_tours_v",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public._tours_v_blocks_socios": {
       "name": "_tours_v_blocks_socios",
       "schema": "",
@@ -11094,6 +13008,354 @@
         "_tours_v_blocks_reconocimientos_parent_id_fk": {
           "name": "_tours_v_blocks_reconocimientos_parent_id_fk",
           "tableFrom": "_tours_v_blocks_reconocimientos",
+          "tableTo": "_tours_v",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public._tours_v_blocks_form_bitrix_block": {
+      "name": "_tours_v_blocks_form_bitrix_block",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "tracking_code": {
+          "name": "tracking_code",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_tours_v_blocks_form_bitrix_block_order_idx": {
+          "name": "_tours_v_blocks_form_bitrix_block_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_tours_v_blocks_form_bitrix_block_parent_id_idx": {
+          "name": "_tours_v_blocks_form_bitrix_block_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_tours_v_blocks_form_bitrix_block_path_idx": {
+          "name": "_tours_v_blocks_form_bitrix_block_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_tours_v_blocks_form_bitrix_block_parent_id_fk": {
+          "name": "_tours_v_blocks_form_bitrix_block_parent_id_fk",
+          "tableFrom": "_tours_v_blocks_form_bitrix_block",
+          "tableTo": "_tours_v",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public._tours_v_blocks_revista_block_revistas_links": {
+      "name": "_tours_v_blocks_revista_block_revistas_links",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_tours_v_blocks_revista_block_revistas_links_order_idx": {
+          "name": "_tours_v_blocks_revista_block_revistas_links_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_tours_v_blocks_revista_block_revistas_links_parent_id_idx": {
+          "name": "_tours_v_blocks_revista_block_revistas_links_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_tours_v_blocks_revista_block_revistas_links_parent_id_fk": {
+          "name": "_tours_v_blocks_revista_block_revistas_links_parent_id_fk",
+          "tableFrom": "_tours_v_blocks_revista_block_revistas_links",
+          "tableTo": "_tours_v_blocks_revista_block",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public._tours_v_blocks_revista_block": {
+      "name": "_tours_v_blocks_revista_block",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum__tours_v_blocks_revista_block_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum__tours_v_blocks_revista_block_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_tours_v_blocks_revista_block_order_idx": {
+          "name": "_tours_v_blocks_revista_block_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_tours_v_blocks_revista_block_parent_id_idx": {
+          "name": "_tours_v_blocks_revista_block_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_tours_v_blocks_revista_block_path_idx": {
+          "name": "_tours_v_blocks_revista_block_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_tours_v_blocks_revista_block_parent_id_fk": {
+          "name": "_tours_v_blocks_revista_block_parent_id_fk",
+          "tableFrom": "_tours_v_blocks_revista_block",
           "tableTo": "_tours_v",
           "columnsFrom": [
             "_parent_id"
@@ -11565,6 +13827,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "blog_categories_id": {
+          "name": "blog_categories_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "posts_id": {
           "name": "posts_id",
           "type": "integer",
@@ -11633,6 +13901,21 @@
           "method": "btree",
           "with": {}
         },
+        "_tours_v_rels_blog_categories_id_idx": {
+          "name": "_tours_v_rels_blog_categories_id_idx",
+          "columns": [
+            {
+              "expression": "blog_categories_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "_tours_v_rels_posts_id_idx": {
           "name": "_tours_v_rels_posts_id_idx",
           "columns": [
@@ -11669,6 +13952,19 @@
           "tableTo": "tour_category",
           "columnsFrom": [
             "tour_category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_tours_v_rels_blog_categories_fk": {
+          "name": "_tours_v_rels_blog_categories_fk",
+          "tableFrom": "_tours_v_rels",
+          "tableTo": "blog_categories",
+          "columnsFrom": [
+            "blog_categories_id"
           ],
           "columnsTo": [
             "id"
@@ -12680,6 +14976,79 @@
           "primaryKey": true,
           "notNull": true
         },
+        "override_defaults": {
+          "name": "override_defaults",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum_posts_blocks_grid_blogs_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum_posts_blocks_grid_blogs_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "general_style": {
+          "name": "general_style",
+          "type": "enum_posts_blocks_grid_blogs_general_style",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'grid'"
+        },
+        "grid_style": {
+          "name": "grid_style",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "populate_by": {
+          "name": "populate_by",
+          "type": "enum_posts_blocks_grid_blogs_populate_by",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'collection'"
+        },
+        "limit": {
+          "name": "limit",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 3
+        },
         "block_name": {
           "name": "block_name",
           "type": "varchar",
@@ -13585,6 +15954,12 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false
+        },
+        "posts_id": {
+          "name": "posts_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {
@@ -13647,6 +16022,21 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "posts_rels_posts_id_idx": {
+          "name": "posts_rels_posts_id_idx",
+          "columns": [
+            {
+              "expression": "posts_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
@@ -13669,6 +16059,19 @@
           "tableTo": "blog_categories",
           "columnsFrom": [
             "blog_categories_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "posts_rels_posts_fk": {
+          "name": "posts_rels_posts_fk",
+          "tableFrom": "posts_rels",
+          "tableTo": "posts",
+          "columnsFrom": [
+            "posts_id"
           ],
           "columnsTo": [
             "id"
@@ -14156,6 +16559,79 @@
           "type": "serial",
           "primaryKey": true,
           "notNull": true
+        },
+        "override_defaults": {
+          "name": "override_defaults",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum__posts_v_blocks_grid_blogs_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum__posts_v_blocks_grid_blogs_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "general_style": {
+          "name": "general_style",
+          "type": "enum__posts_v_blocks_grid_blogs_general_style",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'grid'"
+        },
+        "grid_style": {
+          "name": "grid_style",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "populate_by": {
+          "name": "populate_by",
+          "type": "enum__posts_v_blocks_grid_blogs_populate_by",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'collection'"
+        },
+        "limit": {
+          "name": "limit",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 3
         },
         "_uuid": {
           "name": "_uuid",
@@ -15216,6 +17692,12 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false
+        },
+        "posts_id": {
+          "name": "posts_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {
@@ -15278,6 +17760,21 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "_posts_v_rels_posts_id_idx": {
+          "name": "_posts_v_rels_posts_id_idx",
+          "columns": [
+            {
+              "expression": "posts_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
@@ -15300,6 +17797,19 @@
           "tableTo": "blog_categories",
           "columnsFrom": [
             "blog_categories_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_posts_v_rels_posts_fk": {
+          "name": "_posts_v_rels_posts_fk",
+          "tableFrom": "_posts_v_rels",
+          "tableTo": "posts",
+          "columnsFrom": [
+            "posts_id"
           ],
           "columnsTo": [
             "id"
@@ -16365,6 +18875,79 @@
           "primaryKey": true,
           "notNull": true
         },
+        "override_defaults": {
+          "name": "override_defaults",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum_paquetes_blocks_grid_blogs_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum_paquetes_blocks_grid_blogs_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "general_style": {
+          "name": "general_style",
+          "type": "enum_paquetes_blocks_grid_blogs_general_style",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'grid'"
+        },
+        "grid_style": {
+          "name": "grid_style",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "populate_by": {
+          "name": "populate_by",
+          "type": "enum_paquetes_blocks_grid_blogs_populate_by",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'collection'"
+        },
+        "limit": {
+          "name": "limit",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 3
+        },
         "block_name": {
           "name": "block_name",
           "type": "varchar",
@@ -17346,6 +19929,227 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.paquetes_blocks_revista_block_revistas_links": {
+      "name": "paquetes_blocks_revista_block_revistas_links",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "paquetes_blocks_revista_block_revistas_links_order_idx": {
+          "name": "paquetes_blocks_revista_block_revistas_links_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "paquetes_blocks_revista_block_revistas_links_parent_id_idx": {
+          "name": "paquetes_blocks_revista_block_revistas_links_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "paquetes_blocks_revista_block_revistas_links_parent_id_fk": {
+          "name": "paquetes_blocks_revista_block_revistas_links_parent_id_fk",
+          "tableFrom": "paquetes_blocks_revista_block_revistas_links",
+          "tableTo": "paquetes_blocks_revista_block",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.paquetes_blocks_revista_block": {
+      "name": "paquetes_blocks_revista_block",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum_paquetes_blocks_revista_block_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum_paquetes_blocks_revista_block_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "paquetes_blocks_revista_block_order_idx": {
+          "name": "paquetes_blocks_revista_block_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "paquetes_blocks_revista_block_parent_id_idx": {
+          "name": "paquetes_blocks_revista_block_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "paquetes_blocks_revista_block_path_idx": {
+          "name": "paquetes_blocks_revista_block_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "paquetes_blocks_revista_block_parent_id_fk": {
+          "name": "paquetes_blocks_revista_block_parent_id_fk",
+          "tableFrom": "paquetes_blocks_revista_block",
+          "tableTo": "paquetes",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.paquetes": {
       "name": "paquetes",
       "schema": "",
@@ -17648,6 +20452,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "blog_categories_id": {
+          "name": "blog_categories_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "posts_id": {
           "name": "posts_id",
           "type": "integer",
@@ -17722,6 +20532,21 @@
           "method": "btree",
           "with": {}
         },
+        "paquetes_rels_blog_categories_id_idx": {
+          "name": "paquetes_rels_blog_categories_id_idx",
+          "columns": [
+            {
+              "expression": "blog_categories_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "paquetes_rels_posts_id_idx": {
           "name": "paquetes_rels_posts_id_idx",
           "columns": [
@@ -17773,6 +20598,19 @@
           "tableTo": "tour_category",
           "columnsFrom": [
             "tour_category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "paquetes_rels_blog_categories_fk": {
+          "name": "paquetes_rels_blog_categories_fk",
+          "tableFrom": "paquetes_rels",
+          "tableTo": "blog_categories",
+          "columnsFrom": [
+            "blog_categories_id"
           ],
           "columnsTo": [
             "id"
@@ -18894,6 +21732,79 @@
           "primaryKey": true,
           "notNull": true
         },
+        "override_defaults": {
+          "name": "override_defaults",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum__paquetes_v_blocks_grid_blogs_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum__paquetes_v_blocks_grid_blogs_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "general_style": {
+          "name": "general_style",
+          "type": "enum__paquetes_v_blocks_grid_blogs_general_style",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'grid'"
+        },
+        "grid_style": {
+          "name": "grid_style",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "populate_by": {
+          "name": "populate_by",
+          "type": "enum__paquetes_v_blocks_grid_blogs_populate_by",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'collection'"
+        },
+        "limit": {
+          "name": "limit",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 3
+        },
         "_uuid": {
           "name": "_uuid",
           "type": "varchar",
@@ -19923,6 +22834,239 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public._paquetes_v_blocks_revista_block_revistas_links": {
+      "name": "_paquetes_v_blocks_revista_block_revistas_links",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_paquetes_v_blocks_revista_block_revistas_links_order_idx": {
+          "name": "_paquetes_v_blocks_revista_block_revistas_links_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_paquetes_v_blocks_revista_block_revistas_links_parent_id_idx": {
+          "name": "_paquetes_v_blocks_revista_block_revistas_links_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_paquetes_v_blocks_revista_block_revistas_links_parent_id_fk": {
+          "name": "_paquetes_v_blocks_revista_block_revistas_links_parent_id_fk",
+          "tableFrom": "_paquetes_v_blocks_revista_block_revistas_links",
+          "tableTo": "_paquetes_v_blocks_revista_block",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public._paquetes_v_blocks_revista_block": {
+      "name": "_paquetes_v_blocks_revista_block",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "block_title_title_text": {
+          "name": "block_title_title_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_title_tag": {
+          "name": "block_title_tag",
+          "type": "enum__paquetes_v_blocks_revista_block_block_title_tag",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'h2'"
+        },
+        "block_title_size": {
+          "name": "block_title_size",
+          "type": "enum__paquetes_v_blocks_revista_block_block_title_size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'medium'"
+        },
+        "block_title_text_color": {
+          "name": "block_title_text_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#2970B7'"
+        },
+        "block_title_underline_color": {
+          "name": "block_title_underline_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#EFBA06'"
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_paquetes_v_blocks_revista_block_order_idx": {
+          "name": "_paquetes_v_blocks_revista_block_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_paquetes_v_blocks_revista_block_parent_id_idx": {
+          "name": "_paquetes_v_blocks_revista_block_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_paquetes_v_blocks_revista_block_path_idx": {
+          "name": "_paquetes_v_blocks_revista_block_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_paquetes_v_blocks_revista_block_parent_id_fk": {
+          "name": "_paquetes_v_blocks_revista_block_parent_id_fk",
+          "tableFrom": "_paquetes_v_blocks_revista_block",
+          "tableTo": "_paquetes_v",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public._paquetes_v": {
       "name": "_paquetes_v",
       "schema": "",
@@ -20343,6 +23487,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "blog_categories_id": {
+          "name": "blog_categories_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "posts_id": {
           "name": "posts_id",
           "type": "integer",
@@ -20417,6 +23567,21 @@
           "method": "btree",
           "with": {}
         },
+        "_paquetes_v_rels_blog_categories_id_idx": {
+          "name": "_paquetes_v_rels_blog_categories_id_idx",
+          "columns": [
+            {
+              "expression": "blog_categories_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "_paquetes_v_rels_posts_id_idx": {
           "name": "_paquetes_v_rels_posts_id_idx",
           "columns": [
@@ -20468,6 +23633,19 @@
           "tableTo": "tour_category",
           "columnsFrom": [
             "tour_category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_paquetes_v_rels_blog_categories_fk": {
+          "name": "_paquetes_v_rels_blog_categories_fk",
+          "tableFrom": "_paquetes_v_rels",
+          "tableTo": "blog_categories",
+          "columnsFrom": [
+            "blog_categories_id"
           ],
           "columnsTo": [
             "id"
@@ -22699,6 +25877,28 @@
         "grid"
       ]
     },
+    "public.enum_pages_blocks_revista_block_block_title_tag": {
+      "name": "enum_pages_blocks_revista_block_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum_pages_blocks_revista_block_block_title_size": {
+      "name": "enum_pages_blocks_revista_block_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
     "public.enum_pages_blocks_row_block_columns_column_width": {
       "name": "enum_pages_blocks_row_block_columns_column_width",
       "schema": "public",
@@ -22709,6 +25909,44 @@
         "66.666667",
         "75",
         "100"
+      ]
+    },
+    "public.enum_pages_blocks_grid_blogs_block_title_tag": {
+      "name": "enum_pages_blocks_grid_blogs_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum_pages_blocks_grid_blogs_block_title_size": {
+      "name": "enum_pages_blocks_grid_blogs_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum_pages_blocks_grid_blogs_general_style": {
+      "name": "enum_pages_blocks_grid_blogs_general_style",
+      "schema": "public",
+      "values": [
+        "masonry",
+        "grid"
+      ]
+    },
+    "public.enum_pages_blocks_grid_blogs_populate_by": {
+      "name": "enum_pages_blocks_grid_blogs_populate_by",
+      "schema": "public",
+      "values": [
+        "collection",
+        "selection"
       ]
     },
     "public.enum_pages_blocks_grid_paquetes_block_title_tag": {
@@ -22971,6 +26209,28 @@
         "grid"
       ]
     },
+    "public.enum__pages_v_blocks_revista_block_block_title_tag": {
+      "name": "enum__pages_v_blocks_revista_block_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum__pages_v_blocks_revista_block_block_title_size": {
+      "name": "enum__pages_v_blocks_revista_block_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
     "public.enum__pages_v_blocks_row_block_columns_column_width": {
       "name": "enum__pages_v_blocks_row_block_columns_column_width",
       "schema": "public",
@@ -22981,6 +26241,44 @@
         "66.666667",
         "75",
         "100"
+      ]
+    },
+    "public.enum__pages_v_blocks_grid_blogs_block_title_tag": {
+      "name": "enum__pages_v_blocks_grid_blogs_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum__pages_v_blocks_grid_blogs_block_title_size": {
+      "name": "enum__pages_v_blocks_grid_blogs_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum__pages_v_blocks_grid_blogs_general_style": {
+      "name": "enum__pages_v_blocks_grid_blogs_general_style",
+      "schema": "public",
+      "values": [
+        "masonry",
+        "grid"
+      ]
+    },
+    "public.enum__pages_v_blocks_grid_blogs_populate_by": {
+      "name": "enum__pages_v_blocks_grid_blogs_populate_by",
+      "schema": "public",
+      "values": [
+        "collection",
+        "selection"
       ]
     },
     "public.enum__pages_v_blocks_grid_paquetes_block_title_tag": {
@@ -23079,6 +26377,44 @@
         "xlarge"
       ]
     },
+    "public.enum_tours_blocks_grid_blogs_block_title_tag": {
+      "name": "enum_tours_blocks_grid_blogs_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum_tours_blocks_grid_blogs_block_title_size": {
+      "name": "enum_tours_blocks_grid_blogs_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum_tours_blocks_grid_blogs_general_style": {
+      "name": "enum_tours_blocks_grid_blogs_general_style",
+      "schema": "public",
+      "values": [
+        "masonry",
+        "grid"
+      ]
+    },
+    "public.enum_tours_blocks_grid_blogs_populate_by": {
+      "name": "enum_tours_blocks_grid_blogs_populate_by",
+      "schema": "public",
+      "values": [
+        "collection",
+        "selection"
+      ]
+    },
     "public.enum_tours_blocks_post_relation_tour_block_title_tag": {
       "name": "enum_tours_blocks_post_relation_tour_block_title_tag",
       "schema": "public",
@@ -23123,6 +26459,38 @@
         "xlarge"
       ]
     },
+    "public.enum_tours_blocks_text_content_block_title_tag": {
+      "name": "enum_tours_blocks_text_content_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum_tours_blocks_text_content_block_title_size": {
+      "name": "enum_tours_blocks_text_content_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum_tours_blocks_text_content_description_alignment": {
+      "name": "enum_tours_blocks_text_content_description_alignment",
+      "schema": "public",
+      "values": [
+        "left",
+        "center",
+        "right",
+        "justify"
+      ]
+    },
     "public.enum_tours_blocks_socios_block_title_tag": {
       "name": "enum_tours_blocks_socios_block_title_tag",
       "schema": "public",
@@ -23159,6 +26527,28 @@
     },
     "public.enum_tours_blocks_reconocimientos_block_title_size": {
       "name": "enum_tours_blocks_reconocimientos_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum_tours_blocks_revista_block_block_title_tag": {
+      "name": "enum_tours_blocks_revista_block_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum_tours_blocks_revista_block_block_title_size": {
+      "name": "enum_tours_blocks_revista_block_block_title_size",
       "schema": "public",
       "values": [
         "small",
@@ -23250,6 +26640,44 @@
         "xlarge"
       ]
     },
+    "public.enum__tours_v_blocks_grid_blogs_block_title_tag": {
+      "name": "enum__tours_v_blocks_grid_blogs_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum__tours_v_blocks_grid_blogs_block_title_size": {
+      "name": "enum__tours_v_blocks_grid_blogs_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum__tours_v_blocks_grid_blogs_general_style": {
+      "name": "enum__tours_v_blocks_grid_blogs_general_style",
+      "schema": "public",
+      "values": [
+        "masonry",
+        "grid"
+      ]
+    },
+    "public.enum__tours_v_blocks_grid_blogs_populate_by": {
+      "name": "enum__tours_v_blocks_grid_blogs_populate_by",
+      "schema": "public",
+      "values": [
+        "collection",
+        "selection"
+      ]
+    },
     "public.enum__tours_v_blocks_post_relation_tour_block_title_tag": {
       "name": "enum__tours_v_blocks_post_relation_tour_block_title_tag",
       "schema": "public",
@@ -23294,6 +26722,38 @@
         "xlarge"
       ]
     },
+    "public.enum__tours_v_blocks_text_content_block_title_tag": {
+      "name": "enum__tours_v_blocks_text_content_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum__tours_v_blocks_text_content_block_title_size": {
+      "name": "enum__tours_v_blocks_text_content_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum__tours_v_blocks_text_content_description_alignment": {
+      "name": "enum__tours_v_blocks_text_content_description_alignment",
+      "schema": "public",
+      "values": [
+        "left",
+        "center",
+        "right",
+        "justify"
+      ]
+    },
     "public.enum__tours_v_blocks_socios_block_title_tag": {
       "name": "enum__tours_v_blocks_socios_block_title_tag",
       "schema": "public",
@@ -23330,6 +26790,28 @@
     },
     "public.enum__tours_v_blocks_reconocimientos_block_title_size": {
       "name": "enum__tours_v_blocks_reconocimientos_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum__tours_v_blocks_revista_block_block_title_tag": {
+      "name": "enum__tours_v_blocks_revista_block_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum__tours_v_blocks_revista_block_block_title_size": {
+      "name": "enum__tours_v_blocks_revista_block_block_title_size",
       "schema": "public",
       "values": [
         "small",
@@ -23397,6 +26879,44 @@
         "medium",
         "large",
         "xlarge"
+      ]
+    },
+    "public.enum_posts_blocks_grid_blogs_block_title_tag": {
+      "name": "enum_posts_blocks_grid_blogs_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum_posts_blocks_grid_blogs_block_title_size": {
+      "name": "enum_posts_blocks_grid_blogs_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum_posts_blocks_grid_blogs_general_style": {
+      "name": "enum_posts_blocks_grid_blogs_general_style",
+      "schema": "public",
+      "values": [
+        "masonry",
+        "grid"
+      ]
+    },
+    "public.enum_posts_blocks_grid_blogs_populate_by": {
+      "name": "enum_posts_blocks_grid_blogs_populate_by",
+      "schema": "public",
+      "values": [
+        "collection",
+        "selection"
       ]
     },
     "public.enum_posts_blocks_grid_images_type_grid": {
@@ -23514,6 +27034,44 @@
         "medium",
         "large",
         "xlarge"
+      ]
+    },
+    "public.enum__posts_v_blocks_grid_blogs_block_title_tag": {
+      "name": "enum__posts_v_blocks_grid_blogs_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum__posts_v_blocks_grid_blogs_block_title_size": {
+      "name": "enum__posts_v_blocks_grid_blogs_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum__posts_v_blocks_grid_blogs_general_style": {
+      "name": "enum__posts_v_blocks_grid_blogs_general_style",
+      "schema": "public",
+      "values": [
+        "masonry",
+        "grid"
+      ]
+    },
+    "public.enum__posts_v_blocks_grid_blogs_populate_by": {
+      "name": "enum__posts_v_blocks_grid_blogs_populate_by",
+      "schema": "public",
+      "values": [
+        "collection",
+        "selection"
       ]
     },
     "public.enum__posts_v_blocks_grid_images_type_grid": {
@@ -23655,6 +27213,44 @@
         "xlarge"
       ]
     },
+    "public.enum_paquetes_blocks_grid_blogs_block_title_tag": {
+      "name": "enum_paquetes_blocks_grid_blogs_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum_paquetes_blocks_grid_blogs_block_title_size": {
+      "name": "enum_paquetes_blocks_grid_blogs_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum_paquetes_blocks_grid_blogs_general_style": {
+      "name": "enum_paquetes_blocks_grid_blogs_general_style",
+      "schema": "public",
+      "values": [
+        "masonry",
+        "grid"
+      ]
+    },
+    "public.enum_paquetes_blocks_grid_blogs_populate_by": {
+      "name": "enum_paquetes_blocks_grid_blogs_populate_by",
+      "schema": "public",
+      "values": [
+        "collection",
+        "selection"
+      ]
+    },
     "public.enum_paquetes_blocks_post_relation_tour_block_title_tag": {
       "name": "enum_paquetes_blocks_post_relation_tour_block_title_tag",
       "schema": "public",
@@ -23775,6 +27371,28 @@
         "xlarge"
       ]
     },
+    "public.enum_paquetes_blocks_revista_block_block_title_tag": {
+      "name": "enum_paquetes_blocks_revista_block_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum_paquetes_blocks_revista_block_block_title_size": {
+      "name": "enum_paquetes_blocks_revista_block_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
     "public.enum_paquetes_difficulty": {
       "name": "enum_paquetes_difficulty",
       "schema": "public",
@@ -23856,6 +27474,44 @@
         "medium",
         "large",
         "xlarge"
+      ]
+    },
+    "public.enum__paquetes_v_blocks_grid_blogs_block_title_tag": {
+      "name": "enum__paquetes_v_blocks_grid_blogs_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum__paquetes_v_blocks_grid_blogs_block_title_size": {
+      "name": "enum__paquetes_v_blocks_grid_blogs_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum__paquetes_v_blocks_grid_blogs_general_style": {
+      "name": "enum__paquetes_v_blocks_grid_blogs_general_style",
+      "schema": "public",
+      "values": [
+        "masonry",
+        "grid"
+      ]
+    },
+    "public.enum__paquetes_v_blocks_grid_blogs_populate_by": {
+      "name": "enum__paquetes_v_blocks_grid_blogs_populate_by",
+      "schema": "public",
+      "values": [
+        "collection",
+        "selection"
       ]
     },
     "public.enum__paquetes_v_blocks_post_relation_tour_block_title_tag": {
@@ -23970,6 +27626,28 @@
     },
     "public.enum__paquetes_v_blocks_reconocimientos_block_title_size": {
       "name": "enum__paquetes_v_blocks_reconocimientos_block_title_size",
+      "schema": "public",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "public.enum__paquetes_v_blocks_revista_block_block_title_tag": {
+      "name": "enum__paquetes_v_blocks_revista_block_block_title_tag",
+      "schema": "public",
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    "public.enum__paquetes_v_blocks_revista_block_block_title_size": {
+      "name": "enum__paquetes_v_blocks_revista_block_block_title_size",
       "schema": "public",
       "values": [
         "small",

@@ -29,7 +29,6 @@ export const YouTubeLinksBlock: Block = {
       label: 'YouTube Video Links',
       type: 'array',
       minRows: 0,
-      maxRows: 2,
       labels: {
         singular: 'Video Link',
         plural: 'Video Links',

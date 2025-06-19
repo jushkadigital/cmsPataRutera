@@ -4,7 +4,7 @@ import { GlobalConfig } from "payload";
 
 export const SociosCarousel: GlobalConfig = {
     slug: 'sociosCarousel',
-    label: 'Carrusel de Imágene',
+    label: 'Socios Imagenes',
     access: {
         read: () => true,
     },

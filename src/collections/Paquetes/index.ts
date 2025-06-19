@@ -33,6 +33,7 @@ import { PaqueteHerocar } from '@/blocks/PaqueteHerocar/config'
 import { TextContentBlock } from '@/blocks/TextContentBlock/config'
 import { GridBlogs } from '@/blocks/GridBlogs/config'
 import { FormBitrixBlock } from '@/blocks/FormBitrix/config'
+import { RevistaBlock } from '@/blocks/RevistaBlock/config'
 
 // Import the custom feature
 
@@ -95,7 +96,7 @@ export const Paquetes: CollectionConfig = {
                         {
                             name: 'layout',
                             type: 'blocks',
-                            blocks: [DescrPrice, GuiaTour, GridTours, GridBlogs, PostRelationTourBlock, YouTubeLinksBlock, TextContentBlock, SociosBlock, ReconocimientosBlock, FormBitrixBlock],
+                            blocks: [DescrPrice, GuiaTour, GridTours, GridBlogs, PostRelationTourBlock, YouTubeLinksBlock, TextContentBlock, SociosBlock, ReconocimientosBlock, FormBitrixBlock, RevistaBlock],
                         },
                     ],
                     label: 'Content'

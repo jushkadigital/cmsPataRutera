@@ -2,7 +2,7 @@ import { GlobalConfig } from "payload";
 
 export const ReconocimientosCarousel: GlobalConfig = {
     slug: 'reconocimientosCarousel',
-    label: 'Carrusel de Imágene',
+    label: 'Reconocimientos Images',
     access: {
         read: () => true,
     },

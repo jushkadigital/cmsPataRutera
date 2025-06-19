@@ -253,6 +253,7 @@ export interface Page {
   layout: (
     | RowBlock
     | GridToursBlock
+    | GridBlogsBlock
     | MediaBlock
     | PostRelationTourBlockType
     | SociosBlockType
@@ -335,6 +336,18 @@ export interface RowBlock {
               id?: string | null;
               blockName?: string | null;
               blockType: 'formBitrixBlock';
+            }
+          | {
+              blockTitle: TitleGroup;
+              revistasLinks?:
+                | {
+                    url: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'revistaBlock';
             }
         )[];
         id?: string | null;
@@ -479,6 +492,7 @@ export interface Post {
         | GridBlogsBlock
         | GridImagesBlockType
         | TextContentBlockType
+        | GridImagesBlockType
         | YouTubeLinksBlockType
       )[]
     | null;
@@ -516,9 +530,40 @@ export interface SociosBlockType {
  * via the `definition` "GridBlogsBlock".
  */
 export interface GridBlogsBlock {
+  /**
+   * Si está marcado, los campos de este bloque se mostrarán con logica del frontend.
+   */
+  overrideDefaults?: boolean | null;
+  blockTitle: TitleGroup;
+  generalStyle?: ('masonry' | 'grid') | null;
+  /**
+   * True grid, false list
+   */
+  gridStyle?: boolean | null;
+  populateBy?: ('collection' | 'selection') | null;
+  categories?: (number | BlogCategory)[] | null;
+  limit?: number | null;
+  selectedDocs?:
+    | {
+        relationTo: 'posts';
+        value: number | Post;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'gridBlogs';
+}
+/**
+ * Categories for blog posts.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blogCategories".
+ */
+export interface BlogCategory {
+  id: number;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -580,18 +625,6 @@ export interface YouTubeLinksBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'youTubeLinks';
-}
-/**
- * Categories for blog posts.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blogCategories".
- */
-export interface BlogCategory {
-  id: number;
-  name: string;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -718,10 +751,30 @@ export interface Tour {
     | DescrPriceBlock
     | GuiaTourBlock
     | GridToursBlock
+    | GridBlogsBlock
     | PostRelationTourBlockType
     | YouTubeLinksBlockType
+    | TextContentBlockType
     | SociosBlockType
     | ReconocimientosBlockType
+    | {
+        trackingCode: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'formBitrixBlock';
+      }
+    | {
+        blockTitle: TitleGroup;
+        revistasLinks?:
+          | {
+              url: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'revistaBlock';
+      }
   )[];
   featuredImage: number | Media;
   miniDescription: {
@@ -977,6 +1030,18 @@ export interface Paquete {
             id?: string | null;
             blockName?: string | null;
             blockType: 'formBitrixBlock';
+          }
+        | {
+            blockTitle: TitleGroup;
+            revistasLinks?:
+              | {
+                  url: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'revistaBlock';
           }
       )[]
     | null;
@@ -1346,6 +1411,7 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         rowBlock?: T | RowBlockSelect<T>;
         gridTours?: T | GridToursBlockSelect<T>;
+        gridBlogs?: T | GridBlogsBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
         postRelationTour?: T | PostRelationTourBlockTypeSelect<T>;
         socios?: T | SociosBlockTypeSelect<T>;
@@ -1420,6 +1486,19 @@ export interface RowBlockSelect<T extends boolean = true> {
                 | T
                 | {
                     trackingCode?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              revistaBlock?:
+                | T
+                | {
+                    blockTitle?: T | TitleGroupSelect<T>;
+                    revistasLinks?:
+                      | T
+                      | {
+                          url?: T;
+                          id?: T;
+                        };
                     id?: T;
                     blockName?: T;
                   };
@@ -1593,6 +1672,22 @@ export interface GridImagesBlockTypeSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GridBlogsBlock_select".
+ */
+export interface GridBlogsBlockSelect<T extends boolean = true> {
+  overrideDefaults?: T;
+  blockTitle?: T | TitleGroupSelect<T>;
+  generalStyle?: T;
+  gridStyle?: T;
+  populateBy?: T;
+  categories?: T;
+  limit?: T;
+  selectedDocs?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "GridPaquetesBlock_select".
  */
 export interface GridPaquetesBlockSelect<T extends boolean = true> {
@@ -1621,10 +1716,32 @@ export interface ToursSelect<T extends boolean = true> {
         descrPrice?: T | DescrPriceBlockSelect<T>;
         guiaTour?: T | GuiaTourBlockSelect<T>;
         gridTours?: T | GridToursBlockSelect<T>;
+        gridBlogs?: T | GridBlogsBlockSelect<T>;
         postRelationTour?: T | PostRelationTourBlockTypeSelect<T>;
         youTubeLinks?: T | YouTubeLinksBlockTypeSelect<T>;
+        textContent?: T | TextContentBlockTypeSelect<T>;
         socios?: T | SociosBlockTypeSelect<T>;
         reconocimientos?: T | ReconocimientosBlockTypeSelect<T>;
+        formBitrixBlock?:
+          | T
+          | {
+              trackingCode?: T;
+              id?: T;
+              blockName?: T;
+            };
+        revistaBlock?:
+          | T
+          | {
+              blockTitle?: T | TitleGroupSelect<T>;
+              revistasLinks?:
+                | T
+                | {
+                    url?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   featuredImage?: T;
   miniDescription?: T;
@@ -1830,14 +1947,6 @@ export interface PostsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "GridBlogsBlock_select".
- */
-export interface GridBlogsBlockSelect<T extends boolean = true> {
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "paquetes_select".
  */
 export interface PaquetesSelect<T extends boolean = true> {
@@ -1863,6 +1972,19 @@ export interface PaquetesSelect<T extends boolean = true> {
           | T
           | {
               trackingCode?: T;
+              id?: T;
+              blockName?: T;
+            };
+        revistaBlock?:
+          | T
+          | {
+              blockTitle?: T | TitleGroupSelect<T>;
+              revistasLinks?:
+                | T
+                | {
+                    url?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

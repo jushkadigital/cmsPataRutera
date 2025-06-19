@@ -24,7 +24,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "public"."enum_pages_blocks_text_content_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum_pages_blocks_text_content_description_alignment" AS ENUM('left', 'center', 'right', 'justify');
   CREATE TYPE "public"."enum_pages_blocks_grid_images_type_grid" AS ENUM('masonry', 'overlapping', 'list', 'mosaic', 'grid');
+  CREATE TYPE "public"."enum_pages_blocks_revista_block_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum_pages_blocks_revista_block_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum_pages_blocks_row_block_columns_column_width" AS ENUM('25', '33.333333', '50', '66.666667', '75', '100');
+  CREATE TYPE "public"."enum_pages_blocks_grid_blogs_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum_pages_blocks_grid_blogs_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum_pages_blocks_grid_blogs_general_style" AS ENUM('masonry', 'grid');
+  CREATE TYPE "public"."enum_pages_blocks_grid_blogs_populate_by" AS ENUM('collection', 'selection');
   CREATE TYPE "public"."enum_pages_blocks_grid_paquetes_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum_pages_blocks_grid_paquetes_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum_pages_status" AS ENUM('draft', 'published');
@@ -49,7 +55,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "public"."enum__pages_v_blocks_text_content_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum__pages_v_blocks_text_content_description_alignment" AS ENUM('left', 'center', 'right', 'justify');
   CREATE TYPE "public"."enum__pages_v_blocks_grid_images_type_grid" AS ENUM('masonry', 'overlapping', 'list', 'mosaic', 'grid');
+  CREATE TYPE "public"."enum__pages_v_blocks_revista_block_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum__pages_v_blocks_revista_block_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum__pages_v_blocks_row_block_columns_column_width" AS ENUM('25', '33.333333', '50', '66.666667', '75', '100');
+  CREATE TYPE "public"."enum__pages_v_blocks_grid_blogs_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum__pages_v_blocks_grid_blogs_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum__pages_v_blocks_grid_blogs_general_style" AS ENUM('masonry', 'grid');
+  CREATE TYPE "public"."enum__pages_v_blocks_grid_blogs_populate_by" AS ENUM('collection', 'selection');
   CREATE TYPE "public"."enum__pages_v_blocks_grid_paquetes_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum__pages_v_blocks_grid_paquetes_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum__pages_v_version_status" AS ENUM('draft', 'published');
@@ -59,14 +71,23 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "public"."enum_tours_blocks_guia_tour_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum_tours_blocks_grid_tours_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum_tours_blocks_grid_tours_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum_tours_blocks_grid_blogs_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum_tours_blocks_grid_blogs_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum_tours_blocks_grid_blogs_general_style" AS ENUM('masonry', 'grid');
+  CREATE TYPE "public"."enum_tours_blocks_grid_blogs_populate_by" AS ENUM('collection', 'selection');
   CREATE TYPE "public"."enum_tours_blocks_post_relation_tour_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum_tours_blocks_post_relation_tour_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum_tours_blocks_you_tube_links_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum_tours_blocks_you_tube_links_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum_tours_blocks_text_content_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum_tours_blocks_text_content_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum_tours_blocks_text_content_description_alignment" AS ENUM('left', 'center', 'right', 'justify');
   CREATE TYPE "public"."enum_tours_blocks_socios_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum_tours_blocks_socios_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum_tours_blocks_reconocimientos_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum_tours_blocks_reconocimientos_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum_tours_blocks_revista_block_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum_tours_blocks_revista_block_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum_tours_difficulty" AS ENUM('easy', 'medium', 'hard');
   CREATE TYPE "public"."enum_tours_status" AS ENUM('draft', 'published');
   CREATE TYPE "public"."enum__tours_v_blocks_descr_price_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
@@ -75,20 +96,33 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "public"."enum__tours_v_blocks_guia_tour_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum__tours_v_blocks_grid_tours_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum__tours_v_blocks_grid_tours_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum__tours_v_blocks_grid_blogs_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum__tours_v_blocks_grid_blogs_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum__tours_v_blocks_grid_blogs_general_style" AS ENUM('masonry', 'grid');
+  CREATE TYPE "public"."enum__tours_v_blocks_grid_blogs_populate_by" AS ENUM('collection', 'selection');
   CREATE TYPE "public"."enum__tours_v_blocks_post_relation_tour_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum__tours_v_blocks_post_relation_tour_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum__tours_v_blocks_you_tube_links_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum__tours_v_blocks_you_tube_links_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum__tours_v_blocks_text_content_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum__tours_v_blocks_text_content_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum__tours_v_blocks_text_content_description_alignment" AS ENUM('left', 'center', 'right', 'justify');
   CREATE TYPE "public"."enum__tours_v_blocks_socios_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum__tours_v_blocks_socios_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum__tours_v_blocks_reconocimientos_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum__tours_v_blocks_reconocimientos_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum__tours_v_blocks_revista_block_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum__tours_v_blocks_revista_block_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum__tours_v_version_difficulty" AS ENUM('easy', 'medium', 'hard');
   CREATE TYPE "public"."enum__tours_v_version_status" AS ENUM('draft', 'published');
   CREATE TYPE "public"."enum_posts_blocks_reconocimientos_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum_posts_blocks_reconocimientos_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum_posts_blocks_socios_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum_posts_blocks_socios_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum_posts_blocks_grid_blogs_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum_posts_blocks_grid_blogs_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum_posts_blocks_grid_blogs_general_style" AS ENUM('masonry', 'grid');
+  CREATE TYPE "public"."enum_posts_blocks_grid_blogs_populate_by" AS ENUM('collection', 'selection');
   CREATE TYPE "public"."enum_posts_blocks_grid_images_type_grid" AS ENUM('masonry', 'overlapping', 'list', 'mosaic', 'grid');
   CREATE TYPE "public"."enum_posts_blocks_text_content_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum_posts_blocks_text_content_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
@@ -100,6 +134,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "public"."enum__posts_v_blocks_reconocimientos_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum__posts_v_blocks_socios_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum__posts_v_blocks_socios_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum__posts_v_blocks_grid_blogs_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum__posts_v_blocks_grid_blogs_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum__posts_v_blocks_grid_blogs_general_style" AS ENUM('masonry', 'grid');
+  CREATE TYPE "public"."enum__posts_v_blocks_grid_blogs_populate_by" AS ENUM('collection', 'selection');
   CREATE TYPE "public"."enum__posts_v_blocks_grid_images_type_grid" AS ENUM('masonry', 'overlapping', 'list', 'mosaic', 'grid');
   CREATE TYPE "public"."enum__posts_v_blocks_text_content_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum__posts_v_blocks_text_content_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
@@ -113,6 +151,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "public"."enum_paquetes_blocks_guia_tour_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum_paquetes_blocks_grid_tours_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum_paquetes_blocks_grid_tours_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum_paquetes_blocks_grid_blogs_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum_paquetes_blocks_grid_blogs_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum_paquetes_blocks_grid_blogs_general_style" AS ENUM('masonry', 'grid');
+  CREATE TYPE "public"."enum_paquetes_blocks_grid_blogs_populate_by" AS ENUM('collection', 'selection');
   CREATE TYPE "public"."enum_paquetes_blocks_post_relation_tour_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum_paquetes_blocks_post_relation_tour_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum_paquetes_blocks_you_tube_links_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
@@ -124,6 +166,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "public"."enum_paquetes_blocks_socios_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum_paquetes_blocks_reconocimientos_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum_paquetes_blocks_reconocimientos_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum_paquetes_blocks_revista_block_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum_paquetes_blocks_revista_block_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum_paquetes_difficulty" AS ENUM('easy', 'medium', 'hard');
   CREATE TYPE "public"."enum_paquetes_status" AS ENUM('draft', 'published');
   CREATE TYPE "public"."enum__paquetes_v_blocks_descr_price_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
@@ -132,6 +176,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "public"."enum__paquetes_v_blocks_guia_tour_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum__paquetes_v_blocks_grid_tours_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum__paquetes_v_blocks_grid_tours_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum__paquetes_v_blocks_grid_blogs_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum__paquetes_v_blocks_grid_blogs_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum__paquetes_v_blocks_grid_blogs_general_style" AS ENUM('masonry', 'grid');
+  CREATE TYPE "public"."enum__paquetes_v_blocks_grid_blogs_populate_by" AS ENUM('collection', 'selection');
   CREATE TYPE "public"."enum__paquetes_v_blocks_post_relation_tour_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum__paquetes_v_blocks_post_relation_tour_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum__paquetes_v_blocks_you_tube_links_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
@@ -143,6 +191,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "public"."enum__paquetes_v_blocks_socios_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum__paquetes_v_blocks_reconocimientos_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
   CREATE TYPE "public"."enum__paquetes_v_blocks_reconocimientos_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
+  CREATE TYPE "public"."enum__paquetes_v_blocks_revista_block_block_title_tag" AS ENUM('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+  CREATE TYPE "public"."enum__paquetes_v_blocks_revista_block_block_title_size" AS ENUM('small', 'medium', 'large', 'xlarge');
   CREATE TYPE "public"."enum__paquetes_v_version_difficulty" AS ENUM('easy', 'medium', 'hard');
   CREATE TYPE "public"."enum__paquetes_v_version_status" AS ENUM('draft', 'published');
   CREATE TYPE "public"."enum_payload_jobs_log_task_slug" AS ENUM('inline', 'schedulePublish');
@@ -442,6 +492,26 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
+  CREATE TABLE IF NOT EXISTS "pages_blocks_revista_block_revistas_links" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" varchar NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"url" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "pages_blocks_revista_block" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum_pages_blocks_revista_block_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum_pages_blocks_revista_block_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"block_name" varchar
+  );
+  
   CREATE TABLE IF NOT EXISTS "pages_blocks_row_block_columns" (
   	"_order" integer NOT NULL,
   	"_parent_id" varchar NOT NULL,
@@ -454,6 +524,24 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_parent_id" integer NOT NULL,
   	"_path" text NOT NULL,
   	"id" varchar PRIMARY KEY NOT NULL,
+  	"block_name" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "pages_blocks_grid_blogs" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"override_defaults" boolean DEFAULT false,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum_pages_blocks_grid_blogs_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum_pages_blocks_grid_blogs_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"general_style" "enum_pages_blocks_grid_blogs_general_style" DEFAULT 'grid',
+  	"grid_style" boolean DEFAULT true,
+  	"populate_by" "enum_pages_blocks_grid_blogs_populate_by" DEFAULT 'collection',
+  	"limit" numeric DEFAULT 3,
   	"block_name" varchar
   );
   
@@ -491,6 +579,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"path" varchar NOT NULL,
   	"tour_category_id" integer,
   	"posts_id" integer,
+  	"blog_categories_id" integer,
   	"destinations_id" integer
   );
   
@@ -726,6 +815,28 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
+  CREATE TABLE IF NOT EXISTS "_pages_v_blocks_revista_block_revistas_links" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"url" varchar,
+  	"_uuid" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "_pages_v_blocks_revista_block" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum__pages_v_blocks_revista_block_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum__pages_v_blocks_revista_block_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"_uuid" varchar,
+  	"block_name" varchar
+  );
+  
   CREATE TABLE IF NOT EXISTS "_pages_v_blocks_row_block_columns" (
   	"_order" integer NOT NULL,
   	"_parent_id" integer NOT NULL,
@@ -739,6 +850,25 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_parent_id" integer NOT NULL,
   	"_path" text NOT NULL,
   	"id" serial PRIMARY KEY NOT NULL,
+  	"_uuid" varchar,
+  	"block_name" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "_pages_v_blocks_grid_blogs" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"override_defaults" boolean DEFAULT false,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum__pages_v_blocks_grid_blogs_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum__pages_v_blocks_grid_blogs_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"general_style" "enum__pages_v_blocks_grid_blogs_general_style" DEFAULT 'grid',
+  	"grid_style" boolean DEFAULT true,
+  	"populate_by" "enum__pages_v_blocks_grid_blogs_populate_by" DEFAULT 'collection',
+  	"limit" numeric DEFAULT 3,
   	"_uuid" varchar,
   	"block_name" varchar
   );
@@ -783,6 +913,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"path" varchar NOT NULL,
   	"tour_category_id" integer,
   	"posts_id" integer,
+  	"blog_categories_id" integer,
   	"destinations_id" integer
   );
   
@@ -867,6 +998,24 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
+  CREATE TABLE IF NOT EXISTS "tours_blocks_grid_blogs" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"override_defaults" boolean DEFAULT false,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum_tours_blocks_grid_blogs_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum_tours_blocks_grid_blogs_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"general_style" "enum_tours_blocks_grid_blogs_general_style" DEFAULT 'grid',
+  	"grid_style" boolean DEFAULT true,
+  	"populate_by" "enum_tours_blocks_grid_blogs_populate_by" DEFAULT 'collection',
+  	"limit" numeric DEFAULT 3,
+  	"block_name" varchar
+  );
+  
   CREATE TABLE IF NOT EXISTS "tours_blocks_post_relation_tour" (
   	"_order" integer NOT NULL,
   	"_parent_id" integer NOT NULL,
@@ -901,6 +1050,21 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
+  CREATE TABLE IF NOT EXISTS "tours_blocks_text_content" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum_tours_blocks_text_content_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum_tours_blocks_text_content_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"description" jsonb,
+  	"description_alignment" "enum_tours_blocks_text_content_description_alignment" DEFAULT 'left',
+  	"block_name" varchar
+  );
+  
   CREATE TABLE IF NOT EXISTS "tours_blocks_socios" (
   	"_order" integer NOT NULL,
   	"_parent_id" integer NOT NULL,
@@ -922,6 +1086,35 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_title_title_text" varchar,
   	"block_title_tag" "enum_tours_blocks_reconocimientos_block_title_tag" DEFAULT 'h2',
   	"block_title_size" "enum_tours_blocks_reconocimientos_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"block_name" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "tours_blocks_form_bitrix_block" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"tracking_code" varchar,
+  	"block_name" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "tours_blocks_revista_block_revistas_links" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" varchar NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"url" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "tours_blocks_revista_block" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum_tours_blocks_revista_block_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum_tours_blocks_revista_block_block_title_size" DEFAULT 'medium',
   	"block_title_text_color" varchar DEFAULT '#2970B7',
   	"block_title_underline_color" varchar DEFAULT '#EFBA06',
   	"block_name" varchar
@@ -954,6 +1147,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"parent_id" integer NOT NULL,
   	"path" varchar NOT NULL,
   	"tour_category_id" integer,
+  	"blog_categories_id" integer,
   	"posts_id" integer
   );
   
@@ -1043,6 +1237,25 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
+  CREATE TABLE IF NOT EXISTS "_tours_v_blocks_grid_blogs" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"override_defaults" boolean DEFAULT false,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum__tours_v_blocks_grid_blogs_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum__tours_v_blocks_grid_blogs_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"general_style" "enum__tours_v_blocks_grid_blogs_general_style" DEFAULT 'grid',
+  	"grid_style" boolean DEFAULT true,
+  	"populate_by" "enum__tours_v_blocks_grid_blogs_populate_by" DEFAULT 'collection',
+  	"limit" numeric DEFAULT 3,
+  	"_uuid" varchar,
+  	"block_name" varchar
+  );
+  
   CREATE TABLE IF NOT EXISTS "_tours_v_blocks_post_relation_tour" (
   	"_order" integer NOT NULL,
   	"_parent_id" integer NOT NULL,
@@ -1080,6 +1293,22 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
+  CREATE TABLE IF NOT EXISTS "_tours_v_blocks_text_content" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum__tours_v_blocks_text_content_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum__tours_v_blocks_text_content_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"description" jsonb,
+  	"description_alignment" "enum__tours_v_blocks_text_content_description_alignment" DEFAULT 'left',
+  	"_uuid" varchar,
+  	"block_name" varchar
+  );
+  
   CREATE TABLE IF NOT EXISTS "_tours_v_blocks_socios" (
   	"_order" integer NOT NULL,
   	"_parent_id" integer NOT NULL,
@@ -1102,6 +1331,38 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_title_title_text" varchar,
   	"block_title_tag" "enum__tours_v_blocks_reconocimientos_block_title_tag" DEFAULT 'h2',
   	"block_title_size" "enum__tours_v_blocks_reconocimientos_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"_uuid" varchar,
+  	"block_name" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "_tours_v_blocks_form_bitrix_block" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"tracking_code" varchar,
+  	"_uuid" varchar,
+  	"block_name" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "_tours_v_blocks_revista_block_revistas_links" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"url" varchar,
+  	"_uuid" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "_tours_v_blocks_revista_block" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum__tours_v_blocks_revista_block_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum__tours_v_blocks_revista_block_block_title_size" DEFAULT 'medium',
   	"block_title_text_color" varchar DEFAULT '#2970B7',
   	"block_title_underline_color" varchar DEFAULT '#EFBA06',
   	"_uuid" varchar,
@@ -1140,6 +1401,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"parent_id" integer NOT NULL,
   	"path" varchar NOT NULL,
   	"tour_category_id" integer,
+  	"blog_categories_id" integer,
   	"posts_id" integer
   );
   
@@ -1223,6 +1485,16 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_parent_id" integer NOT NULL,
   	"_path" text NOT NULL,
   	"id" varchar PRIMARY KEY NOT NULL,
+  	"override_defaults" boolean DEFAULT false,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum_posts_blocks_grid_blogs_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum_posts_blocks_grid_blogs_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"general_style" "enum_posts_blocks_grid_blogs_general_style" DEFAULT 'grid',
+  	"grid_style" boolean DEFAULT true,
+  	"populate_by" "enum_posts_blocks_grid_blogs_populate_by" DEFAULT 'collection',
+  	"limit" numeric DEFAULT 3,
   	"block_name" varchar
   );
   
@@ -1296,7 +1568,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"order" integer,
   	"parent_id" integer NOT NULL,
   	"path" varchar NOT NULL,
-  	"blog_categories_id" integer
+  	"blog_categories_id" integer,
+  	"posts_id" integer
   );
   
   CREATE TABLE IF NOT EXISTS "_posts_v_blocks_banner" (
@@ -1344,6 +1617,16 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_parent_id" integer NOT NULL,
   	"_path" text NOT NULL,
   	"id" serial PRIMARY KEY NOT NULL,
+  	"override_defaults" boolean DEFAULT false,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum__posts_v_blocks_grid_blogs_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum__posts_v_blocks_grid_blogs_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"general_style" "enum__posts_v_blocks_grid_blogs_general_style" DEFAULT 'grid',
+  	"grid_style" boolean DEFAULT true,
+  	"populate_by" "enum__posts_v_blocks_grid_blogs_populate_by" DEFAULT 'collection',
+  	"limit" numeric DEFAULT 3,
   	"_uuid" varchar,
   	"block_name" varchar
   );
@@ -1428,7 +1711,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"order" integer,
   	"parent_id" integer NOT NULL,
   	"path" varchar NOT NULL,
-  	"blog_categories_id" integer
+  	"blog_categories_id" integer,
+  	"posts_id" integer
   );
   
   CREATE TABLE IF NOT EXISTS "paquetes_blocks_paquete_herocar_car_content_car_images" (
@@ -1517,6 +1801,16 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_parent_id" integer NOT NULL,
   	"_path" text NOT NULL,
   	"id" varchar PRIMARY KEY NOT NULL,
+  	"override_defaults" boolean DEFAULT false,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum_paquetes_blocks_grid_blogs_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum_paquetes_blocks_grid_blogs_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"general_style" "enum_paquetes_blocks_grid_blogs_general_style" DEFAULT 'grid',
+  	"grid_style" boolean DEFAULT true,
+  	"populate_by" "enum_paquetes_blocks_grid_blogs_populate_by" DEFAULT 'collection',
+  	"limit" numeric DEFAULT 3,
   	"block_name" varchar
   );
   
@@ -1604,6 +1898,26 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
+  CREATE TABLE IF NOT EXISTS "paquetes_blocks_revista_block_revistas_links" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" varchar NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"url" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "paquetes_blocks_revista_block" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum_paquetes_blocks_revista_block_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum_paquetes_blocks_revista_block_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"block_name" varchar
+  );
+  
   CREATE TABLE IF NOT EXISTS "paquetes" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"title" varchar,
@@ -1630,6 +1944,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"parent_id" integer NOT NULL,
   	"path" varchar NOT NULL,
   	"tour_category_id" integer,
+  	"blog_categories_id" integer,
   	"posts_id" integer,
   	"destinations_id" integer
   );
@@ -1725,6 +2040,16 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_parent_id" integer NOT NULL,
   	"_path" text NOT NULL,
   	"id" serial PRIMARY KEY NOT NULL,
+  	"override_defaults" boolean DEFAULT false,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum__paquetes_v_blocks_grid_blogs_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum__paquetes_v_blocks_grid_blogs_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"general_style" "enum__paquetes_v_blocks_grid_blogs_general_style" DEFAULT 'grid',
+  	"grid_style" boolean DEFAULT true,
+  	"populate_by" "enum__paquetes_v_blocks_grid_blogs_populate_by" DEFAULT 'collection',
+  	"limit" numeric DEFAULT 3,
   	"_uuid" varchar,
   	"block_name" varchar
   );
@@ -1820,6 +2145,28 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
+  CREATE TABLE IF NOT EXISTS "_paquetes_v_blocks_revista_block_revistas_links" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"url" varchar,
+  	"_uuid" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "_paquetes_v_blocks_revista_block" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"block_title_title_text" varchar,
+  	"block_title_tag" "enum__paquetes_v_blocks_revista_block_block_title_tag" DEFAULT 'h2',
+  	"block_title_size" "enum__paquetes_v_blocks_revista_block_block_title_size" DEFAULT 'medium',
+  	"block_title_text_color" varchar DEFAULT '#2970B7',
+  	"block_title_underline_color" varchar DEFAULT '#EFBA06',
+  	"_uuid" varchar,
+  	"block_name" varchar
+  );
+  
   CREATE TABLE IF NOT EXISTS "_paquetes_v" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"parent_id" integer,
@@ -1851,6 +2198,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"parent_id" integer NOT NULL,
   	"path" varchar NOT NULL,
   	"tour_category_id" integer,
+  	"blog_categories_id" integer,
   	"posts_id" integer,
   	"destinations_id" integer
   );
@@ -2146,6 +2494,18 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
+   ALTER TABLE "pages_blocks_revista_block_revistas_links" ADD CONSTRAINT "pages_blocks_revista_block_revistas_links_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_revista_block"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "pages_blocks_revista_block" ADD CONSTRAINT "pages_blocks_revista_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
    ALTER TABLE "pages_blocks_row_block_columns" ADD CONSTRAINT "pages_blocks_row_block_columns_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_row_block"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
@@ -2153,6 +2513,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "pages_blocks_row_block" ADD CONSTRAINT "pages_blocks_row_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "pages_blocks_grid_blogs" ADD CONSTRAINT "pages_blocks_grid_blogs_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -2177,6 +2543,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "pages_rels" ADD CONSTRAINT "pages_rels_posts_fk" FOREIGN KEY ("posts_id") REFERENCES "public"."posts"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "pages_rels" ADD CONSTRAINT "pages_rels_blog_categories_fk" FOREIGN KEY ("blog_categories_id") REFERENCES "public"."blog_categories"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -2332,6 +2704,18 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
+   ALTER TABLE "_pages_v_blocks_revista_block_revistas_links" ADD CONSTRAINT "_pages_v_blocks_revista_block_revistas_links_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_revista_block"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "_pages_v_blocks_revista_block" ADD CONSTRAINT "_pages_v_blocks_revista_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
    ALTER TABLE "_pages_v_blocks_row_block_columns" ADD CONSTRAINT "_pages_v_blocks_row_block_columns_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_row_block"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
@@ -2339,6 +2723,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "_pages_v_blocks_row_block" ADD CONSTRAINT "_pages_v_blocks_row_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "_pages_v_blocks_grid_blogs" ADD CONSTRAINT "_pages_v_blocks_grid_blogs_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -2369,6 +2759,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "_pages_v_rels" ADD CONSTRAINT "_pages_v_rels_posts_fk" FOREIGN KEY ("posts_id") REFERENCES "public"."posts"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "_pages_v_rels" ADD CONSTRAINT "_pages_v_rels_blog_categories_fk" FOREIGN KEY ("blog_categories_id") REFERENCES "public"."blog_categories"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -2464,6 +2860,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
+   ALTER TABLE "tours_blocks_grid_blogs" ADD CONSTRAINT "tours_blocks_grid_blogs_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."tours"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
    ALTER TABLE "tours_blocks_post_relation_tour" ADD CONSTRAINT "tours_blocks_post_relation_tour_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."tours"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
@@ -2482,6 +2884,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
+   ALTER TABLE "tours_blocks_text_content" ADD CONSTRAINT "tours_blocks_text_content_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."tours"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
    ALTER TABLE "tours_blocks_socios" ADD CONSTRAINT "tours_blocks_socios_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."tours"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
@@ -2489,6 +2897,24 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "tours_blocks_reconocimientos" ADD CONSTRAINT "tours_blocks_reconocimientos_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."tours"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "tours_blocks_form_bitrix_block" ADD CONSTRAINT "tours_blocks_form_bitrix_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."tours"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "tours_blocks_revista_block_revistas_links" ADD CONSTRAINT "tours_blocks_revista_block_revistas_links_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."tours_blocks_revista_block"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "tours_blocks_revista_block" ADD CONSTRAINT "tours_blocks_revista_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."tours"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -2525,6 +2951,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "tours_rels" ADD CONSTRAINT "tours_rels_tour_category_fk" FOREIGN KEY ("tour_category_id") REFERENCES "public"."tour_category"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "tours_rels" ADD CONSTRAINT "tours_rels_blog_categories_fk" FOREIGN KEY ("blog_categories_id") REFERENCES "public"."blog_categories"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -2620,6 +3052,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
+   ALTER TABLE "_tours_v_blocks_grid_blogs" ADD CONSTRAINT "_tours_v_blocks_grid_blogs_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_tours_v"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
    ALTER TABLE "_tours_v_blocks_post_relation_tour" ADD CONSTRAINT "_tours_v_blocks_post_relation_tour_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_tours_v"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
@@ -2638,6 +3076,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
+   ALTER TABLE "_tours_v_blocks_text_content" ADD CONSTRAINT "_tours_v_blocks_text_content_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_tours_v"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
    ALTER TABLE "_tours_v_blocks_socios" ADD CONSTRAINT "_tours_v_blocks_socios_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_tours_v"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
@@ -2645,6 +3089,24 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "_tours_v_blocks_reconocimientos" ADD CONSTRAINT "_tours_v_blocks_reconocimientos_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_tours_v"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "_tours_v_blocks_form_bitrix_block" ADD CONSTRAINT "_tours_v_blocks_form_bitrix_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_tours_v"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "_tours_v_blocks_revista_block_revistas_links" ADD CONSTRAINT "_tours_v_blocks_revista_block_revistas_links_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_tours_v_blocks_revista_block"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "_tours_v_blocks_revista_block" ADD CONSTRAINT "_tours_v_blocks_revista_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_tours_v"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -2687,6 +3149,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "_tours_v_rels" ADD CONSTRAINT "_tours_v_rels_tour_category_fk" FOREIGN KEY ("tour_category_id") REFERENCES "public"."tour_category"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "_tours_v_rels" ADD CONSTRAINT "_tours_v_rels_blog_categories_fk" FOREIGN KEY ("blog_categories_id") REFERENCES "public"."blog_categories"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -2818,6 +3286,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
+   ALTER TABLE "posts_rels" ADD CONSTRAINT "posts_rels_posts_fk" FOREIGN KEY ("posts_id") REFERENCES "public"."posts"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
    ALTER TABLE "_posts_v_blocks_banner" ADD CONSTRAINT "_posts_v_blocks_banner_image_id_media_id_fk" FOREIGN KEY ("image_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
@@ -2909,6 +3383,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "_posts_v_rels" ADD CONSTRAINT "_posts_v_rels_blog_categories_fk" FOREIGN KEY ("blog_categories_id") REFERENCES "public"."blog_categories"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "_posts_v_rels" ADD CONSTRAINT "_posts_v_rels_posts_fk" FOREIGN KEY ("posts_id") REFERENCES "public"."posts"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -3046,6 +3526,18 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
+   ALTER TABLE "paquetes_blocks_revista_block_revistas_links" ADD CONSTRAINT "paquetes_blocks_revista_block_revistas_links_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."paquetes_blocks_revista_block"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "paquetes_blocks_revista_block" ADD CONSTRAINT "paquetes_blocks_revista_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."paquetes"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
    ALTER TABLE "paquetes" ADD CONSTRAINT "paquetes_featured_image_id_media_id_fk" FOREIGN KEY ("featured_image_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
@@ -3071,6 +3563,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "paquetes_rels" ADD CONSTRAINT "paquetes_rels_tour_category_fk" FOREIGN KEY ("tour_category_id") REFERENCES "public"."tour_category"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "paquetes_rels" ADD CONSTRAINT "paquetes_rels_blog_categories_fk" FOREIGN KEY ("blog_categories_id") REFERENCES "public"."blog_categories"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -3220,6 +3718,18 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
+   ALTER TABLE "_paquetes_v_blocks_revista_block_revistas_links" ADD CONSTRAINT "_paquetes_v_blocks_revista_block_revistas_links_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_paquetes_v_blocks_revista_block"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "_paquetes_v_blocks_revista_block" ADD CONSTRAINT "_paquetes_v_blocks_revista_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_paquetes_v"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
    ALTER TABLE "_paquetes_v" ADD CONSTRAINT "_paquetes_v_parent_id_paquetes_id_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."paquetes"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
@@ -3251,6 +3761,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "_paquetes_v_rels" ADD CONSTRAINT "_paquetes_v_rels_tour_category_fk" FOREIGN KEY ("tour_category_id") REFERENCES "public"."tour_category"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "_paquetes_v_rels" ADD CONSTRAINT "_paquetes_v_rels_blog_categories_fk" FOREIGN KEY ("blog_categories_id") REFERENCES "public"."blog_categories"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -3496,11 +4012,19 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "pages_blocks_form_bitrix_block_order_idx" ON "pages_blocks_form_bitrix_block" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "pages_blocks_form_bitrix_block_parent_id_idx" ON "pages_blocks_form_bitrix_block" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "pages_blocks_form_bitrix_block_path_idx" ON "pages_blocks_form_bitrix_block" USING btree ("_path");
+  CREATE INDEX IF NOT EXISTS "pages_blocks_revista_block_revistas_links_order_idx" ON "pages_blocks_revista_block_revistas_links" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "pages_blocks_revista_block_revistas_links_parent_id_idx" ON "pages_blocks_revista_block_revistas_links" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "pages_blocks_revista_block_order_idx" ON "pages_blocks_revista_block" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "pages_blocks_revista_block_parent_id_idx" ON "pages_blocks_revista_block" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "pages_blocks_revista_block_path_idx" ON "pages_blocks_revista_block" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "pages_blocks_row_block_columns_order_idx" ON "pages_blocks_row_block_columns" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "pages_blocks_row_block_columns_parent_id_idx" ON "pages_blocks_row_block_columns" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "pages_blocks_row_block_order_idx" ON "pages_blocks_row_block" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "pages_blocks_row_block_parent_id_idx" ON "pages_blocks_row_block" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "pages_blocks_row_block_path_idx" ON "pages_blocks_row_block" USING btree ("_path");
+  CREATE INDEX IF NOT EXISTS "pages_blocks_grid_blogs_order_idx" ON "pages_blocks_grid_blogs" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "pages_blocks_grid_blogs_parent_id_idx" ON "pages_blocks_grid_blogs" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "pages_blocks_grid_blogs_path_idx" ON "pages_blocks_grid_blogs" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "pages_blocks_grid_paquetes_order_idx" ON "pages_blocks_grid_paquetes" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "pages_blocks_grid_paquetes_parent_id_idx" ON "pages_blocks_grid_paquetes" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "pages_blocks_grid_paquetes_path_idx" ON "pages_blocks_grid_paquetes" USING btree ("_path");
@@ -3513,6 +4037,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "pages_rels_path_idx" ON "pages_rels" USING btree ("path");
   CREATE INDEX IF NOT EXISTS "pages_rels_tour_category_id_idx" ON "pages_rels" USING btree ("tour_category_id");
   CREATE INDEX IF NOT EXISTS "pages_rels_posts_id_idx" ON "pages_rels" USING btree ("posts_id");
+  CREATE INDEX IF NOT EXISTS "pages_rels_blog_categories_id_idx" ON "pages_rels" USING btree ("blog_categories_id");
   CREATE INDEX IF NOT EXISTS "pages_rels_destinations_id_idx" ON "pages_rels" USING btree ("destinations_id");
   CREATE INDEX IF NOT EXISTS "_pages_v_blocks_banner_order_idx" ON "_pages_v_blocks_banner" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "_pages_v_blocks_banner_parent_id_idx" ON "_pages_v_blocks_banner" USING btree ("_parent_id");
@@ -3572,11 +4097,19 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_pages_v_blocks_form_bitrix_block_order_idx" ON "_pages_v_blocks_form_bitrix_block" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "_pages_v_blocks_form_bitrix_block_parent_id_idx" ON "_pages_v_blocks_form_bitrix_block" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "_pages_v_blocks_form_bitrix_block_path_idx" ON "_pages_v_blocks_form_bitrix_block" USING btree ("_path");
+  CREATE INDEX IF NOT EXISTS "_pages_v_blocks_revista_block_revistas_links_order_idx" ON "_pages_v_blocks_revista_block_revistas_links" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "_pages_v_blocks_revista_block_revistas_links_parent_id_idx" ON "_pages_v_blocks_revista_block_revistas_links" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "_pages_v_blocks_revista_block_order_idx" ON "_pages_v_blocks_revista_block" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "_pages_v_blocks_revista_block_parent_id_idx" ON "_pages_v_blocks_revista_block" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "_pages_v_blocks_revista_block_path_idx" ON "_pages_v_blocks_revista_block" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "_pages_v_blocks_row_block_columns_order_idx" ON "_pages_v_blocks_row_block_columns" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "_pages_v_blocks_row_block_columns_parent_id_idx" ON "_pages_v_blocks_row_block_columns" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "_pages_v_blocks_row_block_order_idx" ON "_pages_v_blocks_row_block" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "_pages_v_blocks_row_block_parent_id_idx" ON "_pages_v_blocks_row_block" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "_pages_v_blocks_row_block_path_idx" ON "_pages_v_blocks_row_block" USING btree ("_path");
+  CREATE INDEX IF NOT EXISTS "_pages_v_blocks_grid_blogs_order_idx" ON "_pages_v_blocks_grid_blogs" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "_pages_v_blocks_grid_blogs_parent_id_idx" ON "_pages_v_blocks_grid_blogs" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "_pages_v_blocks_grid_blogs_path_idx" ON "_pages_v_blocks_grid_blogs" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "_pages_v_blocks_grid_paquetes_order_idx" ON "_pages_v_blocks_grid_paquetes" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "_pages_v_blocks_grid_paquetes_parent_id_idx" ON "_pages_v_blocks_grid_paquetes" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "_pages_v_blocks_grid_paquetes_path_idx" ON "_pages_v_blocks_grid_paquetes" USING btree ("_path");
@@ -3594,6 +4127,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_pages_v_rels_path_idx" ON "_pages_v_rels" USING btree ("path");
   CREATE INDEX IF NOT EXISTS "_pages_v_rels_tour_category_id_idx" ON "_pages_v_rels" USING btree ("tour_category_id");
   CREATE INDEX IF NOT EXISTS "_pages_v_rels_posts_id_idx" ON "_pages_v_rels" USING btree ("posts_id");
+  CREATE INDEX IF NOT EXISTS "_pages_v_rels_blog_categories_id_idx" ON "_pages_v_rels" USING btree ("blog_categories_id");
   CREATE INDEX IF NOT EXISTS "_pages_v_rels_destinations_id_idx" ON "_pages_v_rels" USING btree ("destinations_id");
   CREATE INDEX IF NOT EXISTS "tours_blocks_tour_herocar_car_content_car_images_order_idx" ON "tours_blocks_tour_herocar_car_content_car_images" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "tours_blocks_tour_herocar_car_content_car_images_parent_id_idx" ON "tours_blocks_tour_herocar_car_content_car_images" USING btree ("_parent_id");
@@ -3618,6 +4152,9 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "tours_blocks_grid_tours_parent_id_idx" ON "tours_blocks_grid_tours" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "tours_blocks_grid_tours_path_idx" ON "tours_blocks_grid_tours" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "tours_blocks_grid_tours_destination_idx" ON "tours_blocks_grid_tours" USING btree ("destination_id");
+  CREATE INDEX IF NOT EXISTS "tours_blocks_grid_blogs_order_idx" ON "tours_blocks_grid_blogs" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "tours_blocks_grid_blogs_parent_id_idx" ON "tours_blocks_grid_blogs" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "tours_blocks_grid_blogs_path_idx" ON "tours_blocks_grid_blogs" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "tours_blocks_post_relation_tour_order_idx" ON "tours_blocks_post_relation_tour" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "tours_blocks_post_relation_tour_parent_id_idx" ON "tours_blocks_post_relation_tour" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "tours_blocks_post_relation_tour_path_idx" ON "tours_blocks_post_relation_tour" USING btree ("_path");
@@ -3626,12 +4163,23 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "tours_blocks_you_tube_links_order_idx" ON "tours_blocks_you_tube_links" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "tours_blocks_you_tube_links_parent_id_idx" ON "tours_blocks_you_tube_links" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "tours_blocks_you_tube_links_path_idx" ON "tours_blocks_you_tube_links" USING btree ("_path");
+  CREATE INDEX IF NOT EXISTS "tours_blocks_text_content_order_idx" ON "tours_blocks_text_content" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "tours_blocks_text_content_parent_id_idx" ON "tours_blocks_text_content" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "tours_blocks_text_content_path_idx" ON "tours_blocks_text_content" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "tours_blocks_socios_order_idx" ON "tours_blocks_socios" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "tours_blocks_socios_parent_id_idx" ON "tours_blocks_socios" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "tours_blocks_socios_path_idx" ON "tours_blocks_socios" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "tours_blocks_reconocimientos_order_idx" ON "tours_blocks_reconocimientos" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "tours_blocks_reconocimientos_parent_id_idx" ON "tours_blocks_reconocimientos" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "tours_blocks_reconocimientos_path_idx" ON "tours_blocks_reconocimientos" USING btree ("_path");
+  CREATE INDEX IF NOT EXISTS "tours_blocks_form_bitrix_block_order_idx" ON "tours_blocks_form_bitrix_block" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "tours_blocks_form_bitrix_block_parent_id_idx" ON "tours_blocks_form_bitrix_block" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "tours_blocks_form_bitrix_block_path_idx" ON "tours_blocks_form_bitrix_block" USING btree ("_path");
+  CREATE INDEX IF NOT EXISTS "tours_blocks_revista_block_revistas_links_order_idx" ON "tours_blocks_revista_block_revistas_links" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "tours_blocks_revista_block_revistas_links_parent_id_idx" ON "tours_blocks_revista_block_revistas_links" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "tours_blocks_revista_block_order_idx" ON "tours_blocks_revista_block" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "tours_blocks_revista_block_parent_id_idx" ON "tours_blocks_revista_block" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "tours_blocks_revista_block_path_idx" ON "tours_blocks_revista_block" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "tours_featured_image_idx" ON "tours" USING btree ("featured_image_id");
   CREATE INDEX IF NOT EXISTS "tours_icon_max_passengers_idx" ON "tours" USING btree ("icon_max_passengers_id");
   CREATE INDEX IF NOT EXISTS "tours_icon_difficulty_idx" ON "tours" USING btree ("icon_difficulty_id");
@@ -3644,6 +4192,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "tours_rels_parent_idx" ON "tours_rels" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "tours_rels_path_idx" ON "tours_rels" USING btree ("path");
   CREATE INDEX IF NOT EXISTS "tours_rels_tour_category_id_idx" ON "tours_rels" USING btree ("tour_category_id");
+  CREATE INDEX IF NOT EXISTS "tours_rels_blog_categories_id_idx" ON "tours_rels" USING btree ("blog_categories_id");
   CREATE INDEX IF NOT EXISTS "tours_rels_posts_id_idx" ON "tours_rels" USING btree ("posts_id");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_tour_herocar_car_content_car_images_order_idx" ON "_tours_v_blocks_tour_herocar_car_content_car_images" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_tour_herocar_car_content_car_images_parent_id_idx" ON "_tours_v_blocks_tour_herocar_car_content_car_images" USING btree ("_parent_id");
@@ -3668,6 +4217,9 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_grid_tours_parent_id_idx" ON "_tours_v_blocks_grid_tours" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_grid_tours_path_idx" ON "_tours_v_blocks_grid_tours" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_grid_tours_destination_idx" ON "_tours_v_blocks_grid_tours" USING btree ("destination_id");
+  CREATE INDEX IF NOT EXISTS "_tours_v_blocks_grid_blogs_order_idx" ON "_tours_v_blocks_grid_blogs" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "_tours_v_blocks_grid_blogs_parent_id_idx" ON "_tours_v_blocks_grid_blogs" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "_tours_v_blocks_grid_blogs_path_idx" ON "_tours_v_blocks_grid_blogs" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_post_relation_tour_order_idx" ON "_tours_v_blocks_post_relation_tour" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_post_relation_tour_parent_id_idx" ON "_tours_v_blocks_post_relation_tour" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_post_relation_tour_path_idx" ON "_tours_v_blocks_post_relation_tour" USING btree ("_path");
@@ -3676,12 +4228,23 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_you_tube_links_order_idx" ON "_tours_v_blocks_you_tube_links" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_you_tube_links_parent_id_idx" ON "_tours_v_blocks_you_tube_links" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_you_tube_links_path_idx" ON "_tours_v_blocks_you_tube_links" USING btree ("_path");
+  CREATE INDEX IF NOT EXISTS "_tours_v_blocks_text_content_order_idx" ON "_tours_v_blocks_text_content" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "_tours_v_blocks_text_content_parent_id_idx" ON "_tours_v_blocks_text_content" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "_tours_v_blocks_text_content_path_idx" ON "_tours_v_blocks_text_content" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_socios_order_idx" ON "_tours_v_blocks_socios" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_socios_parent_id_idx" ON "_tours_v_blocks_socios" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_socios_path_idx" ON "_tours_v_blocks_socios" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_reconocimientos_order_idx" ON "_tours_v_blocks_reconocimientos" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_reconocimientos_parent_id_idx" ON "_tours_v_blocks_reconocimientos" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "_tours_v_blocks_reconocimientos_path_idx" ON "_tours_v_blocks_reconocimientos" USING btree ("_path");
+  CREATE INDEX IF NOT EXISTS "_tours_v_blocks_form_bitrix_block_order_idx" ON "_tours_v_blocks_form_bitrix_block" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "_tours_v_blocks_form_bitrix_block_parent_id_idx" ON "_tours_v_blocks_form_bitrix_block" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "_tours_v_blocks_form_bitrix_block_path_idx" ON "_tours_v_blocks_form_bitrix_block" USING btree ("_path");
+  CREATE INDEX IF NOT EXISTS "_tours_v_blocks_revista_block_revistas_links_order_idx" ON "_tours_v_blocks_revista_block_revistas_links" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "_tours_v_blocks_revista_block_revistas_links_parent_id_idx" ON "_tours_v_blocks_revista_block_revistas_links" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "_tours_v_blocks_revista_block_order_idx" ON "_tours_v_blocks_revista_block" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "_tours_v_blocks_revista_block_parent_id_idx" ON "_tours_v_blocks_revista_block" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "_tours_v_blocks_revista_block_path_idx" ON "_tours_v_blocks_revista_block" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "_tours_v_parent_idx" ON "_tours_v" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "_tours_v_version_version_featured_image_idx" ON "_tours_v" USING btree ("version_featured_image_id");
   CREATE INDEX IF NOT EXISTS "_tours_v_version_version_icon_max_passengers_idx" ON "_tours_v" USING btree ("version_icon_max_passengers_id");
@@ -3699,6 +4262,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_tours_v_rels_parent_idx" ON "_tours_v_rels" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "_tours_v_rels_path_idx" ON "_tours_v_rels" USING btree ("path");
   CREATE INDEX IF NOT EXISTS "_tours_v_rels_tour_category_id_idx" ON "_tours_v_rels" USING btree ("tour_category_id");
+  CREATE INDEX IF NOT EXISTS "_tours_v_rels_blog_categories_id_idx" ON "_tours_v_rels" USING btree ("blog_categories_id");
   CREATE INDEX IF NOT EXISTS "_tours_v_rels_posts_id_idx" ON "_tours_v_rels" USING btree ("posts_id");
   CREATE INDEX IF NOT EXISTS "ofertas_imagen_idx" ON "ofertas" USING btree ("imagen_id");
   CREATE INDEX IF NOT EXISTS "ofertas_tour_relacionado_idx" ON "ofertas" USING btree ("tour_relacionado_id");
@@ -3753,6 +4317,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "posts_rels_parent_idx" ON "posts_rels" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "posts_rels_path_idx" ON "posts_rels" USING btree ("path");
   CREATE INDEX IF NOT EXISTS "posts_rels_blog_categories_id_idx" ON "posts_rels" USING btree ("blog_categories_id");
+  CREATE INDEX IF NOT EXISTS "posts_rels_posts_id_idx" ON "posts_rels" USING btree ("posts_id");
   CREATE INDEX IF NOT EXISTS "_posts_v_blocks_banner_order_idx" ON "_posts_v_blocks_banner" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "_posts_v_blocks_banner_parent_id_idx" ON "_posts_v_blocks_banner" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "_posts_v_blocks_banner_path_idx" ON "_posts_v_blocks_banner" USING btree ("_path");
@@ -3795,6 +4360,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_posts_v_rels_parent_idx" ON "_posts_v_rels" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "_posts_v_rels_path_idx" ON "_posts_v_rels" USING btree ("path");
   CREATE INDEX IF NOT EXISTS "_posts_v_rels_blog_categories_id_idx" ON "_posts_v_rels" USING btree ("blog_categories_id");
+  CREATE INDEX IF NOT EXISTS "_posts_v_rels_posts_id_idx" ON "_posts_v_rels" USING btree ("posts_id");
   CREATE INDEX IF NOT EXISTS "paquetes_blocks_paquete_herocar_car_content_car_images_order_idx" ON "paquetes_blocks_paquete_herocar_car_content_car_images" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "paquetes_blocks_paquete_herocar_car_content_car_images_parent_id_idx" ON "paquetes_blocks_paquete_herocar_car_content_car_images" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "paquetes_blocks_paquete_herocar_car_content_car_images_image_idx" ON "paquetes_blocks_paquete_herocar_car_content_car_images" USING btree ("image_id");
@@ -3841,6 +4407,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "paquetes_blocks_form_bitrix_block_order_idx" ON "paquetes_blocks_form_bitrix_block" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "paquetes_blocks_form_bitrix_block_parent_id_idx" ON "paquetes_blocks_form_bitrix_block" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "paquetes_blocks_form_bitrix_block_path_idx" ON "paquetes_blocks_form_bitrix_block" USING btree ("_path");
+  CREATE INDEX IF NOT EXISTS "paquetes_blocks_revista_block_revistas_links_order_idx" ON "paquetes_blocks_revista_block_revistas_links" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "paquetes_blocks_revista_block_revistas_links_parent_id_idx" ON "paquetes_blocks_revista_block_revistas_links" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "paquetes_blocks_revista_block_order_idx" ON "paquetes_blocks_revista_block" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "paquetes_blocks_revista_block_parent_id_idx" ON "paquetes_blocks_revista_block" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "paquetes_blocks_revista_block_path_idx" ON "paquetes_blocks_revista_block" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "paquetes_featured_image_idx" ON "paquetes" USING btree ("featured_image_id");
   CREATE INDEX IF NOT EXISTS "paquetes_icon_max_passengers_idx" ON "paquetes" USING btree ("icon_max_passengers_id");
   CREATE INDEX IF NOT EXISTS "paquetes_icon_difficulty_idx" ON "paquetes" USING btree ("icon_difficulty_id");
@@ -3852,6 +4423,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "paquetes_rels_parent_idx" ON "paquetes_rels" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "paquetes_rels_path_idx" ON "paquetes_rels" USING btree ("path");
   CREATE INDEX IF NOT EXISTS "paquetes_rels_tour_category_id_idx" ON "paquetes_rels" USING btree ("tour_category_id");
+  CREATE INDEX IF NOT EXISTS "paquetes_rels_blog_categories_id_idx" ON "paquetes_rels" USING btree ("blog_categories_id");
   CREATE INDEX IF NOT EXISTS "paquetes_rels_posts_id_idx" ON "paquetes_rels" USING btree ("posts_id");
   CREATE INDEX IF NOT EXISTS "paquetes_rels_destinations_id_idx" ON "paquetes_rels" USING btree ("destinations_id");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_blocks_paquete_herocar_car_content_car_images_order_idx" ON "_paquetes_v_blocks_paquete_herocar_car_content_car_images" USING btree ("_order");
@@ -3900,6 +4472,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_paquetes_v_blocks_form_bitrix_block_order_idx" ON "_paquetes_v_blocks_form_bitrix_block" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_blocks_form_bitrix_block_parent_id_idx" ON "_paquetes_v_blocks_form_bitrix_block" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_blocks_form_bitrix_block_path_idx" ON "_paquetes_v_blocks_form_bitrix_block" USING btree ("_path");
+  CREATE INDEX IF NOT EXISTS "_paquetes_v_blocks_revista_block_revistas_links_order_idx" ON "_paquetes_v_blocks_revista_block_revistas_links" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "_paquetes_v_blocks_revista_block_revistas_links_parent_id_idx" ON "_paquetes_v_blocks_revista_block_revistas_links" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "_paquetes_v_blocks_revista_block_order_idx" ON "_paquetes_v_blocks_revista_block" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "_paquetes_v_blocks_revista_block_parent_id_idx" ON "_paquetes_v_blocks_revista_block" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "_paquetes_v_blocks_revista_block_path_idx" ON "_paquetes_v_blocks_revista_block" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_parent_idx" ON "_paquetes_v" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_version_version_featured_image_idx" ON "_paquetes_v" USING btree ("version_featured_image_id");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_version_version_icon_max_passengers_idx" ON "_paquetes_v" USING btree ("version_icon_max_passengers_id");
@@ -3916,6 +4493,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_paquetes_v_rels_parent_idx" ON "_paquetes_v_rels" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_rels_path_idx" ON "_paquetes_v_rels" USING btree ("path");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_rels_tour_category_id_idx" ON "_paquetes_v_rels" USING btree ("tour_category_id");
+  CREATE INDEX IF NOT EXISTS "_paquetes_v_rels_blog_categories_id_idx" ON "_paquetes_v_rels" USING btree ("blog_categories_id");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_rels_posts_id_idx" ON "_paquetes_v_rels" USING btree ("posts_id");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_rels_destinations_id_idx" ON "_paquetes_v_rels" USING btree ("destinations_id");
   CREATE INDEX IF NOT EXISTS "payload_jobs_log_order_idx" ON "payload_jobs_log" USING btree ("_order");
@@ -3998,8 +4576,11 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "pages_blocks_grid_images_image" CASCADE;
   DROP TABLE "pages_blocks_grid_images" CASCADE;
   DROP TABLE "pages_blocks_form_bitrix_block" CASCADE;
+  DROP TABLE "pages_blocks_revista_block_revistas_links" CASCADE;
+  DROP TABLE "pages_blocks_revista_block" CASCADE;
   DROP TABLE "pages_blocks_row_block_columns" CASCADE;
   DROP TABLE "pages_blocks_row_block" CASCADE;
+  DROP TABLE "pages_blocks_grid_blogs" CASCADE;
   DROP TABLE "pages_blocks_grid_paquetes" CASCADE;
   DROP TABLE "pages" CASCADE;
   DROP TABLE "pages_rels" CASCADE;
@@ -4022,8 +4603,11 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "_pages_v_blocks_grid_images_image" CASCADE;
   DROP TABLE "_pages_v_blocks_grid_images" CASCADE;
   DROP TABLE "_pages_v_blocks_form_bitrix_block" CASCADE;
+  DROP TABLE "_pages_v_blocks_revista_block_revistas_links" CASCADE;
+  DROP TABLE "_pages_v_blocks_revista_block" CASCADE;
   DROP TABLE "_pages_v_blocks_row_block_columns" CASCADE;
   DROP TABLE "_pages_v_blocks_row_block" CASCADE;
+  DROP TABLE "_pages_v_blocks_grid_blogs" CASCADE;
   DROP TABLE "_pages_v_blocks_grid_paquetes" CASCADE;
   DROP TABLE "_pages_v" CASCADE;
   DROP TABLE "_pages_v_rels" CASCADE;
@@ -4032,11 +4616,16 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "tours_blocks_descr_price" CASCADE;
   DROP TABLE "tours_blocks_guia_tour" CASCADE;
   DROP TABLE "tours_blocks_grid_tours" CASCADE;
+  DROP TABLE "tours_blocks_grid_blogs" CASCADE;
   DROP TABLE "tours_blocks_post_relation_tour" CASCADE;
   DROP TABLE "tours_blocks_you_tube_links_video_links" CASCADE;
   DROP TABLE "tours_blocks_you_tube_links" CASCADE;
+  DROP TABLE "tours_blocks_text_content" CASCADE;
   DROP TABLE "tours_blocks_socios" CASCADE;
   DROP TABLE "tours_blocks_reconocimientos" CASCADE;
+  DROP TABLE "tours_blocks_form_bitrix_block" CASCADE;
+  DROP TABLE "tours_blocks_revista_block_revistas_links" CASCADE;
+  DROP TABLE "tours_blocks_revista_block" CASCADE;
   DROP TABLE "tours" CASCADE;
   DROP TABLE "tours_rels" CASCADE;
   DROP TABLE "_tours_v_blocks_tour_herocar_car_content_car_images" CASCADE;
@@ -4044,11 +4633,16 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "_tours_v_blocks_descr_price" CASCADE;
   DROP TABLE "_tours_v_blocks_guia_tour" CASCADE;
   DROP TABLE "_tours_v_blocks_grid_tours" CASCADE;
+  DROP TABLE "_tours_v_blocks_grid_blogs" CASCADE;
   DROP TABLE "_tours_v_blocks_post_relation_tour" CASCADE;
   DROP TABLE "_tours_v_blocks_you_tube_links_video_links" CASCADE;
   DROP TABLE "_tours_v_blocks_you_tube_links" CASCADE;
+  DROP TABLE "_tours_v_blocks_text_content" CASCADE;
   DROP TABLE "_tours_v_blocks_socios" CASCADE;
   DROP TABLE "_tours_v_blocks_reconocimientos" CASCADE;
+  DROP TABLE "_tours_v_blocks_form_bitrix_block" CASCADE;
+  DROP TABLE "_tours_v_blocks_revista_block_revistas_links" CASCADE;
+  DROP TABLE "_tours_v_blocks_revista_block" CASCADE;
   DROP TABLE "_tours_v" CASCADE;
   DROP TABLE "_tours_v_rels" CASCADE;
   DROP TABLE "ofertas" CASCADE;
@@ -4090,6 +4684,8 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "paquetes_blocks_socios" CASCADE;
   DROP TABLE "paquetes_blocks_reconocimientos" CASCADE;
   DROP TABLE "paquetes_blocks_form_bitrix_block" CASCADE;
+  DROP TABLE "paquetes_blocks_revista_block_revistas_links" CASCADE;
+  DROP TABLE "paquetes_blocks_revista_block" CASCADE;
   DROP TABLE "paquetes" CASCADE;
   DROP TABLE "paquetes_rels" CASCADE;
   DROP TABLE "_paquetes_v_blocks_paquete_herocar_car_content_car_images" CASCADE;
@@ -4105,6 +4701,8 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "_paquetes_v_blocks_socios" CASCADE;
   DROP TABLE "_paquetes_v_blocks_reconocimientos" CASCADE;
   DROP TABLE "_paquetes_v_blocks_form_bitrix_block" CASCADE;
+  DROP TABLE "_paquetes_v_blocks_revista_block_revistas_links" CASCADE;
+  DROP TABLE "_paquetes_v_blocks_revista_block" CASCADE;
   DROP TABLE "_paquetes_v" CASCADE;
   DROP TABLE "_paquetes_v_rels" CASCADE;
   DROP TABLE "payload_jobs_log" CASCADE;
@@ -4144,7 +4742,13 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "public"."enum_pages_blocks_text_content_block_title_size";
   DROP TYPE "public"."enum_pages_blocks_text_content_description_alignment";
   DROP TYPE "public"."enum_pages_blocks_grid_images_type_grid";
+  DROP TYPE "public"."enum_pages_blocks_revista_block_block_title_tag";
+  DROP TYPE "public"."enum_pages_blocks_revista_block_block_title_size";
   DROP TYPE "public"."enum_pages_blocks_row_block_columns_column_width";
+  DROP TYPE "public"."enum_pages_blocks_grid_blogs_block_title_tag";
+  DROP TYPE "public"."enum_pages_blocks_grid_blogs_block_title_size";
+  DROP TYPE "public"."enum_pages_blocks_grid_blogs_general_style";
+  DROP TYPE "public"."enum_pages_blocks_grid_blogs_populate_by";
   DROP TYPE "public"."enum_pages_blocks_grid_paquetes_block_title_tag";
   DROP TYPE "public"."enum_pages_blocks_grid_paquetes_block_title_size";
   DROP TYPE "public"."enum_pages_status";
@@ -4169,7 +4773,13 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "public"."enum__pages_v_blocks_text_content_block_title_size";
   DROP TYPE "public"."enum__pages_v_blocks_text_content_description_alignment";
   DROP TYPE "public"."enum__pages_v_blocks_grid_images_type_grid";
+  DROP TYPE "public"."enum__pages_v_blocks_revista_block_block_title_tag";
+  DROP TYPE "public"."enum__pages_v_blocks_revista_block_block_title_size";
   DROP TYPE "public"."enum__pages_v_blocks_row_block_columns_column_width";
+  DROP TYPE "public"."enum__pages_v_blocks_grid_blogs_block_title_tag";
+  DROP TYPE "public"."enum__pages_v_blocks_grid_blogs_block_title_size";
+  DROP TYPE "public"."enum__pages_v_blocks_grid_blogs_general_style";
+  DROP TYPE "public"."enum__pages_v_blocks_grid_blogs_populate_by";
   DROP TYPE "public"."enum__pages_v_blocks_grid_paquetes_block_title_tag";
   DROP TYPE "public"."enum__pages_v_blocks_grid_paquetes_block_title_size";
   DROP TYPE "public"."enum__pages_v_version_status";
@@ -4179,14 +4789,23 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "public"."enum_tours_blocks_guia_tour_block_title_size";
   DROP TYPE "public"."enum_tours_blocks_grid_tours_block_title_tag";
   DROP TYPE "public"."enum_tours_blocks_grid_tours_block_title_size";
+  DROP TYPE "public"."enum_tours_blocks_grid_blogs_block_title_tag";
+  DROP TYPE "public"."enum_tours_blocks_grid_blogs_block_title_size";
+  DROP TYPE "public"."enum_tours_blocks_grid_blogs_general_style";
+  DROP TYPE "public"."enum_tours_blocks_grid_blogs_populate_by";
   DROP TYPE "public"."enum_tours_blocks_post_relation_tour_block_title_tag";
   DROP TYPE "public"."enum_tours_blocks_post_relation_tour_block_title_size";
   DROP TYPE "public"."enum_tours_blocks_you_tube_links_block_title_tag";
   DROP TYPE "public"."enum_tours_blocks_you_tube_links_block_title_size";
+  DROP TYPE "public"."enum_tours_blocks_text_content_block_title_tag";
+  DROP TYPE "public"."enum_tours_blocks_text_content_block_title_size";
+  DROP TYPE "public"."enum_tours_blocks_text_content_description_alignment";
   DROP TYPE "public"."enum_tours_blocks_socios_block_title_tag";
   DROP TYPE "public"."enum_tours_blocks_socios_block_title_size";
   DROP TYPE "public"."enum_tours_blocks_reconocimientos_block_title_tag";
   DROP TYPE "public"."enum_tours_blocks_reconocimientos_block_title_size";
+  DROP TYPE "public"."enum_tours_blocks_revista_block_block_title_tag";
+  DROP TYPE "public"."enum_tours_blocks_revista_block_block_title_size";
   DROP TYPE "public"."enum_tours_difficulty";
   DROP TYPE "public"."enum_tours_status";
   DROP TYPE "public"."enum__tours_v_blocks_descr_price_block_title_tag";
@@ -4195,20 +4814,33 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "public"."enum__tours_v_blocks_guia_tour_block_title_size";
   DROP TYPE "public"."enum__tours_v_blocks_grid_tours_block_title_tag";
   DROP TYPE "public"."enum__tours_v_blocks_grid_tours_block_title_size";
+  DROP TYPE "public"."enum__tours_v_blocks_grid_blogs_block_title_tag";
+  DROP TYPE "public"."enum__tours_v_blocks_grid_blogs_block_title_size";
+  DROP TYPE "public"."enum__tours_v_blocks_grid_blogs_general_style";
+  DROP TYPE "public"."enum__tours_v_blocks_grid_blogs_populate_by";
   DROP TYPE "public"."enum__tours_v_blocks_post_relation_tour_block_title_tag";
   DROP TYPE "public"."enum__tours_v_blocks_post_relation_tour_block_title_size";
   DROP TYPE "public"."enum__tours_v_blocks_you_tube_links_block_title_tag";
   DROP TYPE "public"."enum__tours_v_blocks_you_tube_links_block_title_size";
+  DROP TYPE "public"."enum__tours_v_blocks_text_content_block_title_tag";
+  DROP TYPE "public"."enum__tours_v_blocks_text_content_block_title_size";
+  DROP TYPE "public"."enum__tours_v_blocks_text_content_description_alignment";
   DROP TYPE "public"."enum__tours_v_blocks_socios_block_title_tag";
   DROP TYPE "public"."enum__tours_v_blocks_socios_block_title_size";
   DROP TYPE "public"."enum__tours_v_blocks_reconocimientos_block_title_tag";
   DROP TYPE "public"."enum__tours_v_blocks_reconocimientos_block_title_size";
+  DROP TYPE "public"."enum__tours_v_blocks_revista_block_block_title_tag";
+  DROP TYPE "public"."enum__tours_v_blocks_revista_block_block_title_size";
   DROP TYPE "public"."enum__tours_v_version_difficulty";
   DROP TYPE "public"."enum__tours_v_version_status";
   DROP TYPE "public"."enum_posts_blocks_reconocimientos_block_title_tag";
   DROP TYPE "public"."enum_posts_blocks_reconocimientos_block_title_size";
   DROP TYPE "public"."enum_posts_blocks_socios_block_title_tag";
   DROP TYPE "public"."enum_posts_blocks_socios_block_title_size";
+  DROP TYPE "public"."enum_posts_blocks_grid_blogs_block_title_tag";
+  DROP TYPE "public"."enum_posts_blocks_grid_blogs_block_title_size";
+  DROP TYPE "public"."enum_posts_blocks_grid_blogs_general_style";
+  DROP TYPE "public"."enum_posts_blocks_grid_blogs_populate_by";
   DROP TYPE "public"."enum_posts_blocks_grid_images_type_grid";
   DROP TYPE "public"."enum_posts_blocks_text_content_block_title_tag";
   DROP TYPE "public"."enum_posts_blocks_text_content_block_title_size";
@@ -4220,6 +4852,10 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "public"."enum__posts_v_blocks_reconocimientos_block_title_size";
   DROP TYPE "public"."enum__posts_v_blocks_socios_block_title_tag";
   DROP TYPE "public"."enum__posts_v_blocks_socios_block_title_size";
+  DROP TYPE "public"."enum__posts_v_blocks_grid_blogs_block_title_tag";
+  DROP TYPE "public"."enum__posts_v_blocks_grid_blogs_block_title_size";
+  DROP TYPE "public"."enum__posts_v_blocks_grid_blogs_general_style";
+  DROP TYPE "public"."enum__posts_v_blocks_grid_blogs_populate_by";
   DROP TYPE "public"."enum__posts_v_blocks_grid_images_type_grid";
   DROP TYPE "public"."enum__posts_v_blocks_text_content_block_title_tag";
   DROP TYPE "public"."enum__posts_v_blocks_text_content_block_title_size";
@@ -4233,6 +4869,10 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "public"."enum_paquetes_blocks_guia_tour_block_title_size";
   DROP TYPE "public"."enum_paquetes_blocks_grid_tours_block_title_tag";
   DROP TYPE "public"."enum_paquetes_blocks_grid_tours_block_title_size";
+  DROP TYPE "public"."enum_paquetes_blocks_grid_blogs_block_title_tag";
+  DROP TYPE "public"."enum_paquetes_blocks_grid_blogs_block_title_size";
+  DROP TYPE "public"."enum_paquetes_blocks_grid_blogs_general_style";
+  DROP TYPE "public"."enum_paquetes_blocks_grid_blogs_populate_by";
   DROP TYPE "public"."enum_paquetes_blocks_post_relation_tour_block_title_tag";
   DROP TYPE "public"."enum_paquetes_blocks_post_relation_tour_block_title_size";
   DROP TYPE "public"."enum_paquetes_blocks_you_tube_links_block_title_tag";
@@ -4244,6 +4884,8 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "public"."enum_paquetes_blocks_socios_block_title_size";
   DROP TYPE "public"."enum_paquetes_blocks_reconocimientos_block_title_tag";
   DROP TYPE "public"."enum_paquetes_blocks_reconocimientos_block_title_size";
+  DROP TYPE "public"."enum_paquetes_blocks_revista_block_block_title_tag";
+  DROP TYPE "public"."enum_paquetes_blocks_revista_block_block_title_size";
   DROP TYPE "public"."enum_paquetes_difficulty";
   DROP TYPE "public"."enum_paquetes_status";
   DROP TYPE "public"."enum__paquetes_v_blocks_descr_price_block_title_tag";
@@ -4252,6 +4894,10 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "public"."enum__paquetes_v_blocks_guia_tour_block_title_size";
   DROP TYPE "public"."enum__paquetes_v_blocks_grid_tours_block_title_tag";
   DROP TYPE "public"."enum__paquetes_v_blocks_grid_tours_block_title_size";
+  DROP TYPE "public"."enum__paquetes_v_blocks_grid_blogs_block_title_tag";
+  DROP TYPE "public"."enum__paquetes_v_blocks_grid_blogs_block_title_size";
+  DROP TYPE "public"."enum__paquetes_v_blocks_grid_blogs_general_style";
+  DROP TYPE "public"."enum__paquetes_v_blocks_grid_blogs_populate_by";
   DROP TYPE "public"."enum__paquetes_v_blocks_post_relation_tour_block_title_tag";
   DROP TYPE "public"."enum__paquetes_v_blocks_post_relation_tour_block_title_size";
   DROP TYPE "public"."enum__paquetes_v_blocks_you_tube_links_block_title_tag";
@@ -4263,6 +4909,8 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "public"."enum__paquetes_v_blocks_socios_block_title_size";
   DROP TYPE "public"."enum__paquetes_v_blocks_reconocimientos_block_title_tag";
   DROP TYPE "public"."enum__paquetes_v_blocks_reconocimientos_block_title_size";
+  DROP TYPE "public"."enum__paquetes_v_blocks_revista_block_block_title_tag";
+  DROP TYPE "public"."enum__paquetes_v_blocks_revista_block_block_title_size";
   DROP TYPE "public"."enum__paquetes_v_version_difficulty";
   DROP TYPE "public"."enum__paquetes_v_version_status";
   DROP TYPE "public"."enum_payload_jobs_log_task_slug";

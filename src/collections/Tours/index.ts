@@ -32,6 +32,8 @@ import { getPayload, RequiredDataFromCollectionSlug } from 'payload';
 import config from '@payload-config';
 import { TextContentBlock } from '@/blocks/TextContentBlock/config'
 import { GridBlogs } from '@/blocks/GridBlogs/config'
+import { RevistaBlock } from '@/blocks/RevistaBlock/config'
+import { FormBitrixBlock } from '@/blocks/FormBitrix/config'
 
 // Import the custom feature
 
@@ -94,7 +96,7 @@ export const Tours: CollectionConfig = {
                         {
                             name: 'layout',
                             type: 'blocks',
-                            blocks: [DescrPrice, GuiaTour, GridTours, PostRelationTourBlock, YouTubeLinksBlock, SociosBlock, ReconocimientosBlock],
+                            blocks: [DescrPrice, GuiaTour, GridTours, GridBlogs, PostRelationTourBlock, YouTubeLinksBlock, TextContentBlock, SociosBlock, ReconocimientosBlock, FormBitrixBlock, RevistaBlock],
                             //blocks: [],
                             required: true,
                         },
