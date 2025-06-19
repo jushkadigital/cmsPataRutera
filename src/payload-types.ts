@@ -322,6 +322,7 @@ export interface RowBlock {
           | OfertasBlock
           | CarouselDestinationBlock
           | TikTokLinksBlockType
+          | YouTubeLinksBlockType
           | BeneficiosBlockType
           | EstadisticasBlockType
           | TextContentBlockType
@@ -757,6 +758,7 @@ export interface Tour {
     | GuiaTourBlock
     | GridToursBlock
     | GridBlogsBlock
+    | RowBlock
     | PostRelationTourBlockType
     | YouTubeLinksBlockType
     | TextContentBlockType
@@ -1443,6 +1445,7 @@ export interface RowBlockSelect<T extends boolean = true> {
               ofertas?: T | OfertasBlockSelect<T>;
               carouselDestination?: T | CarouselDestinationBlockSelect<T>;
               tikTokLinks?: T | TikTokLinksBlockTypeSelect<T>;
+              youTubeLinks?: T | YouTubeLinksBlockTypeSelect<T>;
               beneficios?: T | BeneficiosBlockTypeSelect<T>;
               estadisticas?: T | EstadisticasBlockTypeSelect<T>;
               textContent?: T | TextContentBlockTypeSelect<T>;
@@ -1546,6 +1549,22 @@ export interface TikTokLinksBlockTypeSelect<T extends boolean = true> {
   videoLinks?:
     | T
     | {
+        url?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "YouTubeLinksBlockType_select".
+ */
+export interface YouTubeLinksBlockTypeSelect<T extends boolean = true> {
+  blockTitle?: T | TitleGroupSelect<T>;
+  videoLinks?:
+    | T
+    | {
+        image?: T;
         url?: T;
         id?: T;
       };
@@ -1689,6 +1708,7 @@ export interface ToursSelect<T extends boolean = true> {
         guiaTour?: T | GuiaTourBlockSelect<T>;
         gridTours?: T | GridToursBlockSelect<T>;
         gridBlogs?: T | GridBlogsBlockSelect<T>;
+        rowBlock?: T | RowBlockSelect<T>;
         postRelationTour?: T | PostRelationTourBlockTypeSelect<T>;
         youTubeLinks?: T | YouTubeLinksBlockTypeSelect<T>;
         textContent?: T | TextContentBlockTypeSelect<T>;
@@ -1802,22 +1822,6 @@ export interface GuiaTourBlockSelect<T extends boolean = true> {
         iconText?: T;
         iconImage?: T;
         contentSection?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "YouTubeLinksBlockType_select".
- */
-export interface YouTubeLinksBlockTypeSelect<T extends boolean = true> {
-  blockTitle?: T | TitleGroupSelect<T>;
-  videoLinks?:
-    | T
-    | {
-        image?: T;
-        url?: T;
-        id?: T;
       };
   id?: T;
   blockName?: T;

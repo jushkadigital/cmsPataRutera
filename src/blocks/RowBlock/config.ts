@@ -15,6 +15,7 @@ import { TextContentBlock } from '../TextContentBlock/config';
 import { GridImages } from '../GridImages/config';
 import { FormBitrixBlock } from '../FormBitrix/config';
 import { RevistaBlock } from '../RevistaBlock/config';
+import { YouTubeLinksBlock } from '../YouTubeLinksBlock/config';
 // Importa los bloques típicos que quieres permitir DENTRO de las columnas
 // Importa cualquier otro bloque típico que deba poder ir en una columna
 
@@ -76,7 +77,7 @@ export const RowBlock: Block = {
                     // Aquí listas los bloques que están permitidos DENTRO de ESTA COLUMNA
                     blocks: [
                         GridTours, MediaBlock, PostRelationTourBlock, SociosBlock, ReconocimientosBlock, OfertasBlock,
-                        CarouselDestination, TikTokLinksBlock, BeneficiosBlock, EstadisticasBlock, TextContentBlock, GridImages,
+                        CarouselDestination, TikTokLinksBlock, YouTubeLinksBlock, BeneficiosBlock, EstadisticasBlock, TextContentBlock, GridImages,
                         OfertasBlock, FormBitrixBlock, RevistaBlock
                         // QuoteBlock,
                         // IMPORTANTE: NO te añadas a ti mismo (LayoutRowBlock) aquí dentro,
