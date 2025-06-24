@@ -34,7 +34,7 @@ import { healthCheckEndpoint } from './endpoints/health'
 import { configEndpoint } from './endpoints/config'
 import { Paquetes } from './collections/Paquetes'
 import { getServerSideURL } from '@/utilities/getURL'
-import type { Page, Post as PostType } from './payload-types'
+import type { Page, Post as PostType, Paquete as PaqueteType, Tour as TourType } from './payload-types'
 
 // We'll implement these plugins properly in phase 2
 // import { usersPlugin } from './plugins/core/users'
@@ -53,14 +53,13 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 // Helper function to get server URL for CORS
-const generateTitle: GenerateTitle<PostType | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
+const generateTitle: GenerateTitle<TourType | PaqueteType | PostType | Page> = ({ doc }) => {
+  return doc?.title ? `${doc.title} | ${process.env.NAME_BUSINESS}` : 'Mi sitio'
 }
 
-const generateURL: GenerateURL<PostType | Page> = ({ doc }) => {
-  const url = getServerSideURL()
-
-  return doc?.slug ? `${url}/${doc.slug}` : url
+const generateURL: GenerateURL<TourType | PaqueteType | PostType | Page> = ({ doc, collectionSlug }) => {
+  const url = process.env.NEXTJS_FRONTEND_URL || 'http://localhost:3000'
+  return doc?.slug ? collectionSlug == 'pages' ? `${url}/${doc?.slug}` : `${url}/${collectionSlug}/${doc?.slug}` : url
 }
 
 
@@ -93,8 +92,10 @@ export default buildConfig({
   // database-adapter-config-end
   sharp,
   plugins: [
-    payloadCloudPlugin(),
-
+    seoPlugin({
+      generateTitle: generateTitle,
+      generateURL: generateURL
+    }),
     // toursPlugin(), // Remove this
     // passengersPlugin(), // Remove this
     // Will enable these once implemented properly
@@ -108,7 +109,7 @@ export default buildConfig({
   },
   // Add CORS configurationauthenticatedOrPublished
   serverURL: process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000',
-  cors: [process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000', 'http://localhost:4000'],
+  cors: [process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000', process.env.NEXTJS_FRONTEND_URL || 'http://localhost:4000'],
   // Implementing endpoints
   endpoints: [
     healthCheckEndpoint,

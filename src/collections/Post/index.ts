@@ -14,6 +14,8 @@ import { GridImages } from '@/blocks/GridImages/config';
 import { TextContentBlock } from '@/blocks/TextContentBlock/config';
 import { YouTubeLinksBlock } from '@/blocks/YouTubeLinksBlock/config';
 import { heroPost } from '@/heros/PostHero';
+import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from '@payloadcms/plugin-seo/fields';
+import { populateAuthors } from './hooks/populatedAuthors';
 
 export const Post: CollectionConfig = {
     slug: 'posts',
@@ -27,6 +29,10 @@ export const Post: CollectionConfig = {
     defaultPopulate: {
         title: true,
         slug: true,
+        categories: true,
+        meta: {
+
+        }
     },
     admin: {
         defaultColumns: ['title', 'slug', 'updatedAt'],
@@ -102,6 +108,33 @@ export const Post: CollectionConfig = {
                         }
                     ],
                 },
+                {
+                    name: 'meta',
+                    label: 'SEO',
+                    fields: [
+                        OverviewField({
+                            titlePath: 'meta.title',
+                            descriptionPath: 'meta.description',
+                            imagePath: 'meta.image',
+                        }),
+                        MetaTitleField({
+                            hasGenerateFn: true,
+                        }),
+                        MetaImageField({
+                            relationTo: 'media',
+                        }),
+
+                        MetaDescriptionField({}),
+                        PreviewField({
+                            // if the `generateUrl` function is configured
+                            hasGenerateFn: true,
+
+                            // field paths to match the target field for data
+                            titlePath: 'meta.title',
+                            descriptionPath: 'meta.description',
+                        }),
+                    ],
+                },
             ],
         },
         // Uncomment author relationship
@@ -136,12 +169,40 @@ export const Post: CollectionConfig = {
                     pickerAppearance: 'dayAndTime',
                 }
             },
+            hooks: {
+                beforeChange: [
+                    ({ siblingData, value }) => {
+                        if (siblingData._status === 'published' && !value) {
+                            return new Date()
+                        }
+                        return value
+                    },
+                ],
+            },
+        },
+        {
+            name: 'populatedAuthors',
+            type: 'array',
+            access: {
+                update: () => false,
+            },
+            admin: {
+                disabled: true,
+                readOnly: true,
+            },
+            fields: [
+                {
+                    name: 'id',
+                    type: 'text',
+                },
+            ],
         },
         ...slugField(),
     ],
     hooks: {
         afterChange: [revalidatePost],
         beforeChange: [populatePublishedAt],
+        afterRead: [populateAuthors],
         afterDelete: [revalidateDelete],
     },
     versions: {

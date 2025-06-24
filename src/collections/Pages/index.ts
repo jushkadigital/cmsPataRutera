@@ -34,6 +34,8 @@ import { GridImages } from '@/blocks/GridImages/config'
 import { GridPaquetes } from '@/blocks/GridPaquetes/config'
 import { FormBitrixBlock } from '@/blocks/FormBitrix/config'
 import { GridBlogs } from '@/blocks/GridBlogs/config'
+import { metadata } from '@payloadcms/next/layouts'
+import { getServerSideURL } from '@/utilities/getURL'
 
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -99,6 +101,45 @@ export const Pages: CollectionConfig<'pages'> = {
           ],
           label: 'Content',
         },
+        {
+          label: 'SEO',
+          name: 'meta',
+          fields: [
+            OverviewField({
+              titlePath: 'meta.title',
+              descriptionPath: 'meta.description',
+            })
+            ,
+            MetaTitleField({
+              hasGenerateFn: true
+            }),
+            MetaImageField({
+              relationTo: 'media'
+            }),
+            MetaDescriptionField({
+            }),
+            {
+              name: 'canonicalUrl',
+              label: 'Canonical Url',
+              type: 'text',
+              hooks: {
+                beforeChange: [
+                  async ({ data, value }) => {
+                    const url = process.env.NEXTJS_FRONTEND_URL || 'http://localhost:4000'
+                    const customSlug = data?.slug == 'home' ? '' : data?.slug
+                    return value ? value : `${url}/${customSlug}`
+                  }
+                ]
+              }
+            },
+            PreviewField({
+              hasGenerateFn: true,
+              titlePath: 'meta.title',
+              descriptionPath: 'meta.description'
+            }),
+
+          ]
+        }
       ],
     },
     {

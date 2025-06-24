@@ -268,6 +268,15 @@ export interface Page {
     | GridPaquetesBlock
     | FormBitrixBlock
   )[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+    canonicalUrl?: string | null;
+  };
   publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
@@ -474,9 +483,22 @@ export interface Post {
     | GridImagesBlockType
     | YouTubeLinksBlockType
   )[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
   author: number | User;
   categories?: (number | BlogCategory)[] | null;
   publishedDate?: string | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+      }[]
+    | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1399,6 +1421,14 @@ export interface PagesSelect<T extends boolean = true> {
         gridPaquetes?: T | GridPaquetesBlockSelect<T>;
         formBitrixBlock?: T | FormBitrixBlockSelect<T>;
       };
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+        canonicalUrl?: T;
+      };
   publishedAt?: T;
   slug?: T;
   slugLock?: T;
@@ -1895,9 +1925,21 @@ export interface PostsSelect<T extends boolean = true> {
         textContent?: T | TextContentBlockTypeSelect<T>;
         youTubeLinks?: T | YouTubeLinksBlockTypeSelect<T>;
       };
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
   author?: T;
   categories?: T;
   publishedDate?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+      };
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
