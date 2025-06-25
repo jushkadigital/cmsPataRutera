@@ -127,7 +127,7 @@ export const Pages: CollectionConfig<'pages'> = {
                   async ({ data, value }) => {
                     const url = process.env.NEXTJS_FRONTEND_URL || 'http://localhost:4000'
                     const customSlug = data?.slug == 'home' ? '' : data?.slug
-                    return value ? value : `${url}/${customSlug}`
+                    return value !== '' ? value : `${url}/${customSlug}`
                   }
                 ]
               }

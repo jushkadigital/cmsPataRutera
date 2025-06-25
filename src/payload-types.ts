@@ -490,6 +490,7 @@ export interface Post {
      */
     image?: (number | null) | Media;
     description?: string | null;
+    canonicalUrl?: string | null;
   };
   author: number | User;
   categories?: (number | BlogCategory)[] | null;
@@ -1931,6 +1932,7 @@ export interface PostsSelect<T extends boolean = true> {
         title?: T;
         image?: T;
         description?: T;
+        canonicalUrl?: T;
       };
   author?: T;
   categories?: T;

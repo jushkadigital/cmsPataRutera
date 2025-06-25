@@ -126,6 +126,20 @@ export const Post: CollectionConfig = {
                         }),
 
                         MetaDescriptionField({}),
+                        {
+                            name: 'canonicalUrl',
+                            label: 'Canonical Url',
+                            type: 'text',
+                            hooks: {
+                                beforeChange: [
+                                    async ({ data, value }) => {
+                                        const url = process.env.NEXTJS_FRONTEND_URL || 'http://localhost:4000'
+                                        const customSlug = data?.slug == 'home' ? '' : data?.slug
+                                        return value !== '' ? value : `${url}/${customSlug}`
+                                    }
+                                ]
+                            }
+                        },
                         PreviewField({
                             // if the `generateUrl` function is configured
                             hasGenerateFn: true,
