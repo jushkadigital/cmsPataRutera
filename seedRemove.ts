@@ -2,14 +2,14 @@ import { type CollectionSlug, getPayload, PayloadRequest } from 'payload'
 import config from '@/payload.config'
 
 const collections: CollectionSlug[] = [
-    'destinations',
     'media',
+    'destinations',
+    'tourCategory',
+    'blogCategories',
     'pages',
     'posts',
     'tours',
     'ofertas',
-    'tourCategory',
-    'blogCategories',
     'paquetes',
 ]
 
