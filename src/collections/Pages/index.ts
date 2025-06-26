@@ -118,20 +118,6 @@ export const Pages: CollectionConfig<'pages'> = {
             }),
             MetaDescriptionField({
             }),
-            {
-              name: 'canonicalUrl',
-              label: 'Canonical Url',
-              type: 'text',
-              hooks: {
-                beforeChange: [
-                  async ({ data, value }) => {
-                    const url = process.env.NEXTJS_FRONTEND_URL || 'http://localhost:4000'
-                    const customSlug = data?.slug == 'home' ? '' : data?.slug
-                    return value !== '' ? value : `${url}/${customSlug}`
-                  }
-                ]
-              }
-            },
             PreviewField({
               hasGenerateFn: true,
               titlePath: 'meta.title',
@@ -141,6 +127,16 @@ export const Pages: CollectionConfig<'pages'> = {
           ]
         }
       ],
+    },
+    {
+      name: 'author',
+      label: 'Author',
+      type: 'relationship',
+      relationTo: 'users', // Assumes a 'users' collection slug
+      required: true,
+      admin: {
+        position: 'sidebar',
+      }
     },
     {
       name: 'publishedAt',

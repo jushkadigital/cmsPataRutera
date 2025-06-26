@@ -1120,6 +1120,7 @@ const Tour = ({
         direction: "ltr"
       }
     },
+    author: 1,
     Desde: "Desde",
     price: price,
     "Person desc": "por persona",
@@ -2040,6 +2041,7 @@ const Paquete = ({
         direction: "ltr"
       }
     },
+    author: 1,
     Desde: "Desde",
     price: price,
     "Person desc": "por persona",
@@ -3084,18 +3086,7 @@ const Post = ({
         }
       }
     ],
-    author: {
-      id: 1,
-      firstName: null,
-      lastName: null,
-      roles: [
-        "admin"
-      ],
-      updatedAt: "2025-06-17T21:53:36.475Z",
-      createdAt: "2025-06-17T21:53:36.313Z",
-      email: "urgosxd@gmail.com",
-      loginAttempts: 0
-    },
+    author: 1,
     categories: [
       ...Categories
     ],
@@ -3426,6 +3417,7 @@ async function main() {
             }
           }
         ],
+        author: 1,
         publishedAt: new Date().toISOString(),
         slug: "destinos",
         slugLock: true,
@@ -3495,6 +3487,7 @@ async function main() {
             }
           }
         ],
+        author: 1,
         publishedAt: new Date().toISOString(),
         slug: "paquetes",
         slugLock: true,
@@ -3805,6 +3798,7 @@ async function main() {
           }
         }
       ],
+      author: 1,
       publishedAt: new Date().toISOString(),
       slug: "home",
       slugLock: true,
@@ -3871,6 +3865,7 @@ async function main() {
             }
           }
         ],
+        author: 1,
         publishedAt: new Date().toISOString(),
         slug: "blogs",
         slugLock: true,

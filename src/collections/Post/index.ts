@@ -126,20 +126,6 @@ export const Post: CollectionConfig = {
                         }),
 
                         MetaDescriptionField({}),
-                        {
-                            name: 'canonicalUrl',
-                            label: 'Canonical Url',
-                            type: 'text',
-                            hooks: {
-                                beforeChange: [
-                                    async ({ data, value }) => {
-                                        const url = process.env.NEXTJS_FRONTEND_URL || 'http://localhost:4000'
-                                        const customSlug = data?.slug == 'home' ? '' : data?.slug
-                                        return value !== '' ? value : `${url}/${customSlug}`
-                                    }
-                                ]
-                            }
-                        },
                         PreviewField({
                             // if the `generateUrl` function is configured
                             hasGenerateFn: true,
@@ -195,29 +181,11 @@ export const Post: CollectionConfig = {
                 ],
             },
         },
-        {
-            name: 'populatedAuthors',
-            type: 'array',
-            access: {
-                update: () => false,
-            },
-            admin: {
-                disabled: true,
-                readOnly: true,
-            },
-            fields: [
-                {
-                    name: 'id',
-                    type: 'text',
-                },
-            ],
-        },
         ...slugField(),
     ],
     hooks: {
         afterChange: [revalidatePost],
         beforeChange: [populatePublishedAt],
-        afterRead: [populateAuthors],
         afterDelete: [revalidateDelete],
     },
     versions: {

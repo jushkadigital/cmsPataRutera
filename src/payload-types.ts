@@ -275,8 +275,8 @@ export interface Page {
      */
     image?: (number | null) | Media;
     description?: string | null;
-    canonicalUrl?: string | null;
   };
+  author: number | User;
   publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
@@ -490,16 +490,10 @@ export interface Post {
      */
     image?: (number | null) | Media;
     description?: string | null;
-    canonicalUrl?: string | null;
   };
   author: number | User;
   categories?: (number | BlogCategory)[] | null;
   publishedDate?: string | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-      }[]
-    | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -813,6 +807,14 @@ export interface Tour {
   maxPassengers: number;
   iconDifficulty?: (number | null) | Media;
   difficulty: 'easy' | 'medium' | 'hard';
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
   /**
    * Categorías a las que pertenece este tour.
    */
@@ -821,6 +823,7 @@ export interface Tour {
    * Destinos a los que pertenece este tour.
    */
   destinos?: (number | null) | Destination;
+  author: number | User;
   publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
@@ -1064,10 +1067,19 @@ export interface Paquete {
   maxPassengers: number;
   iconDifficulty?: (number | null) | Media;
   difficulty: 'easy' | 'medium' | 'hard';
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
   /**
    * Destinos a los que pertenece este tour.
    */
   destinos?: (number | Destination)[] | null;
+  author: number | User;
   publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
@@ -1428,8 +1440,8 @@ export interface PagesSelect<T extends boolean = true> {
         title?: T;
         image?: T;
         description?: T;
-        canonicalUrl?: T;
       };
+  author?: T;
   publishedAt?: T;
   slug?: T;
   slugLock?: T;
@@ -1757,8 +1769,16 @@ export interface ToursSelect<T extends boolean = true> {
   maxPassengers?: T;
   iconDifficulty?: T;
   difficulty?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
   categorias?: T;
   destinos?: T;
+  author?: T;
   publishedAt?: T;
   slug?: T;
   slugLock?: T;
@@ -1932,16 +1952,10 @@ export interface PostsSelect<T extends boolean = true> {
         title?: T;
         image?: T;
         description?: T;
-        canonicalUrl?: T;
       };
   author?: T;
   categories?: T;
   publishedDate?: T;
-  populatedAuthors?:
-    | T
-    | {
-        id?: T;
-      };
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -1983,7 +1997,15 @@ export interface PaquetesSelect<T extends boolean = true> {
   maxPassengers?: T;
   iconDifficulty?: T;
   difficulty?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
   destinos?: T;
+  author?: T;
   publishedAt?: T;
   slug?: T;
   slugLock?: T;

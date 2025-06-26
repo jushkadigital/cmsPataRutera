@@ -35,6 +35,7 @@ import { GridBlogs } from '@/blocks/GridBlogs/config'
 import { RevistaBlock } from '@/blocks/RevistaBlock/config'
 import { FormBitrixBlock } from '@/blocks/FormBitrix/config'
 import { RowBlock } from '@/blocks/RowBlock/config'
+import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from '@payloadcms/plugin-seo/fields'
 
 // Import the custom feature
 
@@ -268,8 +269,31 @@ export const Tours: CollectionConfig = {
 
                     ],
                     label: 'Thumbnail'
+                },
+                {
+                    label: 'SEO',
+                    name: 'meta',
+                    fields: [
+                        OverviewField({
+                            titlePath: 'meta.title',
+                            descriptionPath: 'meta.description',
+                        })
+                        ,
+                        MetaTitleField({
+                            hasGenerateFn: true
+                        }),
+                        MetaImageField({
+                            relationTo: 'media'
+                        }),
+                        MetaDescriptionField({
+                        }),
+                        PreviewField({
+                            hasGenerateFn: true,
+                            titlePath: 'meta.title',
+                            descriptionPath: 'meta.description'
+                        }),
+                    ]
                 }
-
             ]
         },
         {
@@ -292,6 +316,16 @@ export const Tours: CollectionConfig = {
                 position: 'sidebar',
                 description: 'Destinos a los que pertenece este tour.'
             },
+        },
+        {
+            name: 'author',
+            label: 'Author',
+            type: 'relationship',
+            relationTo: 'users', // Assumes a 'users' collection slug
+            required: true,
+            admin: {
+                position: 'sidebar',
+            }
         },
         {
             name: 'publishedAt',
