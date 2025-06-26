@@ -1,5 +1,5 @@
 {
-  "id": "407843bc-c13e-44ce-b3b3-5f1a5f2e09d2",
+  "id": "2119aaf5-8b61-4896-ad88-d5af16774e2d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -4252,9 +4252,9 @@
           "primaryKey": false,
           "notNull": false
         },
-        "meta_canonical_url": {
-          "name": "meta_canonical_url",
-          "type": "varchar",
+        "author_id": {
+          "name": "author_id",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false
         },
@@ -4306,6 +4306,21 @@
           "columns": [
             {
               "expression": "meta_image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "pages_author_idx": {
+          "name": "pages_author_idx",
+          "columns": [
+            {
+              "expression": "author_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -4384,6 +4399,19 @@
           "tableTo": "media",
           "columnsFrom": [
             "meta_image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "pages_author_id_users_id_fk": {
+          "name": "pages_author_id_users_id_fk",
+          "tableFrom": "pages",
+          "tableTo": "users",
+          "columnsFrom": [
+            "author_id"
           ],
           "columnsTo": [
             "id"
@@ -8334,9 +8362,9 @@
           "primaryKey": false,
           "notNull": false
         },
-        "version_meta_canonical_url": {
-          "name": "version_meta_canonical_url",
-          "type": "varchar",
+        "version_author_id": {
+          "name": "version_author_id",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false
         },
@@ -8427,6 +8455,21 @@
           "columns": [
             {
               "expression": "version_meta_image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_pages_v_version_version_author_idx": {
+          "name": "_pages_v_version_version_author_idx",
+          "columns": [
+            {
+              "expression": "version_author_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -8578,6 +8621,19 @@
           "tableTo": "media",
           "columnsFrom": [
             "version_meta_image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "_pages_v_version_author_id_users_id_fk": {
+          "name": "_pages_v_version_author_id_users_id_fk",
+          "tableFrom": "_pages_v",
+          "tableTo": "users",
+          "columnsFrom": [
+            "version_author_id"
           ],
           "columnsTo": [
             "id"
@@ -12814,8 +12870,32 @@
           "notNull": false,
           "default": "'easy'"
         },
+        "meta_title": {
+          "name": "meta_title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "meta_image_id": {
+          "name": "meta_image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "meta_description": {
+          "name": "meta_description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
         "destinos_id": {
           "name": "destinos_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "author_id": {
+          "name": "author_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -12908,11 +12988,41 @@
           "method": "btree",
           "with": {}
         },
+        "tours_meta_meta_image_idx": {
+          "name": "tours_meta_meta_image_idx",
+          "columns": [
+            {
+              "expression": "meta_image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "tours_destinos_idx": {
           "name": "tours_destinos_idx",
           "columns": [
             {
               "expression": "destinos_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "tours_author_idx": {
+          "name": "tours_author_idx",
+          "columns": [
+            {
+              "expression": "author_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -13024,12 +13134,38 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
+        "tours_meta_image_id_media_id_fk": {
+          "name": "tours_meta_image_id_media_id_fk",
+          "tableFrom": "tours",
+          "tableTo": "media",
+          "columnsFrom": [
+            "meta_image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "tours_destinos_id_destinations_id_fk": {
           "name": "tours_destinos_id_destinations_id_fk",
           "tableFrom": "tours",
           "tableTo": "destinations",
           "columnsFrom": [
             "destinos_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "tours_author_id_users_id_fk": {
+          "name": "tours_author_id_users_id_fk",
+          "tableFrom": "tours",
+          "tableTo": "users",
+          "columnsFrom": [
+            "author_id"
           ],
           "columnsTo": [
             "id"
@@ -17406,8 +17542,32 @@
           "notNull": false,
           "default": "'easy'"
         },
+        "version_meta_title": {
+          "name": "version_meta_title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_meta_image_id": {
+          "name": "version_meta_image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_meta_description": {
+          "name": "version_meta_description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
         "version_destinos_id": {
           "name": "version_destinos_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_author_id": {
+          "name": "version_author_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -17539,11 +17699,41 @@
           "method": "btree",
           "with": {}
         },
+        "_tours_v_version_meta_version_meta_image_idx": {
+          "name": "_tours_v_version_meta_version_meta_image_idx",
+          "columns": [
+            {
+              "expression": "version_meta_image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "_tours_v_version_version_destinos_idx": {
           "name": "_tours_v_version_version_destinos_idx",
           "columns": [
             {
               "expression": "version_destinos_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_tours_v_version_version_author_idx": {
+          "name": "_tours_v_version_version_author_idx",
+          "columns": [
+            {
+              "expression": "version_author_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -17728,12 +17918,38 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
+        "_tours_v_version_meta_image_id_media_id_fk": {
+          "name": "_tours_v_version_meta_image_id_media_id_fk",
+          "tableFrom": "_tours_v",
+          "tableTo": "media",
+          "columnsFrom": [
+            "version_meta_image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "_tours_v_version_destinos_id_destinations_id_fk": {
           "name": "_tours_v_version_destinos_id_destinations_id_fk",
           "tableFrom": "_tours_v",
           "tableTo": "destinations",
           "columnsFrom": [
             "version_destinos_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "_tours_v_version_author_id_users_id_fk": {
+          "name": "_tours_v_version_author_id_users_id_fk",
+          "tableFrom": "_tours_v",
+          "tableTo": "users",
+          "columnsFrom": [
+            "version_author_id"
           ],
           "columnsTo": [
             "id"
@@ -19708,82 +19924,6 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.posts_populated_authors": {
-      "name": "posts_populated_authors",
-      "schema": "",
-      "columns": {
-        "_order": {
-          "name": "_order",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "_parent_id": {
-          "name": "_parent_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "id": {
-          "name": "id",
-          "type": "varchar",
-          "primaryKey": true,
-          "notNull": true
-        }
-      },
-      "indexes": {
-        "posts_populated_authors_order_idx": {
-          "name": "posts_populated_authors_order_idx",
-          "columns": [
-            {
-              "expression": "_order",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "posts_populated_authors_parent_id_idx": {
-          "name": "posts_populated_authors_parent_id_idx",
-          "columns": [
-            {
-              "expression": "_parent_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "posts_populated_authors_parent_id_fk": {
-          "name": "posts_populated_authors_parent_id_fk",
-          "tableFrom": "posts_populated_authors",
-          "tableTo": "posts",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
     "public.posts": {
       "name": "posts",
       "schema": "",
@@ -21467,88 +21607,6 @@
         "_posts_v_blocks_you_tube_links_parent_id_fk": {
           "name": "_posts_v_blocks_you_tube_links_parent_id_fk",
           "tableFrom": "_posts_v_blocks_you_tube_links",
-          "tableTo": "_posts_v",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public._posts_v_version_populated_authors": {
-      "name": "_posts_v_version_populated_authors",
-      "schema": "",
-      "columns": {
-        "_order": {
-          "name": "_order",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "_parent_id": {
-          "name": "_parent_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "_uuid": {
-          "name": "_uuid",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "_posts_v_version_populated_authors_order_idx": {
-          "name": "_posts_v_version_populated_authors_order_idx",
-          "columns": [
-            {
-              "expression": "_order",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "_posts_v_version_populated_authors_parent_id_idx": {
-          "name": "_posts_v_version_populated_authors_parent_id_idx",
-          "columns": [
-            {
-              "expression": "_parent_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "_posts_v_version_populated_authors_parent_id_fk": {
-          "name": "_posts_v_version_populated_authors_parent_id_fk",
-          "tableFrom": "_posts_v_version_populated_authors",
           "tableTo": "_posts_v",
           "columnsFrom": [
             "_parent_id"
@@ -24563,6 +24621,30 @@
           "notNull": false,
           "default": "'easy'"
         },
+        "meta_title": {
+          "name": "meta_title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "meta_image_id": {
+          "name": "meta_image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "meta_description": {
+          "name": "meta_description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "author_id": {
+          "name": "author_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "published_at": {
           "name": "published_at",
           "type": "timestamp(3) with time zone",
@@ -24641,6 +24723,36 @@
           "columns": [
             {
               "expression": "icon_difficulty_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "paquetes_meta_meta_image_idx": {
+          "name": "paquetes_meta_meta_image_idx",
+          "columns": [
+            {
+              "expression": "meta_image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "paquetes_author_idx": {
+          "name": "paquetes_author_idx",
+          "columns": [
+            {
+              "expression": "author_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -24745,6 +24857,32 @@
           "tableTo": "media",
           "columnsFrom": [
             "icon_difficulty_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "paquetes_meta_image_id_media_id_fk": {
+          "name": "paquetes_meta_image_id_media_id_fk",
+          "tableFrom": "paquetes",
+          "tableTo": "media",
+          "columnsFrom": [
+            "meta_image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "paquetes_author_id_users_id_fk": {
+          "name": "paquetes_author_id_users_id_fk",
+          "tableFrom": "paquetes",
+          "tableTo": "users",
+          "columnsFrom": [
+            "author_id"
           ],
           "columnsTo": [
             "id"
@@ -27554,6 +27692,30 @@
           "notNull": false,
           "default": "'easy'"
         },
+        "version_meta_title": {
+          "name": "version_meta_title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_meta_image_id": {
+          "name": "version_meta_image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_meta_description": {
+          "name": "version_meta_description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_author_id": {
+          "name": "version_author_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "version_published_at": {
           "name": "version_published_at",
           "type": "timestamp(3) with time zone",
@@ -27671,6 +27833,36 @@
           "columns": [
             {
               "expression": "version_icon_difficulty_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_paquetes_v_version_meta_version_meta_image_idx": {
+          "name": "_paquetes_v_version_meta_version_meta_image_idx",
+          "columns": [
+            {
+              "expression": "version_meta_image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_paquetes_v_version_version_author_idx": {
+          "name": "_paquetes_v_version_version_author_idx",
+          "columns": [
+            {
+              "expression": "version_author_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -27848,6 +28040,32 @@
           "tableTo": "media",
           "columnsFrom": [
             "version_icon_difficulty_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "_paquetes_v_version_meta_image_id_media_id_fk": {
+          "name": "_paquetes_v_version_meta_image_id_media_id_fk",
+          "tableFrom": "_paquetes_v",
+          "tableTo": "media",
+          "columnsFrom": [
+            "version_meta_image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "_paquetes_v_version_author_id_users_id_fk": {
+          "name": "_paquetes_v_version_author_id_users_id_fk",
+          "tableFrom": "_paquetes_v",
+          "tableTo": "users",
+          "columnsFrom": [
+            "version_author_id"
           ],
           "columnsTo": [
             "id"
