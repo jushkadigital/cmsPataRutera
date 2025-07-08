@@ -234,8 +234,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   CREATE TABLE IF NOT EXISTS "users" (
   	"id" serial PRIMARY KEY NOT NULL,
-  	"first_name" varchar,
-  	"last_name" varchar,
+  	"avatar_id" integer,
+  	"name" varchar,
   	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
   	"email" varchar NOT NULL,
@@ -615,7 +615,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"meta_title" varchar,
   	"meta_image_id" integer,
   	"meta_description" varchar,
-  	"author_id" integer,
+  	"created_by_id" integer,
   	"published_at" timestamp(3) with time zone,
   	"slug" varchar,
   	"slug_lock" boolean DEFAULT true,
@@ -973,7 +973,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"version_meta_title" varchar,
   	"version_meta_image_id" integer,
   	"version_meta_description" varchar,
-  	"version_author_id" integer,
+  	"version_created_by_id" integer,
   	"version_published_at" timestamp(3) with time zone,
   	"version_slug" varchar,
   	"version_slug_lock" boolean DEFAULT true,
@@ -1345,8 +1345,9 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"meta_title" varchar,
   	"meta_image_id" integer,
   	"meta_description" varchar,
+  	"price_general" numeric,
   	"destinos_id" integer,
-  	"author_id" integer,
+  	"created_by_id" integer,
   	"published_at" timestamp(3) with time zone,
   	"slug" varchar,
   	"slug_lock" boolean DEFAULT true,
@@ -1742,8 +1743,9 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"version_meta_title" varchar,
   	"version_meta_image_id" integer,
   	"version_meta_description" varchar,
+  	"version_price_general" numeric,
   	"version_destinos_id" integer,
-  	"version_author_id" integer,
+  	"version_created_by_id" integer,
   	"version_published_at" timestamp(3) with time zone,
   	"version_slug" varchar,
   	"version_slug_lock" boolean DEFAULT true,
@@ -1919,7 +1921,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"meta_title" varchar,
   	"meta_image_id" integer,
   	"meta_description" varchar,
-  	"author_id" integer,
+  	"created_by_id" integer,
   	"published_date" timestamp(3) with time zone,
   	"slug" varchar,
   	"slug_lock" boolean DEFAULT true,
@@ -2062,7 +2064,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"version_meta_title" varchar,
   	"version_meta_image_id" integer,
   	"version_meta_description" varchar,
-  	"version_author_id" integer,
+  	"version_created_by_id" integer,
   	"version_published_date" timestamp(3) with time zone,
   	"version_slug" varchar,
   	"version_slug_lock" boolean DEFAULT true,
@@ -2304,7 +2306,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"meta_title" varchar,
   	"meta_image_id" integer,
   	"meta_description" varchar,
-  	"author_id" integer,
+  	"price_general" numeric,
+  	"created_by_id" integer,
   	"published_at" timestamp(3) with time zone,
   	"slug" varchar,
   	"slug_lock" boolean DEFAULT true,
@@ -2560,7 +2563,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"version_meta_title" varchar,
   	"version_meta_image_id" integer,
   	"version_meta_description" varchar,
-  	"version_author_id" integer,
+  	"version_price_general" numeric,
+  	"version_created_by_id" integer,
   	"version_published_at" timestamp(3) with time zone,
   	"version_slug" varchar,
   	"version_slug_lock" boolean DEFAULT true,
@@ -2726,6 +2730,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "users_roles" ADD CONSTRAINT "users_roles_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "users" ADD CONSTRAINT "users_avatar_id_media_id_fk" FOREIGN KEY ("avatar_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -2941,7 +2951,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
-   ALTER TABLE "pages" ADD CONSTRAINT "pages_author_id_users_id_fk" FOREIGN KEY ("author_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
+   ALTER TABLE "pages" ADD CONSTRAINT "pages_created_by_id_users_id_fk" FOREIGN KEY ("created_by_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -3193,7 +3203,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
-   ALTER TABLE "_pages_v" ADD CONSTRAINT "_pages_v_version_author_id_users_id_fk" FOREIGN KEY ("version_author_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
+   ALTER TABLE "_pages_v" ADD CONSTRAINT "_pages_v_version_created_by_id_users_id_fk" FOREIGN KEY ("version_created_by_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -3511,7 +3521,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
-   ALTER TABLE "tours" ADD CONSTRAINT "tours_author_id_users_id_fk" FOREIGN KEY ("author_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
+   ALTER TABLE "tours" ADD CONSTRAINT "tours_created_by_id_users_id_fk" FOREIGN KEY ("created_by_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -3829,7 +3839,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
-   ALTER TABLE "_tours_v" ADD CONSTRAINT "_tours_v_version_author_id_users_id_fk" FOREIGN KEY ("version_author_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
+   ALTER TABLE "_tours_v" ADD CONSTRAINT "_tours_v_version_created_by_id_users_id_fk" FOREIGN KEY ("version_created_by_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -3973,7 +3983,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
-   ALTER TABLE "posts" ADD CONSTRAINT "posts_author_id_users_id_fk" FOREIGN KEY ("author_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
+   ALTER TABLE "posts" ADD CONSTRAINT "posts_created_by_id_users_id_fk" FOREIGN KEY ("created_by_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -4087,7 +4097,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
-   ALTER TABLE "_posts_v" ADD CONSTRAINT "_posts_v_version_author_id_users_id_fk" FOREIGN KEY ("version_author_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
+   ALTER TABLE "_posts_v" ADD CONSTRAINT "_posts_v_version_created_by_id_users_id_fk" FOREIGN KEY ("version_created_by_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -4291,7 +4301,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
-   ALTER TABLE "paquetes" ADD CONSTRAINT "paquetes_author_id_users_id_fk" FOREIGN KEY ("author_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
+   ALTER TABLE "paquetes" ADD CONSTRAINT "paquetes_created_by_id_users_id_fk" FOREIGN KEY ("created_by_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -4513,7 +4523,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
-   ALTER TABLE "_paquetes_v" ADD CONSTRAINT "_paquetes_v_version_author_id_users_id_fk" FOREIGN KEY ("version_author_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
+   ALTER TABLE "_paquetes_v" ADD CONSTRAINT "_paquetes_v_version_created_by_id_users_id_fk" FOREIGN KEY ("version_created_by_id") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -4706,6 +4716,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   CREATE INDEX IF NOT EXISTS "users_roles_order_idx" ON "users_roles" USING btree ("order");
   CREATE INDEX IF NOT EXISTS "users_roles_parent_idx" ON "users_roles" USING btree ("parent_id");
+  CREATE INDEX IF NOT EXISTS "users_avatar_idx" ON "users" USING btree ("avatar_id");
   CREATE INDEX IF NOT EXISTS "users_updated_at_idx" ON "users" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "users_created_at_idx" ON "users" USING btree ("created_at");
   CREATE UNIQUE INDEX IF NOT EXISTS "users_email_idx" ON "users" USING btree ("email");
@@ -4801,7 +4812,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "pages_blocks_grid_paquetes_parent_id_idx" ON "pages_blocks_grid_paquetes" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "pages_blocks_grid_paquetes_path_idx" ON "pages_blocks_grid_paquetes" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "pages_meta_meta_image_idx" ON "pages" USING btree ("meta_image_id");
-  CREATE INDEX IF NOT EXISTS "pages_author_idx" ON "pages" USING btree ("author_id");
+  CREATE INDEX IF NOT EXISTS "pages_created_by_idx" ON "pages" USING btree ("created_by_id");
   CREATE UNIQUE INDEX IF NOT EXISTS "pages_slug_idx" ON "pages" USING btree ("slug");
   CREATE INDEX IF NOT EXISTS "pages_updated_at_idx" ON "pages" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "pages_created_at_idx" ON "pages" USING btree ("created_at");
@@ -4896,7 +4907,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_pages_v_blocks_grid_paquetes_path_idx" ON "_pages_v_blocks_grid_paquetes" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "_pages_v_parent_idx" ON "_pages_v" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "_pages_v_version_meta_version_meta_image_idx" ON "_pages_v" USING btree ("version_meta_image_id");
-  CREATE INDEX IF NOT EXISTS "_pages_v_version_version_author_idx" ON "_pages_v" USING btree ("version_author_id");
+  CREATE INDEX IF NOT EXISTS "_pages_v_version_version_created_by_idx" ON "_pages_v" USING btree ("version_created_by_id");
   CREATE INDEX IF NOT EXISTS "_pages_v_version_version_slug_idx" ON "_pages_v" USING btree ("version_slug");
   CREATE INDEX IF NOT EXISTS "_pages_v_version_version_updated_at_idx" ON "_pages_v" USING btree ("version_updated_at");
   CREATE INDEX IF NOT EXISTS "_pages_v_version_version_created_at_idx" ON "_pages_v" USING btree ("version_created_at");
@@ -5007,7 +5018,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "tours_icon_difficulty_idx" ON "tours" USING btree ("icon_difficulty_id");
   CREATE INDEX IF NOT EXISTS "tours_meta_meta_image_idx" ON "tours" USING btree ("meta_image_id");
   CREATE INDEX IF NOT EXISTS "tours_destinos_idx" ON "tours" USING btree ("destinos_id");
-  CREATE INDEX IF NOT EXISTS "tours_author_idx" ON "tours" USING btree ("author_id");
+  CREATE INDEX IF NOT EXISTS "tours_created_by_idx" ON "tours" USING btree ("created_by_id");
   CREATE UNIQUE INDEX IF NOT EXISTS "tours_slug_idx" ON "tours" USING btree ("slug");
   CREATE INDEX IF NOT EXISTS "tours_updated_at_idx" ON "tours" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "tours_created_at_idx" ON "tours" USING btree ("created_at");
@@ -5114,7 +5125,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_tours_v_version_version_icon_difficulty_idx" ON "_tours_v" USING btree ("version_icon_difficulty_id");
   CREATE INDEX IF NOT EXISTS "_tours_v_version_meta_version_meta_image_idx" ON "_tours_v" USING btree ("version_meta_image_id");
   CREATE INDEX IF NOT EXISTS "_tours_v_version_version_destinos_idx" ON "_tours_v" USING btree ("version_destinos_id");
-  CREATE INDEX IF NOT EXISTS "_tours_v_version_version_author_idx" ON "_tours_v" USING btree ("version_author_id");
+  CREATE INDEX IF NOT EXISTS "_tours_v_version_version_created_by_idx" ON "_tours_v" USING btree ("version_created_by_id");
   CREATE INDEX IF NOT EXISTS "_tours_v_version_version_slug_idx" ON "_tours_v" USING btree ("version_slug");
   CREATE INDEX IF NOT EXISTS "_tours_v_version_version_updated_at_idx" ON "_tours_v" USING btree ("version_updated_at");
   CREATE INDEX IF NOT EXISTS "_tours_v_version_version_created_at_idx" ON "_tours_v" USING btree ("version_created_at");
@@ -5175,7 +5186,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "posts_blocks_you_tube_links_path_idx" ON "posts_blocks_you_tube_links" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "posts_featured_image_idx" ON "posts" USING btree ("featured_image_id");
   CREATE INDEX IF NOT EXISTS "posts_meta_meta_image_idx" ON "posts" USING btree ("meta_image_id");
-  CREATE INDEX IF NOT EXISTS "posts_author_idx" ON "posts" USING btree ("author_id");
+  CREATE INDEX IF NOT EXISTS "posts_created_by_idx" ON "posts" USING btree ("created_by_id");
   CREATE UNIQUE INDEX IF NOT EXISTS "posts_slug_idx" ON "posts" USING btree ("slug");
   CREATE INDEX IF NOT EXISTS "posts_updated_at_idx" ON "posts" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "posts_created_at_idx" ON "posts" USING btree ("created_at");
@@ -5216,7 +5227,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_posts_v_parent_idx" ON "_posts_v" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "_posts_v_version_version_featured_image_idx" ON "_posts_v" USING btree ("version_featured_image_id");
   CREATE INDEX IF NOT EXISTS "_posts_v_version_meta_version_meta_image_idx" ON "_posts_v" USING btree ("version_meta_image_id");
-  CREATE INDEX IF NOT EXISTS "_posts_v_version_version_author_idx" ON "_posts_v" USING btree ("version_author_id");
+  CREATE INDEX IF NOT EXISTS "_posts_v_version_version_created_by_idx" ON "_posts_v" USING btree ("version_created_by_id");
   CREATE INDEX IF NOT EXISTS "_posts_v_version_version_slug_idx" ON "_posts_v" USING btree ("version_slug");
   CREATE INDEX IF NOT EXISTS "_posts_v_version_version_updated_at_idx" ON "_posts_v" USING btree ("version_updated_at");
   CREATE INDEX IF NOT EXISTS "_posts_v_version_version_created_at_idx" ON "_posts_v" USING btree ("version_created_at");
@@ -5287,7 +5298,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "paquetes_icon_max_passengers_idx" ON "paquetes" USING btree ("icon_max_passengers_id");
   CREATE INDEX IF NOT EXISTS "paquetes_icon_difficulty_idx" ON "paquetes" USING btree ("icon_difficulty_id");
   CREATE INDEX IF NOT EXISTS "paquetes_meta_meta_image_idx" ON "paquetes" USING btree ("meta_image_id");
-  CREATE INDEX IF NOT EXISTS "paquetes_author_idx" ON "paquetes" USING btree ("author_id");
+  CREATE INDEX IF NOT EXISTS "paquetes_created_by_idx" ON "paquetes" USING btree ("created_by_id");
   CREATE UNIQUE INDEX IF NOT EXISTS "paquetes_slug_idx" ON "paquetes" USING btree ("slug");
   CREATE INDEX IF NOT EXISTS "paquetes_updated_at_idx" ON "paquetes" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "paquetes_created_at_idx" ON "paquetes" USING btree ("created_at");
@@ -5357,7 +5368,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_paquetes_v_version_version_icon_max_passengers_idx" ON "_paquetes_v" USING btree ("version_icon_max_passengers_id");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_version_version_icon_difficulty_idx" ON "_paquetes_v" USING btree ("version_icon_difficulty_id");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_version_meta_version_meta_image_idx" ON "_paquetes_v" USING btree ("version_meta_image_id");
-  CREATE INDEX IF NOT EXISTS "_paquetes_v_version_version_author_idx" ON "_paquetes_v" USING btree ("version_author_id");
+  CREATE INDEX IF NOT EXISTS "_paquetes_v_version_version_created_by_idx" ON "_paquetes_v" USING btree ("version_created_by_id");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_version_version_slug_idx" ON "_paquetes_v" USING btree ("version_slug");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_version_version_updated_at_idx" ON "_paquetes_v" USING btree ("version_updated_at");
   CREATE INDEX IF NOT EXISTS "_paquetes_v_version_version_created_at_idx" ON "_paquetes_v" USING btree ("version_created_at");

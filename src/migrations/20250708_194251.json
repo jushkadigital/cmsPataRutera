@@ -1,5 +1,5 @@
 {
-  "id": "2119aaf5-8b61-4896-ad88-d5af16774e2d",
+  "id": "e683e5fb-374f-4877-8944-285d163bc8b0",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -97,14 +97,14 @@
           "primaryKey": true,
           "notNull": true
         },
-        "first_name": {
-          "name": "first_name",
-          "type": "varchar",
+        "avatar_id": {
+          "name": "avatar_id",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false
         },
-        "last_name": {
-          "name": "last_name",
+        "name": {
+          "name": "name",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
@@ -168,6 +168,21 @@
         }
       },
       "indexes": {
+        "users_avatar_idx": {
+          "name": "users_avatar_idx",
+          "columns": [
+            {
+              "expression": "avatar_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "users_updated_at_idx": {
           "name": "users_updated_at_idx",
           "columns": [
@@ -214,7 +229,21 @@
           "with": {}
         }
       },
-      "foreignKeys": {},
+      "foreignKeys": {
+        "users_avatar_id_media_id_fk": {
+          "name": "users_avatar_id_media_id_fk",
+          "tableFrom": "users",
+          "tableTo": "media",
+          "columnsFrom": [
+            "avatar_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -4252,8 +4281,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "author_id": {
-          "name": "author_id",
+        "created_by_id": {
+          "name": "created_by_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -4316,11 +4345,11 @@
           "method": "btree",
           "with": {}
         },
-        "pages_author_idx": {
-          "name": "pages_author_idx",
+        "pages_created_by_idx": {
+          "name": "pages_created_by_idx",
           "columns": [
             {
-              "expression": "author_id",
+              "expression": "created_by_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -4406,12 +4435,12 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "pages_author_id_users_id_fk": {
-          "name": "pages_author_id_users_id_fk",
+        "pages_created_by_id_users_id_fk": {
+          "name": "pages_created_by_id_users_id_fk",
           "tableFrom": "pages",
           "tableTo": "users",
           "columnsFrom": [
-            "author_id"
+            "created_by_id"
           ],
           "columnsTo": [
             "id"
@@ -8362,8 +8391,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "version_author_id": {
-          "name": "version_author_id",
+        "version_created_by_id": {
+          "name": "version_created_by_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -8465,11 +8494,11 @@
           "method": "btree",
           "with": {}
         },
-        "_pages_v_version_version_author_idx": {
-          "name": "_pages_v_version_version_author_idx",
+        "_pages_v_version_version_created_by_idx": {
+          "name": "_pages_v_version_version_created_by_idx",
           "columns": [
             {
-              "expression": "version_author_id",
+              "expression": "version_created_by_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -8628,12 +8657,12 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "_pages_v_version_author_id_users_id_fk": {
-          "name": "_pages_v_version_author_id_users_id_fk",
+        "_pages_v_version_created_by_id_users_id_fk": {
+          "name": "_pages_v_version_created_by_id_users_id_fk",
           "tableFrom": "_pages_v",
           "tableTo": "users",
           "columnsFrom": [
-            "version_author_id"
+            "version_created_by_id"
           ],
           "columnsTo": [
             "id"
@@ -12888,14 +12917,20 @@
           "primaryKey": false,
           "notNull": false
         },
+        "price_general": {
+          "name": "price_general",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
         "destinos_id": {
           "name": "destinos_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
         },
-        "author_id": {
-          "name": "author_id",
+        "created_by_id": {
+          "name": "created_by_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -13018,11 +13053,11 @@
           "method": "btree",
           "with": {}
         },
-        "tours_author_idx": {
-          "name": "tours_author_idx",
+        "tours_created_by_idx": {
+          "name": "tours_created_by_idx",
           "columns": [
             {
-              "expression": "author_id",
+              "expression": "created_by_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -13160,12 +13195,12 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "tours_author_id_users_id_fk": {
-          "name": "tours_author_id_users_id_fk",
+        "tours_created_by_id_users_id_fk": {
+          "name": "tours_created_by_id_users_id_fk",
           "tableFrom": "tours",
           "tableTo": "users",
           "columnsFrom": [
-            "author_id"
+            "created_by_id"
           ],
           "columnsTo": [
             "id"
@@ -17560,14 +17595,20 @@
           "primaryKey": false,
           "notNull": false
         },
+        "version_price_general": {
+          "name": "version_price_general",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
         "version_destinos_id": {
           "name": "version_destinos_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
         },
-        "version_author_id": {
-          "name": "version_author_id",
+        "version_created_by_id": {
+          "name": "version_created_by_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -17729,11 +17770,11 @@
           "method": "btree",
           "with": {}
         },
-        "_tours_v_version_version_author_idx": {
-          "name": "_tours_v_version_version_author_idx",
+        "_tours_v_version_version_created_by_idx": {
+          "name": "_tours_v_version_version_created_by_idx",
           "columns": [
             {
-              "expression": "version_author_id",
+              "expression": "version_created_by_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -17944,12 +17985,12 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "_tours_v_version_author_id_users_id_fk": {
-          "name": "_tours_v_version_author_id_users_id_fk",
+        "_tours_v_version_created_by_id_users_id_fk": {
+          "name": "_tours_v_version_created_by_id_users_id_fk",
           "tableFrom": "_tours_v",
           "tableTo": "users",
           "columnsFrom": [
-            "version_author_id"
+            "version_created_by_id"
           ],
           "columnsTo": [
             "id"
@@ -19970,8 +20011,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "author_id": {
-          "name": "author_id",
+        "created_by_id": {
+          "name": "created_by_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -20049,11 +20090,11 @@
           "method": "btree",
           "with": {}
         },
-        "posts_author_idx": {
-          "name": "posts_author_idx",
+        "posts_created_by_idx": {
+          "name": "posts_created_by_idx",
           "columns": [
             {
-              "expression": "author_id",
+              "expression": "created_by_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -20152,12 +20193,12 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "posts_author_id_users_id_fk": {
-          "name": "posts_author_id_users_id_fk",
+        "posts_created_by_id_users_id_fk": {
+          "name": "posts_created_by_id_users_id_fk",
           "tableFrom": "posts",
           "tableTo": "users",
           "columnsFrom": [
-            "author_id"
+            "created_by_id"
           ],
           "columnsTo": [
             "id"
@@ -21676,8 +21717,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "version_author_id": {
-          "name": "version_author_id",
+        "version_created_by_id": {
+          "name": "version_created_by_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -21794,11 +21835,11 @@
           "method": "btree",
           "with": {}
         },
-        "_posts_v_version_version_author_idx": {
-          "name": "_posts_v_version_version_author_idx",
+        "_posts_v_version_version_created_by_idx": {
+          "name": "_posts_v_version_version_created_by_idx",
           "columns": [
             {
-              "expression": "version_author_id",
+              "expression": "version_created_by_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -21970,12 +22011,12 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "_posts_v_version_author_id_users_id_fk": {
-          "name": "_posts_v_version_author_id_users_id_fk",
+        "_posts_v_version_created_by_id_users_id_fk": {
+          "name": "_posts_v_version_created_by_id_users_id_fk",
           "tableFrom": "_posts_v",
           "tableTo": "users",
           "columnsFrom": [
-            "version_author_id"
+            "version_created_by_id"
           ],
           "columnsTo": [
             "id"
@@ -24639,8 +24680,14 @@
           "primaryKey": false,
           "notNull": false
         },
-        "author_id": {
-          "name": "author_id",
+        "price_general": {
+          "name": "price_general",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_by_id": {
+          "name": "created_by_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -24748,11 +24795,11 @@
           "method": "btree",
           "with": {}
         },
-        "paquetes_author_idx": {
-          "name": "paquetes_author_idx",
+        "paquetes_created_by_idx": {
+          "name": "paquetes_created_by_idx",
           "columns": [
             {
-              "expression": "author_id",
+              "expression": "created_by_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -24877,12 +24924,12 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "paquetes_author_id_users_id_fk": {
-          "name": "paquetes_author_id_users_id_fk",
+        "paquetes_created_by_id_users_id_fk": {
+          "name": "paquetes_created_by_id_users_id_fk",
           "tableFrom": "paquetes",
           "tableTo": "users",
           "columnsFrom": [
-            "author_id"
+            "created_by_id"
           ],
           "columnsTo": [
             "id"
@@ -27710,8 +27757,14 @@
           "primaryKey": false,
           "notNull": false
         },
-        "version_author_id": {
-          "name": "version_author_id",
+        "version_price_general": {
+          "name": "version_price_general",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_created_by_id": {
+          "name": "version_created_by_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -27858,11 +27911,11 @@
           "method": "btree",
           "with": {}
         },
-        "_paquetes_v_version_version_author_idx": {
-          "name": "_paquetes_v_version_version_author_idx",
+        "_paquetes_v_version_version_created_by_idx": {
+          "name": "_paquetes_v_version_version_created_by_idx",
           "columns": [
             {
-              "expression": "version_author_id",
+              "expression": "version_created_by_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -28060,12 +28113,12 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "_paquetes_v_version_author_id_users_id_fk": {
-          "name": "_paquetes_v_version_author_id_users_id_fk",
+        "_paquetes_v_version_created_by_id_users_id_fk": {
+          "name": "_paquetes_v_version_created_by_id_users_id_fk",
           "tableFrom": "_paquetes_v",
           "tableTo": "users",
           "columnsFrom": [
-            "version_author_id"
+            "version_created_by_id"
           ],
           "columnsTo": [
             "id"
