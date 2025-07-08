@@ -5,6 +5,7 @@ import titleGroup from '@/fields/title';
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { lexicalEditor, ParagraphFeature } from '@payloadcms/richtext-lexical';
+import { CustomListServerFeature } from '@/lexical/CustomList/customListFeature.server';
 
 export const DescrPrice: Block = {
     slug: 'descrPrice',
@@ -50,9 +51,13 @@ export const DescrPrice: Block = {
                             label: 'Descripción del Tour',
                             type: 'richText',
                             editor: lexicalEditor({
-                                features: ({ defaultFeatures }) => [
-                                    ...defaultFeatures,
-                                ],
+                                features: ({ defaultFeatures }) => {
+                                    const noUnorderedListFeature = defaultFeatures.filter(ele => ele.key !== 'unorderedList')
+                                    return ([
+                                        ...noUnorderedListFeature,
+                                        CustomListServerFeature()
+                                    ])
+                                },
                             }), // Use the default lexical editor config
                             required: true,
                         },

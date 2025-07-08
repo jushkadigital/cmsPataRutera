@@ -29,6 +29,7 @@ import {
     CustomListItemNode,
     $isCustomListItemNode,
     $createCustomListItemNode,
+    IconType,
 } from './customListItem.node'
 import { ListNode } from '@payloadcms/richtext-lexical/lexical/list'
 import { i18n } from './i18n'
@@ -103,7 +104,7 @@ function CustomListItemToolbarPlugin(): React.JSX.Element | null {
         });
     }, [editor, updateToolbar]);
 
-    const setIcon = (type: 'check' | 'warning' | null) => {
+    const setIcon = (type: IconType) => {
         if (!selectedNodeKey) return;
         editor.update(() => {
             const node = $getNodeByKey(selectedNodeKey);
@@ -141,8 +142,10 @@ function CustomListItemToolbarPlugin(): React.JSX.Element | null {
     return (
         <div style={{ marginTop: '5px', borderTop: '1px solid #eee', paddingTop: '5px' }}>
             <button style={buttonStyle} onClick={() => setIcon('check')} disabled={currentIconType === 'check'}>✅ Set Check</button>
-            <button style={buttonStyle} onClick={() => setIcon('warning')} disabled={currentIconType === 'warning'}>⚠️ Set Warning</button>
-            <button style={buttonStyle} onClick={() => setIcon(null)} disabled={!currentIconType}>❌ Clear Icon</button>
+            <button style={buttonStyle} onClick={() => setIcon('warning')} disabled={currentIconType === 'nocheck'}>❌ Set Warning</button>
+            <button style={buttonStyle} onClick={() => setIcon('location')} disabled={currentIconType === 'location'}>📍 Set Location</button>
+            <button style={buttonStyle} onClick={() => setIcon('circle')} disabled={currentIconType === 'circle'}>🔵Set Location</button>
+            <button style={buttonStyle} onClick={() => setIcon(null)} disabled={!currentIconType}> Clear Icon</button>
         </div>
     );
 }

@@ -100,9 +100,7 @@ export const GuiaTour: Block = { // Renamed constant
                             editor:
                                 lexicalEditor({
                                     features: ({ defaultFeatures }) => {
-                                        const noHeadingFeature = defaultFeatures.filter(ele => ele.key !== 'heading')
                                         const noUnorderedListFeature = defaultFeatures.filter(ele => ele.key !== 'unorderedList')
-                                        console.log(defaultFeatures.map(ele => ele.key))
                                         return ([
                                             ...noUnorderedListFeature,
                                             CustomListServerFeature()
@@ -186,10 +184,13 @@ export const GuiaTour: Block = { // Renamed constant
                             type: 'richText',
                             editor:
                                 lexicalEditor({
-                                    features: ({ defaultFeatures }) => [
-                                        ...defaultFeatures,
-                                        //CustomListServerFeature(),
-                                    ],
+                                    features: ({ defaultFeatures }) => {
+                                        const noUnorderedListFeature = defaultFeatures.filter(ele => ele.key !== 'unorderedList')
+                                        return ([
+                                            ...noUnorderedListFeature,
+                                            CustomListServerFeature()
+                                        ])
+                                    },
                                 }),
                             required: true,
                         },
@@ -268,10 +269,13 @@ export const GuiaTour: Block = { // Renamed constant
                             type: 'richText',
                             editor:
                                 lexicalEditor({
-                                    features: ({ defaultFeatures }) => [
-                                        ...defaultFeatures,
-                                        //CustomListServerFeature(),
-                                    ],
+                                    features: ({ defaultFeatures }) => {
+                                        const noUnorderedListFeature = defaultFeatures.filter(ele => ele.key !== 'unorderedList')
+                                        return ([
+                                            ...noUnorderedListFeature,
+                                            CustomListServerFeature()
+                                        ])
+                                    },
                                 }),
                             required: true,
                         },
@@ -350,10 +354,13 @@ export const GuiaTour: Block = { // Renamed constant
                             type: 'richText',
                             editor:
                                 lexicalEditor({
-                                    features: ({ defaultFeatures }) => [
-                                        ...defaultFeatures,
-                                        //CustomListServerFeature(),
-                                    ],
+                                    features: ({ defaultFeatures }) => {
+                                        const noUnorderedListFeature = defaultFeatures.filter(ele => ele.key !== 'unorderedList')
+                                        return ([
+                                            ...noUnorderedListFeature,
+                                            CustomListServerFeature()
+                                        ])
+                                    },
                                 }),
                             required: true,
                         },

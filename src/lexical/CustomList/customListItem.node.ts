@@ -25,7 +25,7 @@ import {
 } from '@payloadcms/richtext-lexical/lexical/list'
 
 // --- Custom List Item Node Definition ---
-type IconType = 'check' | 'warning' | null | undefined
+export type IconType = 'check' | 'warning' | 'location' | 'circle' | 'nocheck' | null | undefined
 
 export type SerializedCustomListItemNode = Spread<
     {
@@ -37,7 +37,9 @@ export type SerializedCustomListItemNode = Spread<
 // Helper function to add/remove classes based on iconType
 function setIconClasses(dom: HTMLElement, iconType: IconType) {
     dom.classList.toggle('custom-list-item-check', iconType === 'check');
-    dom.classList.toggle('custom-list-item-warning', iconType === 'warning');
+    dom.classList.toggle('custom-list-item-nocheck', iconType === 'nocheck');
+    dom.classList.toggle('custom-list-item-location', iconType === 'location');
+    dom.classList.toggle('custom-list-item-circle', iconType === 'circle');
     // Add a general class when any icon is active to hide default marker
     dom.classList.toggle('custom-list-item-active', !!iconType);
 }
@@ -58,7 +60,6 @@ export class CustomListItemNode extends ListItemNode {
         return super.canMergeWith(node) || $isHeadingNode(node);
     }
     override extractWithChild(child: LexicalNode, selection: BaseSelection): boolean {
-        console.log('extcract')
         if (!$isRangeSelection(selection)) {
             return false;
         }

@@ -32,8 +32,14 @@
   content: '✅';
 }
 
-.custom-list-item-warning::before {
-  content: '⚠️';
+.custom-list-item-nocheck::before {
+  content: '❌';
+}
+.custom-list-item-location::before {
+  content: '📍';
+}
+.custom-list-item-circle::before {
+  content: '🔵';
 }
 
 /* Optional: Adjust alignment for ordered lists if needed */
