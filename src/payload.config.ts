@@ -54,100 +54,100 @@ const dirname = path.dirname(filename)
 
 // Helper function to get server URL for CORS
 const generateTitle: GenerateTitle<TourType | PaqueteType | PostType | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | ${process.env.NAME_BUSINESS}` : 'Mi sitio'
+    return doc?.title ? `${doc.title} | ${process.env.NAME_BUSINESS}` : 'Mi sitio'
 }
 
 const generateURL: GenerateURL<TourType | PaqueteType | PostType | Page> = ({ doc, collectionSlug }) => {
-  const url = process.env.NEXTJS_FRONTEND_URL || 'http://localhost:3000'
-  return doc?.slug ? collectionSlug == 'pages' ? `${url}/${doc?.slug}` : `${url}/${collectionSlug}/${doc?.slug}` : url
+    const url = process.env.NEXTJS_FRONTEND_URL || 'http://localhost:3000'
+    return doc?.slug ? collectionSlug == 'pages' ? `${url}/${doc?.slug}` : `${url}/${collectionSlug}/${doc?.slug}` : url
 }
 
 
 
 export default buildConfig({
-  admin: {
-    importMap: {
-      baseDir: path.resolve(dirname),
+    admin: {
+        importMap: {
+            baseDir: path.resolve(dirname),
+        },
+        user: Users.slug,
+        livePreview: {
+            breakpoints: [
+                {
+                    label: 'Mobile',
+                    name: 'mobile',
+                    width: 375,
+                    height: 667,
+                },
+                {
+                    label: 'Tablet',
+                    name: 'tablet',
+                    width: 768,
+                    height: 1024,
+                },
+                {
+                    label: 'Desktop',
+                    name: 'desktop',
+                    width: 1440,
+                    height: 900,
+                },
+            ],
+        }
+        // We'll add more components here later as needed
     },
-    user: Users.slug,
-    livePreview: {
-      breakpoints: [
-        {
-          label: 'Mobile',
-          name: 'mobile',
-          width: 375,
-          height: 667,
-        },
-        {
-          label: 'Tablet',
-          name: 'tablet',
-          width: 768,
-          height: 1024,
-        },
-        {
-          label: 'Desktop',
-          name: 'desktop',
-          width: 1440,
-          height: 900,
-        },
-      ],
-    }
-    // We'll add more components here later as needed
-  },
-  collections: [Users, Media, Pages, Tours, Ofertas, TourCategory, Destinations, BlogCategory, Post, Paquetes],
-  globals: [ReconocimientosCarousel, SociosCarousel, Footer],
-  editor: lexicalEditor({
-    // Configure default lexical editor options
-  }),
-  secret: process.env.PAYLOAD_SECRET || '',
-  typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
-  },
-  // database-adapter-config-start
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URI || '',
-    },
-    migrationDir: './src/migrations',
-    prodMigrations: migrations
-  }),
-  // database-adapter-config-end
-  sharp,
-  plugins: [
-    seoPlugin({
-      generateTitle: generateTitle,
-      generateURL: generateURL
+    collections: [Users, Media, Pages, Tours, Ofertas, TourCategory, Destinations, BlogCategory, Post, Paquetes],
+    globals: [ReconocimientosCarousel, SociosCarousel, Footer],
+    editor: lexicalEditor({
+        // Configure default lexical editor options
     }),
-    // toursPlugin(), // Remove this
-    // passengersPlugin(), // Remove this
-    // Will enable these once implemented properly
-    // usersPlugin(),
-    // mediaPlugin(),
-    // storage-adapter-placeholder
-  ],
-  i18n: {
-    supportedLanguages: { es, en },
-    fallbackLanguage: 'en'
-  },
-  // Add CORS configurationauthenticatedOrPublished
-  serverURL: process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000',
-  cors: [process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000', process.env.NEXTJS_FRONTEND_URL || 'http://localhost:4000'],
-  // Implementing endpoints
-  endpoints: [
-    healthCheckEndpoint,
-    configEndpoint,
-    seedEndpoint,
-    removeSeedEndpoint
-  ],
-  // Configure job queue for background tasks (if needed)
-  jobs: {
-    access: {
-      run: ({ req }: { req: PayloadRequest }): boolean => {
-        // Allow authenticated users to run jobs
-        if (req.user) return true
-        return false
-      },
+    secret: process.env.PAYLOAD_SECRET || '',
+    typescript: {
+        outputFile: path.resolve(dirname, 'payload-types.ts'),
     },
-    tasks: [],
-  },
+    // database-adapter-config-start
+    db: postgresAdapter({
+        pool: {
+            connectionString: process.env.DATABASE_URI || '',
+        },
+        migrationDir: './src/migrations',
+        prodMigrations: migrations
+    }),
+    // database-adapter-config-end
+    sharp,
+    plugins: [
+        seoPlugin({
+            generateTitle: generateTitle,
+            generateURL: generateURL
+        }),
+        // toursPlugin(), // Remove this
+        // passengersPlugin(), // Remove this
+        // Will enable these once implemented properly
+        // usersPlugin(),
+        // mediaPlugin(),
+        // storage-adapter-placeholder
+    ],
+    i18n: {
+        supportedLanguages: { es, en },
+        fallbackLanguage: 'en'
+    },
+    // Add CORS configurationauthenticatedOrPublished
+    serverURL: process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000',
+    cors: [process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000', process.env.NEXTJS_FRONTEND_URL || 'http://localhost:4000'],
+    // Implementing endpoints
+    endpoints: [
+        healthCheckEndpoint,
+        configEndpoint,
+        seedEndpoint,
+        removeSeedEndpoint
+    ],
+    // Configure job queue for background tasks (if needed)
+    jobs: {
+        access: {
+            run: ({ req }: { req: PayloadRequest }): boolean => {
+                // Allow authenticated users to run jobs
+                if (req.user) return true
+                return false
+            },
+        },
+        tasks: [],
+    },
 })

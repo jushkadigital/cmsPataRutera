@@ -13,3 +13,14 @@ export const populatePublishedAt: CollectionBeforeChangeHook = ({ data, operatio
 
   return data
 }
+
+
+export const createdBy: CollectionBeforeChangeHook = ({ req, operation, data }) => {
+  if (operation === 'create') {
+    if (req.user) {
+      data.createdBy = req.user.id;
+      return data;
+    }
+  }
+  console.log(data.createdBy)
+}

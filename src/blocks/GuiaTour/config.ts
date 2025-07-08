@@ -3,9 +3,8 @@ import titleGroup from '@/fields/title' // Import the title group field
 import { defaultLexical } from '@/fields/defaultLexical';
 
 import { getPayload } from 'payload'
-import config from '@payload-config'
-import { lexicalEditor, ParagraphFeature } from '@payloadcms/richtext-lexical';
-import { CustomListServerFeature } from '@/lexical/customListFeature.server';
+import { FixedToolbarFeature, lexicalEditor, ParagraphFeature } from '@payloadcms/richtext-lexical';
+import { CustomListServerFeature } from '@/lexical/CustomList/customListFeature.server';
 // Define the structure for each feature item within the array
 const sectionItemFields1: Field[] = [
 
@@ -56,13 +55,12 @@ export const GuiaTour: Block = { // Renamed constant
                                     label: 'Imagen Icono',
                                     type: 'upload',
                                     relationTo: 'media', // Assuming your media collection slug is 'media'
-                                    /* defaultValue: async ({ user, locale, req }) => {
+                                    defaultValue: async ({ user, locale, req }) => {
                                         try {
                                             // Realiza una consulta a la colección 'media' para encontrar la imagen por su nombre de archivo
                                             // Reemplaza 'nombre-de-tu-imagen-por-defecto.jpg' con el nombre real del archivo
 
-                                            const payload = await getPayload({ config })
-                                            const result = await payload.find({
+                                            const result = await req.payload.find({
                                                 collection: 'media',
                                                 where: {
                                                     filename: {
@@ -86,7 +84,7 @@ export const GuiaTour: Block = { // Renamed constant
                                         // Si no se encuentra la imagen o hay un error, retorna null o undefined
                                         // para que el campo quede vacío por defecto.
                                         return null;
-                                    }, */
+                                    },
                                     required: true,
                                     admin: {
                                         description: 'Sube una imagen pequeña de icono.',
@@ -101,10 +99,15 @@ export const GuiaTour: Block = { // Renamed constant
                             type: 'richText',
                             editor:
                                 lexicalEditor({
-                                    features: ({ defaultFeatures }) => [
-                                        ...defaultFeatures,
-                                        //CustomListServerFeature(),
-                                    ],
+                                    features: ({ defaultFeatures }) => {
+                                        const noHeadingFeature = defaultFeatures.filter(ele => ele.key !== 'heading')
+                                        const noUnorderedListFeature = defaultFeatures.filter(ele => ele.key !== 'unorderedList')
+                                        console.log(defaultFeatures.map(ele => ele.key))
+                                        return ([
+                                            ...noUnorderedListFeature,
+                                            CustomListServerFeature()
+                                        ])
+                                    },
                                 }),
                             required: true,
                         },
@@ -139,13 +142,12 @@ export const GuiaTour: Block = { // Renamed constant
                                     label: 'Imagen Icono',
                                     type: 'upload',
                                     relationTo: 'media', // Assuming your media collection slug is 'media'
-                                    /* defaultValue: async ({ user, locale, req }) => {
+                                    defaultValue: async ({ user, locale, req }) => {
                                         try {
                                             // Realiza una consulta a la colección 'media' para encontrar la imagen por su nombre de archivo
                                             // Reemplaza 'nombre-de-tu-imagen-por-defecto.jpg' con el nombre real del archivo
 
-                                            const payload = await getPayload({ config })
-                                            const result = await payload.find({
+                                            const result = await req.payload.find({
                                                 collection: 'media',
                                                 where: {
                                                     filename: {
@@ -169,7 +171,7 @@ export const GuiaTour: Block = { // Renamed constant
                                         // Si no se encuentra la imagen o hay un error, retorna null o undefined
                                         // para que el campo quede vacío por defecto.
                                         return null;
-                                    }, */
+                                    },
                                     required: true,
                                     admin: {
                                         description: 'Sube una imagen pequeña de icono.',
@@ -222,13 +224,12 @@ export const GuiaTour: Block = { // Renamed constant
                                     label: 'Imagen Icono',
                                     type: 'upload',
                                     relationTo: 'media', // Assuming your media collection slug is 'media'
-                                    /* defaultValue: async ({ user, locale, req }) => {
+                                    defaultValue: async ({ user, locale, req }) => {
                                         try {
                                             // Realiza una consulta a la colección 'media' para encontrar la imagen por su nombre de archivo
                                             // Reemplaza 'nombre-de-tu-imagen-por-defecto.jpg' con el nombre real del archivo
 
-                                            const payload = await getPayload({ config })
-                                            const result = await payload.find({
+                                            const result = await req.payload.find({
                                                 collection: 'media',
                                                 where: {
                                                     filename: {
@@ -252,7 +253,7 @@ export const GuiaTour: Block = { // Renamed constant
                                         // Si no se encuentra la imagen o hay un error, retorna null o undefined
                                         // para que el campo quede vacío por defecto.
                                         return null;
-                                    }, */
+                                    },
                                     required: true,
                                     admin: {
                                         description: 'Sube una imagen pequeña de icono.',
@@ -305,13 +306,12 @@ export const GuiaTour: Block = { // Renamed constant
                                     label: 'Imagen Icono',
                                     type: 'upload',
                                     relationTo: 'media', // Assuming your media collection slug is 'media'
-                                    /* defaultValue: async ({ user, locale, req }) => {
+                                    defaultValue: async ({ user, locale, req }) => {
                                         try {
                                             // Realiza una consulta a la colección 'media' para encontrar la imagen por su nombre de archivo
                                             // Reemplaza 'nombre-de-tu-imagen-por-defecto.jpg' con el nombre real del archivo
 
-                                            const payload = await getPayload({ config })
-                                            const result = await payload.find({
+                                            const result = await req.payload.find({
                                                 collection: 'media',
                                                 where: {
                                                     filename: {
@@ -335,7 +335,7 @@ export const GuiaTour: Block = { // Renamed constant
                                         // Si no se encuentra la imagen o hay un error, retorna null o undefined
                                         // para que el campo quede vacío por defecto.
                                         return null;
-                                    }, */
+                                    },
                                     required: true,
                                     admin: {
                                         description: 'Sube una imagen pequeña de icono.',

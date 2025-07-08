@@ -84,7 +84,9 @@ export const DescrPrice: Block = {
                             type: 'number',
                             name: 'price',
                             label: 'Precio',
-                            required: true,
+                            admin: {
+                                readOnly: true
+                            }
                         },
                         {
                             name: 'nextText',
@@ -106,38 +108,35 @@ export const DescrPrice: Block = {
                                             name: 'iconDate',
                                             label: 'Icono fecha',
                                             relationTo: 'media',
-                                            //defaultValue: async ({ user, locale, req }) => {
-                                            //console.log('iconDate')
-                                            //try {
-                                            // Realiza una consulta a la colección 'media' para encontrar la imagen por su nombre de archivo
-                                            // Reemplaza 'nombre-de-tu-imagen-por-defecto.jpg' con el nombre real del archivo
+                                            defaultValue: async ({ user, locale, req }) => {
+                                                try {
+                                                    // Reemplaza 'nombre-de-tu-imagen-por-defecto.jpg' con el nombre real del archivo
 
-                                            //const result = await req.payload.find({
-                                            //    collection: 'media',
-                                            //    where: {
-                                            //        filename: {
-                                            //            like: '%iconDate%'
-                                            //        }
-                                            //    },
-                                            //    limit: 1
-                                            //});
-                                            //console.log('gaa')
+                                                    const result = await req.payload.find({
+                                                        collection: 'media',
+                                                        where: {
+                                                            filename: {
+                                                                like: '%iconDate%'
+                                                            }
+                                                        },
+                                                        limit: 1
+                                                    });
 
-                                            // Si se encontró un documento, retorna su ID
-                                            //console.log(result)
-                                            //if (result.docs.length > 0) {
-                                            //    return result.docs[0]!.id;
-                                            //}
+                                                    // Si se encontró un documento, retorna su ID
+                                                    //console.log(result)
+                                                    if (result.docs.length > 0) {
+                                                        return result.docs[0]!.id;
+                                                    }
 
-                                            //} catch (error) {
-                                            //    // Maneja cualquier error durante la consulta
-                                            //    console.error('Error fetching default image:', error);
-                                            //}
+                                                } catch (error) {
+                                                    // Maneja cualquier error durante la consulta
+                                                    console.error('Error fetching default image:', error);
+                                                }
 
-                                            // Si no se encuentra la imagen o hay un error, retorna null o undefined
-                                            // para que el campo quede vacío por defecto.
-                                            //return null;
-                                            //},
+                                                // Si no se encuentra la imagen o hay un error, retorna null o undefined
+                                                // para que el campo quede vacío por defecto.
+                                                return null;
+                                            },
                                         },
                                         {
                                             type: 'text',
@@ -155,7 +154,7 @@ export const DescrPrice: Block = {
                                             name: 'iconPassengers',
                                             label: 'Icono Pasajeros',
                                             relationTo: 'media',
-                                            /*defaultValue: async ({ user, locale, req }) => {
+                                            defaultValue: async ({ user, locale, req }) => {
                                                 try {
                                                     // Realiza una consulta a la colección 'media' para encontrar la imagen por su nombre de archivo
                                                     // Reemplaza 'nombre-de-tu-imagen-por-defecto.jpg' con el nombre real del archivo
@@ -185,7 +184,7 @@ export const DescrPrice: Block = {
                                                 // Si no se encuentra la imagen o hay un error, retorna null o undefined
                                                 // para que el campo quede vacío por defecto.
                                                 return null;
-                                            }*/
+                                            }
                                         },
                                         {
                                             type: 'text',

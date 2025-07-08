@@ -2,7 +2,6 @@ import { type CollectionSlug, getPayload, PayloadRequest } from 'payload'
 import config from '@/payload.config'
 
 const collections: CollectionSlug[] = [
-    'media',
     'destinations',
     'tourCategory',
     'blogCategories',
@@ -22,6 +21,7 @@ export const removeSeed = async ({ req }: { req: PayloadRequest }) => {
         collections.map((collection) => payload.db.deleteMany({ collection, req, where: {} })),
     )
 
+    await payload.logger.info('Removing seed data 2...');
 
     await Promise.all(
         collections

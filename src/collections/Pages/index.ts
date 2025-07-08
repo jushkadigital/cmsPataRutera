@@ -13,7 +13,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 
-import { populatePublishedAt } from '../../hooks/populatePublishedAt'
+import { createdBy, populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 import { RowBlock } from '@/blocks/RowBlock/config'
@@ -36,13 +36,14 @@ import { FormBitrixBlock } from '@/blocks/FormBitrix/config'
 import { GridBlogs } from '@/blocks/GridBlogs/config'
 import { metadata } from '@payloadcms/next/layouts'
 import { getServerSideURL } from '@/utilities/getURL'
+import { isAdminOrCreatedBy } from './access'
 
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
   access: {
     create: authenticated,
-    delete: authenticated,
+    delete: isAdminOrCreatedBy,
     read: anyone,
     update: authenticated,
   },
@@ -129,14 +130,15 @@ export const Pages: CollectionConfig<'pages'> = {
       ],
     },
     {
-      name: 'author',
-      label: 'Author',
+      name: 'createdBy',
       type: 'relationship',
       relationTo: 'users', // Assumes a 'users' collection slug
-      required: true,
       admin: {
+        readOnly: true,
         position: 'sidebar',
-      }
+      },
+      access: {
+      },
     },
     {
       name: 'publishedAt',
@@ -152,8 +154,9 @@ export const Pages: CollectionConfig<'pages'> = {
   ],
   hooks: {
     afterChange: [revalidatePage],
-    beforeChange: [populatePublishedAt],
+    beforeChange: [populatePublishedAt, createdBy],
     afterDelete: [revalidateDelete],
+
   },
   versions: {
     drafts: {

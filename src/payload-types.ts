@@ -151,9 +151,9 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
-  firstName?: string | null;
-  lastName?: string | null;
-  roles: ('admin' | 'editor' | 'user')[];
+  avatar?: (number | null) | Media;
+  roles?: ('admin' | 'editor' | 'user')[] | null;
+  name?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -276,7 +276,7 @@ export interface Page {
     image?: (number | null) | Media;
     description?: string | null;
   };
-  author: number | User;
+  createdBy?: (number | null) | User;
   publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
@@ -491,7 +491,7 @@ export interface Post {
     image?: (number | null) | Media;
     description?: string | null;
   };
-  author: number | User;
+  createdBy?: (number | null) | User;
   categories?: (number | BlogCategory)[] | null;
   publishedDate?: string | null;
   slug?: string | null;
@@ -770,20 +770,22 @@ export interface Tour {
   id: number;
   title: string;
   heroTour?: TourHerocarB[] | null;
-  layout: (
-    | DescrPriceBlock
-    | GuiaTourBlock
-    | GridToursBlock
-    | GridBlogsBlock
-    | RowBlock
-    | PostRelationTourBlockType
-    | YouTubeLinksBlockType
-    | TextContentBlockType
-    | SociosBlockType
-    | ReconocimientosBlockType
-    | FormBitrixBlock
-    | RevistaBlock
-  )[];
+  layout?:
+    | (
+        | DescrPriceBlock
+        | GuiaTourBlock
+        | GridToursBlock
+        | GridBlogsBlock
+        | RowBlock
+        | PostRelationTourBlockType
+        | YouTubeLinksBlockType
+        | TextContentBlockType
+        | SociosBlockType
+        | ReconocimientosBlockType
+        | FormBitrixBlock
+        | RevistaBlock
+      )[]
+    | null;
   featuredImage: number | Media;
   miniDescription: {
     root: {
@@ -801,7 +803,7 @@ export interface Tour {
     [k: string]: unknown;
   };
   Desde: string;
-  price: number;
+  price?: number | null;
   'Person desc': string;
   iconMaxPassengers?: (number | null) | Media;
   maxPassengers: number;
@@ -816,6 +818,10 @@ export interface Tour {
     description?: string | null;
   };
   /**
+   * Precio General
+   */
+  priceGeneral: number;
+  /**
    * Categorías a las que pertenece este tour.
    */
   categorias?: (number | TourCategory)[] | null;
@@ -823,7 +829,7 @@ export interface Tour {
    * Destinos a los que pertenece este tour.
    */
   destinos?: (number | null) | Destination;
-  author: number | User;
+  createdBy?: (number | null) | User;
   publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
@@ -878,7 +884,7 @@ export interface DescrPriceBlock {
   rightColumn: {
     priceTitle?: string | null;
     prevText?: string | null;
-    price: number;
+    price?: number | null;
     nextText: string;
     paymentForm?: {
       iconDate?: (number | null) | Media;
@@ -1061,7 +1067,7 @@ export interface Paquete {
     [k: string]: unknown;
   };
   Desde: string;
-  price: number;
+  price?: number | null;
   'Person desc': string;
   iconMaxPassengers?: (number | null) | Media;
   maxPassengers: number;
@@ -1076,10 +1082,14 @@ export interface Paquete {
     description?: string | null;
   };
   /**
+   * Precio General
+   */
+  priceGeneral: number;
+  /**
    * Destinos a los que pertenece este tour.
    */
   destinos?: (number | Destination)[] | null;
-  author: number | User;
+  createdBy?: (number | null) | User;
   publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
@@ -1297,9 +1307,9 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  firstName?: T;
-  lastName?: T;
+  avatar?: T;
   roles?: T;
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -1441,7 +1451,7 @@ export interface PagesSelect<T extends boolean = true> {
         image?: T;
         description?: T;
       };
-  author?: T;
+  createdBy?: T;
   publishedAt?: T;
   slug?: T;
   slugLock?: T;
@@ -1776,9 +1786,10 @@ export interface ToursSelect<T extends boolean = true> {
         image?: T;
         description?: T;
       };
+  priceGeneral?: T;
   categorias?: T;
   destinos?: T;
-  author?: T;
+  createdBy?: T;
   publishedAt?: T;
   slug?: T;
   slugLock?: T;
@@ -1953,7 +1964,7 @@ export interface PostsSelect<T extends boolean = true> {
         image?: T;
         description?: T;
       };
-  author?: T;
+  createdBy?: T;
   categories?: T;
   publishedDate?: T;
   slug?: T;
@@ -2004,8 +2015,9 @@ export interface PaquetesSelect<T extends boolean = true> {
         image?: T;
         description?: T;
       };
+  priceGeneral?: T;
   destinos?: T;
-  author?: T;
+  createdBy?: T;
   publishedAt?: T;
   slug?: T;
   slugLock?: T;

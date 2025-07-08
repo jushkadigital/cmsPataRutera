@@ -22,7 +22,7 @@ import GuiaTour from '@/blocks/GuiaTour/config'
 import { heroPaquete } from '@/heros/PaqueteHero'
 import { slugField } from '@/fields/slug'
 import { GridTours } from '@/blocks/GridTours/config'
-import { populatePublishedAt } from '@/hooks/populatePublishedAt'
+import { createdBy, populatePublishedAt } from '@/hooks/populatePublishedAt'
 import { PostRelationTourBlock } from '@/blocks/PostRelationTour/config'
 import { YouTubeLinksBlock } from '@/blocks/YouTubeLinksBlock/config'
 import { SociosBlock } from '@/blocks/Socios/config'
@@ -35,6 +35,7 @@ import { GridBlogs } from '@/blocks/GridBlogs/config'
 import { FormBitrixBlock } from '@/blocks/FormBitrix/config'
 import { RevistaBlock } from '@/blocks/RevistaBlock/config'
 import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from '@payloadcms/plugin-seo/fields'
+import { PopulatePrice } from './hooks/populatePrice'
 
 // Import the custom feature
 
@@ -141,7 +142,9 @@ export const Paquetes: CollectionConfig = {
                                         {
                                             type: 'number',
                                             name: 'price',
-                                            required: true,
+                                            admin: {
+                                                readOnly: true
+                                            }
                                         },
                                         {
                                             type: 'text',
@@ -296,6 +299,15 @@ export const Paquetes: CollectionConfig = {
             ]
         },
         {
+            type: 'number',
+            name: 'priceGeneral',
+            required: true,
+            admin: {
+                position: 'sidebar',
+                description: 'Precio General'
+            },
+        },
+        {
             name: 'destinos',
             label: 'Destinos',
             type: 'relationship',
@@ -307,14 +319,15 @@ export const Paquetes: CollectionConfig = {
             },
         },
         {
-            name: 'author',
-            label: 'Author',
+            name: 'createdBy',
             type: 'relationship',
             relationTo: 'users', // Assumes a 'users' collection slug
-            required: true,
             admin: {
+                readOnly: true,
                 position: 'sidebar',
-            }
+            },
+            access: {
+            },
         },
         {
             name: 'publishedAt',
@@ -329,8 +342,8 @@ export const Paquetes: CollectionConfig = {
         ...slugField(),
     ],
     hooks: {
-        afterChange: [revalidatePaquete],
-        beforeChange: [populatePublishedAt],
+        afterChange: [revalidatePaquete, PopulatePrice],
+        beforeChange: [populatePublishedAt, createdBy],
         afterDelete: [revalidateDelete],
     },
     versions: {

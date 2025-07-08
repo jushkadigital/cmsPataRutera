@@ -2,12 +2,11 @@
 
 import * as React from 'react'
 import { useCallback, useEffect, useState } from 'react'
-import {
-    createClientFeature,
-} from '@payloadcms/richtext-lexical/client'
+
 import {
     useLexicalComposerContext
 } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext'
+
 
 // Import Node types and check functions
 import {
@@ -16,17 +15,29 @@ import {
     type EditorState,
     type LexicalEditor,
     $applyNodeReplacement,
+    $createRangeSelection,
+    $setSelection,
+    $createTextNode,
 } from '@payloadcms/richtext-lexical/lexical'
 import {
     $isListItemNode,
+    $isListNode,
+    INSERT_UNORDERED_LIST_COMMAND,
     ListItemNode,
 } from '@payloadcms/richtext-lexical/lexical/list'
 import {
     CustomListItemNode,
     $isCustomListItemNode,
     $createCustomListItemNode,
-} from './customListFeature.node'
+} from './customListItem.node'
 import { ListNode } from '@payloadcms/richtext-lexical/lexical/list'
+import { i18n } from './i18n'
+import { createClientFeature, slashMenuBasicGroupWithItems, toolbarTextDropdownGroupWithItems } from '@payloadcms/richtext-lexical/client'
+import { slashMenuListGroupWithItems } from './shared/slashMenuListGroup'
+import { CustomIcon } from './Icon/customIcon'
+import { ToolbarGroup } from '@payloadcms/richtext-lexical'
+import { $createHeadingNode, $isHeadingNode } from '@payloadcms/richtext-lexical/lexical/rich-text'
+import { LexicalListPlugin } from './plugin'
 
 // Floating Toolbar Plugin Component
 function CustomListItemToolbarPlugin(): React.JSX.Element | null {
@@ -97,15 +108,21 @@ function CustomListItemToolbarPlugin(): React.JSX.Element | null {
         editor.update(() => {
             const node = $getNodeByKey(selectedNodeKey);
 
+            console.log(node)
+
             if ($isCustomListItemNode(node)) {
                 node.setIconType(type);
+                const content = node.getChildren();
+
+
             } else if ($isListItemNode(node)) {
-                const checked = node.getChecked();
-                const value = node.getValue();
-                const customNode = $createCustomListItemNode(type, value, checked);
-                customNode.append(...node.getChildren());
-                node.replace(customNode);
             }
+
+            // --- INICIO DE LA CORRECCIÓN ---
+
+
+
+            // --- FIN DE LA CORRECCIÓN ---
         });
     };
 
@@ -130,16 +147,98 @@ function CustomListItemToolbarPlugin(): React.JSX.Element | null {
     );
 }
 
+const toolbarGroups: ToolbarGroup[] = [
+    toolbarTextDropdownGroupWithItems([
+        {
+            ChildComponent: CustomIcon,
+            isActive: ({ selection }) => {
+                if (!$isRangeSelection(selection)) {
+                    return false
+                }
+                for (const node of selection.getNodes()) {
+                    if ($isHeadingNode(node)) {
+                        console.log('IS NODE')
+                    }
+
+                    if ($isListNode(node) && node.getListType() === 'bullet') {
+                        continue
+                    }
+
+                    const parent = node.getParent()
+
+                    if ($isListNode(parent) && parent.getListType() === 'bullet') {
+                        continue
+                    }
+
+
+                    const parentParent = parent?.getParent()
+                    // Example scenario: Node = textNode, parent = listItemNode, parentParent = listNode
+                    if ($isListNode(parentParent) && parentParent.getListType() === 'bullet') {
+                        continue
+                    }
+
+                    return false
+                }
+                return true
+            },
+            key: 'unorderedList',
+            label: ({ i18n }) => {
+                return i18n.t('lexical:unorderedList:label')
+            },
+            onSelect: ({ editor }) => {
+                editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined)
+            },
+            order: 11,
+        },
+    ]),
+]
+
+
 // --- Client Feature Definition ---
 export const CustomListClientFeature = createClientFeature({
     nodes: [
-        CustomListItemNode,
+        ListItemNode,
         ListNode,
+        CustomListItemNode,
+        {
+            replace: ListItemNode,
+            with: (node: ListItemNode) => {
+                return $createCustomListItemNode(null, node.getValue(), node.getChecked());
+            },
+            withKlass: CustomListItemNode,
+        },
     ],
     plugins: [
         {
             Component: CustomListItemToolbarPlugin,
             position: 'floatingAnchorElem',
+        },
+        {
+            Component: LexicalListPlugin,
+            position: 'normal',
         }
     ],
+    slashMenu: {
+        groups: [
+            slashMenuListGroupWithItems([
+                {
+                    Icon: CustomIcon,
+                    key: 'unorderedList',
+                    keywords: ['unordered list', 'ul'],
+                    label: ({ i18n }) => {
+                        return i18n.t('lexical:unorderedList:label')
+                    },
+                    onSelect: ({ editor }) => {
+                        editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined)
+                    },
+                },
+            ]),
+        ],
+    },
+    toolbarFixed: {
+        groups: toolbarGroups,
+    },
+    toolbarInline: {
+        groups: toolbarGroups,
+    },
 }) 

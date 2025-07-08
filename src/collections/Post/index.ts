@@ -7,7 +7,7 @@ import { anyone } from '@/access/anyone';
 import { authenticated } from '@/access/authenticated';
 import { generatePreviewPath } from '@/utilities/generatePreviewPath';
 import { slugField } from '@/fields/slug';
-import { populatePublishedAt } from '@/hooks/populatePublishedAt';
+import { createdBy, populatePublishedAt } from '@/hooks/populatePublishedAt';
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost';
 import { GridBlogs } from '@/blocks/GridBlogs/config';
 import { GridImages } from '@/blocks/GridImages/config';
@@ -138,16 +138,16 @@ export const Post: CollectionConfig = {
                 },
             ],
         },
-        // Uncomment author relationship
         {
-            name: 'author',
-            label: 'Author',
+            name: 'createdBy',
             type: 'relationship',
             relationTo: 'users', // Assumes a 'users' collection slug
-            required: true,
             admin: {
+                readOnly: true,
                 position: 'sidebar',
-            }
+            },
+            access: {
+            },
         },
         {
             name: 'categories',
@@ -185,7 +185,7 @@ export const Post: CollectionConfig = {
     ],
     hooks: {
         afterChange: [revalidatePost],
-        beforeChange: [populatePublishedAt],
+        beforeChange: [populatePublishedAt, createdBy],
         afterDelete: [revalidateDelete],
     },
     versions: {
