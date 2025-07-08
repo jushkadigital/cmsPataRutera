@@ -1179,8 +1179,8 @@ export const Tours: CollectionConfig = {
         ...slugField(),
     ],
     hooks: {
-        afterChange: [revalidateTour, PopulatePrice],
-        beforeChange: [populatePublishedAt, createdBy],
+        afterChange: [revalidateTour],
+        beforeChange: [populatePublishedAt, createdBy, PopulatePrice],
         afterDelete: [revalidateDelete],
     },
     versions: {

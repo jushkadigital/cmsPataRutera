@@ -7,8 +7,8 @@ import type { Media, TourCategory, Destination, BlogCategory } from '@/payload-t
 import { getPayload, RequiredDataFromCollectionSlug } from 'payload';
 
 let TOKEN = '';
-const BASE_URL = 'https://cms.patarutera.pe';
-//const BASE_URL = 'http://localhost:3000';
+//const BASE_URL = 'https://cms.patarutera.pe';
+const BASE_URL = 'http://localhost:3000';
 const assetsDir = path.resolve('./assets');
 
 interface AssetBuffer {
@@ -1058,6 +1058,33 @@ const Tour = ({
             }
           }
         }
+      },
+      {
+        blockName: null,
+        blockType: "reconocimientos",
+        blockTitle: {
+          titleText: "Nuestros reconocimientos",
+          tag: "h2",
+          size: "medium",
+          textColor: "#2970B7",
+          underlineColor: "#EFBA06"
+        }
+      },
+      {
+        overrideDefaults: false,
+        gridColumns: 3,
+        gridStyle: true,
+        destination: null,
+        blockName: null,
+        blockType: "gridTours",
+        blockTitle: {
+          titleText: "Tours Relacionados",
+          tag: "h2",
+          size: "medium",
+          textColor: "#2970B7",
+          underlineColor: "#EFBA06"
+        },
+        category: []
       },
       {
         blockName: null,
@@ -3422,7 +3449,7 @@ async function main() {
           blockType: "ofertas",
           typeGrid: "grid",
           title: {
-            titleText: " ",
+            titleText: "Ofertas del Mes",
             tag: "h2",
             size: "medium",
             textColor: "#2970B7",
