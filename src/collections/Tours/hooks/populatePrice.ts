@@ -7,7 +7,7 @@ export const PopulatePrice: CollectionAfterChangeHook<Tour> = async ({ doc }) =>
         return doc
     }
     if (doc.layout.length > 0) {
-        doc.layout.map(block => {
+        doc.layout.forEach(block => {
             if (block.blockType == 'descrPrice') {
                 block.rightColumn.price = doc.priceGeneral
             }
