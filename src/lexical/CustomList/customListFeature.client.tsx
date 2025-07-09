@@ -142,7 +142,7 @@ function CustomListItemToolbarPlugin(): React.JSX.Element | null {
     return (
         <div style={{ marginTop: '5px', borderTop: '1px solid #eee', paddingTop: '5px' }}>
             <button style={buttonStyle} onClick={() => setIcon('check')} disabled={currentIconType === 'check'}>✅ Set Check</button>
-            <button style={buttonStyle} onClick={() => setIcon('warning')} disabled={currentIconType === 'nocheck'}>❌ Set NoCheck</button>
+            <button style={buttonStyle} onClick={() => setIcon('nocheck')} disabled={currentIconType === 'nocheck'}>❌ Set NoCheck</button>
             <button style={buttonStyle} onClick={() => setIcon('location')} disabled={currentIconType === 'location'}>📍 Set Location(lugar)</button>
             <button style={buttonStyle} onClick={() => setIcon('circle')} disabled={currentIconType === 'circle'}>🔵Set Title(subtitulos)</button>
             <button style={buttonStyle} onClick={() => setIcon(null)} disabled={!currentIconType}> Clear Icon</button>

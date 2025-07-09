@@ -25,7 +25,7 @@ import {
 } from '@payloadcms/richtext-lexical/lexical/list'
 
 // --- Custom List Item Node Definition ---
-export type IconType = 'check' | 'warning' | 'location' | 'circle' | 'nocheck' | null | undefined
+export type IconType = 'check' | 'location' | 'circle' | 'nocheck' | null | undefined
 
 export type SerializedCustomListItemNode = Spread<
     {
