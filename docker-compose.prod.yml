@@ -22,8 +22,6 @@ services:
       - '3000:3000'
     env_file:
       - .env
-    volumes:
-      - ./uploads/media:/app/public/media
     networks:
       # Conecta el servicio payload a la red externa para comunicarse con el proxy
       - proxiable
