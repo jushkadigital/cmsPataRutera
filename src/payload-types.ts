@@ -106,11 +106,13 @@ export interface Config {
     reconocimientosCarousel: ReconocimientosCarousel;
     sociosCarousel: SociosCarousel;
     footer: Footer;
+    redesNegocio: RedesNegocio;
   };
   globalsSelect: {
     reconocimientosCarousel: ReconocimientosCarouselSelect<false> | ReconocimientosCarouselSelect<true>;
     sociosCarousel: SociosCarouselSelect<false> | SociosCarouselSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    redesNegocio: RedesNegocioSelect<false> | RedesNegocioSelect<true>;
   };
   locale: null;
   user: User & {
@@ -2188,6 +2190,22 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redesNegocio".
+ */
+export interface RedesNegocio {
+  id: number;
+  network?:
+    | {
+        iconName: string;
+        link: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reconocimientosCarousel_select".
  */
 export interface ReconocimientosCarouselSelect<T extends boolean = true> {
@@ -2241,6 +2259,22 @@ export interface FooterSelect<T extends boolean = true> {
                   };
               id?: T;
             };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redesNegocio_select".
+ */
+export interface RedesNegocioSelect<T extends boolean = true> {
+  network?:
+    | T
+    | {
+        iconName?: T;
+        link?: T;
         id?: T;
       };
   updatedAt?: T;

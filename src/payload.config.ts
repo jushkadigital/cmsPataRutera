@@ -48,6 +48,7 @@ import { removeSeedEndpoint } from './endpoints/removeSeed'
 import { SociosCarousel } from './globals/sociosCarousel/config'
 import { ReconocimientosCarousel } from './globals/reconocimientosCarousel/config'
 import { Footer } from './globals/Footer/config'
+import { RedesNegocio } from './globals/redesNegocio/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -95,7 +96,7 @@ export default buildConfig({
         // We'll add more components here later as needed
     },
     collections: [Users, Media, Pages, Tours, Ofertas, TourCategory, Destinations, BlogCategory, Post, Paquetes],
-    globals: [ReconocimientosCarousel, SociosCarousel, Footer],
+    globals: [ReconocimientosCarousel, SociosCarousel, Footer, RedesNegocio],
     editor: lexicalEditor({
         // Configure default lexical editor options
     }),

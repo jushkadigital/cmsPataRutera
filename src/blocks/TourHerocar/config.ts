@@ -17,11 +17,12 @@ export const TourHerocarBlock: Block = {
                     label: 'Carousel Images Column',
                     admin: {
                         width: '50%',
+
                     },
                     fields: [
                         {
                             name: 'carImages',
-                            label: 'Carousel Images',
+                            label: 'Carousel Images Dimensiones 1:1',
                             type: 'array',
                             fields: [
                                 {
@@ -45,7 +46,7 @@ export const TourHerocarBlock: Block = {
                     fields: [
                         {
                             name: 'image',
-                            label: 'Image',
+                            label: 'Image Dimensiones 4:3',
                             type: 'upload',
                             relationTo: 'media', // Assuming you have a 'media' collection
                             required: true,
