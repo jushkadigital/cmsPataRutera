@@ -342,8 +342,8 @@ export const Paquetes: CollectionConfig = {
         ...slugField(),
     ],
     hooks: {
-        afterChange: [revalidatePaquete, PopulatePrice],
-        beforeChange: [populatePublishedAt, createdBy],
+        afterChange: [revalidatePaquete],
+        beforeChange: [populatePublishedAt, createdBy, PopulatePrice],
         afterDelete: [revalidateDelete],
     },
     versions: {
