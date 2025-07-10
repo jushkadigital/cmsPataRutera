@@ -23,8 +23,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./assets:/app/assets
-      - ./public/media/:/app/public/media
+      - ./uploads/media:/app/public/media
     networks:
       # Conecta el servicio payload a la red externa para comunicarse con el proxy
       - proxiable

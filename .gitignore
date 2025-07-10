@@ -20,6 +20,8 @@ node_modules/
 /assets/
 public/media/*
 !public/media/.gitkeep
+uploads/media/*
+!uploads/media/.gitkeep
 /.idea/*
 !/.idea/runConfigurations
 /assetsCC/
