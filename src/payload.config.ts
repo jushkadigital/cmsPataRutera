@@ -50,6 +50,9 @@ import { ReconocimientosCarousel } from './globals/reconocimientosCarousel/confi
 import { Footer } from './globals/Footer/config'
 import { RedesNegocio } from './globals/redesNegocio/config'
 
+import { s3Storage } from '@payloadcms/storage-s3'
+import { projectGetSourceForAsset } from 'next/dist/build/swc/generated-native'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -119,6 +122,20 @@ export default buildConfig({
             generateTitle: generateTitle,
             generateURL: generateURL
         }),
+        s3Storage({
+            collections: {
+                media: true
+            },
+            bucket: process.env.S3_BUCKET || '',
+            config: {
+                credentials: {
+                    accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+                    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || ''
+                },
+                region: process.env.S3_REGION
+            }
+
+        })
         // toursPlugin(), // Remove this
         // passengersPlugin(), // Remove this
         // Will enable these once implemented properly
