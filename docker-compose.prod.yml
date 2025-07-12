@@ -22,8 +22,10 @@ services:
       - '3000:3000'
     env_file:
       - .env
+    volumes:
+      - ./backups:/backups
     networks:
-      # Conecta el servicio payload a la red externa para comunicarse con el proxy
+      # Conecta el servicio payloaubd a la red externa para comunicarse con el proxy
       - proxiable
       # Conecta el servicio payload a la nueva red interna para comunicarse con la base de datos
       - db_network
