@@ -30,7 +30,6 @@ export const TikTokLinksBlock: Block = {
       label: 'TikTok Video Links',
       type: 'array',
       minRows: 0,
-      maxRows: 3, // Changed to 3 as per requirement
       labels: {
         singular: 'Video Link',
         plural: 'Video Links',
