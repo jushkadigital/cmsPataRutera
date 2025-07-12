@@ -6,6 +6,7 @@ services:
     image: postgres:latest
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./backups:/backups
     ports:
       - '5432:5432'
     environment:
@@ -22,8 +23,6 @@ services:
       - '3000:3000'
     env_file:
       - .env
-    volumes:
-      - ./backups:/backups
     networks:
       # Conecta el servicio payloaubd a la red externa para comunicarse con el proxy
       - proxiable
