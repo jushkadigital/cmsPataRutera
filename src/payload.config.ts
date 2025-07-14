@@ -128,6 +128,18 @@ export default buildConfig({
             },
             bucket: process.env.S3_BUCKET || '',
             config: {
+                requestHandler: {
+                    httpAgent: {
+                        maxSockets: 300,
+                        keepAlive: true,
+                    },
+                    httpsAgent: {
+                        maxSockets: 300,
+                        keepAlive: true,
+                    },
+                    connectionTimeout: 5 * 1000,
+                    requestTimeout: 5 * 1000,
+                },
                 credentials: {
                     accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
                     secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || ''
