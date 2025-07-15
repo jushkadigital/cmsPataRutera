@@ -107,12 +107,16 @@ export interface Config {
     sociosCarousel: SociosCarousel;
     footer: Footer;
     redesNegocio: RedesNegocio;
+    touP: TouP;
+    pacP: PacP;
   };
   globalsSelect: {
     reconocimientosCarousel: ReconocimientosCarouselSelect<false> | ReconocimientosCarouselSelect<true>;
     sociosCarousel: SociosCarouselSelect<false> | SociosCarouselSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     redesNegocio: RedesNegocioSelect<false> | RedesNegocioSelect<true>;
+    touP: TouPSelect<false> | TouPSelect<true>;
+    pacP: PacPSelect<false> | PacPSelect<true>;
   };
   locale: null;
   user: User & {
@@ -2206,6 +2210,79 @@ export interface RedesNegocio {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "touP".
+ */
+export interface TouP {
+  id: number;
+  heroPageBlocks?: (BannerBlock | CarouselHeroPage)[] | null;
+  layout?:
+    | (
+        | DescrPriceBlock
+        | GuiaTourBlock
+        | GridToursBlock
+        | GridBlogsBlock
+        | RowBlock
+        | PostRelationTourBlockType
+        | YouTubeLinksBlockType
+        | TextContentBlockType
+        | SociosBlockType
+        | ReconocimientosBlockType
+        | FormBitrixBlock
+        | RevistaBlock
+      )[]
+    | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  createdBy?: (number | null) | User;
+  publishedAt?: string | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pacP".
+ */
+export interface PacP {
+  id: number;
+  heroPageBlocks?: (BannerBlock | CarouselHeroPage)[] | null;
+  layout?:
+    | (
+        | DescrPriceBlock
+        | GuiaTourBlock
+        | GridToursBlock
+        | GridBlogsBlock
+        | RowBlock
+        | PostRelationTourBlockType
+        | YouTubeLinksBlockType
+        | TextContentBlockType
+        | SociosBlockType
+        | FormBitrixBlock
+        | RevistaBlock
+      )[]
+    | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  createdBy?: (number | null) | User;
+  publishedAt?: string | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reconocimientosCarousel_select".
  */
 export interface ReconocimientosCarouselSelect<T extends boolean = true> {
@@ -2283,6 +2360,87 @@ export interface RedesNegocioSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "touP_select".
+ */
+export interface TouPSelect<T extends boolean = true> {
+  heroPageBlocks?:
+    | T
+    | {
+        banner?: T | BannerBlockSelect<T>;
+        carouselHeroPage?: T | CarouselHeroPageSelect<T>;
+      };
+  layout?:
+    | T
+    | {
+        descrPrice?: T | DescrPriceBlockSelect<T>;
+        guiaTour?: T | GuiaTourBlockSelect<T>;
+        gridTours?: T | GridToursBlockSelect<T>;
+        gridBlogs?: T | GridBlogsBlockSelect<T>;
+        rowBlock?: T | RowBlockSelect<T>;
+        postRelationTour?: T | PostRelationTourBlockTypeSelect<T>;
+        youTubeLinks?: T | YouTubeLinksBlockTypeSelect<T>;
+        textContent?: T | TextContentBlockTypeSelect<T>;
+        socios?: T | SociosBlockTypeSelect<T>;
+        reconocimientos?: T | ReconocimientosBlockTypeSelect<T>;
+        formBitrixBlock?: T | FormBitrixBlockSelect<T>;
+        revistaBlock?: T | RevistaBlockSelect<T>;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  createdBy?: T;
+  publishedAt?: T;
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pacP_select".
+ */
+export interface PacPSelect<T extends boolean = true> {
+  heroPageBlocks?:
+    | T
+    | {
+        banner?: T | BannerBlockSelect<T>;
+        carouselHeroPage?: T | CarouselHeroPageSelect<T>;
+      };
+  layout?:
+    | T
+    | {
+        descrPrice?: T | DescrPriceBlockSelect<T>;
+        guiaTour?: T | GuiaTourBlockSelect<T>;
+        gridTours?: T | GridToursBlockSelect<T>;
+        gridBlogs?: T | GridBlogsBlockSelect<T>;
+        rowBlock?: T | RowBlockSelect<T>;
+        postRelationTour?: T | PostRelationTourBlockTypeSelect<T>;
+        youTubeLinks?: T | YouTubeLinksBlockTypeSelect<T>;
+        textContent?: T | TextContentBlockTypeSelect<T>;
+        socios?: T | SociosBlockTypeSelect<T>;
+        formBitrixBlock?: T | FormBitrixBlockSelect<T>;
+        revistaBlock?: T | RevistaBlockSelect<T>;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  createdBy?: T;
+  publishedAt?: T;
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TaskSchedulePublish".
  */
 export interface TaskSchedulePublish {
@@ -2306,7 +2464,7 @@ export interface TaskSchedulePublish {
           relationTo: 'paquetes';
           value: number | Paquete;
         } | null);
-    global?: string | null;
+    global?: ('touP' | 'pacP') | null;
     user?: (number | null) | User;
   };
   output?: unknown;
