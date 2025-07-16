@@ -162,12 +162,11 @@ export const Paquetes: CollectionConfig = {
                                             name: 'iconMaxPassengers',
                                             type: 'upload',
                                             relationTo: 'media',
-                                            /* defaultValue: async ({ user, locale, req }) => {
+                                            defaultValue: async ({ user, locale, req }) => {
                                                 try {
                                                     // Realiza una consulta a la colección 'media' para encontrar la imagen por su nombre de archivo
                                                     // Reemplaza 'nombre-de-tu-imagen-por-defecto.jpg' con el nombre real del archivo
-                                                    const payload = await getPayload({ config })
-                                                    const result = await payload.find({
+                                                    const result = await req.payload.find({
                                                         collection: 'media',
                                                         where: {
                                                             filename: {
@@ -191,7 +190,7 @@ export const Paquetes: CollectionConfig = {
                                                 // Si no se encuentra la imagen o hay un error, retorna null o undefined
                                                 // para que el campo quede vacío por defecto.
                                                 return null;
-                                            }, */
+                                            },
                                             admin: {
                                                 readOnly: true, // Hace que el campo sea de solo lectura
                                             },
@@ -206,13 +205,12 @@ export const Paquetes: CollectionConfig = {
                                             name: 'iconDifficulty',
                                             type: 'upload',
                                             relationTo: 'media',
-                                            /* defaultValue: async ({ user, locale, req }) => {
+                                            defaultValue: async ({ user, locale, req }) => {
                                                 try {
                                                     // Realiza una consulta a la colección 'media' para encontrar la imagen por su nombre de archivo
                                                     // Reemplaza 'nombre-de-tu-imagen-por-defecto.jpg' con el nombre real del archivo
 
-                                                    const payload = await getPayload({ config })
-                                                    const result = await payload.find({
+                                                    const result = await req.payload.find({
                                                         collection: 'media',
                                                         where: {
                                                             filename: {
@@ -236,7 +234,7 @@ export const Paquetes: CollectionConfig = {
                                                 // Si no se encuentra la imagen o hay un error, retorna null o undefined
                                                 // para que el campo quede vacío por defecto.
                                                 return null;
-                                            }, */
+                                            },
                                             admin: {
                                                 readOnly: true, // Hace que el campo sea de solo lectura
                                             },
