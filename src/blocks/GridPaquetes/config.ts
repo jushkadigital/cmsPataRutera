@@ -51,7 +51,7 @@ export const GridPaquetes: Block = { // Renamed constant
             },
 
         },
-        {
+        applyConditionalDefaults({
             name: 'destination',
             type: 'relationship',
             label: 'Destino',
@@ -60,6 +60,6 @@ export const GridPaquetes: Block = { // Renamed constant
             admin: {
                 description: 'Si se selecciona un destino, solo se mostrarán los paquetes de ese destino.',
             },
-        }
+        }) as Field
     ]
 }
