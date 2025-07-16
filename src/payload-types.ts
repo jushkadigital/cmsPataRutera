@@ -2264,6 +2264,7 @@ export interface PacP {
         | YouTubeLinksBlockType
         | TextContentBlockType
         | SociosBlockType
+        | ReconocimientosBlockType
         | FormBitrixBlock
         | RevistaBlock
       )[]
@@ -2424,6 +2425,7 @@ export interface PacPSelect<T extends boolean = true> {
         youTubeLinks?: T | YouTubeLinksBlockTypeSelect<T>;
         textContent?: T | TextContentBlockTypeSelect<T>;
         socios?: T | SociosBlockTypeSelect<T>;
+        reconocimientos?: T | ReconocimientosBlockTypeSelect<T>;
         formBitrixBlock?: T | FormBitrixBlockSelect<T>;
         revistaBlock?: T | RevistaBlockSelect<T>;
       };

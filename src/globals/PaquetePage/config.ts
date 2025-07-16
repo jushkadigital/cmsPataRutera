@@ -56,7 +56,7 @@ export const PaquetePageGlobal: GlobalConfig = {
                         {
                             name: 'layout',
                             type: 'blocks',
-                            blocks: [DescrPrice, GuiaTour, GridTours, GridPaquetes, GridBlogs, RowBlock, PostRelationTourBlock, YouTubeLinksBlock, TextContentBlock, SociosBlock, FormBitrixBlock, RevistaBlock],
+                            blocks: [DescrPrice, GuiaTour, GridTours, GridPaquetes, GridBlogs, RowBlock, PostRelationTourBlock, YouTubeLinksBlock, TextContentBlock, SociosBlock, ReconocimientosBlock, FormBitrixBlock, RevistaBlock],
                             defaultValue: [
                             ],
                         },
