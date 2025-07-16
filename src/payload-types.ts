@@ -2257,6 +2257,7 @@ export interface PacP {
         | DescrPriceBlock
         | GuiaTourBlock
         | GridToursBlock
+        | GridPaquetesBlock
         | GridBlogsBlock
         | RowBlock
         | PostRelationTourBlockType
@@ -2416,6 +2417,7 @@ export interface PacPSelect<T extends boolean = true> {
         descrPrice?: T | DescrPriceBlockSelect<T>;
         guiaTour?: T | GuiaTourBlockSelect<T>;
         gridTours?: T | GridToursBlockSelect<T>;
+        gridPaquetes?: T | GridPaquetesBlockSelect<T>;
         gridBlogs?: T | GridBlogsBlockSelect<T>;
         rowBlock?: T | RowBlockSelect<T>;
         postRelationTour?: T | PostRelationTourBlockTypeSelect<T>;

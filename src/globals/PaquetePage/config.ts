@@ -23,6 +23,7 @@ import { RowBlock } from '@/blocks/RowBlock/config'
 import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from '@payloadcms/plugin-seo/fields'
 import { revalidatePaquete } from './hooks/revalidatePaquete'
 import { heroPage } from '@/heros/MainHero'
+import { GridPaquetes } from '@/blocks/GridPaquetes/config'
 
 // Import the custom feature
 
@@ -55,7 +56,7 @@ export const PaquetePageGlobal: GlobalConfig = {
                         {
                             name: 'layout',
                             type: 'blocks',
-                            blocks: [DescrPrice, GuiaTour, GridTours, GridBlogs, RowBlock, PostRelationTourBlock, YouTubeLinksBlock, TextContentBlock, SociosBlock, FormBitrixBlock, RevistaBlock],
+                            blocks: [DescrPrice, GuiaTour, GridTours, GridPaquetes, GridBlogs, RowBlock, PostRelationTourBlock, YouTubeLinksBlock, TextContentBlock, SociosBlock, FormBitrixBlock, RevistaBlock],
                             defaultValue: [
                             ],
                         },

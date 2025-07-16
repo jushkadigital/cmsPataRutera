@@ -111,6 +111,7 @@ export default buildConfig({
     },
     // database-adapter-config-start
     db: postgresAdapter({
+        push: false,
         pool: {
             connectionString: process.env.DATABASE_URI || '',
         },
