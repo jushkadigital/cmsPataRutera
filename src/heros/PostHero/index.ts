@@ -11,8 +11,5 @@ export const heroPost: BlocksField = {
         Banner
     ],
     maxRows: 1,
-    admin: {
-        initCollapsed: true,
-    },
     label: 'Hero',
 }

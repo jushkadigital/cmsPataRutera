@@ -1,4 +1,5 @@
 import { GlobalConfig } from "payload";
+import { revalidateRedes } from "./hooks/revalidateRedes";
 
 export const RedesNegocio: GlobalConfig = {
     slug: 'redesNegocio',
@@ -28,4 +29,7 @@ export const RedesNegocio: GlobalConfig = {
             ],
         },
     ],
+    hooks: {
+        afterChange: [revalidateRedes]
+    }
 };
