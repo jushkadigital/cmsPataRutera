@@ -41,7 +41,7 @@ export const revalidateRedes: GlobalAfterChangeHook = async ({
 
     if (!context.disableRevalidate) {
         payload.logger.info(`Revalidating footer`)
-        await sendRevalidationRequest(payload, [], ['global_redes'])
+        await sendRevalidationRequest(payload, [], ['global_redesNegocio'])
     }
     return doc
 }
