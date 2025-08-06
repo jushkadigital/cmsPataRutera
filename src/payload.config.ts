@@ -54,6 +54,7 @@ import { s3Storage } from '@payloadcms/storage-s3'
 import { projectGetSourceForAsset } from 'next/dist/build/swc/generated-native'
 import { ToursPageGlobal } from './globals/TourPage/config'
 import { PaquetePageGlobal } from './globals/PaquetePage/config'
+import { BlogPageGlobal } from './globals/BlogPage/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -101,7 +102,7 @@ export default buildConfig({
         // We'll add more components here later as needed
     },
     collections: [Users, Media, Pages, Tours, Ofertas, TourCategory, Destinations, BlogCategory, Post, Paquetes],
-    globals: [ReconocimientosCarousel, SociosCarousel, Footer, RedesNegocio, ToursPageGlobal, PaquetePageGlobal],
+    globals: [ReconocimientosCarousel, SociosCarousel, Footer, RedesNegocio, ToursPageGlobal, PaquetePageGlobal, BlogPageGlobal],
     editor: lexicalEditor({
         // Configure default lexical editor options
     }),
