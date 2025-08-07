@@ -89,9 +89,15 @@ export const Post: CollectionConfig = {
                         },
                         {
                             name: 'description',
-                            label: 'Short Description / Excerpt',
-                            type: 'textarea',
-                            required: false, // Or true if you want an excerpt
+                            type: 'richText',
+                            label: 'Descripción',
+                            editor: lexicalEditor({
+                                features: ({ defaultFeatures }) => [
+                                    ...defaultFeatures,
+                                    //CustomListServerFeature(),
+                                ],
+                            }),
+                            required: true,
                         },
                     ],
                 },
