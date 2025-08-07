@@ -2094,7 +2094,903 @@ const Post = ({
       }
     ],
     featuredImage: Images[1]!,
-    description: "aoeuthaoenuthaoentuhaeotnu aoeuaoeuoaeuaoe aoeuaoeuaoeu",
+    description: {
+      root: {
+        type: "root", format: "", indent: 0, version: 1, children: [{ type: "paragraph", format: "", indent: 0, version: 1, children: [{ mode: "normal", text: "En PDS Viajes, nos enorgullece ofrecer experiencias turísticas seguras y memorables. Al reservar con nosotros, aceptas las siguientes condiciones y recomendaciones:", type: "text", style: "", detail: 0, format: 0, version: 1 }], direction: "ltr", textStyle: "", textFormat: 0 }, { type: "paragraph", format: "", indent: 0, version: 1, children: [], direction: "ltr", textStyle: "", textFormat: 0 }, { type: "paragraph", format: "", indent: 0, version: 1, children: [{ mode: "normal", text: "Requisitos Legales", type: "text", style: "", detail: 0, format: 0, version: 1 }], direction: "ltr", textStyle: "", textFormat: 0 }, { type: "paragraph", format: "", indent: 0, version: 1, children: [{ mode: "normal", text: "Ingreso a Perú:", type: "text", style: "", detail: 0, format: 0, version: 1 }], direction: "ltr", textStyle: "", textFormat: 0 }, { type: "paragraph", format: "", indent: 0, version: 1, children: [], direction: "ltr", textStyle: "", textFormat: 0 }, {
+          type: "paragraph", format: "", indent: 0, version: 1, children: [{
+            mode: "normal", text: "Pasaporte con vigencia mínima de 6 meses desde tu llegada.", type: "text", style: "", detail: 0, format: 0,
+            version: 1
+          }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Ciudadanos de Argentina, Brasil, Paraguay, Uruguay, Ecuador, Colombia, Bolivia y Chile pueden ingresar con su documento de identidad nacional.",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Visita a sitios arqueológicos (Machu Picchu, Camino Inca, Chan Chan, etc.):",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Presentar pasaporte o documento de identidad original.",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Para reservas:",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Hoteles y agencias requieren una copia de tu pasaporte o DNI, la cual será custodiada bajo estrictas medidas de seguridad por PDS Viajes.",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Recomendaciones de Seguridad",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Seguro de viaje: Contrata uno que cubra imprevistos médicos, cancelaciones o pérdidas.",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Vestimenta adecuada: Nuestros asesores te guiarán según el clima de cada destino (ropa abrigadora para la sierra, ligera para la selva, etc.).",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Planificación anticipada: Organiza tu itinerario antes de viajar para aprovechar al máximo la cultura, tradiciones y paisajes peruanos.",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Mal de altura (soroche):",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Al llegar a ciudades altas como Cusco, descansa 2 horas mínimo, toma mate de coca y evita esfuerzos físicos iniciales.",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Recomendaciones Sanitarias",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "COVID-19:",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Desde octubre 2022, no se exige carnet de vacunación ni uso obligatorio de mascarillas.",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Sin embargo, recomendamos mantener precauciones (vacunación actualizada, mascarilla en espacios concurridos).",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "En caso de síntomas, contacta al Ministerio de Salud (línea 113) o visita ",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            },
+            {
+              type: "autolink",
+              fields: {
+                url: "https://www.gob.pe/minsa",
+                linkType: "custom"
+              },
+              format: "",
+              indent: 0,
+              version: 2,
+              children: [
+                {
+                  mode: "normal",
+                  text: "www.gob.pe/minsa",
+                  type: "text",
+                  style: "",
+                  detail: 0,
+                  format: 0,
+                  version: 1
+                }
+              ],
+              direction: "ltr"
+            },
+            {
+              mode: "normal",
+              text: ".",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Selva amazónica:",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Vacuna contra fiebre amarilla (aplicada al menos 10 días antes del viaje).",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Profilaxis para malaria y repelente contra mosquitos (evita picaduras al amanecer/anochecer).",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Brotes recientes de dengue en Ucayali, Loreto, San Martín, Piura y Tumbes.",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Sierra (altitud >3,000 msnm):",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Protector solar FP 50+ (especialmente en Arequipa, por alta radiación UV).",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Come ligero, hidrátate y evita alcohol.",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Costa:",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Protégete del sol (Perú está cerca del ecuador) y de mosquitos.",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Alimentos y agua:",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Bebe agua embotellada, evita hielo, pescado crudo y vegetales sin lavar.",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "Lleva antidiarreicos y antihistamínicos en tu botiquín.",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        },
+        {
+          type: "paragraph",
+          format: "",
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              mode: "normal",
+              text: "¡Gracias por confiar en nosotros para tu aventura en Perú!",
+              type: "text",
+              style: "",
+              detail: 0,
+              format: 0,
+              version: 1
+            }
+          ],
+          direction: "ltr",
+          textStyle: "",
+          textFormat: 0
+        }
+        ],
+        direction: "ltr"
+      }
+    },
     layout: [
       {
         description: {
