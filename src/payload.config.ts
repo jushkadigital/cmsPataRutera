@@ -124,7 +124,7 @@ export default buildConfig({
     plugins: [
         seoPlugin({
             generateTitle: generateTitle,
-            generateURL: generateURL
+            generateURL: generateURL,
         }),
         s3Storage({
             collections: {
