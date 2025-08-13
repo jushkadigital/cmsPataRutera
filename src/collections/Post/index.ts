@@ -29,11 +29,15 @@ export const Post: CollectionConfig = {
     defaultPopulate: {
         title: true,
         slug: true,
+        featuredImage: true,
+        description: true,
         categories: true,
         meta: {
+            title: true,
             image: true,
             description: true
         }
+
     },
     admin: {
         defaultColumns: ['title', 'slug', 'updatedAt'],
