@@ -56,6 +56,7 @@ import { ToursPageGlobal } from './globals/TourPage/config'
 import { PaquetePageGlobal } from './globals/PaquetePage/config'
 import { BlogPageGlobal } from './globals/BlogPage/config'
 
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -151,7 +152,7 @@ export default buildConfig({
                 region: process.env.S3_REGION
             }
 
-        })
+        }),
         // toursPlugin(), // Remove this
         // passengersPlugin(), // Remove this
         // Will enable these once implemented properly
