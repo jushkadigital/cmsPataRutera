@@ -20,7 +20,7 @@ export const convertSizesToWebP: CollectionBeforeChangeHook = async ({ req, data
                 try {
                     // Los buffers de los archivos redimensionados están en `req.payloadUploadSizes`
                     const uploadSizes = req.payloadUploadSizes;
-                    console.log(uploadSizes)
+                    console.log(sizes)
                     if (uploadSizes && uploadSizes[sizeKey]) {
 
                         // 1. Tomar el buffer del tamaño generado por Payload
@@ -39,16 +39,16 @@ export const convertSizesToWebP: CollectionBeforeChangeHook = async ({ req, data
                         console.log(webpFilename)
 
                         // 4. ACTUALIZAR EL BUFFER: Esto asegura que el adaptador de S3 suba el archivo WebP
-                        //req.payloadUploadSizes![sizeKey] = webpBuffer;
+                        req.payloadUploadSizes![sizeKey] = webpBuffer;
 
                         // 5. ACTUALIZAR LOS METADATOS: Esto asegura que la base de datos guarde la info correcta
-                        /*data.sizes[sizeKey] = {
-                          ...data.sizes[sizeKey], // Mantenemos width y height
-                          filename: webpFilename,
-                          mimeType: 'image/webp',
-                          filesize: webpBuffer.length,
+                        data.sizes[sizeKey] = {
+                            ...data.sizes[sizeKey], // Mantenemos width y height
+                            filename: webpFilename,
+                            mimeType: 'image/webp',
+                            filesize: webpBuffer.length,
                         };
-                        */
+
                     }
                 } catch (error) {
                     console.error(`Error convirtiendo el tamaño '${sizeKey}' a WebP:`, error);
