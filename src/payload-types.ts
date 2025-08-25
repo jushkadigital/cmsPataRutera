@@ -806,6 +806,8 @@ export interface Tour {
         | ReconocimientosBlockType
         | FormBitrixBlock
         | RevistaBlock
+        | AdicionalTourBlock
+        | DataTourBlock
       )[]
     | null;
   featuredImage: number | Media;
@@ -1030,6 +1032,64 @@ export interface GuiaTourBlock {
   blockType: 'guiaTour';
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "adicionalTourBlock".
+ */
+export interface AdicionalTourBlock {
+  title: TitleGroup;
+  arrayData?:
+    | {
+        title?: string | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'adicionalTour';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dataTourBlock".
+ */
+export interface DataTourBlock {
+  duration: {
+    title: string;
+    valueDia: number;
+    valueNoche: number;
+  };
+  groupSize: {
+    title: string;
+    value: number;
+  };
+  difficulty: 'easy' | 'medium' | 'hard';
+  altitud: {
+    title: string;
+    value: number;
+  };
+  idioma: {
+    title: string;
+    value: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'dataTour';
+}
+/**
  * Ofertas especiales de Tours
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1071,6 +1131,8 @@ export interface Paquete {
     | ReconocimientosBlockType
     | FormBitrixBlock
     | RevistaBlock
+    | AdicionalTourBlock
+    | DataTourBlock
   )[];
   featuredImage: number | Media;
   miniDescription: {
@@ -1791,6 +1853,8 @@ export interface ToursSelect<T extends boolean = true> {
         reconocimientos?: T | ReconocimientosBlockTypeSelect<T>;
         formBitrixBlock?: T | FormBitrixBlockSelect<T>;
         revistaBlock?: T | RevistaBlockSelect<T>;
+        adicionalTour?: T | AdicionalTourBlockSelect<T>;
+        dataTour?: T | DataTourBlockSelect<T>;
       };
   featuredImage?: T;
   miniDescription?: T;
@@ -1912,6 +1976,56 @@ export interface GuiaTourBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "adicionalTourBlock_select".
+ */
+export interface AdicionalTourBlockSelect<T extends boolean = true> {
+  title?: T | TitleGroupSelect<T>;
+  arrayData?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dataTourBlock_select".
+ */
+export interface DataTourBlockSelect<T extends boolean = true> {
+  duration?:
+    | T
+    | {
+        title?: T;
+        valueDia?: T;
+        valueNoche?: T;
+      };
+  groupSize?:
+    | T
+    | {
+        title?: T;
+        value?: T;
+      };
+  difficulty?: T;
+  altitud?:
+    | T
+    | {
+        title?: T;
+        value?: T;
+      };
+  idioma?:
+    | T
+    | {
+        title?: T;
+        value?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ofertas_select".
  */
 export interface OfertasSelect<T extends boolean = true> {
@@ -2020,6 +2134,8 @@ export interface PaquetesSelect<T extends boolean = true> {
         reconocimientos?: T | ReconocimientosBlockTypeSelect<T>;
         formBitrixBlock?: T | FormBitrixBlockSelect<T>;
         revistaBlock?: T | RevistaBlockSelect<T>;
+        adicionalTour?: T | AdicionalTourBlockSelect<T>;
+        dataTour?: T | DataTourBlockSelect<T>;
       };
   featuredImage?: T;
   miniDescription?: T;

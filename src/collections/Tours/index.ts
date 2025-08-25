@@ -37,6 +37,8 @@ import { FormBitrixBlock } from '@/blocks/FormBitrix/config'
 import { RowBlock } from '@/blocks/RowBlock/config'
 import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from '@payloadcms/plugin-seo/fields'
 import { PopulatePrice } from './hooks/populatePrice'
+import { AdicionalTour } from '@/blocks/AdicionalTour/config'
+import { DataTour } from '@/blocks/DataTour/config'
 
 // Import the custom feature
 
@@ -99,7 +101,7 @@ export const Tours: CollectionConfig = {
                         {
                             name: 'layout',
                             type: 'blocks',
-                            blocks: [DescrPrice, GuiaTour, GridTours, GridBlogs, RowBlock, PostRelationTourBlock, YouTubeLinksBlock, TextContentBlock, SociosBlock, ReconocimientosBlock, FormBitrixBlock, RevistaBlock],
+                            blocks: [DescrPrice, GuiaTour, GridTours, GridBlogs, RowBlock, PostRelationTourBlock, YouTubeLinksBlock, TextContentBlock, SociosBlock, ReconocimientosBlock, FormBitrixBlock, RevistaBlock, AdicionalTour, DataTour],
                             defaultValue: [
                                 {
                                     blockType: 'descrPrice',
