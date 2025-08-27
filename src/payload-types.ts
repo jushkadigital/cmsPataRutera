@@ -347,6 +347,7 @@ export interface RowBlock {
           | GridImagesBlockType
           | FormBitrixBlock
           | RevistaBlock
+          | TxtIconContentBlockType
         )[];
         id?: string | null;
       }[]
@@ -764,29 +765,6 @@ export interface RevistaBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "GridPaquetesBlock".
- */
-export interface GridPaquetesBlock {
-  /**
-   * Si está marcado, los campos de este bloque se mostrarán con logica del frontend.
-   */
-  overrideDefaults?: boolean | null;
-  blockTitle: TitleGroup;
-  gridColumns?: number | null;
-  /**
-   * True grid, false list
-   */
-  gridStyle?: boolean | null;
-  /**
-   * Si se selecciona un destino, solo se mostrarán los paquetes de ese destino.
-   */
-  destination?: (number | Destination)[] | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'gridPaquetes';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TxtIconContentBlockType".
  */
 export interface TxtIconContentBlockType {
@@ -817,6 +795,29 @@ export interface TxtIconContentBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'txtIconContent';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GridPaquetesBlock".
+ */
+export interface GridPaquetesBlock {
+  /**
+   * Si está marcado, los campos de este bloque se mostrarán con logica del frontend.
+   */
+  overrideDefaults?: boolean | null;
+  blockTitle: TitleGroup;
+  gridColumns?: number | null;
+  /**
+   * True grid, false list
+   */
+  gridStyle?: boolean | null;
+  /**
+   * Si se selecciona un destino, solo se mostrarán los paquetes de ese destino.
+   */
+  destination?: (number | Destination)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gridPaquetes';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1649,6 +1650,7 @@ export interface RowBlockSelect<T extends boolean = true> {
               gridImages?: T | GridImagesBlockTypeSelect<T>;
               formBitrixBlock?: T | FormBitrixBlockSelect<T>;
               revistaBlock?: T | RevistaBlockSelect<T>;
+              txtIconContent?: T | TxtIconContentBlockTypeSelect<T>;
             };
         id?: T;
       };
@@ -1860,6 +1862,18 @@ export interface RevistaBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TxtIconContentBlockType_select".
+ */
+export interface TxtIconContentBlockTypeSelect<T extends boolean = true> {
+  iconImage?: T;
+  blockTitle?: T | TitleGroupSelect<T>;
+  description?: T;
+  descriptionAlignment?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "GridBlogsBlock_select".
  */
 export interface GridBlogsBlockSelect<T extends boolean = true> {
@@ -1884,18 +1898,6 @@ export interface GridPaquetesBlockSelect<T extends boolean = true> {
   gridColumns?: T;
   gridStyle?: T;
   destination?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TxtIconContentBlockType_select".
- */
-export interface TxtIconContentBlockTypeSelect<T extends boolean = true> {
-  iconImage?: T;
-  blockTitle?: T | TitleGroupSelect<T>;
-  description?: T;
-  descriptionAlignment?: T;
   id?: T;
   blockName?: T;
 }

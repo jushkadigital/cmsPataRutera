@@ -16,6 +16,7 @@ import { GridImages } from '../GridImages/config';
 import { FormBitrixBlock } from '../FormBitrix/config';
 import { RevistaBlock } from '../RevistaBlock/config';
 import { YouTubeLinksBlock } from '../YouTubeLinksBlock/config';
+import { TextIconContentBlock } from '../TextIconContentBlock/config';
 // Importa los bloques típicos que quieres permitir DENTRO de las columnas
 // Importa cualquier otro bloque típico que deba poder ir en una columna
 
@@ -78,7 +79,7 @@ export const RowBlock: Block = {
                     blocks: [
                         GridTours, MediaBlock, PostRelationTourBlock, SociosBlock, ReconocimientosBlock, OfertasBlock,
                         CarouselDestination, TikTokLinksBlock, YouTubeLinksBlock, BeneficiosBlock, EstadisticasBlock, TextContentBlock, GridImages,
-                        OfertasBlock, FormBitrixBlock, RevistaBlock
+                        OfertasBlock, FormBitrixBlock, RevistaBlock, TextIconContentBlock
                         // QuoteBlock,
                         // IMPORTANTE: NO te añadas a ti mismo (LayoutRowBlock) aquí dentro,
                         // podrías crear una recursión infinita en el Admin y la data.
