@@ -275,6 +275,7 @@ export interface Page {
     | GridImagesBlockType
     | GridPaquetesBlock
     | FormBitrixBlock
+    | TxtIconContentBlockType
   )[];
   meta?: {
     title?: string | null;
@@ -786,6 +787,39 @@ export interface GridPaquetesBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TxtIconContentBlockType".
+ */
+export interface TxtIconContentBlockType {
+  /**
+   * Sube una imagen pequeña de icono.
+   */
+  iconImage: number | Media;
+  blockTitle: TitleGroup;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Controls the text alignment of the description content.
+   */
+  descriptionAlignment?: ('left' | 'center' | 'right' | 'justify') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'txtIconContent';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tours".
  */
 export interface Tour {
@@ -1006,6 +1040,31 @@ export interface GuiaTourBlock {
    * Añade exactamente cuatro secciones, cada uno con texto e icono.
    */
   sectionInfoViaje: {
+    iconText: string;
+    /**
+     * Sube una imagen pequeña de icono.
+     */
+    iconImage: number | Media;
+    contentSection: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+  };
+  /**
+   * Añade exactamente cuatro secciones, cada uno con texto e icono.
+   */
+  sectionFAQ: {
     iconText: string;
     /**
      * Sube una imagen pequeña de icono.
@@ -1527,6 +1586,7 @@ export interface PagesSelect<T extends boolean = true> {
         gridImages?: T | GridImagesBlockTypeSelect<T>;
         gridPaquetes?: T | GridPaquetesBlockSelect<T>;
         formBitrixBlock?: T | FormBitrixBlockSelect<T>;
+        txtIconContent?: T | TxtIconContentBlockTypeSelect<T>;
       };
   meta?:
     | T
@@ -1829,6 +1889,18 @@ export interface GridPaquetesBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TxtIconContentBlockType_select".
+ */
+export interface TxtIconContentBlockTypeSelect<T extends boolean = true> {
+  iconImage?: T;
+  blockTitle?: T | TitleGroupSelect<T>;
+  description?: T;
+  descriptionAlignment?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tours_select".
  */
 export interface ToursSelect<T extends boolean = true> {
@@ -1965,6 +2037,13 @@ export interface GuiaTourBlockSelect<T extends boolean = true> {
         contentSection?: T;
       };
   sectionInfoViaje?:
+    | T
+    | {
+        iconText?: T;
+        iconImage?: T;
+        contentSection?: T;
+      };
+  sectionFAQ?:
     | T
     | {
         iconText?: T;

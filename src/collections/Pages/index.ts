@@ -37,6 +37,7 @@ import { GridBlogs } from '@/blocks/GridBlogs/config'
 import { metadata } from '@payloadcms/next/layouts'
 import { getServerSideURL } from '@/utilities/getURL'
 import { isAdminOrCreatedBy } from './access'
+import { TextIconContentBlock } from '@/blocks/TextIconContentBlock/config'
 
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -93,7 +94,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [RowBlock, GridTours, GridBlogs, MediaBlock, PostRelationTourBlock, SociosBlock, ReconocimientosBlock, OfertasBlock, CarouselDestination, TikTokLinksBlock, BeneficiosBlock, EstadisticasBlock, TextContentBlock, GridImages, OfertasBlock, GridPaquetes, FormBitrixBlock],
+              blocks: [RowBlock, GridTours, GridBlogs, MediaBlock, PostRelationTourBlock, SociosBlock, ReconocimientosBlock, OfertasBlock, CarouselDestination, TikTokLinksBlock, BeneficiosBlock, EstadisticasBlock, TextContentBlock, GridImages, OfertasBlock, GridPaquetes, FormBitrixBlock, TextIconContentBlock],
               required: true,
               admin: {
                 initCollapsed: true,
