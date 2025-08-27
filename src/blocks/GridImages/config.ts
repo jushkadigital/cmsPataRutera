@@ -1,3 +1,4 @@
+import titleGroup from "@/fields/title";
 import type { Block } from "payload";
 
 export const GridImages: Block = {
@@ -8,6 +9,20 @@ export const GridImages: Block = {
         plural: 'Grid Images',
     },
     fields: [
+        {
+            type: 'collapsible',
+            label: 'Título',
+            admin: {
+                initCollapsed: true,
+            },
+            fields: [
+                {
+                    ...titleGroup, // Add the main title group for the block
+                    name: 'blockTitle', // Ensure a unique name for the title within this block
+                    label: 'Título del Bloque', // Customize label if needed
+                },
+            ]
+        },
         {
             name: 'typeGrid',
             type: 'select',

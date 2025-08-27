@@ -589,6 +589,7 @@ export interface BlogCategory {
  * via the `definition` "gridImagesBlockType".
  */
 export interface GridImagesBlockType {
+  blockTitle: TitleGroup;
   typeGrid: 'masonry' | 'overlapping' | 'list' | 'mosaic' | 'grid';
   Image?:
     | {
@@ -1825,6 +1826,7 @@ export interface TextContentBlockTypeSelect<T extends boolean = true> {
  * via the `definition` "gridImagesBlockType_select".
  */
 export interface GridImagesBlockTypeSelect<T extends boolean = true> {
+  blockTitle?: T | TitleGroupSelect<T>;
   typeGrid?: T;
   Image?:
     | T
