@@ -3,8 +3,9 @@ import titleGroup from '@/fields/title' // Import the title group field
 import { defaultLexical } from '@/fields/defaultLexical';
 
 import { getPayload } from 'payload'
-import { FixedToolbarFeature, lexicalEditor, ParagraphFeature } from '@payloadcms/richtext-lexical';
+import { BlocksFeature, FixedToolbarFeature, lexicalEditor, ParagraphFeature } from '@payloadcms/richtext-lexical';
 import { CustomListServerFeature } from '@/lexical/CustomList/customListFeature.server';
+import { GridImages } from '../GridImages/config';
 // Define the structure for each feature item within the array
 const sectionItemFields1: Field[] = [
 
@@ -349,20 +350,28 @@ export const GuiaTour: Block = { // Renamed constant
                         },
 
                         {
-                            name: 'contentSection',
-                            label: 'Sección de Contenido',
-                            type: 'richText',
-                            editor:
-                                lexicalEditor({
-                                    features: ({ defaultFeatures }) => {
-                                        const noUnorderedListFeature = defaultFeatures.filter(ele => ele.key !== 'unorderedList')
-                                        return ([
-                                            ...noUnorderedListFeature,
-                                            CustomListServerFeature()
-                                        ])
-                                    },
-                                }),
-                            required: true,
+                            name: 'arrayData',
+                            type: 'array',
+                            fields: [
+                                {
+                                    name: 'title',
+                                    type: 'text'
+                                },
+                                {
+                                    name: 'content',
+                                    type: 'richText',
+                                    editor: lexicalEditor({
+                                        features: ({ defaultFeatures }) => [
+                                            ...defaultFeatures,
+                                            FixedToolbarFeature(),
+                                            BlocksFeature({
+                                                blocks: [GridImages]
+                                            })
+                                        ]
+                                    })
+                                }
+                            ]
+
                         },
                     ], // Use the defined structure for each item
                     admin: {
@@ -403,7 +412,7 @@ export const GuiaTour: Block = { // Renamed constant
                                                 collection: 'media',
                                                 where: {
                                                     filename: {
-                                                        like: '%iconItinerario%',
+                                                        like: '%iconFaqs%',
                                                     },
                                                 },
                                                 limit: 1, // Asumimos que solo quieres una imagen con ese nombre
@@ -431,22 +440,29 @@ export const GuiaTour: Block = { // Renamed constant
                                 },
                             ]
                         },
-
                         {
-                            name: 'contentSection',
-                            label: 'Sección de Contenido',
-                            type: 'richText',
-                            editor:
-                                lexicalEditor({
-                                    features: ({ defaultFeatures }) => {
-                                        const noUnorderedListFeature = defaultFeatures.filter(ele => ele.key !== 'unorderedList')
-                                        return ([
-                                            ...noUnorderedListFeature,
-                                            CustomListServerFeature()
-                                        ])
-                                    },
-                                }),
-                            required: true,
+                            name: 'arrayData',
+                            type: 'array',
+                            fields: [
+                                {
+                                    name: 'title',
+                                    type: 'text'
+                                },
+                                {
+                                    name: 'content',
+                                    type: 'richText',
+                                    editor: lexicalEditor({
+                                        features: ({ defaultFeatures }) => [
+                                            ...defaultFeatures,
+                                            FixedToolbarFeature(),
+                                            BlocksFeature({
+                                                blocks: [GridImages]
+                                            })
+                                        ]
+                                    })
+                                }
+                            ]
+
                         },
                     ], // Use the defined structure for each item
                     admin: {
