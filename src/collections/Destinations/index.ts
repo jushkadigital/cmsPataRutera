@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { authenticated } from '@/access/authenticated'
 import { anyone } from '@/access/anyone';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
 
 export const Destinations: CollectionConfig = {
     slug: 'destinations',
@@ -42,6 +43,16 @@ export const Destinations: CollectionConfig = {
             type: 'upload',
             relationTo: 'media',
         },
+        {
+            name: 'description',
+            label: 'Descripción',
+            type: 'richText',
+            editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                    ...defaultFeatures,
+                ],
+            }),
+        }
     ],
 }
 
