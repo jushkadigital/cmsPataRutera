@@ -1,0 +1,24 @@
+{
+  "name": "Node.js 22 & PNPM App",
+  // Usa la imagen oficial de Node.js 22 slim.
+  "image": "ubuntu:24.04",
+  "features": {
+    // Node.js ya está incluido en la imagen base, por lo que la feature local se elimina.
+    // Usa una feature oficial y común para instalar pnpm.
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22",
+      "pnpmVersion": "latest"
+    },
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+      "packages": "git,wget,curl,ripgrep,python3,g++,xclip"
+    },
+    "ghcr.io/s1n7ax/devcontainer-features/neovim:2": {}
+  },
+  // --- Opcional: Personalizaciones y configuraciones adicionales ---
+  // Comando a ejecutar después de que el contenedor se haya creado.
+  "postCreateCommand": "corepack enable && corepack prepare pnpm@latest --activate && pnpm install",
+  // Redirige un puerto de tu máquina local al contenedor.
+  "forwardPorts": [
+    3000
+  ]
+}
