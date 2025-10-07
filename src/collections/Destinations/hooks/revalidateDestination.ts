@@ -16,9 +16,8 @@ async function sendRevalidationRequest(payload: any, paths: string[], tags: stri
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${REVALIDATE_SECRET}`
       },
-      body: JSON.stringify({ paths, tags })
+      body: JSON.stringify({ paths, tags, secret: REVALIDATE_SECRET })
     })
 
     if (!response.ok) {
