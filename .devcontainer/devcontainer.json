@@ -1,7 +1,10 @@
 {
   "name": "Node.js 22 & PNPM App",
   // Usa la imagen oficial de Node.js 22 slim.
-  "image": "ubuntu:24.04",
+  // "image": "ubuntu:24.04",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "payload",
+  "workspaceFolder": "/home/node/app/",
   "features": {
     // Node.js ya está incluido en la imagen base, por lo que la feature local se elimina.
     // Usa una feature oficial y común para instalar pnpm.
