@@ -40,6 +40,7 @@ import { PopulatePrice } from './hooks/populatePrice'
 import { AdicionalTour } from '@/blocks/AdicionalTour/config'
 import { DataTour } from '@/blocks/DataTour/config'
 import { MapBlock } from '@/blocks/MapBlock/config'
+import { PopulateMap } from './hooks/populateMap'
 
 // Import the custom feature
 
@@ -1183,7 +1184,7 @@ export const Tours: CollectionConfig = {
   ],
   hooks: {
     afterChange: [revalidateTour],
-    beforeChange: [populatePublishedAt, createdBy, PopulatePrice],
+    beforeChange: [populatePublishedAt, createdBy, PopulatePrice, PopulateMap],
     afterDelete: [revalidateDelete],
   },
   versions: {
