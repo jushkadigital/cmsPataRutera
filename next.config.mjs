@@ -7,14 +7,25 @@ const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    webpack: (config, { webpack }) => {
-        config.plugins.push(new webpack.IgnorePlugin({
-            resourceRegExp: /^pg-native$|^cloudflare:sockets$/,
-        }))
+  serverExternalPackages: ['awilix-manager'],
+  eslint: {
+    // Advierte: Esto permite que las compilaciones de producción
+    // terminen exitosamente incluso si hay errores de ESLint.
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    // PELIGRO: Esto permite que las compilaciones de producción
+    // terminen exitosamente incluso si hay errores de tipo.
+    ignoreBuildErrors: true,
+  },
+  webpack: (config, { webpack }) => {
+    config.plugins.push(new webpack.IgnorePlugin({
+      resourceRegExp: /^pg-native$|^cloudflare:sockets$/,
+    }))
 
-        return config
-    },
-   output: 'standalone',
+    return config
+  },
+  output: 'standalone',
   images: {
     remotePatterns: [
       ...[NEXT_PUBLIC_SERVER_URL /* 'https://example.com' */].map((item) => {

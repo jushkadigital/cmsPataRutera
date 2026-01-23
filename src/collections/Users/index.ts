@@ -2,6 +2,8 @@ import { authenticated } from '@/access/authenticated'
 import type { CollectionConfig } from 'payload'
 import { admin, editor, user } from './access'
 import { protectRoles } from './hooks/protectRoles'
+import { syncToWebhook, capturePassword } from './hooks/syncToWebhook'
+import { syncToMedusa } from './hooks/medusaWebhook'
 
 
 export const Users: CollectionConfig = {
@@ -16,7 +18,13 @@ export const Users: CollectionConfig = {
     defaultColumns: ['name', 'email'],
     useAsTitle: 'email',
   },
-  auth: true,
+  auth: {
+    useAPIKey: true,
+  },
+  hooks: {
+    beforeChange: [],
+    afterChange: [],
+  },
   fields: [
     {
       name: 'avatar',

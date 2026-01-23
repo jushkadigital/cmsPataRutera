@@ -1,27 +1,31 @@
 {
-  "name": "Node.js 22 & PNPM App",
-  // Usa la imagen oficial de Node.js 22 slim.
-  // "image": "ubuntu:24.04",
+  "name": "Node.js 22 & PNPM (CLI Only)",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "payload",
-  "workspaceFolder": "/home/node/app/",
+  "workspaceFolder": "/home/node/app",
+  // CRÍTICO PARA CLI: Indica que debe levantar AMBOS servicios al iniciar.
+  "runServices": [
+    "payload",
+    "postgres"
+  ],
+  // Nos conectamos al contenedor como usuario 'node'
   "features": {
-    // Node.js ya está incluido en la imagen base, por lo que la feature local se elimina.
-    // Usa una feature oficial y común para instalar pnpm.
     "ghcr.io/devcontainers/features/node:1": {
       "version": "22",
       "pnpmVersion": "latest"
     },
+    // Herramientas de terminal esenciales ya que no usas VS Code
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-      "packages": "git,wget,curl,ripgrep,python3,g++,xclip"
+      "packages": "git,wget,curl,ripgrep,python3,g++,xclip,iputils-ping,netcat-openbsd"
     },
-    "ghcr.io/s1n7ax/devcontainer-features/neovim:2": {}
+    "ghcr.io/s1n7ax/devcontainer-features/neovim:2": {},
+    "ghcr.io/devcontainers-extra/features/claude-code:1": {}
   },
-  // --- Opcional: Personalizaciones y configuraciones adicionales ---
-  // Comando a ejecutar después de que el contenedor se haya creado.
+  // Ajuste de permisos y setup inicial
   "postCreateCommand": "corepack enable && corepack prepare pnpm@latest --activate && pnpm install",
-  // Redirige un puerto de tu máquina local al contenedor.
+  // Puertos que la CLI de devcontainers expondrá (si aplica en tu entorno)
   "forwardPorts": [
-    3000
+    3000,
+    5433
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm payload migrate:*)",
+      "Bash(psql:*)"
+    ]
+  }
+}

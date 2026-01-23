@@ -41,6 +41,10 @@ import { AdicionalTour } from '@/blocks/AdicionalTour/config'
 import { DataTour } from '@/blocks/DataTour/config'
 import { MapBlock } from '@/blocks/MapBlock/config'
 import { PopulateMap } from './hooks/populateMap'
+import { ServicesTicket } from '@/blocks/ServicesTicket/config'
+import { ServicesFood } from '@/blocks/ServicesFood/config'
+import titleNew from '@/fields/titlenew'
+import { PopulateId } from './hooks/populateId'
 
 // Import the custom feature
 
@@ -1127,6 +1131,7 @@ export const Tours: CollectionConfig = {
             }),
           ]
         }
+        ,
       ]
     },
     {
@@ -1138,6 +1143,7 @@ export const Tours: CollectionConfig = {
         description: 'Precio General'
       },
     },
+
     {
       name: 'categorias',
       label: 'Categorías',
@@ -1157,6 +1163,14 @@ export const Tours: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Destinos a los que pertenece este tour.'
+      },
+    },
+    {
+      name: 'medusaId',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+        description: 'ID vinculado en Medusa E-commerce',
       },
     },
     {
@@ -1183,14 +1197,14 @@ export const Tours: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidateTour],
+    afterChange: [PopulateId, revalidateTour],
     beforeChange: [populatePublishedAt, createdBy, PopulatePrice, PopulateMap],
     afterDelete: [revalidateDelete],
   },
   versions: {
     drafts: {
       autosave: {
-        interval: 350 // We set this interval for optimal live preview
+        interval: 4500 // We set this interval for optimal live preview
       },
       schedulePublish: true,
     },

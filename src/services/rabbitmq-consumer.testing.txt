@@ -1,0 +1,147 @@
+import amqp, { Channel, Connection, ConsumeMessage } from 'amqplib'
+import { getContainer } from '@/container'
+
+// Definimos la estructura del mensaje que esperamos de Quarkus/Keycloak
+interface UserCreatedMessage {
+  externalId: string
+  email: string
+  adminType?: string
+}
+
+// Declaramos la variable global para mantener la instancia entre recargas de Next.js
+declare global {
+  var __rabbitMQConsumer: RabbitMQConsumer | undefined
+}
+
+export class RabbitMQConsumer {
+  private connection: Connection | null = null
+  private channel: Channel | null = null
+  private isConnecting: boolean = false
+  private exchangeName = 'tourism-exchange'
+  private exchangeType = 'topic'
+  private queueName = 'cms_users_sync_queue' // Nombre único para este microservicio
+  private routingKey = 'admin.registered'
+
+  private constructor() { }
+
+  // Patrón Singleton idéntico a tu WebSocketManager
+  static getInstance(): RabbitMQConsumer {
+    if (!globalThis.__rabbitMQConsumer) {
+      console.log('🐰 Creating new RabbitMQConsumer instance')
+      globalThis.__rabbitMQConsumer = new RabbitMQConsumer()
+    } else {
+      console.log('🐰 Reusing existing RabbitMQConsumer instance')
+    }
+    return globalThis.__rabbitMQConsumer
+  }
+
+  async start() {
+    if (this.connection || this.isConnecting) return
+    this.isConnecting = true
+
+    try {
+      console.log('🐰 Connecting to RabbitMQ...')
+
+      // 1. CONEXIÓN (Aquí es donde te logueas)
+      // Si no hay ENV, usa el fallback con credenciales explícitas
+      this.connection = await amqp.connect(
+        process.env.RABBITMQ_URL || 'amqp://admin:admin123@172.17.0.1:5672'
+      )
+
+      this.channel = await this.connection.createChannel()
+
+      // 2. ASSERT EXCHANGE (Asegurar que el buzón existe)
+      // Debe ser idéntico al de Quarkus (durable: true)
+      await this.channel.assertExchange(this.exchangeName, this.exchangeType, { durable: true })
+
+      // 3. ASSERT QUEUE (Tu cola personal)
+      const q = await this.channel.assertQueue(this.queueName, { durable: true })
+
+      // 4. BINDING (La conexión mágica)
+      // "Conecta mi cola al Exchange 'tourism-exchange' y mándame todo lo que sea 'iam.user.*'"
+      await this.channel.bindQueue(q.queue, this.exchangeName, this.routingKey)
+
+      console.log(`🐰 Listening on queue: ${this.queueName}, binding: ${this.routingKey}`)
+
+      // 5. CONSUMIR
+      this.channel.consume(this.queueName, this.handleMessage.bind(this))
+
+      this.isConnecting = false
+    } catch (error) {
+      console.error('🐰 Error connecting to RabbitMQ:', error)
+      this.isConnecting = false
+      setTimeout(() => this.start(), 5000)
+    }
+  }
+
+  // Lógica de procesamiento del mensaje
+  private async handleMessage(msg: ConsumeMessage | null) {
+    if (!msg) return
+
+    try {
+      const content = msg.content.toString()
+      console.log('🐰 Received message:', content)
+
+      const data: UserCreatedMessage = JSON.parse(content)
+
+      // Obtenemos el contenedor (DI) para acceder a Payload
+      const c = await getContainer()
+      const payload = c.cradle.payload
+
+      console.log(`🐰 Syncing user from Keycloak: ${data.email}`)
+
+      // Usamos la API Local de Payload para crear el usuario
+      // IMPORTANTE: context: { source: 'rabbitmq' } evita bucles infinitos si tienes hooks
+      await payload.create({
+        collection: 'users',
+        data: {
+          email: data.email,
+          password: 'dummy-password-managed-by-keycloak', // Payload exige pass, ponemos uno dummy
+          roles: ['admin'],
+          accounts: [
+            {
+              provider: 'keycloak',
+              providerAccountId: data.externalId,
+              type: 'oidc',
+            },
+          ],
+          // Mapea otros campos según tu esquema
+        },
+        context: {
+          source: 'rabbitmq'
+        }
+      })
+
+      console.log(`✅ User ${data.email} synced successfully`)
+
+      // Confirmamos a RabbitMQ que el mensaje se procesó (ACK)
+      this.channel?.ack(msg)
+
+    } catch (error: any) {
+      console.error('❌ Error processing RabbitMQ message:', error)
+
+      // Manejo de errores:
+      // Si el error es "Duplicate ID", probablemente ya se procesó, hacemos ACK.
+      // Si es otro error, podríamos hacer NACK para reintentar.
+
+      if (error.message?.includes('unique constraint') || error.code === 11000) {
+        console.warn('User already exists, acknowledging message.')
+        this.channel?.ack(msg)
+      } else {
+        // Rechazamos el mensaje pero no lo volvemos a encolar inmediatamente 
+        // para evitar "poison pill" (bucle de error infinito). 
+        // En producción, idealmente enviarías esto a una Dead Letter Queue (DLQ).
+        this.channel?.nack(msg, false, false)
+      }
+    }
+  }
+
+  // Método de limpieza (útil para tests o shutdown)
+  async close() {
+    if (this.channel) await this.channel.close()
+    if (this.connection) await this.connection.close()
+    this.channel = null
+    this.connection = null
+    console.log('🐰 RabbitMQ connection closed')
+  }
+}

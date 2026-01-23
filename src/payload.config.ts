@@ -21,6 +21,8 @@ import { BlogCategory } from './collections/BlogCategory'
 import { Post } from './collections/Post'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types"
+import { authConfig } from "./auth.config";
+
 // Import Globals
 
 // Import Blocks
@@ -41,10 +43,11 @@ import type { Page, Post as PostType, Paquete as PaqueteType, Tour as TourType }
 // import { mediaPlugin } from './plugins/core/media'
 
 //Migrations
-import { migrations } from './migrations'
+import { migrations } from './migrationsss'
 
 import { seedEndpoint } from './endpoints/seed'
 import { removeSeedEndpoint } from './endpoints/removeSeed'
+import { synctours } from './endpoints/synctours'
 import { SociosCarousel } from './globals/sociosCarousel/config'
 import { ReconocimientosCarousel } from './globals/reconocimientosCarousel/config'
 import { Footer } from './globals/Footer/config'
@@ -55,6 +58,8 @@ import { projectGetSourceForAsset } from 'next/dist/build/swc/generated-native'
 import { ToursPageGlobal } from './globals/TourPage/config'
 import { PaquetePageGlobal } from './globals/PaquetePage/config'
 import { BlogPageGlobal } from './globals/BlogPage/config'
+import { authjsPlugin } from 'payload-authjs'
+import { AuthGuard } from './components/AuthGuard'
 
 
 const filename = fileURLToPath(import.meta.url)
@@ -62,127 +67,140 @@ const dirname = path.dirname(filename)
 
 // Helper function to get server URL for CORS
 const generateTitle: GenerateTitle<TourType | PaqueteType | PostType | Page> = ({ doc }) => {
-    return doc?.title ? `${doc.title} | ${process.env.NAME_BUSINESS}` : 'Mi sitio'
+  return doc?.title ? `${doc.title} | ${process.env.NAME_BUSINESS}` : 'Mi sitio'
 }
 
 const generateURL: GenerateURL<TourType | PaqueteType | PostType | Page> = ({ doc, collectionSlug }) => {
-    const url = process.env.NEXTJS_FRONTEND_URL || 'http://localhost:3000'
-    return doc?.slug ? collectionSlug == 'pages' ? `${url}/${doc?.slug}` : `${url}/${collectionSlug}/${doc?.slug}` : url
+  const url = process.env.NEXTJS_FRONTEND_URL || 'http://localhost:3000'
+  return doc?.slug ? collectionSlug == 'pages' ? `${url}/${doc?.slug}` : `${url}/${collectionSlug}/${doc?.slug}` : url
 }
 
 
 
 export default buildConfig({
-    admin: {
-        importMap: {
-            baseDir: path.resolve(dirname),
-        },
-        user: Users.slug,
-        livePreview: {
-            breakpoints: [
-                {
-                    label: 'Mobile',
-                    name: 'mobile',
-                    width: 375,
-                    height: 667,
-                },
-                {
-                    label: 'Tablet',
-                    name: 'tablet',
-                    width: 768,
-                    height: 1024,
-                },
-                {
-                    label: 'Desktop',
-                    name: 'desktop',
-                    width: 1440,
-                    height: 900,
-                },
-            ],
-        }
-        // We'll add more components here later as needed
+  admin: {
+    importMap: {
+      baseDir: path.resolve(dirname),
     },
-    collections: [Users, Media, Pages, Tours, Ofertas, TourCategory, Destinations, BlogCategory, Post, Paquetes],
-    globals: [ReconocimientosCarousel, SociosCarousel, Footer, RedesNegocio, ToursPageGlobal, PaquetePageGlobal, BlogPageGlobal],
-    editor: lexicalEditor({
-        // Configure default lexical editor options
-    }),
-    secret: process.env.PAYLOAD_SECRET || '',
-    typescript: {
-        outputFile: path.resolve(dirname, 'payload-types.ts'),
-    },
-    // database-adapter-config-start
-    db: postgresAdapter({
-        push: false,
-        pool: {
-            connectionString: process.env.DATABASE_URI || '',
+    user: Users.slug,
+    livePreview: {
+      breakpoints: [
+        {
+          label: 'Mobile',
+          name: 'mobile',
+          width: 375,
+          height: 667,
         },
-        migrationDir: './src/migrations',
-        prodMigrations: migrations
-    }),
-    // database-adapter-config-end
-    sharp,
-    plugins: [
-        seoPlugin({
-            generateTitle: generateTitle,
-            generateURL: generateURL,
-        }),
-        s3Storage({
-            collections: {
-                media: true
-            },
-            bucket: process.env.S3_BUCKET || '',
-            config: {
-                requestHandler: {
-                    httpAgent: {
-                        maxSockets: 300,
-                        keepAlive: true,
-                    },
-                    httpsAgent: {
-                        maxSockets: 300,
-                        keepAlive: true,
-                    },
-                    connectionTimeout: 5 * 1000,
-                    requestTimeout: 5 * 1000,
-                },
-                credentials: {
-                    accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
-                    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || ''
-                },
-                region: process.env.S3_REGION
-            }
+        {
+          label: 'Tablet',
+          name: 'tablet',
+          width: 768,
+          height: 1024,
+        },
+        {
+          label: 'Desktop',
+          name: 'desktop',
+          width: 1440,
+          height: 900,
+        },
+      ],
+    },
+    components: {
 
-        }),
-        // toursPlugin(), // Remove this
-        // passengersPlugin(), // Remove this
-        // Will enable these once implemented properly
-        // usersPlugin(),
-        // mediaPlugin(),
-        // storage-adapter-placeholder
-    ],
-    i18n: {
-        supportedLanguages: { es, en },
-        fallbackLanguage: 'en'
     },
-    // Add CORS configurationauthenticatedOrPublished
-    serverURL: process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000',
-    cors: [process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000', process.env.NEXTJS_FRONTEND_URL || 'http://localhost:4000'],
-    // Implementing endpoints
-    endpoints: [
-        healthCheckEndpoint,
-        configEndpoint,
-        seedEndpoint,
-        removeSeedEndpoint
-    ],
-    // Configure job queue for background tasks (if needed)
-    jobs: {
-        access: {
-            run: ({ req }: { req: PayloadRequest }): boolean => {
-                // Allow authenticated users to run jobs
-                if (req.user) return true
-                return false
-            },
+    // We'll add more components here later as needed
+  },
+  collections: [Users, Media, Pages, Tours, Ofertas, TourCategory, Destinations, BlogCategory, Post, Paquetes],
+  globals: [ReconocimientosCarousel, SociosCarousel, Footer, RedesNegocio, ToursPageGlobal, PaquetePageGlobal, BlogPageGlobal],
+  editor: lexicalEditor({
+    // Configure default lexical editor options
+  }),
+  secret: process.env.PAYLOAD_SECRET || '',
+  typescript: {
+    outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
+  // database-adapter-config-start
+  db: postgresAdapter({
+    push: false,
+    pool: {
+      connectionString: process.env.DATABASE_URI || '',
+    },
+    migrationDir: './src/migrations',
+  }),
+  // database-adapter-config-end
+  sharp,
+  plugins: [
+    authjsPlugin({
+      authjsConfig: authConfig,
+      /**
+       * Enable Local JWT Strategy - allows admin to create users with password
+       * Login still goes through Keycloak via middleware redirect
+       *
+       * @see https://payloadcms.com/docs/authentication/jwt
+       */
+      enableLocalStrategy: true,
+    }),
+    seoPlugin({
+      generateTitle: generateTitle,
+      generateURL: generateURL,
+    }),
+    s3Storage({
+      collections: {
+        media: true
+      },
+      bucket: process.env.S3_BUCKET || '',
+      config: {
+        requestHandler: {
+          httpAgent: {
+            maxSockets: 300,
+            keepAlive: true,
+          },
+          httpsAgent: {
+            maxSockets: 300,
+            keepAlive: true,
+          },
+          connectionTimeout: 5 * 1000,
+          requestTimeout: 5 * 1000,
         },
-        tasks: [],
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || ''
+        },
+        region: process.env.S3_REGION
+      }
+
+    }),
+    // toursPlugin(), // Remove this
+    // passengersPlugin(), // Remove this
+    // Will enable these once implemented properly
+    // usersPlugin(),
+    // mediaPlugin(),
+    // storage-adapter-placeholder
+  ],
+  i18n: {
+    supportedLanguages: { es, en },
+    fallbackLanguage: 'en'
+  },
+  // Add CORS configurationauthenticatedOrPublished
+  serverURL: process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000',
+  cors: [process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000', process.env.NEXTJS_FRONTEND_URL || 'http://localhost:4000'],
+  // Implementing endpoints
+  endpoints: [
+    healthCheckEndpoint,
+    configEndpoint,
+    seedEndpoint,
+    removeSeedEndpoint,
+    synctours
+  ],
+  // Configure job queue for background tasks (if needed)
+  jobs: {
+    access: {
+      run: ({ req }: { req: PayloadRequest }): boolean => {
+        // Allow authenticated users to run jobs
+        if (req.user) return true
+        return false
+      },
     },
+    tasks: [],
+  },
 })
