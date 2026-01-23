@@ -12,7 +12,7 @@ services:
         -tAc "SELECT 1 FROM __restore_healthcheck LIMIT 1;" | grep -q 1
       interval: 5s
       timeout: 3s
-      retries: 10
+      retries: 30
     volumes:
       - pgdata:/var/lib/postgresql
       - ./db/backup_20260123_041220.dump:/dump/backup_20260123_041220.dump:ro
