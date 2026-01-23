@@ -18,7 +18,7 @@ services:
       - db_network
 
   payload:
-    build: .
+    image: urgosxd7/payload-cms:latest
     #ports:
     #  - '3000:3000'
     env_file:
