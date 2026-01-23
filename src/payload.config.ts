@@ -43,7 +43,7 @@ import type { Page, Post as PostType, Paquete as PaqueteType, Tour as TourType }
 // import { mediaPlugin } from './plugins/core/media'
 
 //Migrations
-import { migrations } from './migrationsss'
+import { migrations } from './migrations'
 
 import { seedEndpoint } from './endpoints/seed'
 import { removeSeedEndpoint } from './endpoints/removeSeed'

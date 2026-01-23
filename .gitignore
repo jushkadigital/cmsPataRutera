@@ -18,6 +18,7 @@ config/secrets.yml
 # Ignorar directorios específicos
 node_modules/
 /assets/
+/db/
 public/media/*
 !public/media/.gitkeep
 uploads/media/*
