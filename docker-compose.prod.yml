@@ -14,7 +14,8 @@ services:
         >/dev/null
       interval: 5s
       timeout: 5s
-      retries: 30
+      retries: 20
+      start_period: 2m
         
     volumes:
       - pgdata:/var/lib/postgresql
