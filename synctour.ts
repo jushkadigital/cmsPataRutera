@@ -20,7 +20,7 @@ export const syncTour = async ({ req }: { req: PayloadRequest }) => {
   const toursQuery = await payload.find({
     collection: 'tours', // Asegúrate que este sea el slug correcto
     draft: false,         // <--- ESTA es la clave: Trae la última versión existente
-    limit: 20,
+    limit: 200,
   });
 
   const tours = toursQuery.docs;
