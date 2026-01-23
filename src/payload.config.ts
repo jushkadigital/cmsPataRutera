@@ -126,6 +126,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
     migrationDir: './src/migrations',
+    prodMigrations: migrations
   }),
   // database-adapter-config-end
   sharp,
