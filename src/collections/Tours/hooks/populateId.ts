@@ -2,6 +2,7 @@ import type { CollectionAfterChangeHook, CollectionBeforeChangeHook, FieldHook, 
 import type { Media, Tour } from '@/payload-types'
 import crypto from 'crypto'
 import { getPayloadSession } from "payload-authjs"
+import { auth } from '@/auth'
 
 export const PopulateId: CollectionAfterChangeHook<Tour> = async ({ doc, req, operation, context, originalDoc }) => {
   // 1. REGLAS DE SEGURIDAD Y FILTRADO
@@ -24,20 +25,16 @@ export const PopulateId: CollectionAfterChangeHook<Tour> = async ({ doc, req, op
     return;
   }
 
-  async function getAuthSession(req: PayloadRequest) {
-    const res = await fetch(
-      `http://localhost:3000/api/auth/session`,
-      {
-        headers: {
-          cookie: req.headers.get("cookie") ?? "",
-        },
-      }
-    )
 
-    return res.json()
+  async function getAuthSession() {
+    // En v5, 'auth()' detecta el entorno automáticamente.
+    // No necesitas pasar req ni res si estás en App Router / Server Actions.
+    const session = await auth();
+
+    return session;
   }
-  const rr = await getAuthSession(req)
-  console.log(rr.accessToken)
+  const rr = await getAuthSession()
+  console.log(rr?.accessToken)
 
   // Ahora ya tienes acceso al token
   // 2. PREPARAR DATOS

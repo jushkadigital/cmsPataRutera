@@ -21,7 +21,7 @@ export const syncTour = async ({ req }: { req: PayloadRequest }) => {
   // Delete all users (use with caution - this deletes ALL users)
 
   const toursQuery = await payload.find({
-    collection: 'tours', // Asegúrate que este sea el slug correcto
+    collection: 'paquetes', // Asegúrate que este sea el slug correcto
     draft: false,         // <--- ESTA es la clave: Trae la última versión existente
     limit: 200,
   });
@@ -77,7 +77,7 @@ export const syncTour = async ({ req }: { req: PayloadRequest }) => {
     try {
       //const asset = await uploadAssetFromUrl((tour.meta?.image as Media).sizes?.square?.url as string)
 
-      const response = await fetch(`${MEDUSA_URL}/admin/tours`, {
+      const response = await fetch(`${MEDUSA_URL}/admin/paquetes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({
