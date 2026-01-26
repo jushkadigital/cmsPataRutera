@@ -41,6 +41,7 @@ services:
       - proxiable
       # Conecta el servicio payload a la nueva red interna para comunicarse con la base de datos
       - db_network
+      - red-compartida
   
 volumes:
   pgdata:
@@ -55,3 +56,6 @@ networks:
   db_network:
     driver: bridge
     # Docker Compose creará y gestionará esta red automáticamente
+  red-compartida:
+    external: true      # <--- ¡ESTO ES LO IMPORTANTE!
+    name: red-compartida # Asegura que busque el nombre exacto

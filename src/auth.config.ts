@@ -59,14 +59,21 @@ export const authConfig: NextAuthConfig = {
       issuer: process.env.AUTH_KEYCLOAK_ISSUER,
     }),
   ],
+  session: {
+    strategy: 'jwt'
+  },
   callbacks: {
 
-    async signIn({ user, account, profile }) {
-      return true;
-    },
 
-    authorized: ({ auth }) => {
-      return !!auth?.user; // Simplificado, deja que jwt maneje la expiración interna
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const isOnAdmin = nextUrl.pathname.startsWith('/admin');
+
+      if (isOnAdmin) {
+        if (isLoggedIn) return true;
+        return false; // Redirige a login
+      }
+      return true;
     },
 
     async jwt({ token, account, profile }) {

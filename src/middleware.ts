@@ -1,54 +1,24 @@
-import NextAuth from "next-auth";
-import { authConfig } from "./auth.config";
-import { NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt"
 
+import NextAuth from "next-auth";
+import { authConfig } from "./auth.config"; // <--- Importa la config ligera
+import { NextResponse } from "next/server";
+
+// Inicializamos una instancia separada SOLO para el middleware
 const { auth } = NextAuth(authConfig);
 
-export default auth(async (req) => {
+export default auth((req) => {
   const { nextUrl } = req;
-  const isLoggedIn = !!req.auth;
 
-  const token = await getToken({ req, secret: process.env.AUTH_KEYCLOAK_SECRET })
+  // Aquí puedes poner tu lógica extra si la necesitas, 
+  // pero la lógica de 'authorized' en auth.config.ts ya maneja la protección básica.
 
-
-  if (token?.error) {
-    if (token.error == "RefreshAccessTokenError") {
-      return NextResponse.redirect(new URL("/api/auth/logout", nextUrl.origin))
-    }
+  // Ejemplo: Redirección de logout si es necesaria
+  if (nextUrl.pathname === "/admin/logout") {
+    return NextResponse.redirect(new URL("/api/auth/signout", nextUrl.origin));
   }
-
-
-  // Check if accessing admin routes
-  const isAdminRoute = nextUrl.pathname.startsWith("/admin");
-  const isAdminLogout = nextUrl.pathname === "/admin/logout";
-
-  // Allow API routes and static files
-  const isApiRoute = nextUrl.pathname.startsWith("/api");
-  const isStaticRoute = nextUrl.pathname.startsWith("/_next") ||
-    nextUrl.pathname.startsWith("/favicon");
-
-  if (isStaticRoute || isApiRoute) {
-    return NextResponse.next();
-  }
-
-  // Intercept admin logout and redirect to Keycloak logout
-  if (isAdminLogout) {
-    return NextResponse.redirect(new URL("/api/auth/logout", nextUrl.origin));
-  }
-
-  // If accessing admin and not logged in, redirect to auto-signin page
-  /**
-  if (isAdminRoute && !isLoggedIn) {
-    const autoSignInUrl = new URL("/auth/signin", nextUrl.origin);
-    autoSignInUrl.searchParams.set("callbackUrl", nextUrl.href);
-    return NextResponse.redirect(autoSignInUrl);
-  }
-  **/
-
-  return NextResponse.next();
 });
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  // El matcher excluye rutas estáticas y API para no bloquearlas
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

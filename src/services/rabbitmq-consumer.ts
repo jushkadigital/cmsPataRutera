@@ -43,7 +43,7 @@ export class RabbitMQEventBus {
 
     try {
       console.log('🐰 [EventBus] Inicializando conexión...')
-      this.connection = await amqp.connect(process.env.RABBITMQ_URL || 'amqp://admin:admin123@172.17.0.1:5672')
+      this.connection = await amqp.connect(process.env.RABBITMQ_URL || 'amqp://admin:admin123@rabbitmq:5672')
       this.channel = await this.connection.createChannel()
 
       await this.channel.assertExchange(this.exchangeName, 'topic', { durable: true })
