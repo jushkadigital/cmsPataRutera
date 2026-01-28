@@ -48,6 +48,7 @@ import { migrations } from './migrations'
 import { seedEndpoint } from './endpoints/seed'
 import { removeSeedEndpoint } from './endpoints/removeSeed'
 import { synctours } from './endpoints/synctours'
+import { syncpaquetes } from './endpoints/syncpaquetes'
 import { SociosCarousel } from './globals/sociosCarousel/config'
 import { ReconocimientosCarousel } from './globals/reconocimientosCarousel/config'
 import { Footer } from './globals/Footer/config'
@@ -191,7 +192,8 @@ export default buildConfig({
     configEndpoint,
     seedEndpoint,
     removeSeedEndpoint,
-    synctours
+    synctours,
+    syncpaquetes
   ],
   // Configure job queue for background tasks (if needed)
   jobs: {

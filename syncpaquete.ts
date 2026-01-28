@@ -69,7 +69,7 @@ export const syncTour = async ({ req }: { req: PayloadRequest }) => {
     throw new Error()
   }
 
-  const promises = tours.map(async (tour) => {
+  for (const tour of tours) {
     payload.logger.info("TRAP")
     console.log("WAA")
     const thumbnail = (tour.meta?.image as Media)?.sizes?.og?.url
@@ -77,7 +77,7 @@ export const syncTour = async ({ req }: { req: PayloadRequest }) => {
     try {
       //const asset = await uploadAssetFromUrl((tour.meta?.image as Media).sizes?.square?.url as string)
 
-      const response = await fetch(`${MEDUSA_URL}/admin/paquetes`, {
+      const response = await fetch(`${MEDUSA_URL}/admin/packages`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({
@@ -109,8 +109,8 @@ export const syncTour = async ({ req }: { req: PayloadRequest }) => {
           // Para hacer esto bien necesitarías response.clone(), pero es mejor la Opción 1.
           console.log("No se pudo parsear error JSON");
         }
+        continue
 
-        return null; // <--- OBLIGATORIO: Salir de la función aquí
       }
 
       // --- BLOQUE DE ÉXITO ---
@@ -119,7 +119,7 @@ export const syncTour = async ({ req }: { req: PayloadRequest }) => {
 
       payload.logger.info(res)
       const meme = await payload.update({
-        collection: 'tours',
+        collection: 'paquetes',
         id: tour.id, // Es CRUCIAL pasar el ID específico de cada iteración
         data: {
           medusaId: res.tour.product.id,
@@ -136,8 +136,7 @@ export const syncTour = async ({ req }: { req: PayloadRequest }) => {
     }
     return { id: tour.id, status: 'ok' };
 
-  });
-  const results = await Promise.all(promises);
+  };
 
 
 
@@ -145,7 +144,7 @@ export const syncTour = async ({ req }: { req: PayloadRequest }) => {
   // Nota: Si usas Payload 3.0 (Next.js), devuelve Response.json(results)
   // Si usas Payload 2.0 (Express), usa res.status(200).json(results)
 
-  return new Response(JSON.stringify({ message: 'Proceso completado', results }), {
+  return new Response(JSON.stringify({ message: 'Proceso completado' }), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },
   });
