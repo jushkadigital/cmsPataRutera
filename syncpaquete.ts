@@ -134,8 +134,6 @@ export const syncTour = async ({ req }: { req: PayloadRequest }) => {
       payload.logger.error(err)
 
     }
-    return { id: tour.id, status: 'ok' };
-
   };
 
 
