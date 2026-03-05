@@ -18,7 +18,7 @@ export const PopulatePrice: CollectionBeforeChangeHook<Tour> = async ({ data }) 
       if (!block.rightColumn) {
         block.rightColumn = {} as any
       }
-      block.rightColumn.price = priceToApply
+      block.rightColumn!.price = priceToApply
     }
   })
 

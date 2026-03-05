@@ -407,22 +407,6 @@ export interface TitleGroup {
    * El contenido principal del texto del título.
    */
   titleText: string;
-  /**
-   * Selecciona la etiqueta HTML de encabezado (ej., H1, H2).
-   */
-  tag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  /**
-   * Selecciona el tamaño relativo de la fuente.
-   */
-  size: 'small' | 'medium' | 'large' | 'xlarge';
-  /**
-   * Introduce un valor de color CSS (ej., #ff0000, rgba(255,0,0,0.5), red).
-   */
-  textColor?: string | null;
-  /**
-   * Introduce un valor de color CSS para el subrayado.
-   */
-  underlineColor?: string | null;
 }
 /**
  * Categorías para agrupar tours.
@@ -891,11 +875,9 @@ export interface Tour {
     };
     [k: string]: unknown;
   };
-  Desde: string;
   price?: number | null;
-  'Person desc': string;
   iconMaxPassengers?: (number | null) | Media;
-  maxPassengers: number;
+  maxPassengers?: number | null;
   iconDifficulty?: (number | null) | Media;
   difficulty: 'easy' | 'medium' | 'hard';
   meta?: {
@@ -911,6 +893,14 @@ export interface Tour {
    */
   priceGeneral: number;
   /**
+   * Duracion
+   */
+  durationGeneral: number;
+  /**
+   * Duracion
+   */
+  maxPassengersGeneral: number;
+  /**
    * Categorías a las que pertenece este tour.
    */
   categorias?: (number | TourCategory)[] | null;
@@ -918,10 +908,6 @@ export interface Tour {
    * Destinos a los que pertenece este tour.
    */
   destinos?: (number | null) | Destination;
-  /**
-   * ID vinculado en Medusa E-commerce
-   */
-  medusaId?: string | null;
   createdBy?: (string | null) | User;
   publishedAt?: string | null;
   slug?: string | null;
@@ -974,17 +960,8 @@ export interface DescrPriceBlock {
       [k: string]: unknown;
     };
   };
-  rightColumn: {
-    priceTitle?: string | null;
-    prevText?: string | null;
+  rightColumn?: {
     price?: number | null;
-    nextText: string;
-    paymentForm?: {
-      iconDate?: (number | null) | Media;
-      InputPlaceHolderDate?: string | null;
-      iconPassengers?: (number | null) | Media;
-      InputPlaceHolderPassengers?: string | null;
-    };
   };
   id?: string | null;
   blockName?: string | null;
@@ -1269,11 +1246,9 @@ export interface Paquete {
     };
     [k: string]: unknown;
   };
-  Desde: string;
   price?: number | null;
-  'Person desc': string;
   iconMaxPassengers?: (number | null) | Media;
-  maxPassengers: number;
+  maxPassengers?: number | null;
   iconDifficulty?: (number | null) | Media;
   difficulty: 'easy' | 'medium' | 'hard';
   meta?: {
@@ -1289,13 +1264,17 @@ export interface Paquete {
    */
   priceGeneral: number;
   /**
+   * Duracion
+   */
+  durationGeneral: number;
+  /**
+   * Duracion
+   */
+  maxPassengersGeneral: number;
+  /**
    * Destinos a los que pertenece este tour.
    */
   destinos?: (number | Destination)[] | null;
-  /**
-   * ID vinculado en Medusa E-commerce
-   */
-  medusaId?: string | null;
   createdBy?: (string | null) | User;
   publishedAt?: string | null;
   slug?: string | null;
@@ -1754,10 +1733,6 @@ export interface GridToursBlockSelect<T extends boolean = true> {
  */
 export interface TitleGroupSelect<T extends boolean = true> {
   titleText?: T;
-  tag?: T;
-  size?: T;
-  textColor?: T;
-  underlineColor?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2011,9 +1986,7 @@ export interface ToursSelect<T extends boolean = true> {
       };
   featuredImage?: T;
   miniDescription?: T;
-  Desde?: T;
   price?: T;
-  'Person desc'?: T;
   iconMaxPassengers?: T;
   maxPassengers?: T;
   iconDifficulty?: T;
@@ -2026,9 +1999,10 @@ export interface ToursSelect<T extends boolean = true> {
         description?: T;
       };
   priceGeneral?: T;
+  durationGeneral?: T;
+  maxPassengersGeneral?: T;
   categorias?: T;
   destinos?: T;
-  medusaId?: T;
   createdBy?: T;
   publishedAt?: T;
   slug?: T;
@@ -2075,18 +2049,7 @@ export interface DescrPriceBlockSelect<T extends boolean = true> {
   rightColumn?:
     | T
     | {
-        priceTitle?: T;
-        prevText?: T;
         price?: T;
-        nextText?: T;
-        paymentForm?:
-          | T
-          | {
-              iconDate?: T;
-              InputPlaceHolderDate?: T;
-              iconPassengers?: T;
-              InputPlaceHolderPassengers?: T;
-            };
       };
   id?: T;
   blockName?: T;
@@ -2327,9 +2290,7 @@ export interface PaquetesSelect<T extends boolean = true> {
       };
   featuredImage?: T;
   miniDescription?: T;
-  Desde?: T;
   price?: T;
-  'Person desc'?: T;
   iconMaxPassengers?: T;
   maxPassengers?: T;
   iconDifficulty?: T;
@@ -2342,8 +2303,9 @@ export interface PaquetesSelect<T extends boolean = true> {
         description?: T;
       };
   priceGeneral?: T;
+  durationGeneral?: T;
+  maxPassengersGeneral?: T;
   destinos?: T;
-  medusaId?: T;
   createdBy?: T;
   publishedAt?: T;
   slug?: T;

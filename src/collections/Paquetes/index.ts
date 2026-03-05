@@ -137,21 +137,11 @@ export const Paquetes: CollectionConfig = {
                   label: 'Price Data',
                   fields: [
                     {
-                      type: 'text',
-                      name: 'Desde',
-                      required: true,
-                    },
-                    {
                       type: 'number',
                       name: 'price',
                       admin: {
                         readOnly: true
                       }
-                    },
-                    {
-                      type: 'text',
-                      name: 'Person desc',
-                      required: true,
                     },
 
                   ]
@@ -201,7 +191,9 @@ export const Paquetes: CollectionConfig = {
                       name: 'maxPassengers',
                       label: 'Máximo de Pasajeros',
                       type: 'number',
-                      required: true,
+                      admin: {
+                        readOnly: true
+                      }
                     },
                     {
                       name: 'iconDifficulty',
@@ -308,6 +300,24 @@ export const Paquetes: CollectionConfig = {
       },
     },
     {
+      type: 'number',
+      name: 'durationGeneral',
+      required: true,
+      admin: {
+        position: 'sidebar',
+        description: 'Duracion'
+      },
+    },
+    {
+      type: 'number',
+      name: 'maxPassengersGeneral',
+      required: true,
+      admin: {
+        position: 'sidebar',
+        description: 'Duracion'
+      },
+    },
+    {
       name: 'destinos',
       label: 'Destinos',
       type: 'relationship',
@@ -316,14 +326,6 @@ export const Paquetes: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Destinos a los que pertenece este tour.'
-      },
-    },
-    {
-      name: 'medusaId',
-      type: 'text',
-      admin: {
-        position: 'sidebar',
-        description: 'ID vinculado en Medusa E-commerce',
       },
     },
 
