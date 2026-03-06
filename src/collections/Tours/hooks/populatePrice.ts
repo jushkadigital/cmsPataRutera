@@ -7,7 +7,6 @@ export const PopulatePrice: CollectionBeforeChangeHook<Tour> = async ({ data }) 
   if (!data.priceGeneral || !data.layout) {
     return data
   }
-
   // Si el código llega aquí, es SEGURO que data.priceGeneral tiene un valor.
 
   const priceToApply = data.priceGeneral

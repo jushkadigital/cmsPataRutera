@@ -7,8 +7,8 @@ import {
   HeadingFeature,
   UploadFeature,
   UnorderedListFeature, // Keep for filtering
-  OrderedListFeature,   // Keep for filtering
-  ChecklistFeature,     // Corrected Typo: Keep for filtering
+  OrderedListFeature, // Keep for filtering
+  ChecklistFeature, // Corrected Typo: Keep for filtering
   BoldFeature,
   ItalicFeature,
   LinkFeature,
@@ -34,17 +34,20 @@ import { TextContentBlock } from '@/blocks/TextContentBlock/config'
 import { GridBlogs } from '@/blocks/GridBlogs/config'
 import { FormBitrixBlock } from '@/blocks/FormBitrix/config'
 import { RevistaBlock } from '@/blocks/RevistaBlock/config'
-import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from '@payloadcms/plugin-seo/fields'
+import {
+  MetaDescriptionField,
+  MetaImageField,
+  MetaTitleField,
+  OverviewField,
+  PreviewField,
+} from '@payloadcms/plugin-seo/fields'
 import { PopulatePrice } from './hooks/populatePrice'
 import { AdicionalTour } from '@/blocks/AdicionalTour/config'
 import { DataTour } from '@/blocks/DataTour/config'
 
 // Import the custom feature
 
-
-
-
-
+import { emitPaqueteChange, emitPaqueteDelete } from './hooks/emitPaqueteEvents'
 
 export const Paquetes: CollectionConfig = {
   slug: 'paquetes',
@@ -90,23 +93,34 @@ export const Paquetes: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
-          fields: [
-            heroPaquete
-          ],
-          label: 'Hero'
+          fields: [heroPaquete],
+          label: 'Hero',
         },
         {
           fields: [
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [DescrPrice, GuiaTour, GridTours, GridBlogs, PostRelationTourBlock, YouTubeLinksBlock, TextContentBlock, SociosBlock, ReconocimientosBlock, FormBitrixBlock, RevistaBlock, AdicionalTour, DataTour],
+              blocks: [
+                DescrPrice,
+                GuiaTour,
+                GridTours,
+                GridBlogs,
+                PostRelationTourBlock,
+                YouTubeLinksBlock,
+                TextContentBlock,
+                SociosBlock,
+                ReconocimientosBlock,
+                FormBitrixBlock,
+                RevistaBlock,
+                AdicionalTour,
+                DataTour,
+              ],
               required: true,
             },
           ],
-          label: 'Content'
-        }
-        ,
+          label: 'Content',
+        },
         {
           fields: [
             {
@@ -140,11 +154,10 @@ export const Paquetes: CollectionConfig = {
                       type: 'number',
                       name: 'price',
                       admin: {
-                        readOnly: true
-                      }
+                        readOnly: true,
+                      },
                     },
-
-                  ]
+                  ],
                 },
                 {
                   type: 'collapsible',
@@ -162,26 +175,25 @@ export const Paquetes: CollectionConfig = {
                             collection: 'media',
                             where: {
                               filename: {
-                                like: '%iconMaxPassengers%'
+                                like: '%iconMaxPassengers%',
                               },
                             },
                             limit: 1, // Asumimos que solo quieres una imagen con ese nombre
                             depth: 0, // No necesitamos poblar relaciones de la imagen en este caso
-                          });
+                          })
 
                           // Si se encontró un documento, retorna su ID
                           if (result.docs.length > 0) {
-                            return result.docs[0]!.id;
+                            return result.docs[0]!.id
                           }
-
                         } catch (error) {
                           // Maneja cualquier error durante la consulta
-                          console.error('Error fetching default image:', error);
+                          console.error('Error fetching default image:', error)
                         }
 
                         // Si no se encuentra la imagen o hay un error, retorna null o undefined
                         // para que el campo quede vacío por defecto.
-                        return null;
+                        return null
                       },
                       admin: {
                         readOnly: true, // Hace que el campo sea de solo lectura
@@ -192,8 +204,8 @@ export const Paquetes: CollectionConfig = {
                       label: 'Máximo de Pasajeros',
                       type: 'number',
                       admin: {
-                        readOnly: true
-                      }
+                        readOnly: true,
+                      },
                     },
                     {
                       name: 'iconDifficulty',
@@ -213,21 +225,20 @@ export const Paquetes: CollectionConfig = {
                             },
                             limit: 1, // Asumimos que solo quieres una imagen con ese nombre
                             depth: 0, // No necesitamos poblar relaciones de la imagen en este caso
-                          });
+                          })
 
                           // Si se encontró un documento, retorna su ID
                           if (result.docs.length > 0) {
-                            return result.docs[0]!.id;
+                            return result.docs[0]!.id
                           }
-
                         } catch (error) {
                           // Maneja cualquier error durante la consulta
-                          console.error('Error fetching default image:', error);
+                          console.error('Error fetching default image:', error)
                         }
 
                         // Si no se encuentra la imagen o hay un error, retorna null o undefined
                         // para que el campo quede vacío por defecto.
-                        return null;
+                        return null
                       },
                       admin: {
                         readOnly: true, // Hace que el campo sea de solo lectura
@@ -254,14 +265,12 @@ export const Paquetes: CollectionConfig = {
                       ],
                       required: true,
                     },
-                  ]
-                }
-
-              ]
+                  ],
+                },
+              ],
             },
-
           ],
-          label: 'Thumbnail'
+          label: 'Thumbnail',
         },
         {
           label: 'SEO',
@@ -270,33 +279,31 @@ export const Paquetes: CollectionConfig = {
             OverviewField({
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
-            })
-            ,
+            }),
             MetaTitleField({
-              hasGenerateFn: true
+              hasGenerateFn: true,
             }),
             MetaImageField({
-              relationTo: 'media'
+              relationTo: 'media',
             }),
-            MetaDescriptionField({
-            }),
+            MetaDescriptionField({}),
             PreviewField({
               hasGenerateFn: true,
               titlePath: 'meta.title',
-              descriptionPath: 'meta.description'
+              descriptionPath: 'meta.description',
             }),
-          ]
-        }
-
-      ]
+          ],
+        },
+      ],
     },
     {
       type: 'number',
       name: 'priceGeneral',
       required: true,
       admin: {
+        readOnly: true,
         position: 'sidebar',
-        description: 'Precio General'
+        description: 'Precio General',
       },
     },
     {
@@ -305,7 +312,7 @@ export const Paquetes: CollectionConfig = {
       required: true,
       admin: {
         position: 'sidebar',
-        description: 'Duracion'
+        description: 'Duracion',
       },
     },
     {
@@ -314,7 +321,7 @@ export const Paquetes: CollectionConfig = {
       required: true,
       admin: {
         position: 'sidebar',
-        description: 'Duracion'
+        description: 'Duracion',
       },
     },
     {
@@ -325,7 +332,7 @@ export const Paquetes: CollectionConfig = {
       hasMany: true,
       admin: {
         position: 'sidebar',
-        description: 'Destinos a los que pertenece este tour.'
+        description: 'Destinos a los que pertenece este tour.',
       },
     },
 
@@ -337,8 +344,7 @@ export const Paquetes: CollectionConfig = {
         readOnly: true,
         position: 'sidebar',
       },
-      access: {
-      },
+      access: {},
     },
     {
       name: 'publishedAt',
@@ -347,15 +353,15 @@ export const Paquetes: CollectionConfig = {
         position: 'sidebar',
         date: {
           pickerAppearance: 'dayAndTime',
-        }
+        },
       },
     },
     ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidatePaquete],
+    afterChange: [revalidatePaquete, emitPaqueteChange],
     beforeChange: [populatePublishedAt, createdBy, PopulatePrice],
-    afterDelete: [revalidateDelete],
+    afterDelete: [revalidateDelete, emitPaqueteDelete],
   },
   versions: {
     drafts: {

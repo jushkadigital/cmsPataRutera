@@ -7,8 +7,8 @@ import {
   HeadingFeature,
   UploadFeature,
   UnorderedListFeature, // Keep for filtering
-  OrderedListFeature,   // Keep for filtering
-  ChecklistFeature,     // Corrected Typo: Keep for filtering
+  OrderedListFeature, // Keep for filtering
+  ChecklistFeature, // Corrected Typo: Keep for filtering
   BoldFeature,
   ItalicFeature,
   LinkFeature,
@@ -28,14 +28,20 @@ import { SociosBlock } from '@/blocks/Socios/config'
 import { ReconocimientosBlock } from '@/blocks/Reconocimientos/config'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { heroTour } from '@/heros/TourHero'
-import { getPayload, RequiredDataFromCollectionSlug } from 'payload';
-import config from '@payload-config';
+import { getPayload, RequiredDataFromCollectionSlug } from 'payload'
+import config from '@payload-config'
 import { TextContentBlock } from '@/blocks/TextContentBlock/config'
 import { GridBlogs } from '@/blocks/GridBlogs/config'
 import { RevistaBlock } from '@/blocks/RevistaBlock/config'
 import { FormBitrixBlock } from '@/blocks/FormBitrix/config'
 import { RowBlock } from '@/blocks/RowBlock/config'
-import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from '@payloadcms/plugin-seo/fields'
+import {
+  MetaDescriptionField,
+  MetaImageField,
+  MetaTitleField,
+  OverviewField,
+  PreviewField,
+} from '@payloadcms/plugin-seo/fields'
 import { PopulatePrice } from './hooks/populatePrice'
 import { AdicionalTour } from '@/blocks/AdicionalTour/config'
 import { DataTour } from '@/blocks/DataTour/config'
@@ -44,15 +50,11 @@ import { PopulateMap } from './hooks/populateMap'
 import { ServicesTicket } from '@/blocks/ServicesTicket/config'
 import { ServicesFood } from '@/blocks/ServicesFood/config'
 import titleNew from '@/fields/titlenew'
-import { PopulateId } from './hooks/populateId'
 import { defaultData } from './defaults/contentDefault'
 
 // Import the custom feature
 
-
-
-
-
+import { emitTourChange, emitTourDelete } from './hooks/emitTourEvents'
 
 export const Tours: CollectionConfig = {
   slug: 'tours',
@@ -98,21 +100,35 @@ export const Tours: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
-          fields: [
-            heroTour
-          ],
-          label: 'Hero'
+          fields: [heroTour],
+          label: 'Hero',
         },
         {
           fields: [
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [DescrPrice, GuiaTour, GridTours, GridBlogs, RowBlock, PostRelationTourBlock, YouTubeLinksBlock, TextContentBlock, SociosBlock, ReconocimientosBlock, FormBitrixBlock, RevistaBlock, AdicionalTour, DataTour, MapBlock],
-              defaultValue: defaultData
+              blocks: [
+                DescrPrice,
+                GuiaTour,
+                GridTours,
+                GridBlogs,
+                RowBlock,
+                PostRelationTourBlock,
+                YouTubeLinksBlock,
+                TextContentBlock,
+                SociosBlock,
+                ReconocimientosBlock,
+                FormBitrixBlock,
+                RevistaBlock,
+                AdicionalTour,
+                DataTour,
+                MapBlock,
+              ],
+              defaultValue: defaultData,
             },
           ],
-          label: 'Content'
+          label: 'Content',
         },
         {
           fields: [
@@ -147,11 +163,10 @@ export const Tours: CollectionConfig = {
                       type: 'number',
                       name: 'price',
                       admin: {
-                        readOnly: true
-                      }
+                        readOnly: true,
+                      },
                     },
-
-                  ]
+                  ],
                 },
                 {
                   type: 'collapsible',
@@ -170,26 +185,25 @@ export const Tours: CollectionConfig = {
                             collection: 'media',
                             where: {
                               filename: {
-                                equals: 'iconMaxPassengers.svg'
+                                equals: 'iconMaxPassengers.svg',
                               },
                             },
                             limit: 1, // Asumimos que solo quieres una imagen con ese nombre
                             depth: 0, // No necesitamos poblar relaciones de la imagen en este caso
-                          });
+                          })
 
                           // Si se encontró un documento, retorna su ID
                           if (result.docs.length > 0) {
-                            return result.docs[0]!.id;
+                            return result.docs[0]!.id
                           }
-
                         } catch (error) {
                           // Maneja cualquier error durante la consulta
-                          console.error('Error fetching default image:', error);
+                          console.error('Error fetching default image:', error)
                         }
 
                         // Si no se encuentra la imagen o hay un error, retorna null o undefined
                         // para que el campo quede vacío por defecto.
-                        return null;
+                        return null
                       },
                       admin: {
                         readOnly: true, // Hace que el campo sea de solo lectura
@@ -200,8 +214,8 @@ export const Tours: CollectionConfig = {
                       label: 'Máximo de Pasajeros',
                       type: 'number',
                       admin: {
-                        readOnly: true
-                      }
+                        readOnly: true,
+                      },
                     },
                     {
                       name: 'iconDifficulty',
@@ -222,21 +236,20 @@ export const Tours: CollectionConfig = {
                             },
                             limit: 1, // Asumimos que solo quieres una imagen con ese nombre
                             depth: 0, // No necesitamos poblar relaciones de la imagen en este caso
-                          });
+                          })
 
                           // Si se encontró un documento, retorna su ID
                           if (result.docs.length > 0) {
-                            return result.docs[0]!.id;
+                            return result.docs[0]!.id
                           }
-
                         } catch (error) {
                           // Maneja cualquier error durante la consulta
-                          console.error('Error fetching default image:', error);
+                          console.error('Error fetching default image:', error)
                         }
 
                         // Si no se encuentra la imagen o hay un error, retorna null o undefined
                         // para que el campo quede vacío por defecto.
-                        return null;
+                        return null
                       },
                       admin: {
                         readOnly: true, // Hace que el campo sea de solo lectura
@@ -263,14 +276,12 @@ export const Tours: CollectionConfig = {
                       ],
                       required: true,
                     },
-                  ]
-                }
-
-              ]
+                  ],
+                },
+              ],
             },
-
           ],
-          label: 'Thumbnail'
+          label: 'Thumbnail',
         },
         {
           label: 'SEO',
@@ -278,35 +289,32 @@ export const Tours: CollectionConfig = {
           fields: [
             OverviewField({
               titlePath: 'meta.title',
-              descriptionPath: 'meta.description'
-
-            })
-            ,
+              descriptionPath: 'meta.description',
+            }),
             MetaTitleField({
-              hasGenerateFn: true
+              hasGenerateFn: true,
             }),
             MetaImageField({
               relationTo: 'media',
             }),
-            MetaDescriptionField({
-            }),
+            MetaDescriptionField({}),
             PreviewField({
               hasGenerateFn: true,
               titlePath: 'meta.title',
-              descriptionPath: 'meta.description'
+              descriptionPath: 'meta.description',
             }),
-          ]
-        }
-        ,
-      ]
+          ],
+        },
+      ],
     },
     {
       type: 'number',
       name: 'priceGeneral',
       required: true,
       admin: {
+        readOnly: true,
         position: 'sidebar',
-        description: 'Precio General'
+        description: 'Precio General',
       },
     },
     {
@@ -315,7 +323,7 @@ export const Tours: CollectionConfig = {
       required: true,
       admin: {
         position: 'sidebar',
-        description: 'Duracion'
+        description: 'Duracion',
       },
     },
     {
@@ -324,7 +332,7 @@ export const Tours: CollectionConfig = {
       required: true,
       admin: {
         position: 'sidebar',
-        description: 'Duracion'
+        description: 'Duracion',
       },
     },
 
@@ -336,7 +344,7 @@ export const Tours: CollectionConfig = {
       hasMany: true,
       admin: {
         position: 'sidebar',
-        description: 'Categorías a las que pertenece este tour.'
+        description: 'Categorías a las que pertenece este tour.',
       },
     },
     {
@@ -346,7 +354,7 @@ export const Tours: CollectionConfig = {
       relationTo: 'destinations',
       admin: {
         position: 'sidebar',
-        description: 'Destinos a los que pertenece este tour.'
+        description: 'Destinos a los que pertenece este tour.',
       },
     },
     {
@@ -357,8 +365,7 @@ export const Tours: CollectionConfig = {
         readOnly: true,
         position: 'sidebar',
       },
-      access: {
-      },
+      access: {},
     },
     {
       name: 'publishedAt',
@@ -367,20 +374,20 @@ export const Tours: CollectionConfig = {
         position: 'sidebar',
         date: {
           pickerAppearance: 'dayAndTime',
-        }
+        },
       },
     },
     ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidateTour],
+    afterChange: [revalidateTour, emitTourChange],
     beforeChange: [populatePublishedAt, createdBy, PopulatePrice, PopulateMap],
-    afterDelete: [revalidateDelete],
+    afterDelete: [revalidateDelete, emitTourDelete],
   },
   versions: {
     drafts: {
       autosave: {
-        interval: 4500 // We set this interval for optimal live preview
+        interval: 4500, // We set this interval for optimal live preview
       },
       schedulePublish: true,
     },

@@ -10,8 +10,8 @@ export type SubscriberHandler<T = any> = (data: T) => Promise<void>
 
 export class RabbitMQEventBus {
   private payload: Payload
-  private connection: Connection | null = null
-  private channel: Channel | null = null
+  private connection: any = null
+  private channel: any = null
 
   // Mapa de suscriptores
   private subscribers: Map<string, SubscriberHandler[]> = new Map()
@@ -38,12 +38,32 @@ export class RabbitMQEventBus {
     }
   }
 
+  // Método para emitir/publicar eventos
+  public async emit(routingKey: string, data: any) {
+    if (!this.channel) {
+      console.warn('⚠️ [EventBus] Canal no disponible. Intentando conectar...')
+      await this.start()
+    }
+
+    if (this.channel) {
+      const buffer = Buffer.from(JSON.stringify(data))
+      this.channel.publish(this.exchangeName, routingKey, buffer, { persistent: true })
+      console.log(`📤 [EventBus] Evento emitido a [${routingKey}]`)
+    } else {
+      console.error(
+        `❌ [EventBus] No se pudo emitir el evento a [${routingKey}], el canal sigue inactivo.`,
+      )
+    }
+  }
+
   async start() {
     if (this.connection) return
 
     try {
       console.log('🐰 [EventBus] Inicializando conexión...')
-      this.connection = await amqp.connect(process.env.RABBITMQ_URL || 'amqp://admin:admin123@rabbitmq:5672')
+      this.connection = await amqp.connect(
+        process.env.RABBITMQ_URL || 'amqp://admin:admin123@rabbitmq:5672',
+      )
       this.channel = await this.connection.createChannel()
 
       await this.channel.assertExchange(this.exchangeName, 'topic', { durable: true })
@@ -56,7 +76,6 @@ export class RabbitMQEventBus {
 
       this.channel.consume(q.queue, this.handleMessage.bind(this))
       console.log('✅ [EventBus] Conectado y escuchando eventos')
-
     } catch (error) {
       console.error('❌ [EventBus] Error de conexión:', error)
       setTimeout(() => this.start(), 5000)
@@ -83,10 +102,10 @@ export class RabbitMQEventBus {
     try {
       const content = JSON.parse(msg.content.toString())
       // Ejecutamos los handlers.
-      // NOTA: Ya no pasamos 'payload' como argumento al handler, 
+      // NOTA: Ya no pasamos 'payload' como argumento al handler,
       // porque los suscriptores deberían tener sus propias dependencias si las necesitan,
       // o usar el payload global si son funciones simples.
-      await Promise.all(handlers.map(handler => handler(content)))
+      await Promise.all(handlers.map((handler) => handler(content)))
       this.channel?.ack(msg)
     } catch (error) {
       console.error(`❌ [EventBus] Error en ${routingKey}:`, error)

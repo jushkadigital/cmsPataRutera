@@ -3,7 +3,8 @@ import config from '@/payload.config'
 import FormData from 'form-data';
 import crypto from 'crypto'
 import path from 'path'
-import { Media } from '@/payload-types';
+import { Destination, Media, TourCategory } from '@/payload-types';
+import { RabbitMQEventBus } from '@/services/rabbitmq-consumer';
 interface AssetResponse {
   id: string;
   name: string;
@@ -23,7 +24,8 @@ export const syncTour = async ({ req }: { req: PayloadRequest }) => {
   const toursQuery = await payload.find({
     collection: 'tours', // Asegúrate que este sea el slug correcto
     draft: false,         // <--- ESTA es la clave: Trae la última versión existente
-    limit: 200,
+    limit: 2000,
+    depth: 2
   });
 
   const tours = toursQuery.docs;
@@ -35,104 +37,30 @@ export const syncTour = async ({ req }: { req: PayloadRequest }) => {
   // Úsalo si la API externa es estricta con el Rate Limit
   // ---------------------------------------------------------
   let token
-  try {
-    const response = await fetch(`${MEDUSA_URL}/auth/user/emailpass`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "email": "admin@medusa-test.com",
-        "password": "supersecret"
-      })
-    })
-    if (!response.ok) {
-      // --- BLOQUE DE ERROR ---
-      try {
-        const errorData = await response.json(); // Consumo 1
-        console.log("Error JSON:", errorData);
-      } catch (e) {
-        // Nota: Aquí fallaría si intentas response.text() porque response.json() ya intentó leerlo.
-        // Para hacer esto bien necesitarías response.clone(), pero es mejor la Opción 1.
-        console.log("No se pudo parsear error JSON");
-      }
-
-      return null; // <--- OBLIGATORIO: Salir de la función aquí
-    }
-
-    // --- BLOQUE DE ÉXITO ---
-    // Solo llegamos aquí si response.ok es true y el body NO ha sido leído
-    const res = await response.json(); // Consumo 1 (exitoso)
-    payload.logger.info(res)
-    token = res.token
-
-  } catch (error) {
-    payload.logger.error(error)
-    throw new Error()
-  }
+  const { getContainer } = await import('@/container')
+  const container = await getContainer()
+  const eventBus = container.resolve<RabbitMQEventBus>('rabbitMQEventBus')
+  const routingKey = 'tour.created'
 
   for (const tour of tours) {
-    payload.logger.info("TRAP")
-    console.log("WAA")
-    const thumbnail = (tour.meta?.image as Media)?.sizes?.og?.url
-    console.log(thumbnail)
-    try {
-      //const asset = await uploadAssetFromUrl((tour.meta?.image as Media).sizes?.square?.url as string)
-
-      const response = await fetch(`${MEDUSA_URL}/admin/tours`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-        body: JSON.stringify({
-
-          "destination": tour.title,
-          "description": tour.meta?.description || 'description',
-          "duration_days": tour.layout?.find(ele => ele.blockType == "dataTour")?.duration.valueDia ?? 1,
-          "max_capacity": tour.layout?.find(ele => ele.blockType == "dataTour")?.groupSize.value ?? 15,
-          "available_dates": [
-          ],
-          ...(thumbnail && { thumbnail }),
-          "prices": {
-            "adult": tour.priceGeneral,
-            "child": tour.priceGeneral * 0.8,
-            "infant": 0,
-            "currency_code": "pen"
-          }
-
-        }),
-      });
-
-      if (!response.ok) {
-        // --- BLOQUE DE ERROR ---
-        try {
-          const errorData = await response.json(); // Consumo 1
-          console.log("Error JSON:", errorData);
-        } catch (e) {
-          // Nota: Aquí fallaría si intentas response.text() porque response.json() ya intentó leerlo.
-          // Para hacer esto bien necesitarías response.clone(), pero es mejor la Opción 1.
-          console.log("No se pudo parsear error JSON");
-        }
-        continue
+    payload.logger.info("ao")
+    await eventBus.emit(routingKey, {
+      id: tour.id,
+      slug: tour.slug,
+      data: {
+        destination: tour.title,
+        description: tour.miniDescription,
+        duration_days: tour.durationGeneral ?? 1,
+        max_capacity: tour.maxPassengersGeneral ?? 20,
+        thumbnail: (tour.featuredImage as Media)?.sizes?.og?.url ?? '',
+        price: tour.priceGeneral,
+        categories: (tour.categorias as TourCategory[]).map(categoria => ({ name: categoria.name })),
+        destinos: (tour.destinos as Destination)?.name ?? '',
+        difficulty: tour.difficulty
       }
+    })
 
-      // --- BLOQUE DE ÉXITO ---
-      // Solo llegamos aquí si response.ok es true y el body NO ha sido leído
-      const res = await response.json(); // Consumo 1 (exitoso)
 
-      payload.logger.info(res)
-      const meme = await payload.update({
-        collection: 'tours',
-        id: tour.id, // Es CRUCIAL pasar el ID específico de cada iteración
-        data: {
-          medusaId: res.tour.product.id,
-        },
-        context: { disable: true },
-        req: req
-      });
-
-      //payload.logger.info(meme)
-
-    } catch (err) {
-      payload.logger.error(err)
-
-    }
 
   };
   //const results = await Promise.all(promises);
