@@ -122,6 +122,17 @@ export const Paquetes: CollectionConfig = {
           label: 'Content',
         },
         {
+          label: 'Formulario',
+          fields: [
+            {
+              name: 'form',
+              label: 'Formulario',
+              type: 'relationship',
+              relationTo: 'forms',
+            },
+          ],
+        },
+        {
           fields: [
             {
               name: 'featuredImage',

@@ -55,7 +55,7 @@ export const syncTour = async ({ req }: { req: PayloadRequest }) => {
         thumbnail: (tour.featuredImage as Media)?.sizes?.og?.url ?? '',
         price: tour.priceGeneral,
         categories: (tour.categorias as TourCategory[]).map(categoria => ({ name: categoria.name })),
-        destinos: (tour.destinos as Destination)?.name ?? '',
+        destinos: { name: (tour.destinos as Destination)?.name ?? '' },
         difficulty: tour.difficulty
       }
     })

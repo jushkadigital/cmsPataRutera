@@ -45,10 +45,10 @@ export const emitTourChange: CollectionAfterChangeHook<Tour> = async ({ doc, req
         description: doc.miniDescription,
         duration_days: doc.durationGeneral,
         max_capacity: doc.maxPassengersGeneral,
-        thumbnail: image.sizes?.og?.url ?? '',
+        thumbnail: image?.sizes?.og?.url ?? '',
         price: doc.priceGeneral,
         categories: categories.docs.map(categoria => ({ name: categoria.name })),
-        destinos: { id: destino.id, name: destino.name },
+        destinos: { name: destino.name },
         difficulty: doc.difficulty
       }
     })

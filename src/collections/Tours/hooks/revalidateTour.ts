@@ -55,35 +55,6 @@ export const revalidateTour: CollectionAfterChangeHook<Tour> = async ({
     if (doc._status === 'published') {
 
 
-      if (previousDoc._status !== 'published') {
-
-        if (doc.domainTourId) {
-          payload.logger.info('BOTON PUBLICADO')
-          const resdomain = await fetch(`http://172.17.0.1:8081/api/catalog/tours/${doc.domainTourId}/publish`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          })
-          if (!resdomain.ok) { // Si el status no está entre 200-299
-            console.error(`Error Status: ${resdomain.status}`);
-
-            // Intenta leer el mensaje de error del servidor
-            try {
-              const errorData = await resdomain.text(); // Si el servidor devuelve JSON
-              console.log("Detalles del error (JSON):", errorData);
-            } catch (e) {
-              console.log("Detalles del error (Texto):", e);
-            }
-            return;
-          }
-          const res = await resdomain.json()
-          payload.logger.info(res)
-
-        }
-
-      }
-
       // Revalidar la página individual del tour
       const tourPath = `/tours/${doc.slug}`
       payload.logger.info(`Solicitando revalidación de tour en ruta: ${tourPath}`)
@@ -104,20 +75,8 @@ export const revalidateTour: CollectionAfterChangeHook<Tour> = async ({
         pathsToRevalidate.push('/destinos')
       }
     }
-    const hasRelevantChanges = Object.keys(doc).some((key) => {
-      // 1. Si la key está en la lista de ignorados, pasamos al siguiente
 
-      // 2. Ignoramos campos de sistema
-      if (['updatedAt', 'createdAt', 'id'].includes(key)) return false;
 
-      // 3. Comparamos el valor nuevo con el anterior
-      // Nota: Para objetos/arrays anidados, usa JSON.stringify o lodash
-      return JSON.stringify(doc['bussiness']) !== JSON.stringify(previousDoc['bussiness']);
-    });
-
-    if (!hasRelevantChanges) {
-      return doc; // No hacemos nada
-    }
 
     // Revalidar la ruta anterior si el tour fue despublicado
     if (previousDoc?._status === 'published' && doc._status !== 'published') {
@@ -131,7 +90,7 @@ export const revalidateTour: CollectionAfterChangeHook<Tour> = async ({
 
     // Solo enviar la solicitud si hay rutas para revalidar
     if (pathsToRevalidate.length > 0) {
-      await sendRevalidationRequest(payload, pathsToRevalidate, tagsToRevalidate)
+      await sendRevalidationRequest(payload, pathsToRevalidate.map(ele => "/pe" + ele), tagsToRevalidate)
     }
   }
   return doc
@@ -157,7 +116,7 @@ export const revalidateDelete: CollectionAfterDeleteHook<Tour> = async ({
       pathsToRevalidate.push('/destinos')
     }
 
-    await sendRevalidationRequest(payload, pathsToRevalidate, ['tours-sitemap', 'tours'])
+    await sendRevalidationRequest(payload, pathsToRevalidate.map(ele => "/pe" + ele), ['tours-sitemap', 'tours'])
   }
 
   return doc

@@ -20,8 +20,9 @@ import { Destinations } from './collections/Destinations'
 import { BlogCategory } from './collections/BlogCategory'
 import { Post } from './collections/Post'
 import { seoPlugin } from '@payloadcms/plugin-seo'
-import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types"
-import { authConfig } from "./auth.config";
+import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
+import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
+import { authConfig } from './auth.config'
 
 // Import Globals
 
@@ -36,7 +37,12 @@ import { healthCheckEndpoint } from './endpoints/health'
 import { configEndpoint } from './endpoints/config'
 import { Paquetes } from './collections/Paquetes'
 import { getServerSideURL } from '@/utilities/getURL'
-import type { Page, Post as PostType, Paquete as PaqueteType, Tour as TourType } from './payload-types'
+import type {
+  Page,
+  Post as PostType,
+  Paquete as PaqueteType,
+  Tour as TourType,
+} from './payload-types'
 
 // We'll implement these plugins properly in phase 2
 // import { usersPlugin } from './plugins/core/users'
@@ -62,7 +68,6 @@ import { BlogPageGlobal } from './globals/BlogPage/config'
 import { authjsPlugin } from 'payload-authjs'
 import { AuthGuard } from './components/AuthGuard'
 
-
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -71,12 +76,17 @@ const generateTitle: GenerateTitle<TourType | PaqueteType | PostType | Page> = (
   return doc?.title ? `${doc.title} | ${process.env.NAME_BUSINESS}` : 'Mi sitio'
 }
 
-const generateURL: GenerateURL<TourType | PaqueteType | PostType | Page> = ({ doc, collectionSlug }) => {
+const generateURL: GenerateURL<TourType | PaqueteType | PostType | Page> = ({
+  doc,
+  collectionSlug,
+}) => {
   const url = process.env.NEXTJS_FRONTEND_URL || 'http://localhost:3000'
-  return doc?.slug ? collectionSlug == 'pages' ? `${url}/${doc?.slug}` : `${url}/${collectionSlug}/${doc?.slug}` : url
+  return doc?.slug
+    ? collectionSlug == 'pages'
+      ? `${url}/${doc?.slug}`
+      : `${url}/${collectionSlug}/${doc?.slug}`
+    : url
 }
-
-
 
 export default buildConfig({
   admin: {
@@ -106,13 +116,30 @@ export default buildConfig({
         },
       ],
     },
-    components: {
-
-    },
+    components: {},
     // We'll add more components here later as needed
   },
-  collections: [Users, Media, Pages, Tours, Ofertas, TourCategory, Destinations, BlogCategory, Post, Paquetes],
-  globals: [ReconocimientosCarousel, SociosCarousel, Footer, RedesNegocio, ToursPageGlobal, PaquetePageGlobal, BlogPageGlobal],
+  collections: [
+    Users,
+    Media,
+    Pages,
+    Tours,
+    Ofertas,
+    TourCategory,
+    Destinations,
+    BlogCategory,
+    Post,
+    Paquetes,
+  ],
+  globals: [
+    ReconocimientosCarousel,
+    SociosCarousel,
+    Footer,
+    RedesNegocio,
+    ToursPageGlobal,
+    PaquetePageGlobal,
+    BlogPageGlobal,
+  ],
   editor: lexicalEditor({
     // Configure default lexical editor options
   }),
@@ -127,7 +154,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
     migrationDir: './src/migrations',
-    prodMigrations: migrations
+    prodMigrations: migrations,
   }),
   // database-adapter-config-end
   sharp,
@@ -146,9 +173,15 @@ export default buildConfig({
       generateTitle: generateTitle,
       generateURL: generateURL,
     }),
+    formBuilderPlugin({
+      fields: {
+        payment: false,
+      },
+      redirectRelationships: ['tours', 'paquetes'],
+    }),
     s3Storage({
       collections: {
-        media: true
+        media: true,
       },
       bucket: process.env.S3_BUCKET || '',
       config: {
@@ -166,11 +199,10 @@ export default buildConfig({
         },
         credentials: {
           accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
-          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || ''
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
         },
-        region: process.env.S3_REGION
-      }
-
+        region: process.env.S3_REGION,
+      },
     }),
     // toursPlugin(), // Remove this
     // passengersPlugin(), // Remove this
@@ -181,11 +213,14 @@ export default buildConfig({
   ],
   i18n: {
     supportedLanguages: { es, en },
-    fallbackLanguage: 'en'
+    fallbackLanguage: 'en',
   },
   // Add CORS configurationauthenticatedOrPublished
   serverURL: process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000',
-  cors: [process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000', process.env.NEXTJS_FRONTEND_URL || 'http://localhost:4000'],
+  cors: [
+    process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000',
+    process.env.NEXTJS_FRONTEND_URL || 'http://localhost:4000',
+  ],
   // Implementing endpoints
   endpoints: [
     healthCheckEndpoint,
@@ -193,7 +228,7 @@ export default buildConfig({
     seedEndpoint,
     removeSeedEndpoint,
     synctours,
-    syncpaquetes
+    syncpaquetes,
   ],
   // Configure job queue for background tasks (if needed)
   jobs: {
