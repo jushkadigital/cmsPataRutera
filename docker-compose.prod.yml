@@ -12,7 +12,7 @@ services:
         
     volumes:
       - pgdata:/var/lib/postgresql
-      - ./db/backup_20260123_041220.dump:/dump/backup_20260123_041220.dump:ro
+      - ./db/backup_20260105_153850.dump:/dump/backup_20260105_153850.dump:ro
       - ./db/restore.sh:/docker-entrypoint-initdb.d/restore.sh:ro
 
 
