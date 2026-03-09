@@ -15,7 +15,7 @@ pg_restore \
   --if-exists \
   --no-owner \
   --no-privileges \
-  /dump/backup_20260123_041220.dump
+  /dump/backup_20260105_153850.dump
 
 psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB" <<'EOF'
 CREATE TABLE IF NOT EXISTS __restore_healthcheck (
