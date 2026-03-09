@@ -13,12 +13,6 @@ services:
       - ./db/backup_20260123_041220.dump:/dump/backup_20260123_041220.dump:ro
       - ./db/restore.sh:/docker-entrypoint-initdb.d/restore.sh:ro
 
-    #ports:
-    #  - '5432:5432'
-    environment:
-      POSTGRES_DB: payload
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: mypassword
     networks:
       # Conecta el servicio postgres a la nueva red interna para comunicarse con la aplicación
       - db_network
