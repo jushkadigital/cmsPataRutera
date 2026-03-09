@@ -7,14 +7,18 @@ services:
       POSTGRES_DB: payload
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mypassword
-      PGDATA: /var/lib/postgresql/18/docker
+      PGDATA: /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "PGPASSWORD=$$POSTGRES_PASSWORD psql -U $$POSTGRES_USER -d $$POSTGRES_DB -v ON_ERROR_STOP=1 -tAc \"SELECT 1 FROM __restore_healthcheck LIMIT 1\" >/dev/null"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 2m
     volumes:
-      - pgdata:/var/lib/postgresql
-      - ./db/backup_20260123_041220.dump:/dump/backup_20260123_041220.dump:ro
+      - pgdata:/var/lib/postgresql/data
+      - ./db/backup_20260105_153850.dump:/dump/backup_20260105_153850.dump:ro
       - ./db/restore.sh:/docker-entrypoint-initdb.d/restore.sh:ro
-
     networks:
-      # Conecta el servicio postgres a la nueva red interna para comunicarse con la aplicación
       - db_network
 
   payload:
