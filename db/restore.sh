@@ -1,9 +1,11 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 echo "==> Iniciando restore"
 echo "DB: $POSTGRES_DB"
 echo "User: $POSTGRES_USER"
+
+export PGPASSWORD="$POSTGRES_PASSWORD"
 
 pg_restore \
   --verbose \
@@ -11,9 +13,11 @@ pg_restore \
   --dbname="$POSTGRES_DB" \
   --clean \
   --if-exists \
+  --no-owner \
+  --no-privileges \
   /dump/backup_20260123_041220.dump
 
-psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" <<EOF
+psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB" <<'EOF'
 CREATE TABLE IF NOT EXISTS __restore_healthcheck (
   id BOOLEAN PRIMARY KEY DEFAULT TRUE
 );
