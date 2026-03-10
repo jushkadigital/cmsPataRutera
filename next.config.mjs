@@ -1,6 +1,5 @@
 import { withPayload } from '@payloadcms/next/withPayload'
 
-
 const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   : undefined || process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
@@ -19,9 +18,11 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   webpack: (config, { webpack }) => {
-    config.plugins.push(new webpack.IgnorePlugin({
-      resourceRegExp: /^pg-native$|^cloudflare:sockets$/,
-    }))
+    config.plugins.push(
+      new webpack.IgnorePlugin({
+        resourceRegExp: /^pg-native$|^cloudflare:sockets$/,
+      }),
+    )
 
     return config
   },
@@ -36,6 +37,10 @@ const nextConfig = {
           protocol: url.protocol.replace(':', ''),
         }
       }),
+      {
+        protocol: 'https',
+        hostname: '*.amazonaws.com',
+      },
     ],
   },
   reactStrictMode: true,

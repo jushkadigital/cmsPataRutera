@@ -18,6 +18,7 @@
     "seed": "cross-env NODE_OPTIONS=--max-old-space-size=4096 payload run seed.ts "
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1005.0",
     "@payloadcms/db-postgres": "3.33.0",
     "@payloadcms/live-preview": "3.33.0",
     "@payloadcms/live-preview-react": "3.33.0",

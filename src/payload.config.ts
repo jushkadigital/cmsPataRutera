@@ -6,6 +6,24 @@ import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { S3Client } from '@aws-sdk/client-s3'
+
+if (!(S3Client.prototype as any)._isMonkeyPatchedForCacheControl) {
+  const originalSend = S3Client.prototype.send
+  S3Client.prototype.send = function (this: S3Client, command: any, optionsOrCb?: any, cb?: any) {
+    if (
+      command?.constructor?.name === 'PutObjectCommand' ||
+      command?.constructor?.name === 'CreateMultipartUploadCommand'
+    ) {
+      if (command.input && !command.input.CacheControl) {
+        command.input.CacheControl = 'public, max-age=31536000, immutable'
+      }
+    }
+    return originalSend.call(this, command, optionsOrCb, cb)
+  } as any
+    ; (S3Client.prototype as any)._isMonkeyPatchedForCacheControl = true
+}
+
 import { en } from '@payloadcms/translations/languages/en'
 import { es } from '@payloadcms/translations/languages/es'
 // Import collections
@@ -181,7 +199,12 @@ export default buildConfig({
     }),
     s3Storage({
       collections: {
-        media: true,
+        media: {
+          disablePayloadAccessControl: true,
+          generateFileURL: ({ filename, prefix }) => {
+            return `https://${process.env.S3_BUCKET}.s3.${process.env.S3_REGION}.amazonaws.com/${prefix ? `${prefix}/` : ''}${filename}`
+          },
+        },
       },
       bucket: process.env.S3_BUCKET || '',
       config: {
@@ -217,7 +240,8 @@ export default buildConfig({
   },
   // Add CORS configurationauthenticatedOrPublished
   serverURL: process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000',
-  cors: [
+  cors: '*',
+  csrf: [
     process.env.PAYLOAD_DOMAIN_URL || 'http://localhost:3000',
     process.env.NEXTJS_FRONTEND_URL || 'http://localhost:4000',
   ],
