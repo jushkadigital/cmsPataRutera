@@ -20,6 +20,9 @@ services:
       - ./db/restore.sh:/docker-entrypoint-initdb.d/restore.sh:ro
     networks:
       - db_network
+    cpus: 0.75
+    mem_limit: 768m
+    mem_reservation: 384m
 
   payload:
     image: urgosxd7/payload-cms:latest
@@ -36,6 +39,9 @@ services:
       # Conecta el servicio payload a la nueva red interna para comunicarse con la base de datos
       - db_network
       - red-compartida
+    cpus: 1.0
+    mem_limit: 1024m
+    mem_reservation: 512m
   
 volumes:
   pgdata:
