@@ -3,6 +3,7 @@ import type { RabbitMQEventBus } from '@/services/rabbitmq-consumer'
 import { Tour } from '@/payload-types'
 import { metadata } from '@payloadcms/next/layouts'
 import { PayloadIcon } from '@payloadcms/ui'
+import { MeiliImage } from '@/utilities/convertToMeiliImage'
 
 export const emitTourChange: CollectionAfterChangeHook<Tour> = async ({ doc, req, operation }) => {
   try {
@@ -46,6 +47,7 @@ export const emitTourChange: CollectionAfterChangeHook<Tour> = async ({ doc, req
         duration_days: doc.durationGeneral,
         max_capacity: doc.maxPassengersGeneral,
         thumbnail: image?.sizes?.og?.url ?? '',
+        completeThumbnail: MeiliImage(image),
         price: doc.priceGeneral,
         categories: categories.docs.map(categoria => ({ name: categoria.name })),
         destinos: { name: destino.name },

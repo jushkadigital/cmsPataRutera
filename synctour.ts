@@ -5,6 +5,7 @@ import crypto from 'crypto'
 import path from 'path'
 import { Destination, Media, TourCategory } from '@/payload-types';
 import { RabbitMQEventBus } from '@/services/rabbitmq-consumer';
+import { MeiliImage } from '@/utilities/convertToMeiliImage';
 interface AssetResponse {
   id: string;
   name: string;
@@ -53,6 +54,7 @@ export const syncTour = async ({ req }: { req: PayloadRequest }) => {
         duration_days: tour.durationGeneral ?? 1,
         max_capacity: tour.maxPassengersGeneral ?? 20,
         thumbnail: (tour.featuredImage as Media)?.sizes?.og?.url ?? '',
+        completeThumbnail: MeiliImage(tour.featuredImage as Media),
         price: tour.priceGeneral,
         categories: (tour.categorias as TourCategory[]).map(categoria => ({ name: categoria.name })),
         destinos: { name: (tour.destinos as Destination)?.name ?? '' },

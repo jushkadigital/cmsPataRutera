@@ -1,6 +1,7 @@
 import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'payload'
 import type { RabbitMQEventBus } from '@/services/rabbitmq-consumer'
 import { Paquete } from '@/payload-types'
+import { MeiliImage } from '@/utilities/convertToMeiliImage'
 
 export const emitPaqueteChange: CollectionAfterChangeHook<Paquete> = async ({ doc, req, operation }) => {
   try {
@@ -36,6 +37,7 @@ export const emitPaqueteChange: CollectionAfterChangeHook<Paquete> = async ({ do
         duration_days: doc.durationGeneral,
         max_capacity: doc.maxPassengersGeneral,
         thumbnail: image.sizes?.og?.url ?? '',
+        completeThumbnail: MeiliImage(image),
         price: doc.priceGeneral,
         destinos: destinos.docs.map(destino => ({ id: destino.id, name: destino.name })),
         difficulty: doc.difficulty
