@@ -1,8 +1,12 @@
 import { Media } from "@/payload-types";
 
 export function MeiliImage(image: Media) {
+  if (!image) {
+    return null
+  }
+
   if (!image.sizes) {
-    return
+    return null
   }
 
   return {
