@@ -48,6 +48,7 @@ import { DataTour } from '@/blocks/DataTour/config'
 // Import the custom feature
 
 import { emitPaqueteChange, emitPaqueteDelete } from './hooks/emitPaqueteEvents'
+import { defaultData } from './default/contentDefault'
 
 export const Paquetes: CollectionConfig = {
   slug: 'paquetes',
@@ -116,7 +117,7 @@ export const Paquetes: CollectionConfig = {
                 AdicionalTour,
                 DataTour,
               ],
-              required: true,
+              defaultValue: defaultData
             },
           ],
           label: 'Content',
@@ -310,6 +311,7 @@ export const Paquetes: CollectionConfig = {
     {
       type: 'number',
       name: 'priceGeneral',
+      defaultValue: 0,
       required: true,
       admin: {
         readOnly: true,

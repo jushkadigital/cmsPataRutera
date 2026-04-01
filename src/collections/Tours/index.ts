@@ -321,6 +321,7 @@ export const Tours: CollectionConfig = {
     {
       type: 'number',
       name: 'priceGeneral',
+      defaultValue: 0,
       required: true,
       admin: {
         readOnly: true,
