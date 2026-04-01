@@ -1382,21 +1382,23 @@ export interface Paquete {
   id: number;
   title: string;
   heroPaquete?: PaqueteHerocar[] | null;
-  layout: (
-    | DescrPriceBlock
-    | GuiaTourBlock
-    | GridToursBlock
-    | GridBlogsBlock
-    | PostRelationTourBlockType
-    | YouTubeLinksBlockType
-    | TextContentBlockType
-    | SociosBlockType
-    | ReconocimientosBlockType
-    | FormBitrixBlock
-    | RevistaBlock
-    | AdicionalTourBlock
-    | DataTourBlock
-  )[];
+  layout?:
+    | (
+        | DescrPriceBlock
+        | GuiaTourBlock
+        | GridToursBlock
+        | GridBlogsBlock
+        | PostRelationTourBlockType
+        | YouTubeLinksBlockType
+        | TextContentBlockType
+        | SociosBlockType
+        | ReconocimientosBlockType
+        | FormBitrixBlock
+        | RevistaBlock
+        | AdicionalTourBlock
+        | DataTourBlock
+      )[]
+    | null;
   form?: (number | null) | Form;
   featuredImage: number | Media;
   miniDescription: {
