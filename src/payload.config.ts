@@ -21,7 +21,7 @@ if (!(S3Client.prototype as any)._isMonkeyPatchedForCacheControl) {
     }
     return originalSend.call(this, command, optionsOrCb, cb)
   } as any
-    ; (S3Client.prototype as any)._isMonkeyPatchedForCacheControl = true
+  ;(S3Client.prototype as any)._isMonkeyPatchedForCacheControl = true
 }
 
 import { en } from '@payloadcms/translations/languages/en'
@@ -198,6 +198,7 @@ export default buildConfig({
       redirectRelationships: ['tours', 'paquetes'],
     }),
     s3Storage({
+      acl: 'public-read',
       collections: {
         media: {
           disablePayloadAccessControl: true,
