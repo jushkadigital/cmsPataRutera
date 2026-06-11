@@ -47,14 +47,24 @@ import { AdicionalTour } from '@/blocks/AdicionalTour/config'
 import { DataTour } from '@/blocks/DataTour/config'
 import { MapBlock } from '@/blocks/MapBlock/config'
 import { PopulateMap } from './hooks/populateMap'
+import { PopulateGeneralFields } from './hooks/populateGeneralFields'
+import { PopulateDuration } from './hooks/populateDuration'
+import { PopulateMaxPassengers } from './hooks/populateMaxPassengers'
 import { ServicesTicket } from '@/blocks/ServicesTicket/config'
 import { ServicesFood } from '@/blocks/ServicesFood/config'
 import titleNew from '@/fields/titlenew'
 import { defaultData } from './defaults/contentDefault'
+import {
+  featuredImageMinimumHeight,
+  featuredImageMinimumWidth,
+  validateFeaturedImageDimensions,
+} from '@/collections/shared/validateFeaturedImageDimensions'
+import { validatePublishedFeaturedImage } from '@/collections/shared/validatePublishedFeaturedImage'
 
 // Import the custom feature
 
 import { emitTourChange, emitTourDelete } from './hooks/emitTourEvents'
+import { capturePublishedState } from './hooks/capturePublishedState'
 
 export const Tours: CollectionConfig = {
   slug: 'tours',
@@ -69,6 +79,13 @@ export const Tours: CollectionConfig = {
     slug: true,
   },
   admin: {
+    components: {
+      edit: {
+        PublishButton: {
+          path: '@/components/admin/ValidatedPublishButton#ValidatedPublishButton',
+        },
+      },
+    },
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) => {
@@ -148,7 +165,8 @@ export const Tours: CollectionConfig = {
               type: 'upload',
               relationTo: 'media',
               required: true,
-              label: 'Imagen Destacada',
+              label: `Imagen Destacada (mínimo ${featuredImageMinimumWidth}x${featuredImageMinimumHeight}px para generar large, xlarge y og)`,
+              validate: validateFeaturedImageDimensions,
             },
 
             {
@@ -332,10 +350,11 @@ export const Tours: CollectionConfig = {
     {
       type: 'number',
       name: 'durationGeneral',
+      defaultValue: 1,
       required: true,
       admin: {
         position: 'sidebar',
-        description: 'Duracion',
+        description: 'Duración (días)',
       },
     },
     {
@@ -343,8 +362,9 @@ export const Tours: CollectionConfig = {
       name: 'maxPassengersGeneral',
       required: true,
       admin: {
+        readOnly: true,
         position: 'sidebar',
-        description: 'Duracion',
+        description: 'Capacidad máxima',
       },
     },
 
@@ -392,8 +412,9 @@ export const Tours: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
+    beforeValidate: [validatePublishedFeaturedImage],
     afterChange: [revalidateTour, emitTourChange],
-    beforeChange: [populatePublishedAt, createdBy, PopulatePrice, PopulateMap],
+    beforeChange: [capturePublishedState, populatePublishedAt, createdBy, PopulateGeneralFields, PopulatePrice, PopulateDuration, PopulateMaxPassengers, PopulateMap],
     afterDelete: [revalidateDelete, emitTourDelete],
   },
   versions: {

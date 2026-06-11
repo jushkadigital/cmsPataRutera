@@ -1,0 +1,144 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - button "Close Menu" [ref=e4] [cursor=pointer]:
+      - generic "Collapse" [ref=e6]:
+        - img [ref=e7]
+    - generic [ref=e10]:
+      - banner [ref=e11]:
+        - generic [ref=e14]:
+          - generic "Dashboard" [ref=e18]:
+            - img [ref=e19]
+          - link "Account" [ref=e22] [cursor=pointer]:
+            - /url: /admin/account
+            - img "yas" [ref=e23]
+      - generic [ref=e24]:
+        - heading "UROS LUQUINA TAQUILE 2D/1N QA" [level=1] [ref=e25]
+        - list [ref=e28]:
+          - listitem "Edit" [ref=e29]:
+            - link "Edit" [ref=e30] [cursor=pointer]:
+              - /url: ""
+              - generic [ref=e31]: Edit
+          - listitem "Live Preview" [ref=e32]:
+            - link "Live Preview" [ref=e33] [cursor=pointer]:
+              - /url: /admin/collections/tours/98/preview
+              - generic [ref=e34]: Live Preview
+          - listitem "Versions" [ref=e35]:
+            - link "Versions 18" [ref=e36] [cursor=pointer]:
+              - /url: /admin/collections/tours/98/versions
+              - generic [ref=e37]:
+                - text: Versions
+                - generic [ref=e38]: "18"
+          - listitem "API" [ref=e39]:
+            - link "API" [ref=e40] [cursor=pointer]:
+              - /url: /admin/collections/tours/98/api
+              - generic [ref=e41]: API
+      - main [ref=e42]:
+        - generic [ref=e43]:
+          - generic [ref=e45]:
+            - list [ref=e47]:
+              - listitem [ref=e48]:
+                - 'generic "Status: Changed" [ref=e49]':
+                  - generic [ref=e50]:
+                    - generic [ref=e51]: "Status:"
+                    - text: Changed —
+                    - button "Revert to published" [ref=e52] [cursor=pointer]:
+                      - generic:
+                        - generic: Revert to published
+              - listitem
+              - listitem [ref=e53]:
+                - paragraph [ref=e54]: "Last Modified:"
+                - paragraph
+              - listitem [ref=e55]:
+                - paragraph [ref=e56]: "Created:"
+                - paragraph
+            - generic [ref=e57]:
+              - generic [ref=e58]:
+                - button "Preview" [ref=e59] [cursor=pointer]:
+                  - generic:
+                    - generic: Preview
+                    - generic:
+                      - img
+                - button "Publish changes" [disabled] [ref=e61]:
+                  - generic:
+                    - generic: Publish changes
+              - button [disabled] [ref=e64]
+          - generic [ref=e70]:
+            - generic [ref=e73]:
+              - generic [ref=e74]:
+                - generic [ref=e75]:
+                  - text: Title
+                  - generic [ref=e76]: "*"
+                - textbox "Title *" [disabled] [ref=e78]: UROS LUQUINA TAQUILE 2D/1N QA
+              - generic [ref=e79]:
+                - generic [ref=e81]:
+                  - button "Hero" [ref=e82] [cursor=pointer]
+                  - button "Content" [ref=e83] [cursor=pointer]
+                  - button "Formulario" [ref=e84] [cursor=pointer]
+                  - button "Thumbnail" [ref=e85] [cursor=pointer]
+                  - button "SEO" [ref=e86] [cursor=pointer]
+                - generic [ref=e90]:
+                  - generic [ref=e92]:
+                    - heading "Hero Tour" [level=3] [ref=e94]:
+                      - generic [ref=e95]: Hero Tour
+                    - list [ref=e96]:
+                      - listitem [ref=e97]:
+                        - button "Collapse All" [ref=e98] [cursor=pointer]
+                      - listitem [ref=e99]:
+                        - button "Show All" [ref=e100] [cursor=pointer]
+                  - generic [ref=e104]:
+                    - button "Toggle block" [ref=e105] [cursor=pointer]
+                    - button [disabled] [ref=e106]:
+                      - img [ref=e107]
+                    - generic:
+                      - generic:
+                        - generic: "01"
+                        - generic: Tour Hero Carousel
+                        - textbox "Untitled" [ref=e115]
+                    - generic:
+                      - generic:
+                        - img
+            - generic [ref=e122]:
+              - generic [ref=e123]:
+                - generic [ref=e124]:
+                  - text: Price General
+                  - generic [ref=e125]: "*"
+                - generic [ref=e126]:
+                  - spinbutton "Price General *" [disabled] [ref=e128]: "270"
+                  - generic [ref=e129]: Precio General
+              - generic [ref=e130]:
+                - generic [ref=e131]:
+                  - text: Duration General
+                  - generic [ref=e132]: "*"
+                - generic [ref=e133]:
+                  - spinbutton "Duration General *" [disabled] [ref=e135]
+                  - generic [ref=e136]: Duracion
+              - generic [ref=e137]:
+                - generic [ref=e138]:
+                  - text: Max Passengers General
+                  - generic [ref=e139]: "*"
+                - generic [ref=e140]:
+                  - spinbutton "Max Passengers General *" [disabled] [ref=e142]
+                  - generic [ref=e143]: Duracion
+              - generic [ref=e144]:
+                - generic [ref=e145]: Categorías
+                - generic [ref=e151]: Categorías a las que pertenece este tour.
+              - generic [ref=e152]:
+                - generic [ref=e153]: Destinos
+                - generic [ref=e158]: Destinos a los que pertenece este tour.
+              - generic [ref=e160]: Created By
+              - generic [ref=e165]:
+                - generic [ref=e166]: Published At
+                - generic [ref=e168]:
+                  - generic:
+                    - button [ref=e169] [cursor=pointer]:
+                      - img [ref=e170]
+                    - img
+                  - textbox [disabled] [ref=e175]: Dec 27, 2025 8:49 PM
+              - generic [ref=e176]:
+                - generic [ref=e177]:
+                  - generic [ref=e178]: Slug
+                  - button "Unlock" [ref=e179] [cursor=pointer]:
+                    - generic:
+                      - generic: Unlock
+                - textbox "Slug" [disabled] [ref=e182]: uros-luquina-taquile--2d1n-qa
+  - region "Notifications alt+T"

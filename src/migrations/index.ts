@@ -35,6 +35,8 @@ import * as migration_20260124_043941_me from './20260124_043941_me';
 import * as migration_20260305_222339_porfa from './20260305_222339_porfa';
 import * as migration_20260306_075255 from './20260306_075255';
 import * as migration_20260401_215422 from './20260401_215422';
+import * as migration_20260519_processed_events from './20260519_processed_events';
+import * as migration_20260605_ofertas_tour_nullable from './20260605_ofertas_tour_nullable';
 
 export const migrations = [
   {
@@ -221,5 +223,15 @@ export const migrations = [
     up: migration_20260401_215422.up,
     down: migration_20260401_215422.down,
     name: '20260401_215422'
+  },
+  {
+    up: migration_20260519_processed_events.up,
+    down: migration_20260519_processed_events.down,
+    name: '20260519_processed_events',
+  },
+  {
+    up: migration_20260605_ofertas_tour_nullable.up,
+    down: migration_20260605_ofertas_tour_nullable.down,
+    name: '20260605_ofertas_tour_nullable',
   },
 ];

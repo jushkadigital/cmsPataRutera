@@ -1,0 +1,36 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - img [ref=e5]
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e21]:
+            - text: Email
+            - generic [ref=e22]: "*"
+          - textbox "Email *" [ref=e24]: admin@example.com
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - text: Password
+            - generic [ref=e27]: "*"
+          - textbox "Password" [ref=e30]: password
+      - link "Forgot password?" [ref=e31] [cursor=pointer]:
+        - /url: /admin/forgot
+      - button "Login" [ref=e33] [cursor=pointer]:
+        - generic:
+          - generic: Login
+    - button "Sign in with Keycloak Provider Keycloak" [ref=e34] [cursor=pointer]:
+      - generic:
+        - generic:
+          - text: Sign in with
+          - strong: Keycloak
+        - generic:
+          - img "Provider Keycloak"
+  - region "Notifications alt+T":
+    - list:
+      - listitem [ref=e56]:
+        - button "Close toast" [ref=e57] [cursor=pointer]:
+          - img [ref=e58]
+        - generic [ref=e61]: The email or password provided is incorrect.
+  - alert [ref=e46]
+  - button "Open Next.js Dev Tools" [ref=e52] [cursor=pointer]:
+    - img [ref=e53]

@@ -1,0 +1,352 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - button "Open Menu" [ref=e189] [cursor=pointer]:
+      - generic "Open" [ref=e190]:
+        - img [ref=e191]
+    - generic [ref=e9]:
+      - complementary [ref=e193]:
+        - navigation [ref=e195]:
+          - generic [ref=e196]:
+            - button "Collections" [ref=e197] [cursor=pointer]:
+              - generic [ref=e198]: Collections
+              - img [ref=e200]
+            - generic [ref=e204]:
+              - link "Users" [ref=e205] [cursor=pointer]:
+                - /url: /admin/collections/users
+                - generic [ref=e206]: Users
+              - link "Media" [ref=e207] [cursor=pointer]:
+                - /url: /admin/collections/media
+                - generic [ref=e208]: Media
+              - link "Pages" [ref=e209] [cursor=pointer]:
+                - /url: /admin/collections/pages
+                - generic [ref=e210]: Pages
+              - link "Tours" [ref=e211] [cursor=pointer]:
+                - /url: /admin/collections/tours
+                - generic [ref=e213]: Tours
+              - link "Ofertas" [ref=e214] [cursor=pointer]:
+                - /url: /admin/collections/ofertas
+                - generic [ref=e215]: Ofertas
+              - link "Tour Categories" [ref=e216] [cursor=pointer]:
+                - /url: /admin/collections/tourCategory
+                - generic [ref=e217]: Tour Categories
+              - link "Destinations" [ref=e218] [cursor=pointer]:
+                - /url: /admin/collections/destinations
+                - generic [ref=e219]: Destinations
+              - link "Blog Categories" [ref=e220] [cursor=pointer]:
+                - /url: /admin/collections/blogCategories
+                - generic [ref=e221]: Blog Categories
+              - link "Posts" [ref=e222] [cursor=pointer]:
+                - /url: /admin/collections/posts
+                - generic [ref=e223]: Posts
+              - link "Paquetes" [ref=e224] [cursor=pointer]:
+                - /url: /admin/collections/paquetes
+                - generic [ref=e225]: Paquetes
+              - link "Forms" [ref=e226] [cursor=pointer]:
+                - /url: /admin/collections/forms
+                - generic [ref=e227]: Forms
+              - link "Form Submissions" [ref=e228] [cursor=pointer]:
+                - /url: /admin/collections/form-submissions
+                - generic [ref=e229]: Form Submissions
+          - generic [ref=e230]:
+            - button "Globals" [ref=e231] [cursor=pointer]:
+              - generic [ref=e232]: Globals
+              - img [ref=e234]
+            - generic [ref=e238]:
+              - link "Reconocimientos Images" [ref=e239] [cursor=pointer]:
+                - /url: /admin/globals/reconocimientosCarousel
+                - generic [ref=e240]: Reconocimientos Images
+              - link "Socios Imagenes" [ref=e241] [cursor=pointer]:
+                - /url: /admin/globals/sociosCarousel
+                - generic [ref=e242]: Socios Imagenes
+              - link "Footer" [ref=e243] [cursor=pointer]:
+                - /url: /admin/globals/footer
+                - generic [ref=e244]: Footer
+              - link "Redes Negocio" [ref=e245] [cursor=pointer]:
+                - /url: /admin/globals/redesNegocio
+                - generic [ref=e246]: Redes Negocio
+              - link "Tour Page" [ref=e247] [cursor=pointer]:
+                - /url: /admin/globals/touP
+                - generic [ref=e248]: Tour Page
+              - link "Paquete Page" [ref=e249] [cursor=pointer]:
+                - /url: /admin/globals/pacP
+                - generic [ref=e250]: Paquete Page
+              - link "Blog Page" [ref=e251] [cursor=pointer]:
+                - /url: /admin/globals/blogP
+                - generic [ref=e252]: Blog Page
+          - link "Log out" [ref=e254] [cursor=pointer]:
+            - /url: /admin/logout
+            - img [ref=e255]
+      - generic [ref=e10]:
+        - banner [ref=e11]:
+          - generic [ref=e14]:
+            - navigation [ref=e259]:
+              - link [ref=e260] [cursor=pointer]:
+                - /url: /admin
+                - generic "Dashboard" [ref=e261]:
+                  - img [ref=e262]
+              - generic [ref=e265]: /
+              - link "Tours" [ref=e266] [cursor=pointer]:
+                - /url: /admin/collections/tours
+                - generic [ref=e267]: Tours
+              - generic [ref=e268]: /
+              - generic [ref=e269]: UROS LUQUINA TAQUILE 2D/1N QA
+            - link "Account" [ref=e22] [cursor=pointer]:
+              - /url: /admin/account
+              - img "yas" [ref=e23]
+        - generic [ref=e24]:
+          - heading "UROS LUQUINA TAQUILE 2D/1N QA" [level=1] [ref=e478]
+          - list [ref=e28]:
+            - listitem "Edit" [ref=e29]:
+              - link "Edit" [ref=e30] [cursor=pointer]:
+                - /url: ""
+                - generic [ref=e31]: Edit
+            - listitem "Live Preview" [ref=e32]:
+              - link "Live Preview" [ref=e33] [cursor=pointer]:
+                - /url: /admin/collections/tours/98/preview
+                - generic [ref=e34]: Live Preview
+            - listitem "Versions" [ref=e35]:
+              - link "Versions 17" [ref=e36] [cursor=pointer]:
+                - /url: /admin/collections/tours/98/versions
+                - generic [ref=e37]:
+                  - text: Versions
+                  - generic [ref=e38]: "17"
+            - listitem "API" [ref=e39]:
+              - link "API" [ref=e40] [cursor=pointer]:
+                - /url: /admin/collections/tours/98/api
+                - generic [ref=e41]: API
+        - main [ref=e42]:
+          - generic [ref=e43]:
+            - generic [ref=e45]:
+              - list [ref=e47]:
+                - listitem [ref=e48]:
+                  - 'generic "Status: Published" [ref=e49]':
+                    - generic [ref=e50]:
+                      - generic [ref=e51]: "Status:"
+                      - text: Published —
+                      - button "Unpublish" [ref=e52] [cursor=pointer]:
+                        - generic:
+                          - generic: Unpublish
+                - listitem [ref=e479]:
+                  - generic [ref=e480]: Saving...
+                - listitem "December 29th 2025, 8:04 PM" [ref=e270]:
+                  - paragraph [ref=e54]: "Last Modified:"
+                  - paragraph [ref=e271]: December 29th 2025, 8:04 PM
+                - listitem "December 27th 2025, 5:46 PM" [ref=e272]:
+                  - paragraph [ref=e56]: "Created:"
+                  - paragraph [ref=e273]: December 27th 2025, 5:46 PM
+              - generic [ref=e57]:
+                - generic [ref=e58]:
+                  - button "Preview" [ref=e59] [cursor=pointer]:
+                    - generic:
+                      - generic: Preview
+                      - generic:
+                        - img
+                  - button "Publish changes" [ref=e481] [cursor=pointer]:
+                    - generic:
+                      - generic: Publish changes
+                - button [ref=e70] [cursor=pointer]
+            - generic [ref=e76]:
+              - generic [ref=e79]:
+                - generic [ref=e80]:
+                  - generic [ref=e81]:
+                    - text: Title
+                    - generic [ref=e82]: "*"
+                  - textbox "Title *" [active] [ref=e84]: UROS LUQUINA TAQUILE 2D/1N QA
+                - generic [ref=e85]:
+                  - generic [ref=e87]:
+                    - button "Hero" [ref=e88] [cursor=pointer]
+                    - button "Content" [ref=e89] [cursor=pointer]
+                    - button "Formulario" [ref=e90] [cursor=pointer]
+                    - button "Thumbnail" [ref=e91] [cursor=pointer]
+                    - button "SEO" [ref=e92] [cursor=pointer]
+                  - generic [ref=e96]:
+                    - generic [ref=e98]:
+                      - heading "Hero Tour" [level=3] [ref=e100]:
+                        - generic [ref=e101]: Hero Tour
+                      - list [ref=e102]:
+                        - listitem [ref=e103]:
+                          - button "Collapse All" [ref=e104] [cursor=pointer]
+                        - listitem [ref=e105]:
+                          - button "Show All" [ref=e106] [cursor=pointer]
+                    - generic [ref=e109]:
+                      - generic [ref=e110]:
+                        - button "Toggle block" [ref=e111] [cursor=pointer]
+                        - button [ref=e112]:
+                          - img [ref=e113]
+                        - generic:
+                          - generic:
+                            - generic: "01"
+                            - generic: Tour Hero Carousel
+                            - textbox "Untitled" [ref=e121]
+                        - generic:
+                          - button [ref=e277] [cursor=pointer]:
+                            - img [ref=e278]
+                          - generic:
+                            - img
+                      - generic [ref=e284]:
+                        - generic [ref=e286]:
+                          - heading "Carousel Images Column" [level=3] [ref=e289]
+                          - generic [ref=e291]:
+                            - generic [ref=e293]:
+                              - heading "Carousel Images Dimensiones 1:1" [level=3] [ref=e295]
+                              - list [ref=e296]:
+                                - listitem [ref=e297]:
+                                  - button "Collapse All" [ref=e298] [cursor=pointer]
+                                - listitem [ref=e299]:
+                                  - button "Show All" [ref=e300] [cursor=pointer]
+                            - generic [ref=e301]:
+                              - generic [ref=e303]:
+                                - generic [ref=e304]:
+                                  - button "Toggle block" [ref=e305] [cursor=pointer]
+                                  - button [ref=e306]:
+                                    - img [ref=e307]
+                                  - generic:
+                                    - generic:
+                                      - generic: Car Image 01
+                                  - generic:
+                                    - button [ref=e317] [cursor=pointer]:
+                                      - img [ref=e318]
+                                    - generic:
+                                      - img
+                                - generic [ref=e327]:
+                                  - text: Image
+                                  - generic [ref=e328]: "*"
+                              - generic [ref=e335]:
+                                - generic [ref=e336]:
+                                  - button "Toggle block" [ref=e337] [cursor=pointer]
+                                  - button [ref=e338]:
+                                    - img [ref=e339]
+                                  - generic:
+                                    - generic:
+                                      - generic: Car Image 02
+                                  - generic:
+                                    - button [ref=e349] [cursor=pointer]:
+                                      - img [ref=e350]
+                                    - generic:
+                                      - img
+                                - generic [ref=e359]:
+                                  - text: Image
+                                  - generic [ref=e360]: "*"
+                              - generic [ref=e367]:
+                                - generic [ref=e368]:
+                                  - button "Toggle block" [ref=e369] [cursor=pointer]
+                                  - button [ref=e370]:
+                                    - img [ref=e371]
+                                  - generic:
+                                    - generic:
+                                      - generic: Car Image 03
+                                  - generic:
+                                    - button [ref=e381] [cursor=pointer]:
+                                      - img [ref=e382]
+                                    - generic:
+                                      - img
+                                - generic [ref=e391]:
+                                  - text: Image
+                                  - generic [ref=e392]: "*"
+                            - status [ref=e398]
+                            - button "Add Car Image" [ref=e399] [cursor=pointer]:
+                              - generic:
+                                - generic: Add Car Image
+                                - generic:
+                                  - img
+                        - generic [ref=e401]:
+                          - heading "Single Image Column" [level=3] [ref=e404]
+                          - generic [ref=e407]:
+                            - text: Image Dimensiones 4:3
+                            - generic [ref=e408]: "*"
+                    - status [ref=e414]
+              - generic [ref=e128]:
+                - generic [ref=e129]:
+                  - generic [ref=e130]:
+                    - text: Price General
+                    - generic [ref=e131]: "*"
+                  - generic [ref=e132]:
+                    - spinbutton "Price General *" [disabled] [ref=e134]: "270"
+                    - generic [ref=e135]: Precio General
+                - generic [ref=e136]:
+                  - generic [ref=e137]:
+                    - text: Duration General
+                    - generic [ref=e138]: "*"
+                  - generic [ref=e139]:
+                    - spinbutton "Duration General *" [ref=e141]
+                    - generic [ref=e142]: Duracion
+                - generic [ref=e143]:
+                  - generic [ref=e144]:
+                    - text: Max Passengers General
+                    - generic [ref=e145]: "*"
+                  - generic [ref=e146]:
+                    - spinbutton "Max Passengers General *" [ref=e148]
+                    - generic [ref=e149]: Duracion
+                - generic [ref=e150]:
+                  - generic [ref=e151]: Categorías
+                  - generic [ref=e152]:
+                    - generic [ref=e153]:
+                      - generic [ref=e415]:
+                        - log [ref=e417]
+                        - generic [ref=e418]:
+                          - generic [ref=e420]:
+                            - generic [ref=e421]: Select a value
+                            - combobox [ref=e423]
+                          - button [ref=e425] [cursor=pointer]:
+                            - img [ref=e426]
+                      - status [ref=e428]
+                      - button "Add new Tour Category" [ref=e430] [cursor=pointer]:
+                        - img [ref=e431]
+                    - generic [ref=e157]: Categorías a las que pertenece este tour.
+                - generic [ref=e158]:
+                  - generic [ref=e159]: Destinos
+                  - generic [ref=e160]:
+                    - generic [ref=e161]:
+                      - generic [ref=e433]:
+                        - log [ref=e435]
+                        - generic [ref=e436]:
+                          - generic [ref=e438]:
+                            - generic [ref=e439]: Select a value
+                            - combobox [ref=e441]
+                          - button [ref=e443] [cursor=pointer]:
+                            - img [ref=e444]
+                      - button "Add new Destination" [ref=e447] [cursor=pointer]:
+                        - img [ref=e448]
+                    - generic [ref=e164]: Destinos a los que pertenece este tour.
+                - generic [ref=e165]:
+                  - generic [ref=e166]: Created By
+                  - generic [ref=e168]:
+                    - generic:
+                      - log
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: Select a value
+                        - generic:
+                          - button [disabled]:
+                            - img
+                - generic [ref=e171]:
+                  - generic [ref=e172]: Published At
+                  - generic [ref=e450]:
+                    - generic:
+                      - button [ref=e451] [cursor=pointer]:
+                        - img [ref=e452]
+                      - img
+                    - textbox [ref=e457]: Dec 27, 2025 8:49 PM
+                - generic [ref=e182]:
+                  - generic [ref=e183]:
+                    - generic [ref=e184]: Slug
+                    - button "Unlock" [ref=e185] [cursor=pointer]:
+                      - generic:
+                        - generic: Unlock
+                  - textbox "Slug" [disabled] [ref=e188]: uros-luquina-taquile--2d1n-qa
+  - region "Notifications alt+T"
+  - alert [ref=e458]
+  - generic [ref=e463] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e464]:
+      - img [ref=e465]
+    - generic [ref=e468]:
+      - button "Open issues overlay" [ref=e469]:
+        - generic [ref=e482]:
+          - generic [ref=e483]: "3"
+          - generic [ref=e484]: "4"
+        - generic [ref=e473]:
+          - text: Issue
+          - generic [ref=e474]: s
+      - button "Collapse issues badge" [ref=e475]:
+        - img [ref=e476]

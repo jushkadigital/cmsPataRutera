@@ -1,48 +1,79 @@
-version: '3'
 services:
   postgres:
     image: postgres:18
     restart: always
+    shm_size: 192m
     environment:
-      POSTGRES_DB: payload
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: josue
+      POSTGRES_DB: ${POSTGRES_DB:-payload}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
       PGDATA: /var/lib/postgresql/data
+    command: >
+      postgres
+      -c shared_buffers=192MB
+      -c effective_cache_size=576MB
+      -c work_mem=8MB
+      -c maintenance_work_mem=128MB
+      -c wal_buffers=8MB
+      -c max_connections=40
+      -c random_page_cost=1.1
+      -c effective_io_concurrency=200
+      -c log_min_duration_statement=200
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB || exit 1"]
-      interval: 30s
+      test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB || exit 1']
+      interval: 15s
       timeout: 5s
       retries: 5
       start_period: 20s
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./db/backup_20260105_153850.dump:/dump/backup_20260105_153850.dump:ro
-      - ./db/restore.sh:/docker-entrypoint-initdb.d/restore.sh:ro
     networks:
       - db_network
     cpus: 0.75
     mem_limit: 768m
     mem_reservation: 384m
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    security_opt:
+      - no-new-privileges:true
 
   payload:
     image: urgosxd7/payload-cms:latest
-    #ports:
-    #  - '3000:3000'
+    restart: always
     env_file:
       - .env
     depends_on:
       postgres:
         condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'curl -f http://localhost:3000/api/health || exit 1']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
     networks:
-      # Conecta el servicio payloaubd a la red externa para comunicarse con el proxy
+      # Conecta el servicio payload a la red externa para comunicarse con el proxy
       - proxiable
-      # Conecta el servicio payload a la nueva red interna para comunicarse con la base de datos
+      # Conecta el servicio payload a la red interna para comunicarse con la base de datos
       - db_network
       - red-compartida
+      - observability
     cpus: 1.0
     mem_limit: 1024m
     mem_reservation: 512m
-  
+    tmpfs:
+      - /tmp:size=64M
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
+    security_opt:
+      - no-new-privileges:true
+
 volumes:
   pgdata:
 
@@ -50,12 +81,15 @@ networks:
   # Define la red externa existente para la comunicación con el proxy
   proxiable:
     external: true
-    name: proxiable # Asegúrate de que este nombre coincida exactamente con tu red externa
+    name: proxiable
 
   # Define una nueva red bridge interna para la comunicación entre la aplicación y la base de datos
   db_network:
     driver: bridge
-    # Docker Compose creará y gestionará esta red automáticamente
   red-compartida:
-    external: true      # <--- ¡ESTO ES LO IMPORTANTE!
-    name: red-compartida # Asegura que busque el nombre exacto
+    external: true
+    name: red-compartida
+
+  observability:
+    external: true
+    name: observability-net

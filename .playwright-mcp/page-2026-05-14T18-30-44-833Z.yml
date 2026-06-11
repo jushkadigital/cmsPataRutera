@@ -1,0 +1,252 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e47]:
+    - button "Open Menu" [ref=e49] [cursor=pointer]:
+      - generic "Open" [ref=e51]:
+        - img [ref=e52]
+    - generic [ref=e54]:
+      - complementary [ref=e55]:
+        - navigation [ref=e57]:
+          - generic [ref=e58]:
+            - button "Collections" [ref=e59] [cursor=pointer]:
+              - generic [ref=e60]: Collections
+              - img [ref=e62]
+            - generic [ref=e66]:
+              - link "Users" [ref=e67] [cursor=pointer]:
+                - /url: /admin/collections/users
+                - generic [ref=e68]: Users
+              - link "Media" [ref=e69] [cursor=pointer]:
+                - /url: /admin/collections/media
+                - generic [ref=e70]: Media
+              - link "Pages" [ref=e71] [cursor=pointer]:
+                - /url: /admin/collections/pages
+                - generic [ref=e72]: Pages
+              - link "Tours" [ref=e73] [cursor=pointer]:
+                - /url: /admin/collections/tours
+                - generic [ref=e74]: Tours
+              - link "Ofertas" [ref=e75] [cursor=pointer]:
+                - /url: /admin/collections/ofertas
+                - generic [ref=e76]: Ofertas
+              - link "Tour Categories" [ref=e77] [cursor=pointer]:
+                - /url: /admin/collections/tourCategory
+                - generic [ref=e78]: Tour Categories
+              - link "Destinations" [ref=e79] [cursor=pointer]:
+                - /url: /admin/collections/destinations
+                - generic [ref=e80]: Destinations
+              - link "Blog Categories" [ref=e81] [cursor=pointer]:
+                - /url: /admin/collections/blogCategories
+                - generic [ref=e82]: Blog Categories
+              - link "Posts" [ref=e83] [cursor=pointer]:
+                - /url: /admin/collections/posts
+                - generic [ref=e84]: Posts
+              - link "Paquetes" [ref=e85] [cursor=pointer]:
+                - /url: /admin/collections/paquetes
+                - generic [ref=e86]: Paquetes
+              - link "Forms" [ref=e87] [cursor=pointer]:
+                - /url: /admin/collections/forms
+                - generic [ref=e88]: Forms
+              - link "Form Submissions" [ref=e89] [cursor=pointer]:
+                - /url: /admin/collections/form-submissions
+                - generic [ref=e90]: Form Submissions
+          - generic [ref=e91]:
+            - button "Globals" [ref=e92] [cursor=pointer]:
+              - generic [ref=e93]: Globals
+              - img [ref=e95]
+            - generic [ref=e99]:
+              - link "Reconocimientos Images" [ref=e100] [cursor=pointer]:
+                - /url: /admin/globals/reconocimientosCarousel
+                - generic [ref=e101]: Reconocimientos Images
+              - link "Socios Imagenes" [ref=e102] [cursor=pointer]:
+                - /url: /admin/globals/sociosCarousel
+                - generic [ref=e103]: Socios Imagenes
+              - link "Footer" [ref=e104] [cursor=pointer]:
+                - /url: /admin/globals/footer
+                - generic [ref=e105]: Footer
+              - link "Redes Negocio" [ref=e106] [cursor=pointer]:
+                - /url: /admin/globals/redesNegocio
+                - generic [ref=e107]: Redes Negocio
+              - link "Tour Page" [ref=e108] [cursor=pointer]:
+                - /url: /admin/globals/touP
+                - generic [ref=e109]: Tour Page
+              - link "Paquete Page" [ref=e110] [cursor=pointer]:
+                - /url: /admin/globals/pacP
+                - generic [ref=e111]: Paquete Page
+              - link "Blog Page" [ref=e112] [cursor=pointer]:
+                - /url: /admin/globals/blogP
+                - generic [ref=e113]: Blog Page
+          - link "Log out" [ref=e115] [cursor=pointer]:
+            - /url: /admin/logout
+            - img [ref=e116]
+      - generic [ref=e120]:
+        - banner [ref=e121]:
+          - generic [ref=e124]:
+            - generic "Dashboard" [ref=e128]:
+              - img [ref=e129]
+            - link "Account" [ref=e132] [cursor=pointer]:
+              - /url: /admin/account
+              - img "yas" [ref=e133]
+        - generic [ref=e135]:
+          - generic [ref=e136]:
+            - heading "Collections" [level=2] [ref=e137]
+            - list [ref=e138]:
+              - listitem [ref=e139]:
+                - generic [ref=e140] [cursor=pointer]:
+                  - heading "Users" [level=3] [ref=e141]
+                  - link "Create new Users" [ref=e143]:
+                    - /url: /admin/collections/users/create
+                    - generic:
+                      - generic:
+                        - img
+                  - link "Show all Users" [ref=e144]:
+                    - /url: /admin/collections/users
+              - listitem [ref=e145]:
+                - generic [ref=e146] [cursor=pointer]:
+                  - heading "Media" [level=3] [ref=e147]
+                  - link "Create new Media" [ref=e149]:
+                    - /url: /admin/collections/media/create
+                    - generic:
+                      - generic:
+                        - img
+                  - link "Show all Media" [ref=e150]:
+                    - /url: /admin/collections/media
+              - listitem [ref=e151]:
+                - generic [ref=e152] [cursor=pointer]:
+                  - heading "Pages" [level=3] [ref=e153]
+                  - link "Create new Pages" [ref=e155]:
+                    - /url: /admin/collections/pages/create
+                    - generic:
+                      - generic:
+                        - img
+                  - link "Show all Pages" [ref=e156]:
+                    - /url: /admin/collections/pages
+              - listitem [ref=e157]:
+                - generic [ref=e158] [cursor=pointer]:
+                  - heading "Tours" [level=3] [ref=e159]
+                  - link "Create new Tours" [ref=e161]:
+                    - /url: /admin/collections/tours/create
+                    - generic:
+                      - generic:
+                        - img
+                  - link "Show all Tours" [ref=e162]:
+                    - /url: /admin/collections/tours
+              - listitem [ref=e163]:
+                - generic [ref=e164] [cursor=pointer]:
+                  - heading "Ofertas" [level=3] [ref=e165]
+                  - link "Create new Ofertas" [ref=e167]:
+                    - /url: /admin/collections/ofertas/create
+                    - generic:
+                      - generic:
+                        - img
+                  - link "Show all Ofertas" [ref=e168]:
+                    - /url: /admin/collections/ofertas
+              - listitem [ref=e169]:
+                - generic [ref=e170] [cursor=pointer]:
+                  - heading "Tour Categories" [level=3] [ref=e171]
+                  - link "Create new Tour Categories" [ref=e173]:
+                    - /url: /admin/collections/tourCategory/create
+                    - generic:
+                      - generic:
+                        - img
+                  - link "Show all Tour Categories" [ref=e174]:
+                    - /url: /admin/collections/tourCategory
+              - listitem [ref=e175]:
+                - generic [ref=e176] [cursor=pointer]:
+                  - heading "Destinations" [level=3] [ref=e177]
+                  - link "Create new Destinations" [ref=e179]:
+                    - /url: /admin/collections/destinations/create
+                    - generic:
+                      - generic:
+                        - img
+                  - link "Show all Destinations" [ref=e180]:
+                    - /url: /admin/collections/destinations
+              - listitem [ref=e181]:
+                - generic [ref=e182] [cursor=pointer]:
+                  - heading "Blog Categories" [level=3] [ref=e183]
+                  - link "Create new Blog Categories" [ref=e185]:
+                    - /url: /admin/collections/blogCategories/create
+                    - generic:
+                      - generic:
+                        - img
+                  - link "Show all Blog Categories" [ref=e186]:
+                    - /url: /admin/collections/blogCategories
+              - listitem [ref=e187]:
+                - generic [ref=e188] [cursor=pointer]:
+                  - heading "Posts" [level=3] [ref=e189]
+                  - link "Create new Posts" [ref=e191]:
+                    - /url: /admin/collections/posts/create
+                    - generic:
+                      - generic:
+                        - img
+                  - link "Show all Posts" [ref=e192]:
+                    - /url: /admin/collections/posts
+              - listitem [ref=e193]:
+                - generic [ref=e194] [cursor=pointer]:
+                  - heading "Paquetes" [level=3] [ref=e195]
+                  - link "Create new Paquetes" [ref=e197]:
+                    - /url: /admin/collections/paquetes/create
+                    - generic:
+                      - generic:
+                        - img
+                  - link "Show all Paquetes" [ref=e198]:
+                    - /url: /admin/collections/paquetes
+              - listitem [ref=e199]:
+                - generic [ref=e200] [cursor=pointer]:
+                  - heading "Forms" [level=3] [ref=e201]
+                  - link "Create new Forms" [ref=e203]:
+                    - /url: /admin/collections/forms/create
+                    - generic:
+                      - generic:
+                        - img
+                  - link "Show all Forms" [ref=e204]:
+                    - /url: /admin/collections/forms
+              - listitem [ref=e205]:
+                - generic [ref=e206] [cursor=pointer]:
+                  - heading "Form Submissions" [level=3] [ref=e207]
+                  - link "Create new Form Submissions" [ref=e209]:
+                    - /url: /admin/collections/form-submissions/create
+                    - generic:
+                      - generic:
+                        - img
+                  - link "Show all Form Submissions" [ref=e210]:
+                    - /url: /admin/collections/form-submissions
+          - generic [ref=e211]:
+            - heading "Globals" [level=2] [ref=e212]
+            - list [ref=e213]:
+              - listitem [ref=e214]:
+                - generic [ref=e215] [cursor=pointer]:
+                  - heading "Reconocimientos Images" [level=3] [ref=e216]
+                  - link "Edit Reconocimientos Images" [ref=e217]:
+                    - /url: /admin/globals/reconocimientosCarousel
+              - listitem [ref=e218]:
+                - generic [ref=e219] [cursor=pointer]:
+                  - heading "Socios Imagenes" [level=3] [ref=e220]
+                  - link "Edit Socios Imagenes" [ref=e221]:
+                    - /url: /admin/globals/sociosCarousel
+              - listitem [ref=e222]:
+                - generic [ref=e223] [cursor=pointer]:
+                  - heading "Footer" [level=3] [ref=e224]
+                  - link "Edit Footer" [ref=e225]:
+                    - /url: /admin/globals/footer
+              - listitem [ref=e226]:
+                - generic [ref=e227] [cursor=pointer]:
+                  - heading "Redes Negocio" [level=3] [ref=e228]
+                  - link "Edit Redes Negocio" [ref=e229]:
+                    - /url: /admin/globals/redesNegocio
+              - listitem [ref=e230]:
+                - generic [ref=e231] [cursor=pointer]:
+                  - heading "Tour Page" [level=3] [ref=e232]
+                  - link "Edit Tour Page" [ref=e233]:
+                    - /url: /admin/globals/touP
+              - listitem [ref=e234]:
+                - generic [ref=e235] [cursor=pointer]:
+                  - heading "Paquete Page" [level=3] [ref=e236]
+                  - link "Edit Paquete Page" [ref=e237]:
+                    - /url: /admin/globals/pacP
+              - listitem [ref=e238]:
+                - generic [ref=e239] [cursor=pointer]:
+                  - heading "Blog Page" [level=3] [ref=e240]
+                  - link "Edit Blog Page" [ref=e241]:
+                    - /url: /admin/globals/blogP
+  - region "Notifications alt+T"
+  - alert [ref=e37]: Dashboard - Payload
+  - button "Open Next.js Dev Tools" [ref=e43] [cursor=pointer]:
+    - img [ref=e44]

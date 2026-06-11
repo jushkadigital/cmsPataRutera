@@ -2,19 +2,30 @@ version: '3'
 
 services:
   payload:
-    # Usamos la imagen optimizada para devcontainers. 
-    # Facilita el mapeo de usuarios UID/GID sin depender del IDE.
+    # Shell container for the devcontainer workspace.
+    container_name: cms-payload
     image: ubuntu:24.04
+    init: true
     volumes:
-      - .:/home/node/app:cached
-    working_dir: /home/node/app
-    # IMPORTANTE: Mantiene el contenedor vivo para que puedas entrar por CLI.
+      - .:/workspace:cached
+      # OpenCode session data persistence (SQLite DB, auth, logs)
+      - opencode-data:/home/ubuntu/.local/share/opencode
+      # OpenCode config persistence (opencode.jsonc, oh-my-openagent.json, plugins)
+      - opencode-config:/home/ubuntu/.config/opencode
+      # OpenCode cache (models, bins - avoids re-downloading ~2MB each time)
+      - opencode-cache:/home/ubuntu/.cache/opencode
+    working_dir: /workspace
+    # Keep the workspace container alive for the editor/CLI session.
     command: sleep infinity
     depends_on:
-      - postgres
-    # Forzamos que corra como el usuario 'node' para evitar archivos creados como root
+      postgres:
+        condition: service_healthy
     ports:
-      - '3000:3000'
+      - '3001:3000'
+      - '9464:9464'
+    networks:
+      - default
+      - observability
 
   postgres:
     restart: always
@@ -24,9 +35,23 @@ services:
     ports:
       - '5433:5432'
     environment:
-      POSTGRES_USER: josue
-      POSTGRES_DB: josue
-      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: payload
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d payload']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
 volumes:
   pgdata:
+  opencode-data:
+  opencode-config:
+  opencode-cache:
+
+networks:
+  observability:
+    external: true
+    name: observability-net

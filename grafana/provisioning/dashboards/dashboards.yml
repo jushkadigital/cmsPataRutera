@@ -1,0 +1,14 @@
+apiVersion: 1
+
+providers:
+  - name: Tourism Dashboards
+    orgId: 1
+    folder: Tourism
+    folderUid: tourism
+    type: file
+    disableDeletion: false
+    editable: true
+    updateIntervalSeconds: 30
+    options:
+      path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: false

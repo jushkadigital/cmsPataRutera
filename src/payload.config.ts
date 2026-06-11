@@ -8,20 +8,96 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { S3Client } from '@aws-sdk/client-s3'
 
-if (!(S3Client.prototype as any)._isMonkeyPatchedForCacheControl) {
-  const originalSend = S3Client.prototype.send
-  S3Client.prototype.send = function (this: S3Client, command: any, optionsOrCb?: any, cb?: any) {
-    if (
-      command?.constructor?.name === 'PutObjectCommand' ||
-      command?.constructor?.name === 'CreateMultipartUploadCommand'
-    ) {
-      if (command.input && !command.input.CacheControl) {
+const binaryS3ContentTypes = new Set(['application/octet-stream', 'binary/octet-stream'])
+const s3ContentTypesByExtension: Record<string, string> = {
+  '.avif': 'image/avif',
+  '.gif': 'image/gif',
+  '.jpeg': 'image/jpeg',
+  '.jpg': 'image/jpeg',
+  '.png': 'image/png',
+  '.svg': 'image/svg+xml',
+  '.tif': 'image/tiff',
+  '.tiff': 'image/tiff',
+  '.webp': 'image/webp',
+}
+
+const inferS3ContentType = (key: unknown): string | null => {
+  if (typeof key !== 'string') {
+    return null
+  }
+
+  const pathname = key.split('?')[0]?.toLowerCase() || ''
+  const extensionStart = pathname.lastIndexOf('.')
+
+  if (extensionStart === -1) {
+    return null
+  }
+
+  return s3ContentTypesByExtension[pathname.slice(extensionStart)] || null
+}
+
+type CachePatchedS3Prototype = typeof S3Client.prototype & {
+  _isMonkeyPatchedForCacheControl?: boolean
+}
+
+type S3UploadCommandInput = {
+  CacheControl?: string
+  ContentType?: string
+  Key?: unknown
+}
+
+type S3UploadCommand = {
+  constructor?: { name?: string }
+  input?: S3UploadCommandInput
+}
+
+const isS3UploadCommand = (command: unknown): command is S3UploadCommand => {
+  if (typeof command !== 'object' || command === null || !('constructor' in command)) {
+    return false
+  }
+
+  const commandName = (command as { constructor?: { name?: string } }).constructor?.name
+
+  return commandName === 'PutObjectCommand' || commandName === 'CreateMultipartUploadCommand'
+}
+
+const s3Prototype = S3Client.prototype as CachePatchedS3Prototype
+
+if (!s3Prototype._isMonkeyPatchedForCacheControl) {
+  const originalSend = s3Prototype.send
+
+  s3Prototype.send = function (this: S3Client, command: unknown, optionsOrCb?: unknown, cb?: unknown) {
+    if (isS3UploadCommand(command) && command.input) {
+      if (!command.input.CacheControl) {
         command.input.CacheControl = 'public, max-age=31536000, immutable'
       }
+      if (!command.input.ContentType || binaryS3ContentTypes.has(command.input.ContentType)) {
+        const contentType = inferS3ContentType(command.input.Key)
+
+        if (contentType) {
+          command.input.ContentType = contentType
+        }
+      }
     }
-    return originalSend.call(this, command, optionsOrCb, cb)
-  } as any
-  ;(S3Client.prototype as any)._isMonkeyPatchedForCacheControl = true
+    const callOriginalSend = (...args: unknown[]) => {
+      return Reflect.apply(originalSend as (...sendArgs: unknown[]) => unknown, this, args)
+    }
+
+    if (typeof optionsOrCb === 'function') {
+      return callOriginalSend(command, optionsOrCb)
+    }
+
+    if (typeof cb === 'function') {
+      return callOriginalSend(command, optionsOrCb, cb)
+    }
+
+    if (optionsOrCb !== undefined) {
+      return callOriginalSend(command, optionsOrCb)
+    }
+
+    return callOriginalSend(command)
+  } as typeof originalSend
+  s3Prototype._isMonkeyPatchedForCacheControl = true
 }
 
 import { en } from '@payloadcms/translations/languages/en'

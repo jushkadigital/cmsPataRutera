@@ -1,77 +1,81 @@
-import { type CollectionSlug, getPayload, PayloadRequest } from 'payload'
-import config from '@/payload.config'
-import FormData from 'form-data';
-import crypto from 'crypto'
-import path from 'path'
-import { Destination, Media, TourCategory } from '@/payload-types';
-import { RabbitMQEventBus } from '@/services/rabbitmq-consumer';
-import { MeiliImage } from '@/utilities/convertToMeiliImage';
-interface AssetResponse {
-  id: string;
-  name: string;
-  source: string;
-  preview: string;
-}
+import { PayloadRequest } from 'payload'
+import type { Media } from '@/payload-types'
+import { type IEventBus } from '@/events/bus/IEventBus'
+import { createTourPublishedV1 } from '@/events/integration/tour/v1'
+import { createTourPublishedEmail } from '@/events/notification/email/TourPublishedEmail'
+import { createTourPublishedWebhook } from '@/events/notification/webhook/TourPublishedWebhook'
+import { MeiliImage } from '@/utilities/convertToMeiliImage'
 
-
-const MEDUSA_URL = process.env.MEDUSA_URL || ''
 export const syncTour = async ({ req }: { req: PayloadRequest }) => {
 
-  const payload = await getPayload({ config });
-  payload.logger.info('Removing seed data...');
-
-  // Delete all users (use with caution - this deletes ALL users)
+  const payload = req.payload
+  payload.logger.info('Syncing published tours...');
 
   const toursQuery = await payload.find({
-    collection: 'tours', // Asegúrate que este sea el slug correcto
-    draft: false,         // <--- ESTA es la clave: Trae la última versión existente
+    collection: 'tours',
+    draft: false,
     limit: 2000,
     depth: 2
   });
 
   const tours = toursQuery.docs;
 
-
-
-
-  // OPCIÓN A: Secuencial (Uno por uno)
-  // Úsalo si la API externa es estricta con el Rate Limit
-  // ---------------------------------------------------------
-  let token
   const { getContainer } = await import('@/container')
   const container = await getContainer()
-  const eventBus = container.resolve<RabbitMQEventBus>('rabbitMQEventBus')
-  const routingKey = 'tour.created'
+  const eventBus = container.resolve<IEventBus>('rabbitMQEventBus')
 
   for (const tour of tours) {
-    payload.logger.info("ao")
-    await eventBus.emit(routingKey, {
-      id: tour.id,
-      slug: tour.slug,
-      data: {
-        destination: tour.title,
-        description: tour.miniDescription,
-        duration_days: tour.durationGeneral ?? 1,
-        max_capacity: tour.maxPassengersGeneral ?? 20,
-        thumbnail: (tour.featuredImage as Media)?.sizes?.og?.url ?? '',
-        completeThumbnail: MeiliImage(tour.featuredImage as Media),
-        price: tour.priceGeneral,
-        categories: (tour.categorias as TourCategory[]).map(categoria => ({ name: categoria.name })),
-        destinos: { name: (tour.destinos as Destination)?.name ?? '' },
-        difficulty: tour.difficulty
-      }
+    const destino = typeof tour.destinos === 'object' && tour.destinos !== null
+      ? tour.destinos
+      : null
+
+    // With depth: 2, categorias comes populated as objects {id, name, ...}
+    // Extract IDs before using them in a where clause
+    const categoriaIds = (tour.categorias ?? [])
+      .map((cat: unknown) => typeof cat === 'object' && cat !== null ? (cat as { id: number }).id : cat)
+      .filter((id: unknown): id is number => typeof id === 'number')
+
+    const categories = await payload.find({
+      collection: 'tourCategory',
+      depth: 2,
+      overrideAccess: true,
+      limit: 1000,
+      where: {
+        id: {
+          in: categoriaIds,
+        },
+      },
     })
 
+    const image = typeof tour.featuredImage === 'object' ? tour.featuredImage as Media : null
 
+    const integrationPayload = {
+      id: tour.id,
+      slug: tour.slug ?? '',
+      data: {
+        destination: tour.title ?? '',
+        description: tour.miniDescription as Record<string, unknown>,
+        duration_days: tour.durationGeneral || 1,
+        max_capacity: tour.maxPassengersGeneral || 20,
+        thumbnail: image?.sizes?.og?.url ?? '',
+        completeThumbnail: image ? MeiliImage(image) : null,
+        price: tour.priceGeneral ?? 0,
+        categories: categories.docs.map((categoria) => ({ name: categoria.name })),
+        destinos: { name: destino?.name ?? '' },
+        difficulty: tour.difficulty ?? '',
+      },
+    }
 
-  };
-  //const results = await Promise.all(promises);
+    const notificationPayload = {
+      tourId: String(tour.id),
+      tourSlug: tour.slug ?? '',
+      channels: ['email', 'webhook'] as ('email' | 'webhook' | 'push')[],
+    }
 
-
-
-  // Retornar respuesta
-  // Nota: Si usas Payload 3.0 (Next.js), devuelve Response.json(results)
-  // Si usas Payload 2.0 (Express), usa res.status(200).json(results)
+    await eventBus.emit('integration', createTourPublishedV1(integrationPayload))
+    await eventBus.emit('notification', createTourPublishedEmail(notificationPayload))
+    await eventBus.emit('notification', createTourPublishedWebhook(notificationPayload))
+  }
 
   return new Response(JSON.stringify({ message: 'Proceso completado' }), {
     status: 200,

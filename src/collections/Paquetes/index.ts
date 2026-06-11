@@ -42,13 +42,23 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { PopulatePrice } from './hooks/populatePrice'
+import { PopulateGeneralFields } from './hooks/populateGeneralFields'
+import { PopulateDuration } from './hooks/populateDuration'
+import { PopulateMaxPassengers } from './hooks/populateMaxPassengers'
 import { AdicionalTour } from '@/blocks/AdicionalTour/config'
 import { DataTour } from '@/blocks/DataTour/config'
 
 // Import the custom feature
 
 import { emitPaqueteChange, emitPaqueteDelete } from './hooks/emitPaqueteEvents'
+import { capturePublishedState } from './hooks/capturePublishedState'
 import { defaultData } from './default/contentDefault'
+import {
+  featuredImageMinimumHeight,
+  featuredImageMinimumWidth,
+  validateFeaturedImageDimensions,
+} from '@/collections/shared/validateFeaturedImageDimensions'
+import { validatePublishedFeaturedImage } from '@/collections/shared/validatePublishedFeaturedImage'
 
 export const Paquetes: CollectionConfig = {
   slug: 'paquetes',
@@ -63,6 +73,13 @@ export const Paquetes: CollectionConfig = {
     slug: true,
   },
   admin: {
+    components: {
+      edit: {
+        PublishButton: {
+          path: '@/components/admin/ValidatedPublishButton#ValidatedPublishButton',
+        },
+      },
+    },
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) => {
@@ -140,7 +157,8 @@ export const Paquetes: CollectionConfig = {
               type: 'upload',
               relationTo: 'media',
               required: true,
-              label: 'Imagen Destacada',
+              label: `Imagen Destacada (mínimo ${featuredImageMinimumWidth}x${featuredImageMinimumHeight}px para generar large, xlarge y og)`,
+              validate: validateFeaturedImageDimensions,
             },
 
             {
@@ -322,10 +340,11 @@ export const Paquetes: CollectionConfig = {
     {
       type: 'number',
       name: 'durationGeneral',
+      defaultValue: 1,
       required: true,
       admin: {
         position: 'sidebar',
-        description: 'Duracion',
+        description: 'Duración (días)',
       },
     },
     {
@@ -333,8 +352,9 @@ export const Paquetes: CollectionConfig = {
       name: 'maxPassengersGeneral',
       required: true,
       admin: {
+        readOnly: true,
         position: 'sidebar',
-        description: 'Duracion',
+        description: 'Capacidad máxima',
       },
     },
     {
@@ -372,8 +392,9 @@ export const Paquetes: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
+    beforeValidate: [validatePublishedFeaturedImage],
     afterChange: [revalidatePaquete, emitPaqueteChange],
-    beforeChange: [populatePublishedAt, createdBy, PopulatePrice],
+    beforeChange: [capturePublishedState, populatePublishedAt, createdBy, PopulateGeneralFields, PopulatePrice, PopulateDuration, PopulateMaxPassengers],
     afterDelete: [revalidateDelete, emitPaqueteDelete],
   },
   versions: {

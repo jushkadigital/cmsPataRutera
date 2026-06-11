@@ -6,7 +6,7 @@ const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverExternalPackages: ['awilix-manager'],
+  serverExternalPackages: ['awilix-manager', '@opentelemetry/*', 'pino', 'pino-pretty', 'amqplib'],
   eslint: {
     // Advierte: Esto permite que las compilaciones de producción
     // terminen exitosamente incluso si hay errores de ESLint.

@@ -1,0 +1,8 @@
+export { createTourPublishedWebhook } from './TourPublishedWebhook'
+export type { TourPublishedWebhookPayload, TourPublishedWebhookEvent } from './TourPublishedWebhook'
+export { createTourUpdatedWebhook } from './TourUpdatedWebhook'
+export type { TourUpdatedWebhookPayload, TourUpdatedWebhookEvent } from './TourUpdatedWebhook'
+export { createPaquetePublishedWebhook } from './PaquetePublishedWebhook'
+export type { PaquetePublishedWebhookPayload, PaquetePublishedWebhookEvent } from './PaquetePublishedWebhook'
+export { createPaqueteUpdatedWebhook } from './PaqueteUpdatedWebhook'
+export type { PaqueteUpdatedWebhookPayload, PaqueteUpdatedWebhookEvent } from './PaqueteUpdatedWebhook'

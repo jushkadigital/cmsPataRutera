@@ -2,9 +2,16 @@
   "name": "Node.js 22 & PNPM (CLI Only)",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "payload",
-  "workspaceFolder": "/home/node/app",
+  "workspaceFolder": "/workspace",
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb"
+  },
   "remoteUser": "ubuntu",
-  // CRÍTICO PARA CLI: Indica que debe levantar AMBOS servicios al iniciar.
+  "updateRemoteUserUID": true,
+  "overrideCommand": true,
+  "shutdownAction": "stopCompose",
+  // Start both services when the devcontainer boots.
   "runServices": [
     "payload",
     "postgres"
@@ -26,18 +33,18 @@
     "ghcr.io/danzilberdan/devcontainers/opencode:0": {},
     "ghcr.io/s1n7ax/devcontainer-features/neovim:2": {}
   },
-  "mounts": [
-    {
-      "source": "${localWorkspaceFolder}/.opencode/auth.json",
-      "target": "/mnt/opencode-auth.json",
-      "type": "bind"
-    }
-  ],
-  // Ajuste de permisos y setup inicial
-  "postCreateCommand": "sudo mkdir -p /home/node/app && sudo chown -R ubuntu:ubuntu /home/node && sudo chown ubuntu:ubuntu /mnt/opencode-auth.json",
-  // Puertos que la CLI de devcontainers expondrá ()
+    "containerEnv": {
+    "PNPM_HOME": "/home/ubuntu/.local/share/pnpm"
+  },
+  "remoteEnv": {
+    "PNPM_HOME": "/home/ubuntu/.local/share/pnpm",
+    "PATH": "/home/ubuntu/.local/share/pnpm:${containerEnv:PATH}"
+  },
+  // Minimal setup: fix volume-created directories ownership, enable pnpm, install dependencies, install Playwright browser system dependencies, install OpenSpec globally, and fix auth mount permissions if present.
+  "postCreateCommand": "bash -lc 'sudo chown -R ubuntu:ubuntu /home/ubuntu/.local /home/ubuntu/.config /home/ubuntu/.cache && corepack enable pnpm && pnpm install && pnpm playwright:install && pnpm add -g @fission-ai/openspec@latest '",
+  // Ports forwarded by the devcontainer CLI.
   "forwardPorts": [
     3000,
     5433
-  ]
+  ],
 }

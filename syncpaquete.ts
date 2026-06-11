@@ -1,75 +1,79 @@
-import { type CollectionSlug, getPayload, PayloadRequest } from 'payload'
-import config from '@/payload.config'
-import FormData from 'form-data';
-import crypto from 'crypto'
-import path from 'path'
-import { Destination, Media } from '@/payload-types';
-import { RabbitMQEventBus } from '@/services/rabbitmq-consumer';
-import { MeiliImage } from '@/utilities/convertToMeiliImage';
-interface AssetResponse {
-  id: string;
-  name: string;
-  source: string;
-  preview: string;
-}
+import { PayloadRequest } from 'payload'
+import type { Media } from '@/payload-types'
+import { type IEventBus } from '@/events/bus/IEventBus'
+import { createPackagePublishedV1 } from '@/events/integration/package/v1'
+import { createPaquetePublishedEmail } from '@/events/notification/email/PaquetePublishedEmail'
+import { createPaquetePublishedWebhook } from '@/events/notification/webhook/PaquetePublishedWebhook'
+import { MeiliImage } from '@/utilities/convertToMeiliImage'
 
+export const syncPaquete = async ({ req }: { req: PayloadRequest }) => {
 
-const MEDUSA_URL = process.env.MEDUSA_URL || ''
-export const syncTour = async ({ req }: { req: PayloadRequest }) => {
+  const payload = req.payload
+  payload.logger.info('Syncing published paquetes...');
 
-  const payload = await getPayload({ config });
-  payload.logger.info('Removing seed data...');
-
-  // Delete all users (use with caution - this deletes ALL users)
-
-  const toursQuery = await payload.find({
-    collection: 'paquetes', // Asegúrate que este sea el slug correcto
-    draft: false,         // <--- ESTA es la clave: Trae la última versión existente
+  const paquetesQuery = await payload.find({
+    collection: 'paquetes',
+    draft: false,
     limit: 200,
+    depth: 2
   });
 
-  const tours = toursQuery.docs;
+  const paquetes = paquetesQuery.docs;
 
-
-
-
-  // OPCIÓN A: Secuencial (Uno por uno)
-  // Úsalo si la API externa es estricta con el Rate Limit
-  // ---------------------------------------------------------
-  let token
   const { getContainer } = await import('@/container')
   const container = await getContainer()
-  const eventBus = container.resolve<RabbitMQEventBus>('rabbitMQEventBus')
-  const routingKey = 'package.created'
+  const eventBus = container.resolve<IEventBus>('rabbitMQEventBus')
 
-  for (const tour of tours) {
-    await eventBus.emit(routingKey, {
-      id: tour.id,
-      slug: tour.slug,
-      data: {
-        destination: tour.title,
-        description: tour.miniDescription,
-        duration_days: tour.durationGeneral ?? 3,
-        max_capacity: tour.maxPassengersGeneral ?? 20,
-        thumbnail: (tour.featuredImage as Media)?.sizes?.og?.url ?? '',
-        completeThumbnail: MeiliImage(tour.featuredImage as Media),
-        price: tour.priceGeneral,
-        destinos: (tour.destinos as Destination[]).map(destino => ({ name: destino.name })),
-        difficulty: tour.difficulty
-      }
+  for (const paquete of paquetes) {
+    // With depth: 2, destinos comes populated as objects — extract IDs before querying
+    const destinoIds = (paquete.destinos ?? [])
+      .map((d: unknown) => typeof d === 'object' && d !== null ? (d as { id: number }).id : d)
+      .filter((id: unknown): id is number => typeof id === 'number')
+
+    const destinos = await payload.find({
+      collection: 'destinations',
+      depth: 2,
+      overrideAccess: true,
+      limit: 1000,
+      where: {
+        id: {
+          in: destinoIds,
+        },
+      },
     })
-  };
 
+    const image = typeof paquete.featuredImage === 'object' ? paquete.featuredImage as Media : null
 
+    const integrationPayload = {
+      id: paquete.id,
+      slug: paquete.slug ?? '',
+      data: {
+        destination: paquete.title ?? '',
+        description: paquete.miniDescription as Record<string, unknown>,
+        duration_days: paquete.durationGeneral || 3,
+        max_capacity: paquete.maxPassengersGeneral || 20,
+        thumbnail: image?.sizes?.og?.url ?? '',
+        completeThumbnail: image ? MeiliImage(image) : null,
+        price: paquete.priceGeneral ?? 0,
+        destinos: destinos.docs.map((d) => ({ name: d.name })),
+        difficulty: paquete.difficulty ?? '',
+      },
+    }
 
-  // Retornar respuesta
-  // Nota: Si usas Payload 3.0 (Next.js), devuelve Response.json(results)
-  // Si usas Payload 2.0 (Express), usa res.status(200).json(results)
+    const notificationPayload = {
+      paqueteId: String(paquete.id),
+      paqueteSlug: paquete.slug ?? '',
+      channels: ['email', 'webhook'] as ('email' | 'webhook')[],
+    }
+
+    await eventBus.emit('integration', createPackagePublishedV1(integrationPayload))
+    await eventBus.emit('notification', createPaquetePublishedEmail(notificationPayload))
+    await eventBus.emit('notification', createPaquetePublishedWebhook(notificationPayload))
+  }
 
   return new Response(JSON.stringify({ message: 'Proceso completado' }), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },
   });
 
-  payload.logger.info('Tours sync successfully');
 }

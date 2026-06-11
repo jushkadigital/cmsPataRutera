@@ -1,0 +1,29 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e5]:
+    - img [ref=e7]
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]:
+            - text: Email
+            - generic [ref=e24]: "*"
+          - textbox "Email *" [ref=e26]
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - text: Password
+            - generic [ref=e29]: "*"
+          - textbox "Password" [ref=e32]
+      - link "Forgot password?" [ref=e33] [cursor=pointer]:
+        - /url: /admin/forgot
+      - button "Login" [ref=e35] [cursor=pointer]:
+        - generic:
+          - generic: Login
+    - button "Sign in with Keycloak Provider Keycloak" [ref=e36] [cursor=pointer]:
+      - generic:
+        - generic:
+          - text: Sign in with
+          - strong: Keycloak
+        - generic:
+          - img "Provider Keycloak"
+  - region "Notifications alt+T"
+  - alert [ref=e37]

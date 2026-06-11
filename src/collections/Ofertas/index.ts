@@ -78,7 +78,7 @@ export const Ofertas: CollectionConfig = {
             label: 'Related Tour',
             type: 'relationship',
             relationTo: 'tours', // Link to the Tours collection
-            required: true,
+            required: false,
             hasMany: false, // An offer relates to one tour
             admin: {
                 position: 'sidebar', // Place relationship in the sidebar for better layout

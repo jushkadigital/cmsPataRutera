@@ -1,0 +1,10 @@
+{
+  "reverts": [
+    {
+      "group": "20250709_233506",
+      "operation": "revertField",
+      "collection": "ofertas",
+      "field": "tourRelacionado"
+    }
+  ]
+}

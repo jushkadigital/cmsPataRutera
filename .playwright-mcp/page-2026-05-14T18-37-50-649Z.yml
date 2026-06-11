@@ -1,0 +1,421 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - button "Open Menu" [ref=e176] [cursor=pointer]:
+      - generic "Open" [ref=e177]:
+        - img [ref=e178]
+    - generic [ref=e9]:
+      - complementary [ref=e180]:
+        - navigation [ref=e182]:
+          - generic [ref=e183]:
+            - button "Collections" [ref=e184] [cursor=pointer]:
+              - generic [ref=e185]: Collections
+              - img [ref=e187]
+            - generic [ref=e191]:
+              - link "Users" [ref=e192] [cursor=pointer]:
+                - /url: /admin/collections/users
+                - generic [ref=e193]: Users
+              - link "Media" [ref=e194] [cursor=pointer]:
+                - /url: /admin/collections/media
+                - generic [ref=e195]: Media
+              - link "Pages" [ref=e196] [cursor=pointer]:
+                - /url: /admin/collections/pages
+                - generic [ref=e197]: Pages
+              - link "Tours" [ref=e198] [cursor=pointer]:
+                - /url: /admin/collections/tours
+                - generic [ref=e199]: Tours
+              - link "Ofertas" [ref=e200] [cursor=pointer]:
+                - /url: /admin/collections/ofertas
+                - generic [ref=e201]: Ofertas
+              - link "Tour Categories" [ref=e202] [cursor=pointer]:
+                - /url: /admin/collections/tourCategory
+                - generic [ref=e203]: Tour Categories
+              - link "Destinations" [ref=e204] [cursor=pointer]:
+                - /url: /admin/collections/destinations
+                - generic [ref=e205]: Destinations
+              - link "Blog Categories" [ref=e206] [cursor=pointer]:
+                - /url: /admin/collections/blogCategories
+                - generic [ref=e207]: Blog Categories
+              - link "Posts" [ref=e208] [cursor=pointer]:
+                - /url: /admin/collections/posts
+                - generic [ref=e209]: Posts
+              - link "Paquetes" [ref=e210] [cursor=pointer]:
+                - /url: /admin/collections/paquetes
+                - generic [ref=e212]: Paquetes
+              - link "Forms" [ref=e213] [cursor=pointer]:
+                - /url: /admin/collections/forms
+                - generic [ref=e214]: Forms
+              - link "Form Submissions" [ref=e215] [cursor=pointer]:
+                - /url: /admin/collections/form-submissions
+                - generic [ref=e216]: Form Submissions
+          - generic [ref=e217]:
+            - button "Globals" [ref=e218] [cursor=pointer]:
+              - generic [ref=e219]: Globals
+              - img [ref=e221]
+            - generic [ref=e225]:
+              - link "Reconocimientos Images" [ref=e226] [cursor=pointer]:
+                - /url: /admin/globals/reconocimientosCarousel
+                - generic [ref=e227]: Reconocimientos Images
+              - link "Socios Imagenes" [ref=e228] [cursor=pointer]:
+                - /url: /admin/globals/sociosCarousel
+                - generic [ref=e229]: Socios Imagenes
+              - link "Footer" [ref=e230] [cursor=pointer]:
+                - /url: /admin/globals/footer
+                - generic [ref=e231]: Footer
+              - link "Redes Negocio" [ref=e232] [cursor=pointer]:
+                - /url: /admin/globals/redesNegocio
+                - generic [ref=e233]: Redes Negocio
+              - link "Tour Page" [ref=e234] [cursor=pointer]:
+                - /url: /admin/globals/touP
+                - generic [ref=e235]: Tour Page
+              - link "Paquete Page" [ref=e236] [cursor=pointer]:
+                - /url: /admin/globals/pacP
+                - generic [ref=e237]: Paquete Page
+              - link "Blog Page" [ref=e238] [cursor=pointer]:
+                - /url: /admin/globals/blogP
+                - generic [ref=e239]: Blog Page
+          - link "Log out" [ref=e241] [cursor=pointer]:
+            - /url: /admin/logout
+            - img [ref=e242]
+      - generic [ref=e10]:
+        - banner [ref=e11]:
+          - generic [ref=e14]:
+            - navigation [ref=e246]:
+              - link [ref=e247] [cursor=pointer]:
+                - /url: /admin
+                - generic "Dashboard" [ref=e248]:
+                  - img [ref=e249]
+              - generic [ref=e252]: /
+              - link "Paquetes" [ref=e253] [cursor=pointer]:
+                - /url: /admin/collections/paquetes
+                - generic [ref=e254]: Paquetes
+              - generic [ref=e255]: /
+              - generic [ref=e256]: AREQUIPA 4 DIAS 3 NOCHES QA
+            - link "Account" [ref=e22] [cursor=pointer]:
+              - /url: /admin/account
+              - img "yas" [ref=e23]
+        - generic [ref=e24]:
+          - heading "AREQUIPA 4 DIAS 3 NOCHES QA" [level=1] [ref=e25]
+          - list [ref=e28]:
+            - listitem "Edit" [ref=e29]:
+              - link "Edit" [ref=e30] [cursor=pointer]:
+                - /url: ""
+                - generic [ref=e31]: Edit
+            - listitem "Live Preview" [ref=e32]:
+              - link "Live Preview" [ref=e33] [cursor=pointer]:
+                - /url: /admin/collections/paquetes/51/preview
+                - generic [ref=e34]: Live Preview
+            - listitem "Versions" [ref=e35]:
+              - link "Versions 8" [ref=e36] [cursor=pointer]:
+                - /url: /admin/collections/paquetes/51/versions
+                - generic [ref=e37]:
+                  - text: Versions
+                  - generic [ref=e38]: "8"
+            - listitem "API" [ref=e39]:
+              - link "API" [ref=e40] [cursor=pointer]:
+                - /url: /admin/collections/paquetes/51/api
+                - generic [ref=e41]: API
+        - main [ref=e42]:
+          - generic [ref=e43]:
+            - generic [ref=e45]:
+              - list [ref=e47]:
+                - listitem [ref=e48]:
+                  - 'generic "Status: Changed" [ref=e49]':
+                    - generic [ref=e50]:
+                      - generic [ref=e51]: "Status:"
+                      - text: Changed —
+                      - button "Revert to published" [ref=e52] [cursor=pointer]:
+                        - generic:
+                          - generic: Revert to published
+                - listitem
+                - listitem "May 12th 2026, 12:24 AM" [ref=e257]:
+                  - paragraph [ref=e54]: "Last Modified:"
+                  - paragraph [ref=e258]: May 12th 2026, 12:24 AM
+                - listitem "November 10th 2025, 12:12 PM" [ref=e259]:
+                  - paragraph [ref=e56]: "Created:"
+                  - paragraph [ref=e260]: November 10th 2025, 12:12 PM
+              - generic [ref=e57]:
+                - generic [ref=e58]:
+                  - button "Preview" [ref=e59] [cursor=pointer]:
+                    - generic:
+                      - generic: Preview
+                      - generic:
+                        - img
+                  - button "Publish changes" [ref=e61] [cursor=pointer]:
+                    - generic:
+                      - generic: Publish changes
+                - button [ref=e64] [cursor=pointer]
+            - generic [ref=e70]:
+              - generic [ref=e73]:
+                - generic [ref=e74]:
+                  - generic [ref=e75]:
+                    - text: Title
+                    - generic [ref=e76]: "*"
+                  - textbox "Title *" [ref=e78]: AREQUIPA 4 DIAS 3 NOCHES QA
+                - generic [ref=e79]:
+                  - generic [ref=e81]:
+                    - button "Hero" [ref=e82] [cursor=pointer]
+                    - button "Content" [ref=e83] [cursor=pointer]
+                    - button "Formulario" [ref=e84] [cursor=pointer]
+                    - button "Thumbnail 1" [ref=e485] [cursor=pointer]:
+                      - text: Thumbnail
+                      - generic [ref=e487]: "1"
+                    - button "SEO" [ref=e86] [cursor=pointer]
+                  - generic [ref=e90]:
+                    - generic [ref=e92]:
+                      - heading "Hero Paquete" [level=3] [ref=e94]:
+                        - generic [ref=e95]: Hero Paquete
+                      - list [ref=e96]:
+                        - listitem [ref=e97]:
+                          - button "Collapse All" [ref=e98] [cursor=pointer]
+                        - listitem [ref=e99]:
+                          - button "Show All" [ref=e100] [cursor=pointer]
+                    - generic [ref=e103]:
+                      - generic [ref=e104]:
+                        - button "Toggle block" [ref=e105] [cursor=pointer]
+                        - button [ref=e106]:
+                          - img [ref=e107]
+                        - generic:
+                          - generic:
+                            - generic: "01"
+                            - generic: CarouselHero Paquete
+                            - textbox "Untitled" [ref=e115]
+                        - generic:
+                          - button [ref=e491] [cursor=pointer]:
+                            - img [ref=e492]
+                          - generic:
+                            - img
+                      - generic [ref=e271]:
+                        - generic [ref=e273]:
+                          - heading "Carousel Images Column" [level=3] [ref=e276]
+                          - generic [ref=e278]:
+                            - generic [ref=e280]:
+                              - heading "Carousel Images" [level=3] [ref=e282]
+                              - list [ref=e283]:
+                                - listitem [ref=e284]:
+                                  - button "Collapse All" [ref=e285] [cursor=pointer]
+                                - listitem [ref=e286]:
+                                  - button "Show All" [ref=e287] [cursor=pointer]
+                            - generic [ref=e288]:
+                              - generic [ref=e290]:
+                                - generic [ref=e291]:
+                                  - button "Toggle block" [ref=e292] [cursor=pointer]
+                                  - button [ref=e293]:
+                                    - img [ref=e294]
+                                  - generic:
+                                    - generic:
+                                      - generic: Car Image 01
+                                  - generic:
+                                    - button [ref=e499] [cursor=pointer]:
+                                      - img [ref=e500]
+                                    - generic:
+                                      - img
+                                - generic [ref=e313]:
+                                  - generic [ref=e314]:
+                                    - text: Image
+                                    - generic [ref=e315]: "*"
+                                  - generic [ref=e318]:
+                                    - generic [ref=e319]:
+                                      - img "caption (4).jpg" [ref=e321]
+                                      - generic [ref=e322]:
+                                        - paragraph [ref=e323]:
+                                          - link "caption (4).jpg" [ref=e324] [cursor=pointer]:
+                                            - /url: https://patarutera3.s3.us-east-1.amazonaws.com/caption%20(4).jpg
+                                        - paragraph [ref=e325]: 86KB — 720x480 — image/jpeg
+                                    - generic [ref=e504]:
+                                      - button [ref=e505] [cursor=pointer]:
+                                        - generic:
+                                          - generic:
+                                            - img
+                                      - button [ref=e506] [cursor=pointer]:
+                                        - generic:
+                                          - generic:
+                                            - img
+                              - generic [ref=e330]:
+                                - generic [ref=e331]:
+                                  - button "Toggle block" [ref=e332] [cursor=pointer]
+                                  - button [ref=e333]:
+                                    - img [ref=e334]
+                                  - generic:
+                                    - generic:
+                                      - generic: Car Image 02
+                                  - generic:
+                                    - button [ref=e510] [cursor=pointer]:
+                                      - img [ref=e511]
+                                    - generic:
+                                      - img
+                                - generic [ref=e353]:
+                                  - generic [ref=e354]:
+                                    - text: Image
+                                    - generic [ref=e355]: "*"
+                                  - generic [ref=e358]:
+                                    - generic [ref=e359]:
+                                      - img "d7.jpg" [ref=e361]
+                                      - generic [ref=e362]:
+                                        - paragraph [ref=e363]:
+                                          - link "d7.jpg" [ref=e364] [cursor=pointer]:
+                                            - /url: https://patarutera3.s3.us-east-1.amazonaws.com/d7.jpg
+                                        - paragraph [ref=e365]: 80KB — 669x446 — image/jpeg
+                                    - generic [ref=e515]:
+                                      - button [ref=e516] [cursor=pointer]:
+                                        - generic:
+                                          - generic:
+                                            - img
+                                      - button [ref=e517] [cursor=pointer]:
+                                        - generic:
+                                          - generic:
+                                            - img
+                              - generic [ref=e370]:
+                                - generic [ref=e371]:
+                                  - button "Toggle block" [ref=e372] [cursor=pointer]
+                                  - button [ref=e373]:
+                                    - img [ref=e374]
+                                  - generic:
+                                    - generic:
+                                      - generic: Car Image 03
+                                  - generic:
+                                    - button [ref=e521] [cursor=pointer]:
+                                      - img [ref=e522]
+                                    - generic:
+                                      - img
+                                - generic [ref=e393]:
+                                  - generic [ref=e394]:
+                                    - text: Image
+                                    - generic [ref=e395]: "*"
+                                  - generic [ref=e398]:
+                                    - generic [ref=e399]:
+                                      - img "92.jpg" [ref=e401]
+                                      - generic [ref=e402]:
+                                        - paragraph [ref=e403]:
+                                          - link "92.jpg" [ref=e404] [cursor=pointer]:
+                                            - /url: https://patarutera3.s3.us-east-1.amazonaws.com/92.jpg
+                                        - paragraph [ref=e405]: 93KB — 669x446 — image/jpeg
+                                    - generic [ref=e526]:
+                                      - button [ref=e527] [cursor=pointer]:
+                                        - generic:
+                                          - generic:
+                                            - img
+                                      - button [ref=e528] [cursor=pointer]:
+                                        - generic:
+                                          - generic:
+                                            - img
+                            - status [ref=e409]
+                            - button "Add Car Image" [ref=e529] [cursor=pointer]:
+                              - generic:
+                                - generic: Add Car Image
+                                - generic:
+                                  - img
+                        - generic [ref=e412]:
+                          - heading "Single Image Column" [level=3] [ref=e415]
+                          - generic [ref=e417]:
+                            - generic [ref=e418]:
+                              - text: Image
+                              - generic [ref=e419]: "*"
+                            - generic [ref=e422]:
+                              - generic [ref=e423]:
+                                - img "santa-catalina-convent-02116.webp" [ref=e425]
+                                - generic [ref=e426]:
+                                  - paragraph [ref=e427]:
+                                    - link "santa-catalina-convent-02116.webp" [ref=e428] [cursor=pointer]:
+                                      - /url: https://patarutera3.s3.us-east-1.amazonaws.com/santa-catalina-convent-02116.webp
+                                  - paragraph [ref=e429]: 15KB — 455x320 — image/webp
+                              - generic [ref=e530]:
+                                - button [ref=e531] [cursor=pointer]:
+                                  - generic:
+                                    - generic:
+                                      - img
+                                - button [ref=e532] [cursor=pointer]:
+                                  - generic:
+                                    - generic:
+                                      - img
+                    - status [ref=e433]
+              - generic [ref=e122]:
+                - generic [ref=e123]:
+                  - generic [ref=e124]:
+                    - text: Price General
+                    - generic [ref=e125]: "*"
+                  - generic [ref=e126]:
+                    - spinbutton "Price General *" [disabled] [ref=e128]: "835"
+                    - generic [ref=e129]: Precio General
+                - generic [ref=e130]:
+                  - generic [ref=e131]:
+                    - text: Duration General
+                    - generic [ref=e132]: "*"
+                  - generic [ref=e133]:
+                    - spinbutton "Duration General *" [ref=e135]
+                    - generic [ref=e136]: Duracion
+                - generic [ref=e137]:
+                  - generic [ref=e138]:
+                    - text: Max Passengers General
+                    - generic [ref=e139]: "*"
+                  - generic [ref=e140]:
+                    - spinbutton "Max Passengers General *" [ref=e142]
+                    - generic [ref=e143]: Duracion
+                - generic [ref=e144]:
+                  - generic [ref=e145]: Destinos
+                  - generic [ref=e146]:
+                    - generic [ref=e147]:
+                      - generic [ref=e434]:
+                        - log [ref=e436]
+                        - generic [ref=e437]:
+                          - generic [ref=e439]:
+                            - button "Arequipa Edit Arequipa Remove" [ref=e440]:
+                              - generic [ref=e441]:
+                                - generic [ref=e443]: Arequipa
+                                - button "Edit Arequipa" [ref=e444] [cursor=pointer]:
+                                  - img [ref=e445]
+                              - button "Remove" [ref=e447] [cursor=pointer]:
+                                - img [ref=e448]
+                            - combobox [ref=e451]
+                          - generic [ref=e452]:
+                            - button [ref=e533] [cursor=pointer]:
+                              - img [ref=e534]
+                            - button [ref=e456] [cursor=pointer]:
+                              - img [ref=e457]
+                      - status [ref=e459]
+                      - button "Add new Destination" [ref=e537] [cursor=pointer]:
+                        - img [ref=e538]
+                    - generic [ref=e151]: Destinos a los que pertenece este tour.
+                - generic [ref=e152]:
+                  - generic [ref=e153]: Created By
+                  - generic [ref=e155]:
+                    - generic:
+                      - log
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - generic: urgosxd@gmail.com
+                                  - button "Edit urgosxd@gmail.com" [disabled] [ref=e464] [cursor=pointer]:
+                                    - img [ref=e465]
+                        - generic:
+                          - button [disabled]:
+                            - img
+                - generic [ref=e158]:
+                  - generic [ref=e159]: Published At
+                  - generic [ref=e467]:
+                    - generic:
+                      - button [ref=e468] [cursor=pointer]:
+                        - img [ref=e469]
+                      - img
+                    - textbox [ref=e474]: Nov 10, 2025 12:37 PM
+                - generic [ref=e169]:
+                  - generic [ref=e170]:
+                    - generic [ref=e171]: Slug
+                    - button "Unlock" [ref=e172] [cursor=pointer]:
+                      - generic:
+                        - generic: Unlock
+                  - textbox "Slug" [disabled] [ref=e175]: arequipa--4-dias--3-noches-qa
+  - region "Notifications alt+T":
+    - list:
+      - listitem [ref=e540]:
+        - button "Close toast" [ref=e541] [cursor=pointer]:
+          - img [ref=e542]
+        - generic [ref=e545]:
+          - text: "The following field is invalid:"
+          - list [ref=e546]:
+            - listitem [ref=e547]: featuredImage
+  - alert [ref=e475]
+  - button "Open Next.js Dev Tools" [ref=e481] [cursor=pointer]:
+    - img [ref=e482]

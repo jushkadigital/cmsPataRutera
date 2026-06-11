@@ -105,6 +105,15 @@ export const DataTour: Block = { // Renamed constant
                 }
             ]
 
+        },
+        {
+            name: 'thumbnail',
+            type: 'upload',
+            relationTo: 'media',
+            label: 'Thumbnail',
+            admin: {
+                readOnly: true,
+            },
         }
 
     ]

@@ -1,5 +1,5 @@
 import { Endpoint, PayloadRequest } from 'payload';
-import { syncTour } from '../../../syncpaquete'
+import { syncPaquete } from '../../../syncpaquete'
 
 export const syncpaquetes: Endpoint = {
   path: '/syncpaquetes',
@@ -7,7 +7,7 @@ export const syncpaquetes: Endpoint = {
   handler: async (req: PayloadRequest) => {
     try {
 
-      await syncTour({ req })
+      await syncPaquete({ req })
       return Response.json({
         status: 'ok',
         message: 'Paquete Synced successfully',

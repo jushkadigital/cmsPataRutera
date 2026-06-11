@@ -9,7 +9,11 @@ services:
       POSTGRES_PASSWORD: josue
       PGDATA: /var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "PGPASSWORD=$$POSTGRES_PASSWORD psql -U $$POSTGRES_USER -d $$POSTGRES_DB -v ON_ERROR_STOP=1 -tAc \"SELECT 1 FROM __restore_healthcheck LIMIT 1\" >/dev/null"]
+      test:
+        [
+          'CMD-SHELL',
+          'PGPASSWORD=$$POSTGRES_PASSWORD psql -U $$POSTGRES_USER -d $$POSTGRES_DB -v ON_ERROR_STOP=1 -tAc "SELECT 1 FROM __restore_healthcheck LIMIT 1" >/dev/null',
+        ]
       interval: 5s
       timeout: 5s
       retries: 20
@@ -33,6 +37,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     networks:
       # Conecta el servicio payloaubd a la red externa para comunicarse con el proxy
       - proxiable
@@ -42,9 +48,37 @@ services:
     cpus: 1.0
     mem_limit: 1024m
     mem_reservation: 512m
-  
+
+  rabbitmq:
+    image: rabbitmq:4.1
+    hostname: rabbitmq
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:?RABBITMQ_DEFAULT_USER is required}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:?RABBITMQ_DEFAULT_PASS is required}
+      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE:?RABBITMQ_ERLANG_COOKIE is required}
+    healthcheck:
+      test: ['CMD', 'rabbitmq-diagnostics', '-q', 'ping']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - db_network
+      - red-compartida
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    cpus: 0.75
+    mem_limit: 768m
+    mem_reservation: 384m
+
 volumes:
   pgdata:
+  rabbitmq_data:
 
 networks:
   # Define la red externa existente para la comunicación con el proxy
@@ -57,5 +91,5 @@ networks:
     driver: bridge
     # Docker Compose creará y gestionará esta red automáticamente
   red-compartida:
-    external: true      # <--- ¡ESTO ES LO IMPORTANTE!
+    external: true # <--- ¡ESTO ES LO IMPORTANTE!
     name: red-compartida # Asegura que busque el nombre exacto

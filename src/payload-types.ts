@@ -898,11 +898,11 @@ export interface Tour {
    */
   priceGeneral: number;
   /**
-   * Duracion
+   * Duración (días)
    */
   durationGeneral: number;
   /**
-   * Duracion
+   * Capacidad máxima
    */
   maxPassengersGeneral: number;
   /**
@@ -1173,6 +1173,7 @@ export interface DataTourBlock {
     title: string;
     value: string;
   };
+  thumbnail?: (number | null) | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'dataTour';
@@ -1434,11 +1435,11 @@ export interface Paquete {
    */
   priceGeneral: number;
   /**
-   * Duracion
+   * Duración (días)
    */
   durationGeneral: number;
   /**
-   * Duracion
+   * Capacidad máxima
    */
   maxPassengersGeneral: number;
   /**
@@ -1491,7 +1492,7 @@ export interface Oferta {
   imagen: number | Media;
   price?: number | null;
   slug?: string | null;
-  tourRelacionado: number | Tour;
+  tourRelacionado?: (number | null) | Tour;
   updatedAt: string;
   createdAt: string;
 }
@@ -2375,6 +2376,7 @@ export interface DataTourBlockSelect<T extends boolean = true> {
         title?: T;
         value?: T;
       };
+  thumbnail?: T;
   id?: T;
   blockName?: T;
 }

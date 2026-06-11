@@ -15,11 +15,17 @@ type Args = {
 
 const serverFunction: ServerFunctionClient = async function (args) {
   'use server'
-  return handleServerFunctions({
+  const result = await handleServerFunctions({
     ...args,
     config,
     importMap,
   })
+
+  if (args.name === 'form-state' && result === undefined) {
+    return { state: null }
+  }
+
+  return result
 }
 
 const Layout = ({ children }: Args) => (

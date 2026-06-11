@@ -1,0 +1,538 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - button "Open Menu" [ref=e189] [cursor=pointer]:
+      - generic "Open" [ref=e190]:
+        - img [ref=e191]
+    - generic [ref=e9]:
+      - complementary [ref=e193]:
+        - navigation [ref=e195]:
+          - generic [ref=e196]:
+            - button "Collections" [ref=e197] [cursor=pointer]:
+              - generic [ref=e198]: Collections
+              - img [ref=e200]
+            - generic [ref=e204]:
+              - link "Users" [ref=e205] [cursor=pointer]:
+                - /url: /admin/collections/users
+                - generic [ref=e206]: Users
+              - link "Media" [ref=e207] [cursor=pointer]:
+                - /url: /admin/collections/media
+                - generic [ref=e208]: Media
+              - link "Pages" [ref=e209] [cursor=pointer]:
+                - /url: /admin/collections/pages
+                - generic [ref=e210]: Pages
+              - link "Tours" [ref=e211] [cursor=pointer]:
+                - /url: /admin/collections/tours
+                - generic [ref=e213]: Tours
+              - link "Ofertas" [ref=e214] [cursor=pointer]:
+                - /url: /admin/collections/ofertas
+                - generic [ref=e215]: Ofertas
+              - link "Tour Categories" [ref=e216] [cursor=pointer]:
+                - /url: /admin/collections/tourCategory
+                - generic [ref=e217]: Tour Categories
+              - link "Destinations" [ref=e218] [cursor=pointer]:
+                - /url: /admin/collections/destinations
+                - generic [ref=e219]: Destinations
+              - link "Blog Categories" [ref=e220] [cursor=pointer]:
+                - /url: /admin/collections/blogCategories
+                - generic [ref=e221]: Blog Categories
+              - link "Posts" [ref=e222] [cursor=pointer]:
+                - /url: /admin/collections/posts
+                - generic [ref=e223]: Posts
+              - link "Paquetes" [ref=e224] [cursor=pointer]:
+                - /url: /admin/collections/paquetes
+                - generic [ref=e225]: Paquetes
+              - link "Forms" [ref=e226] [cursor=pointer]:
+                - /url: /admin/collections/forms
+                - generic [ref=e227]: Forms
+              - link "Form Submissions" [ref=e228] [cursor=pointer]:
+                - /url: /admin/collections/form-submissions
+                - generic [ref=e229]: Form Submissions
+          - generic [ref=e230]:
+            - button "Globals" [ref=e231] [cursor=pointer]:
+              - generic [ref=e232]: Globals
+              - img [ref=e234]
+            - generic [ref=e238]:
+              - link "Reconocimientos Images" [ref=e239] [cursor=pointer]:
+                - /url: /admin/globals/reconocimientosCarousel
+                - generic [ref=e240]: Reconocimientos Images
+              - link "Socios Imagenes" [ref=e241] [cursor=pointer]:
+                - /url: /admin/globals/sociosCarousel
+                - generic [ref=e242]: Socios Imagenes
+              - link "Footer" [ref=e243] [cursor=pointer]:
+                - /url: /admin/globals/footer
+                - generic [ref=e244]: Footer
+              - link "Redes Negocio" [ref=e245] [cursor=pointer]:
+                - /url: /admin/globals/redesNegocio
+                - generic [ref=e246]: Redes Negocio
+              - link "Tour Page" [ref=e247] [cursor=pointer]:
+                - /url: /admin/globals/touP
+                - generic [ref=e248]: Tour Page
+              - link "Paquete Page" [ref=e249] [cursor=pointer]:
+                - /url: /admin/globals/pacP
+                - generic [ref=e250]: Paquete Page
+              - link "Blog Page" [ref=e251] [cursor=pointer]:
+                - /url: /admin/globals/blogP
+                - generic [ref=e252]: Blog Page
+          - link "Log out" [ref=e254] [cursor=pointer]:
+            - /url: /admin/logout
+            - img [ref=e255]
+      - generic [ref=e10]:
+        - banner [ref=e11]:
+          - generic [ref=e14]:
+            - navigation [ref=e259]:
+              - link [ref=e260] [cursor=pointer]:
+                - /url: /admin
+                - generic "Dashboard" [ref=e261]:
+                  - img [ref=e262]
+              - generic [ref=e265]: /
+              - link "Tours" [ref=e266] [cursor=pointer]:
+                - /url: /admin/collections/tours
+                - generic [ref=e267]: Tours
+              - generic [ref=e268]: /
+              - generic [ref=e269]: UROS LUQUINA TAQUILE 2D/1N QA
+            - link "Account" [ref=e22] [cursor=pointer]:
+              - /url: /admin/account
+              - img "yas" [ref=e23]
+        - generic [ref=e24]:
+          - heading "UROS LUQUINA TAQUILE 2D/1N QA" [level=1] [ref=e25]
+          - list [ref=e28]:
+            - listitem "Edit" [ref=e29]:
+              - link "Edit" [ref=e30] [cursor=pointer]:
+                - /url: ""
+                - generic [ref=e31]: Edit
+            - listitem "Live Preview" [ref=e32]:
+              - link "Live Preview" [ref=e33] [cursor=pointer]:
+                - /url: /admin/collections/tours/98/preview
+                - generic [ref=e34]: Live Preview
+            - listitem "Versions" [ref=e35]:
+              - link "Versions 18" [ref=e36] [cursor=pointer]:
+                - /url: /admin/collections/tours/98/versions
+                - generic [ref=e37]:
+                  - text: Versions
+                  - generic [ref=e38]: "18"
+            - listitem "API" [ref=e39]:
+              - link "API" [ref=e40] [cursor=pointer]:
+                - /url: /admin/collections/tours/98/api
+                - generic [ref=e41]: API
+        - main [ref=e42]:
+          - generic [ref=e43]:
+            - generic [ref=e45]:
+              - list [ref=e47]:
+                - listitem [ref=e48]:
+                  - 'generic "Status: Changed" [ref=e49]':
+                    - generic [ref=e50]:
+                      - generic [ref=e51]: "Status:"
+                      - text: Changed —
+                      - button "Revert to published" [ref=e52] [cursor=pointer]:
+                        - generic:
+                          - generic: Revert to published
+                - listitem [ref=e528]:
+                  - generic [ref=e529]: Last saved less than a minute ago
+                - listitem "May 12th 2026, 12:19 AM" [ref=e530]:
+                  - paragraph [ref=e54]: "Last Modified:"
+                  - paragraph [ref=e271]: May 12th 2026, 12:19 AM
+                - listitem "December 27th 2025, 5:46 PM" [ref=e272]:
+                  - paragraph [ref=e56]: "Created:"
+                  - paragraph [ref=e273]: December 27th 2025, 5:46 PM
+              - generic [ref=e57]:
+                - generic [ref=e58]:
+                  - button "Preview" [ref=e59] [cursor=pointer]:
+                    - generic:
+                      - generic: Preview
+                      - generic:
+                        - img
+                  - button "Publish changes" [ref=e520] [cursor=pointer]:
+                    - generic:
+                      - generic: Publish changes
+                - button [ref=e70] [cursor=pointer]
+            - generic [ref=e76]:
+              - generic [ref=e79]:
+                - generic [ref=e80]:
+                  - generic [ref=e81]:
+                    - text: Title
+                    - generic [ref=e82]: "*"
+                  - textbox "Title *" [ref=e84]: UROS LUQUINA TAQUILE 2D/1N QA
+                - generic [ref=e85]:
+                  - generic [ref=e87]:
+                    - button "Hero" [ref=e88] [cursor=pointer]
+                    - button "Content" [ref=e89] [cursor=pointer]
+                    - button "Formulario" [ref=e90] [cursor=pointer]
+                    - button "Thumbnail" [ref=e91] [cursor=pointer]
+                    - button "SEO" [ref=e92] [cursor=pointer]
+                  - generic [ref=e95]:
+                    - generic [ref=e274]:
+                      - generic [ref=e275]:
+                        - text: Imagen Destacada (large, xlarge y og con más de 700px de ancho)
+                        - generic [ref=e276]: "*"
+                      - generic [ref=e522]:
+                        - generic [ref=e523]:
+                          - button "Create New" [ref=e524] [cursor=pointer]:
+                            - generic:
+                              - generic: Create New
+                          - generic [ref=e525]: Or
+                          - button "Choose from existing" [ref=e526] [cursor=pointer]:
+                            - generic:
+                              - generic: Choose from existing
+                        - paragraph [ref=e527]: Or Drag and drop a file
+                    - generic [ref=e293]:
+                      - generic [ref=e294]:
+                        - text: Descripción Miniatura
+                        - generic [ref=e295]: "*"
+                      - generic [ref=e297]:
+                        - generic [ref=e299]:
+                          - textbox [ref=e300]:
+                            - paragraph [ref=e301]: Viajar es descubrir, conectar y hacer recuerdo cada momento que toca el corazón.
+                          - button "Add block" [ref=e304] [cursor=pointer]
+                          - generic [ref=e307]:
+                            - button "Edit link" [ref=e308] [cursor=pointer]:
+                              - img [ref=e309]
+                            - button "Remove link" [ref=e311] [cursor=pointer]:
+                              - img [ref=e312]
+                        - button "Insert Paragraph" [ref=e314]
+                    - generic [ref=e317]:
+                      - generic [ref=e319]:
+                        - generic [ref=e320]:
+                          - button "Toggle block" [ref=e321] [cursor=pointer]
+                          - generic:
+                            - generic:
+                              - generic: Price Data
+                          - generic:
+                            - generic:
+                              - img
+                        - generic [ref=e326]:
+                          - generic [ref=e327]: Price
+                          - spinbutton "Price" [disabled] [ref=e330]: "270"
+                      - generic [ref=e332]:
+                        - generic [ref=e333]:
+                          - button "Toggle block" [ref=e334] [cursor=pointer]
+                          - generic:
+                            - generic:
+                              - generic: Price Data
+                          - generic:
+                            - generic:
+                              - img
+                        - generic [ref=e338]:
+                          - generic [ref=e339]:
+                            - generic [ref=e340]: Icon Max Passengers
+                            - generic [ref=e344]:
+                              - img "icon" [ref=e346]
+                              - generic [ref=e347]:
+                                - paragraph [ref=e348]:
+                                  - link "iconMaxPassengers.svg" [ref=e349] [cursor=pointer]:
+                                    - /url: https://patarutera3.s3.us-east-1.amazonaws.com/iconMaxPassengers.svg
+                                - paragraph [ref=e350]: 2KB — 18x16 — image/svg+xml
+                          - generic [ref=e351]:
+                            - generic [ref=e352]: Máximo de Pasajeros
+                            - spinbutton "Máximo de Pasajeros" [disabled] [ref=e355]: "18"
+                          - generic [ref=e356]:
+                            - generic [ref=e357]: Icon Difficulty
+                            - generic [ref=e361]:
+                              - img "icon" [ref=e363]
+                              - generic [ref=e364]:
+                                - paragraph [ref=e365]:
+                                  - link "iconDifficulty.svg" [ref=e366] [cursor=pointer]:
+                                    - /url: https://patarutera3.s3.us-east-1.amazonaws.com/iconDifficulty.svg
+                                - paragraph [ref=e367]: 2KB — 26x15 — image/svg+xml
+                          - generic [ref=e368]:
+                            - generic [ref=e369]:
+                              - text: Dificultad
+                              - generic [ref=e370]: "*"
+                            - generic [ref=e372]:
+                              - log [ref=e374]
+                              - generic [ref=e375]:
+                                - generic [ref=e377]:
+                                  - generic [ref=e378]: Easy
+                                  - combobox [ref=e380]
+                                - generic [ref=e381]:
+                                  - button [ref=e382] [cursor=pointer]:
+                                    - img [ref=e383]
+                                  - button [ref=e385] [cursor=pointer]:
+                                    - img [ref=e386]
+              - generic [ref=e128]:
+                - generic [ref=e129]:
+                  - generic [ref=e130]:
+                    - text: Price General
+                    - generic [ref=e131]: "*"
+                  - generic [ref=e132]:
+                    - spinbutton "Price General *" [disabled] [ref=e134]: "270"
+                    - generic [ref=e135]: Precio General
+                - generic [ref=e136]:
+                  - generic [ref=e137]:
+                    - text: Duration General
+                    - generic [ref=e138]: "*"
+                  - generic [ref=e139]:
+                    - spinbutton "Duration General *" [ref=e141]
+                    - generic [ref=e142]: Duracion
+                - generic [ref=e143]:
+                  - generic [ref=e144]:
+                    - text: Max Passengers General
+                    - generic [ref=e145]: "*"
+                  - generic [ref=e146]:
+                    - spinbutton "Max Passengers General *" [ref=e148]
+                    - generic [ref=e149]: Duracion
+                - generic [ref=e150]:
+                  - generic [ref=e151]: Categorías
+                  - generic [ref=e152]:
+                    - generic [ref=e153]:
+                      - generic [ref=e388]:
+                        - log [ref=e390]
+                        - generic [ref=e391]:
+                          - generic [ref=e393]:
+                            - generic [ref=e394]: Select a value
+                            - combobox [ref=e396]
+                          - button [ref=e398] [cursor=pointer]:
+                            - img [ref=e399]
+                      - status [ref=e401]
+                      - button "Add new Tour Category" [ref=e403] [cursor=pointer]:
+                        - img [ref=e404]
+                    - generic [ref=e157]: Categorías a las que pertenece este tour.
+                - generic [ref=e158]:
+                  - generic [ref=e159]: Destinos
+                  - generic [ref=e160]:
+                    - generic [ref=e161]:
+                      - generic [ref=e406]:
+                        - log [ref=e408]
+                        - generic [ref=e409]:
+                          - generic [ref=e411]:
+                            - generic [ref=e414]:
+                              - generic [ref=e415]: Puno
+                              - button "Edit Puno" [ref=e416] [cursor=pointer]:
+                                - img [ref=e417]
+                            - combobox [ref=e420]
+                          - generic [ref=e421]:
+                            - button [ref=e422] [cursor=pointer]:
+                              - img [ref=e423]
+                            - button [ref=e425] [cursor=pointer]:
+                              - img [ref=e426]
+                      - button "Add new Destination" [ref=e429] [cursor=pointer]:
+                        - img [ref=e430]
+                    - generic [ref=e164]: Destinos a los que pertenece este tour.
+                - generic [ref=e165]:
+                  - generic [ref=e166]: Created By
+                  - generic [ref=e168]:
+                    - generic:
+                      - log
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - generic: melendezcruzmaricielo9@gmail.com
+                                  - button "Edit melendezcruzmaricielo9@gmail.com" [disabled] [ref=e432] [cursor=pointer]:
+                                    - img [ref=e433]
+                        - generic:
+                          - button [disabled]:
+                            - img
+                - generic [ref=e171]:
+                  - generic [ref=e172]: Published At
+                  - generic [ref=e435]:
+                    - generic:
+                      - button [ref=e436] [cursor=pointer]:
+                        - img [ref=e437]
+                      - img
+                    - textbox [ref=e442]: Dec 27, 2025 8:49 PM
+                - generic [ref=e182]:
+                  - generic [ref=e183]:
+                    - generic [ref=e184]: Slug
+                    - button "Unlock" [ref=e185] [cursor=pointer]:
+                      - generic:
+                        - generic: Unlock
+                  - textbox "Slug" [disabled] [ref=e188]: uros-luquina-taquile--2d1n-qa
+  - dialog "list-drawer_1_«rj»" [active] [ref=e531]:
+    - button "Close" [ref=e533] [cursor=pointer]
+    - generic [ref=e537]:
+      - banner [ref=e538]:
+        - generic [ref=e539]:
+          - generic [ref=e540]:
+            - heading "Media" [level=2] [ref=e541]
+            - button "Add new Media" [ref=e542] [cursor=pointer]:
+              - generic:
+                - generic: Create New
+          - button "Close" [ref=e543] [cursor=pointer]:
+            - img [ref=e544]
+      - generic [ref=e547]:
+        - img [ref=e548]
+        - textbox "Search by File Name" [ref=e551]
+        - generic [ref=e553]:
+          - button "Columns" [ref=e554] [cursor=pointer]:
+            - generic [ref=e555]: Columns
+            - img [ref=e557]
+          - button "Filters" [ref=e559] [cursor=pointer]:
+            - generic [ref=e560]: Filters
+            - img [ref=e562]
+      - table [ref=e565]:
+        - rowgroup [ref=e566]:
+          - row "File Name Sort by File Name Ascending Sort by File Name Descending Alt Sort by Alt Ascending Sort by Alt Descending Updated At Sort by Updated At Ascending Sort by Updated At Descending Created At Sort by Created At Ascending Sort by Created At Descending" [ref=e567]:
+            - columnheader "File Name Sort by File Name Ascending Sort by File Name Descending" [ref=e568]:
+              - generic [ref=e569]:
+                - generic [ref=e571]: File Name
+                - generic [ref=e572]:
+                  - button "Sort by File Name Ascending" [ref=e573] [cursor=pointer]:
+                    - img [ref=e574]
+                  - button "Sort by File Name Descending" [ref=e576] [cursor=pointer]:
+                    - img [ref=e577]
+            - columnheader "Alt Sort by Alt Ascending Sort by Alt Descending" [ref=e579]:
+              - generic [ref=e580]:
+                - generic [ref=e582]: Alt
+                - generic [ref=e583]:
+                  - button "Sort by Alt Ascending" [ref=e584] [cursor=pointer]:
+                    - img [ref=e585]
+                  - button "Sort by Alt Descending" [ref=e587] [cursor=pointer]:
+                    - img [ref=e588]
+            - columnheader "Updated At Sort by Updated At Ascending Sort by Updated At Descending" [ref=e590]:
+              - generic [ref=e591]:
+                - generic [ref=e593]: Updated At
+                - generic [ref=e594]:
+                  - button "Sort by Updated At Ascending" [ref=e595] [cursor=pointer]:
+                    - img [ref=e596]
+                  - button "Sort by Updated At Descending" [ref=e598] [cursor=pointer]:
+                    - img [ref=e599]
+            - columnheader "Created At Sort by Created At Ascending Sort by Created At Descending" [ref=e601]:
+              - generic [ref=e602]:
+                - generic [ref=e604]: Created At
+                - generic [ref=e605]:
+                  - button "Sort by Created At Ascending" [ref=e606] [cursor=pointer]:
+                    - img [ref=e607]
+                  - button "Sort by Created At Descending" [ref=e609] [cursor=pointer]:
+                    - img [ref=e610]
+        - rowgroup [ref=e612]:
+          - row "Screenshot from 2026-03-28 16-03-14.webp Screenshot from 2026-03-28 16-03-14.webp aoe May 9th 2026, 8:06 PM May 9th 2026, 8:06 PM" [ref=e613]:
+            - cell "Screenshot from 2026-03-28 16-03-14.webp Screenshot from 2026-03-28 16-03-14.webp" [ref=e614]:
+              - button "Screenshot from 2026-03-28 16-03-14.webp Screenshot from 2026-03-28 16-03-14.webp" [ref=e615] [cursor=pointer]:
+                - generic [ref=e616]:
+                  - img "Screenshot from 2026-03-28 16-03-14.webp" [ref=e618]
+                  - generic [ref=e619]: Screenshot from 2026-03-28 16-03-14.webp
+            - cell "aoe" [ref=e620]:
+              - generic [ref=e621]: aoe
+            - cell "May 9th 2026, 8:06 PM" [ref=e622]:
+              - generic [ref=e623]: May 9th 2026, 8:06 PM
+            - cell "May 9th 2026, 8:06 PM" [ref=e624]:
+              - generic [ref=e625]: May 9th 2026, 8:06 PM
+          - row "AdobeStock_176446223_Preview-3.webp aaaa May 5th 2026, 7:21 PM May 5th 2026, 6:39 PM" [ref=e626]:
+            - cell "AdobeStock_176446223_Preview-3.webp" [ref=e627]:
+              - button "AdobeStock_176446223_Preview-3.webp" [ref=e628] [cursor=pointer]:
+                - generic [ref=e629]:
+                  - img [ref=e631]
+                  - generic [ref=e635]: AdobeStock_176446223_Preview-3.webp
+            - cell "aaaa" [ref=e636]:
+              - generic [ref=e637]: aaaa
+            - cell "May 5th 2026, 7:21 PM" [ref=e638]:
+              - generic [ref=e639]: May 5th 2026, 7:21 PM
+            - cell "May 5th 2026, 6:39 PM" [ref=e640]:
+              - generic [ref=e641]: May 5th 2026, 6:39 PM
+          - row "AdobeStock_375689424.jpeg AdobeStock_375689424.jpeg <No Alt> January 2nd 2026, 4:22 PM January 2nd 2026, 4:22 PM" [ref=e642]:
+            - cell "AdobeStock_375689424.jpeg AdobeStock_375689424.jpeg" [ref=e643]:
+              - button "AdobeStock_375689424.jpeg AdobeStock_375689424.jpeg" [ref=e644] [cursor=pointer]:
+                - generic [ref=e645]:
+                  - img "AdobeStock_375689424.jpeg" [ref=e647]
+                  - generic [ref=e648]: AdobeStock_375689424.jpeg
+            - cell "<No Alt>" [ref=e649]:
+              - generic [ref=e650]: <No Alt>
+            - cell "January 2nd 2026, 4:22 PM" [ref=e651]:
+              - generic [ref=e652]: January 2nd 2026, 4:22 PM
+            - cell "January 2nd 2026, 4:22 PM" [ref=e653]:
+              - generic [ref=e654]: January 2nd 2026, 4:22 PM
+          - row "AdobeStock_193915354 (1)-1.webp AdobeStock_193915354 (1)-1.webp ANdi May 5th 2026, 7:19 PM January 2nd 2026, 4:21 PM" [ref=e655]:
+            - cell "AdobeStock_193915354 (1)-1.webp AdobeStock_193915354 (1)-1.webp" [ref=e656]:
+              - button "AdobeStock_193915354 (1)-1.webp AdobeStock_193915354 (1)-1.webp" [ref=e657] [cursor=pointer]:
+                - generic [ref=e658]:
+                  - img "AdobeStock_193915354 (1)-1.webp" [ref=e660]
+                  - generic [ref=e661]: AdobeStock_193915354 (1)-1.webp
+            - cell "ANdi" [ref=e662]:
+              - generic [ref=e663]: ANdi
+            - cell "May 5th 2026, 7:19 PM" [ref=e664]:
+              - generic [ref=e665]: May 5th 2026, 7:19 PM
+            - cell "January 2nd 2026, 4:21 PM" [ref=e666]:
+              - generic [ref=e667]: January 2nd 2026, 4:21 PM
+          - row "AdobeStock_188083678-1.jpeg AdobeStock_188083678-1.jpeg <No Alt> January 2nd 2026, 4:19 PM January 2nd 2026, 4:19 PM" [ref=e668]:
+            - cell "AdobeStock_188083678-1.jpeg AdobeStock_188083678-1.jpeg" [ref=e669]:
+              - button "AdobeStock_188083678-1.jpeg AdobeStock_188083678-1.jpeg" [ref=e670] [cursor=pointer]:
+                - generic [ref=e671]:
+                  - img "AdobeStock_188083678-1.jpeg" [ref=e673]
+                  - generic [ref=e674]: AdobeStock_188083678-1.jpeg
+            - cell "<No Alt>" [ref=e675]:
+              - generic [ref=e676]: <No Alt>
+            - cell "January 2nd 2026, 4:19 PM" [ref=e677]:
+              - generic [ref=e678]: January 2nd 2026, 4:19 PM
+            - cell "January 2nd 2026, 4:19 PM" [ref=e679]:
+              - generic [ref=e680]: January 2nd 2026, 4:19 PM
+          - row "AdobeStock_110423651.jpeg AdobeStock_110423651.jpeg <No Alt> January 2nd 2026, 4:17 PM January 2nd 2026, 4:17 PM" [ref=e681]:
+            - cell "AdobeStock_110423651.jpeg AdobeStock_110423651.jpeg" [ref=e682]:
+              - button "AdobeStock_110423651.jpeg AdobeStock_110423651.jpeg" [ref=e683] [cursor=pointer]:
+                - generic [ref=e684]:
+                  - img "AdobeStock_110423651.jpeg" [ref=e686]
+                  - generic [ref=e687]: AdobeStock_110423651.jpeg
+            - cell "<No Alt>" [ref=e688]:
+              - generic [ref=e689]: <No Alt>
+            - cell "January 2nd 2026, 4:17 PM" [ref=e690]:
+              - generic [ref=e691]: January 2nd 2026, 4:17 PM
+            - cell "January 2nd 2026, 4:17 PM" [ref=e692]:
+              - generic [ref=e693]: January 2nd 2026, 4:17 PM
+          - row "AdobeStock_188083678.jpeg AdobeStock_188083678.jpeg adobe May 5th 2026, 7:23 PM January 2nd 2026, 4:16 PM" [ref=e694]:
+            - cell "AdobeStock_188083678.jpeg AdobeStock_188083678.jpeg" [ref=e695]:
+              - button "AdobeStock_188083678.jpeg AdobeStock_188083678.jpeg" [ref=e696] [cursor=pointer]:
+                - generic [ref=e697]:
+                  - img "AdobeStock_188083678.jpeg" [ref=e699]
+                  - generic [ref=e700]: AdobeStock_188083678.jpeg
+            - cell "adobe" [ref=e701]:
+              - generic [ref=e702]: adobe
+            - cell "May 5th 2026, 7:23 PM" [ref=e703]:
+              - generic [ref=e704]: May 5th 2026, 7:23 PM
+            - cell "January 2nd 2026, 4:16 PM" [ref=e705]:
+              - generic [ref=e706]: January 2nd 2026, 4:16 PM
+          - row "AdobeStock_363311887.jpeg AdobeStock_363311887.jpeg <No Alt> January 1st 2026, 2:58 PM January 1st 2026, 2:57 PM" [ref=e707]:
+            - cell "AdobeStock_363311887.jpeg AdobeStock_363311887.jpeg" [ref=e708]:
+              - button "AdobeStock_363311887.jpeg AdobeStock_363311887.jpeg" [ref=e709] [cursor=pointer]:
+                - generic [ref=e710]:
+                  - img "AdobeStock_363311887.jpeg" [ref=e712]
+                  - generic [ref=e713]: AdobeStock_363311887.jpeg
+            - cell "<No Alt>" [ref=e714]:
+              - generic [ref=e715]: <No Alt>
+            - cell "January 1st 2026, 2:58 PM" [ref=e716]:
+              - generic [ref=e717]: January 1st 2026, 2:58 PM
+            - cell "January 1st 2026, 2:57 PM" [ref=e718]:
+              - generic [ref=e719]: January 1st 2026, 2:57 PM
+          - row "AdobeStock_331533805-1.jpeg AdobeStock_331533805-1.jpeg <No Alt> January 1st 2026, 2:57 PM January 1st 2026, 2:57 PM" [ref=e720]:
+            - cell "AdobeStock_331533805-1.jpeg AdobeStock_331533805-1.jpeg" [ref=e721]:
+              - button "AdobeStock_331533805-1.jpeg AdobeStock_331533805-1.jpeg" [ref=e722] [cursor=pointer]:
+                - generic [ref=e723]:
+                  - img "AdobeStock_331533805-1.jpeg" [ref=e725]
+                  - generic [ref=e726]: AdobeStock_331533805-1.jpeg
+            - cell "<No Alt>" [ref=e727]:
+              - generic [ref=e728]: <No Alt>
+            - cell "January 1st 2026, 2:57 PM" [ref=e729]:
+              - generic [ref=e730]: January 1st 2026, 2:57 PM
+            - cell "January 1st 2026, 2:57 PM" [ref=e731]:
+              - generic [ref=e732]: January 1st 2026, 2:57 PM
+          - row "AdobeStock_331533805.jpeg AdobeStock_331533805.jpeg <No Alt> January 1st 2026, 2:57 PM January 1st 2026, 2:57 PM" [ref=e733]:
+            - cell "AdobeStock_331533805.jpeg AdobeStock_331533805.jpeg" [ref=e734]:
+              - button "AdobeStock_331533805.jpeg AdobeStock_331533805.jpeg" [ref=e735] [cursor=pointer]:
+                - generic [ref=e736]:
+                  - img "AdobeStock_331533805.jpeg" [ref=e738]
+                  - generic [ref=e739]: AdobeStock_331533805.jpeg
+            - cell "<No Alt>" [ref=e740]:
+              - generic [ref=e741]: <No Alt>
+            - cell "January 1st 2026, 2:57 PM" [ref=e742]:
+              - generic [ref=e743]: January 1st 2026, 2:57 PM
+            - cell "January 1st 2026, 2:57 PM" [ref=e744]:
+              - generic [ref=e745]: January 1st 2026, 2:57 PM
+      - generic [ref=e746]:
+        - generic [ref=e747]:
+          - button [disabled] [ref=e748]:
+            - img [ref=e749]
+          - button [ref=e751] [cursor=pointer]:
+            - img [ref=e752]
+          - button "1" [ref=e754]
+          - button "2" [ref=e755] [cursor=pointer]
+          - generic [ref=e756]: —
+          - button "62" [ref=e757] [cursor=pointer]
+        - generic [ref=e758]: 1-10 of 618
+        - 'button "Per Page: 10" [ref=e762] [cursor=pointer]':
+          - generic [ref=e763]:
+            - generic [ref=e764]: "Per Page: 10"
+            - img [ref=e765]
+  - region "Notifications alt+T"
+  - alert [ref=e443]
+  - button "Open Next.js Dev Tools" [ref=e449] [cursor=pointer]:
+    - img [ref=e450]

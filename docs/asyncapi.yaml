@@ -1,0 +1,1467 @@
+asyncapi: '3.0.0'
+id: 'urn:travel-tours:payload-cms:events'
+info:
+  title: Travel Tours Event Contracts
+  version: '1.0.0'
+  description: |
+    Event-driven architecture contracts for the Payload CMS + Next.js travel tours system.
+
+    Covers three event categories:
+    - **Integration**: Cross-service business events (catalog, content, identity)
+    - **Notification**: User-facing notification events (email, webhook, push)
+    - **Inbound**: Events consumed from external identity services
+
+    All events share the `tourism-events/v1` envelope format with correlation,
+    causation, and OpenTelemetry tracing metadata.
+
+    ## Source Code
+    - Event definitions: `src/events/`
+    - Event bus: `src/events/bus/RabbitMQEventBus.ts`
+    - Event registry: `src/events/registry/catalog.ts`
+    - Envelope spec: `src/events/envelope/EventEnvelope.ts`
+    - Topology: `src/events/topology/`
+  contact:
+    name: Travel Tours Platform Team
+  license:
+    name: Private
+  tags:
+    - name: integration
+    - name: notification
+    - name: inbound
+
+defaultContentType: application/json
+
+# ============================================================================
+# SERVERS
+# ============================================================================
+servers:
+  rabbitmq-production:
+    host: amqp://rabbitmq:5672
+    protocol: amqp
+    protocolVersion: '0.9.1'
+    description: Production RabbitMQ broker for event routing
+    tags:
+      - name: production
+      - name: rabbitmq
+    bindings:
+      amqp:
+        vhost: /
+
+  rabbitmq-development:
+    host: amqp://localhost:5672
+    protocol: amqp
+    protocolVersion: '0.9.1'
+    description: Local development RabbitMQ broker
+    tags:
+      - name: development
+      - name: rabbitmq
+    bindings:
+      amqp:
+        vhost: /
+
+  isr-revalidation:
+    host: '{env:NEXTJS_REVALIDATE_URL}'
+    protocol: http
+    protocolVersion: '1.1'
+    description: Next.js on-demand ISR revalidation endpoint
+    tags:
+      - name: isr
+      - name: nextjs
+
+# ============================================================================
+# CHANNELS — one per logical event stream (routing key)
+# ============================================================================
+channels:
+  # ── Integration Channels (tourism.integration exchange) ──────────────
+
+  integration.tour.published.v1:
+    address: 'integration.tour.published.v1'
+    description: Tour published — now visible to customers
+    messages:
+      tourPublished:
+        $ref: '#/components/messages/TourPublishedV1'
+    tags:
+      - name: integration
+      - name: tour
+
+  integration.tour.updated.v1:
+    address: 'integration.tour.updated.v1'
+    description: Published tour was re-published after being edited (draft → publish cycle)
+    messages:
+      tourUpdated:
+        $ref: '#/components/messages/TourUpdatedV1'
+    tags:
+      - name: integration
+      - name: tour
+
+  integration.tour.deleted.v1:
+    address: 'integration.tour.deleted.v1'
+    description: Tour was permanently deleted
+    messages:
+      tourDeleted:
+        $ref: '#/components/messages/TourDeletedV1'
+    tags:
+      - name: integration
+      - name: tour
+
+  integration.package.published.v1:
+    address: 'integration.package.published.v1'
+    description: Package published — now visible to customers
+    messages:
+      packagePublished:
+        $ref: '#/components/messages/PackagePublishedV1'
+    tags:
+      - name: integration
+      - name: package
+
+  integration.package.updated.v1:
+    address: 'integration.package.updated.v1'
+    description: Published package was re-published after being edited (draft → publish cycle)
+    messages:
+      packageUpdated:
+        $ref: '#/components/messages/PackageUpdatedV1'
+    tags:
+      - name: integration
+      - name: package
+
+  integration.package.deleted.v1:
+    address: 'integration.package.deleted.v1'
+    description: Package was permanently deleted
+    messages:
+      packageDeleted:
+        $ref: '#/components/messages/PackageDeletedV1'
+    tags:
+      - name: integration
+      - name: package
+
+  # ── Notification Channels (tourism.notify exchange) ───────────────────
+
+  notify.tour.published.v1:
+    address: 'notify.tour.published.v1'
+    description: Notification that a tour was published
+    messages:
+      tourPublishedNotify:
+        $ref: '#/components/messages/TourPublishedNotifyV1'
+    tags:
+      - name: notification
+      - name: tour
+
+  notify.tour.updated.v1:
+    address: 'notify.tour.updated.v1'
+    description: Notification that a published tour was re-published after editing
+    messages:
+      tourUpdatedNotify:
+        $ref: '#/components/messages/TourUpdatedNotifyV1'
+    tags:
+      - name: notification
+      - name: tour
+
+  notify.package.published.v1:
+    address: 'notify.package.published.v1'
+    description: Notification that a package was published
+    messages:
+      packagePublishedNotify:
+        $ref: '#/components/messages/PackagePublishedNotifyV1'
+    tags:
+      - name: notification
+      - name: package
+
+  notify.package.updated.v1:
+    address: 'notify.package.updated.v1'
+    description: Notification that a published package was re-published after editing
+    messages:
+      packageUpdatedNotify:
+        $ref: '#/components/messages/PackageUpdatedNotifyV1'
+    tags:
+      - name: notification
+      - name: package
+
+  # ── Inbound Channels (identity.events exchange) ──────────────────────
+
+  identity.user.created.v1:
+    address: 'identity.user.created.v1'
+    description: User created in external identity service (Keycloak)
+    messages:
+      identityUserCreated:
+        $ref: '#/components/messages/IdentityUserCreatedV1'
+    tags:
+      - name: inbound
+      - name: user
+
+  identity.user.deleted.v1:
+    address: 'identity.user.deleted.v1'
+    description: User deleted in external identity service (Keycloak AdminEvent DELETE+USER)
+    messages:
+      identityUserDeleted:
+        $ref: '#/components/messages/IdentityUserDeletedV1'
+    tags:
+      - name: inbound
+      - name: user
+
+  # ── Capacity Channels (capacity.events exchange) ─────────────────────
+
+  capacity.max_passengers.updated.v1:
+    address: 'capacity.max_passengers.updated.v1'
+    description: External capacity service updated max passengers for a tour or paquete
+    messages:
+      capacityMaxPassengersUpdated:
+        $ref: '#/components/messages/CapacityMaxPassengersUpdatedV1'
+    tags:
+      - name: capacity
+      - name: inbound
+
+  # ── ISR Revalidation Channel (HTTP) ─────────────────────────────────
+
+  /api/revalidate:
+    address: '/api/revalidate'
+    description: |
+      Next.js on-demand ISR revalidation endpoint.
+      Triggered by Payload CMS hooks after content changes
+      to invalidate cached pages and refresh static generation.
+    messages:
+      revalidationRequest:
+        $ref: '#/components/messages/RevalidationRequest'
+      revalidationResponse:
+        $ref: '#/components/messages/RevalidationResponse'
+    tags:
+      - name: isr
+      - name: nextjs
+
+# ============================================================================
+# OPERATIONS — who publishes and who subscribes
+# ============================================================================
+operations:
+
+  # ── Tour Integration Producers ──────────────────────────────────────
+
+  emitTourPublished:
+    action: send
+    title: Emit Tour Published
+    summary: Payload CMS publishes tour.published after a tour is first published
+    channel:
+      $ref: '#/channels/integration.tour.published.v1'
+    messages:
+      - $ref: '#/channels/integration.tour.published.v1/messages/tourPublished'
+    tags:
+      - name: producer
+      - name: catalog
+
+  emitTourUpdated:
+    action: send
+    title: Emit Tour Updated
+    summary: Payload CMS publishes tour.updated when a previously published tour is re-published after editing (draft → publish cycle)
+    channel:
+      $ref: '#/channels/integration.tour.updated.v1'
+    messages:
+      - $ref: '#/channels/integration.tour.updated.v1/messages/tourUpdated'
+    tags:
+      - name: producer
+      - name: catalog
+
+  emitTourDeleted:
+    action: send
+    title: Emit Tour Deleted
+    summary: Payload CMS publishes tour.deleted after a tour is permanently deleted
+    channel:
+      $ref: '#/channels/integration.tour.deleted.v1'
+    messages:
+      - $ref: '#/channels/integration.tour.deleted.v1/messages/tourDeleted'
+    tags:
+      - name: producer
+      - name: catalog
+
+  # ── Paquete Integration Producers ───────────────────────────────────
+
+  emitPackagePublished:
+    action: send
+    title: Emit Paquete Published
+    summary: Payload CMS publishes package.published after a package is first published
+    channel:
+      $ref: '#/channels/integration.package.published.v1'
+    messages:
+      - $ref: '#/channels/integration.package.published.v1/messages/packagePublished'
+    tags:
+      - name: producer
+      - name: catalog
+
+  emitPackageUpdated:
+    action: send
+    title: Emit Paquete Updated
+    summary: Payload CMS publishes package.updated when a previously published package is re-published after editing (draft → publish cycle)
+    channel:
+      $ref: '#/channels/integration.package.updated.v1'
+    messages:
+      - $ref: '#/channels/integration.package.updated.v1/messages/packageUpdated'
+    tags:
+      - name: producer
+      - name: catalog
+
+  emitPackageDeleted:
+    action: send
+    title: Emit Paquete Deleted
+    summary: Payload CMS publishes package.deleted after a package is permanently deleted
+    channel:
+      $ref: '#/channels/integration.package.deleted.v1'
+    messages:
+      - $ref: '#/channels/integration.package.deleted.v1/messages/packageDeleted'
+    tags:
+      - name: producer
+      - name: catalog
+
+  # ── Notification Producers ───────────────────────────────────────────
+
+  emitTourPublishedNotification:
+    action: send
+    title: Emit Tour Published Notification
+    summary: Triggers email, webhook, and push notifications for a new tour
+    channel:
+      $ref: '#/channels/notify.tour.published.v1'
+    messages:
+      - $ref: '#/channels/notify.tour.published.v1/messages/tourPublishedNotify'
+    tags:
+      - name: producer
+      - name: notification
+
+  emitTourUpdatedNotification:
+    action: send
+    title: Emit Tour Updated Notification
+    summary: Triggers email, webhook, and push notifications for a tour update
+    channel:
+      $ref: '#/channels/notify.tour.updated.v1'
+    messages:
+      - $ref: '#/channels/notify.tour.updated.v1/messages/tourUpdatedNotify'
+    tags:
+      - name: producer
+      - name: notification
+
+  emitPackagePublishedNotification:
+    action: send
+    title: Emit Paquete Published Notification
+    summary: Triggers email and webhook notifications for a new package
+    channel:
+      $ref: '#/channels/notify.package.published.v1'
+    messages:
+      - $ref: '#/channels/notify.package.published.v1/messages/packagePublishedNotify'
+    tags:
+      - name: producer
+      - name: notification
+
+  emitPackageUpdatedNotification:
+    action: send
+    title: Emit Paquete Updated Notification
+    summary: Triggers email and webhook notifications for a package update
+    channel:
+      $ref: '#/channels/notify.package.updated.v1'
+    messages:
+      - $ref: '#/channels/notify.package.updated.v1/messages/packageUpdatedNotify'
+    tags:
+      - name: producer
+      - name: notification
+
+  # ── Inbound Consumer ────────────────────────────────────────────────
+
+  consumeIdentityUserCreated:
+    action: receive
+    title: Consume Identity User Created
+    summary: Payload CMS receives user.created events from external Keycloak service
+    channel:
+      $ref: '#/channels/identity.user.created.v1'
+    messages:
+      - $ref: '#/channels/identity.user.created.v1/messages/identityUserCreated'
+    tags:
+      - name: consumer
+      - name: inbound
+
+  consumeIdentityUserDeleted:
+    action: receive
+    title: Consume Identity User Deleted
+    summary: Payload CMS receives user.deleted events from external Keycloak service and deletes the admin user
+    channel:
+      $ref: '#/channels/identity.user.deleted.v1'
+    messages:
+      - $ref: '#/channels/identity.user.deleted.v1/messages/identityUserDeleted'
+    tags:
+      - name: consumer
+      - name: inbound
+
+  # ── Capacity Consumer ──────────────────────────────────────────────
+
+  consumeCapacityMaxPassengersUpdated:
+    action: receive
+    title: Consume Capacity Max Passengers Updated
+    summary: Payload CMS receives max_passengers.updated events from external capacity service and updates the tour/paquete
+    channel:
+      $ref: '#/channels/capacity.max_passengers.updated.v1'
+    messages:
+      - $ref: '#/channels/capacity.max_passengers.updated.v1/messages/capacityMaxPassengersUpdated'
+    tags:
+      - name: consumer
+      - name: capacity
+
+  # ── Queue Subscribers ────────────────────────────────────────────────
+
+  searchIndexerConsume:
+    action: receive
+    title: Search Indexer
+    summary: |
+      Search service consumes from `search.integration.queue`.
+      Routes: integration.tour.#, integration.package.#
+    channel:
+      $ref: '#/channels/integration.tour.published.v1'
+    messages:
+      - $ref: '#/channels/integration.tour.published.v1/messages/tourPublished'
+    tags:
+      - name: consumer
+      - name: search
+
+  emailNotifierConsume:
+    action: receive
+    title: Email Notifier
+    summary: "Email notification service consumes from email.notify.queue (routes: notify.#)"
+    channel:
+      $ref: '#/channels/notify.tour.published.v1'
+    messages:
+      - $ref: '#/channels/notify.tour.published.v1/messages/tourPublishedNotify'
+    tags:
+      - name: consumer
+      - name: email
+
+  webhookNotifierConsume:
+    action: receive
+    title: Webhook Notifier
+    summary: "Webhook notification service consumes from webhook.notify.queue (routes: notify.#)"
+    channel:
+      $ref: '#/channels/notify.tour.published.v1'
+    messages:
+      - $ref: '#/channels/notify.tour.published.v1/messages/tourPublishedNotify'
+    tags:
+      - name: consumer
+      - name: webhook
+
+  # ── HTTP ISR Operations ────────────────────────────────────────────
+
+  sendRevalidation:
+    action: send
+    title: Send ISR Revalidation Request
+    summary: |
+      Outbound HTTP POST to Next.js revalidation endpoint.
+      Triggers on-demand ISR cache invalidation after content changes.
+    channel:
+      $ref: '#/channels//api/revalidate'
+    messages:
+      - $ref: '#/channels//api/revalidate/messages/revalidationRequest'
+    reply:
+      channel:
+        $ref: '#/channels//api/revalidate'
+      messages:
+        - $ref: '#/channels//api/revalidate/messages/revalidationResponse'
+    bindings:
+      http:
+        method: POST
+        bindingVersion: '0.3.0'
+    tags:
+      - name: producer
+      - name: isr
+
+# ============================================================================
+# COMPONENTS — reusable schemas, messages, correlation IDs
+# ============================================================================
+components:
+
+  # ── Correlation IDs ──────────────────────────────────────────────────
+  correlationIds:
+    eventCorrelationId:
+      description: |
+        Links all events in a single business flow.
+        Root events generate a new correlationId; handlers propagate it.
+      location: '$message.payload#/metadata/correlationId'
+
+    eventCausationId:
+      description: |
+        eventId of the event that CAUSED this one.
+        null for root events. Set by handlers that emit events as a reaction.
+      location: '$message.payload#/metadata/causationId'
+
+  # ── Schemas ──────────────────────────────────────────────────────────
+  schemas:
+
+    # ── Event Envelope ─────────────────────────────────────────────────
+    EventEnvelope:
+      type: object
+      required:
+        - spec
+        - metadata
+        - payload
+      properties:
+        spec:
+          type: string
+          const: 'tourism-events/v1'
+          description: Envelope specification version
+        metadata:
+          $ref: '#/components/schemas/EventMetadata'
+        payload:
+          description: Event-specific payload (varies by eventType)
+
+    EventMetadata:
+      type: object
+      required:
+        - eventId
+        - eventType
+        - eventVersion
+        - aggregateId
+        - aggregateType
+        - correlationId
+        - causationId
+        - traceId
+        - spanId
+        - producer
+        - occurredAt
+      properties:
+        eventId:
+          type: string
+          format: uuid
+          description: Unique event identifier (UUID v4, auto-generated)
+        eventType:
+          type: string
+          description: |
+            Dotted event type identifier (e.g. "tour.published", "package.updated").
+            Combined with eventVersion uniquely identifies the event schema.
+        eventVersion:
+          type: integer
+          minimum: 1
+          description: Schema version of this event type (semver major)
+        aggregateId:
+          type: string
+          description: ID of the aggregate (entity) this event pertains to
+        aggregateType:
+          type: string
+          enum:
+            - tour
+            - package
+            - paquete
+            - user
+            - media
+            - page
+          description: Type of aggregate this event belongs to
+        correlationId:
+          type: string
+          format: uuid
+          description: |
+            Links all events in a single business flow.
+            Root events generate a new correlationId; handlers propagate it.
+        causationId:
+          type: string
+          nullable: true
+          description: |
+            eventId of the event that CAUSED this one.
+            null for root events. Set by handlers that emit events as a reaction.
+        traceId:
+          type: string
+          description: OpenTelemetry trace ID for distributed tracing
+        spanId:
+          type: string
+          description: OpenTelemetry span ID for distributed tracing
+        producer:
+          type: string
+          enum:
+            - catalog
+            - identity
+            - user-service
+            - capacity-service
+          description: Bounded context that produced this event
+        occurredAt:
+          type: string
+          format: date-time
+          description: ISO 8601 — when the business event occurred (not when published)
+        actorId:
+          type: string
+          nullable: true
+          description: ID of the user or system that triggered the event
+        tenantId:
+          type: string
+          nullable: true
+          description: Tenant identifier for multi-tenant scenarios
+
+    # ── Shared Sub-schemas ─────────────────────────────────────────────
+    Money:
+      type: object
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: number
+          description: Monetary amount
+        currency:
+          type: string
+          enum:
+            - USD
+            - EUR
+            - PEN
+          description: ISO 4217 currency code
+
+    # ── Tour Payloads ──────────────────────────────────────────────────
+    MeiliThumbnail:
+      type: object
+      nullable: true
+      properties:
+        large:
+          type: string
+          format: uri
+          nullable: true
+        medium:
+          type: string
+          format: uri
+          nullable: true
+        small:
+          type: string
+          format: uri
+          nullable: true
+        og:
+          type: string
+          format: uri
+          nullable: true
+        square:
+          type: string
+          format: uri
+          nullable: true
+
+    TourCategoryRef:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+
+    DestinationRef:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+
+    TourData:
+      type: object
+      required:
+        - destination
+        - description
+        - duration_days
+        - thumbnail
+        - price
+        - categories
+        - destinos
+        - difficulty
+      properties:
+        destination:
+          type: string
+          description: Tour display title
+        description:
+          type: object
+          additionalProperties: true
+          description: Lexical rich text JSON
+        duration_days:
+          type: integer
+          minimum: 1
+          description: Tour duration in days
+        thumbnail:
+          type: string
+          format: uri
+          description: OG-size image URL
+        completeThumbnail:
+          $ref: '#/components/schemas/MeiliThumbnail'
+        price:
+          type: number
+          description: Tour price in USD
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/TourCategoryRef'
+        destinos:
+          $ref: '#/components/schemas/DestinationRef'
+        difficulty:
+          type: string
+          description: Difficulty level
+
+    TourPublishedV1Payload:
+      type: object
+      required:
+        - id
+        - slug
+        - data
+      properties:
+        id:
+          type: integer
+          description: Payload CMS document ID
+        slug:
+          type: string
+          description: URL-friendly slug
+        data:
+          $ref: '#/components/schemas/TourData'
+      examples:
+        - id: 42
+          slug: machu-picchu-full-day
+          data:
+            destination: 'Machu Picchu Full Day Tour'
+            description: { root: { type: root, children: [] } }
+            duration_days: 1
+            thumbnail: 'https://example.com/media/machu-picchu-og.jpg'
+            completeThumbnail:
+              large: 'https://example.com/media/machu-picchu-large.jpg'
+              medium: 'https://example.com/media/machu-picchu-medium.jpg'
+            price: 89.99
+            categories:
+              - name: Adventure
+              - name: Cultural
+            destinos:
+              name: Cusco
+            difficulty: moderate
+
+    TourUpdatedV1Payload:
+      type: object
+      required:
+        - id
+        - slug
+        - data
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+        data:
+          $ref: '#/components/schemas/TourData'
+
+    TourDeletedV1Payload:
+      type: object
+      required:
+        - id
+        - slug
+        - deletedAt
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        deletedAt:
+          type: string
+          format: date-time
+
+    # ── Paquete Payloads ───────────────────────────────────────────────
+    PackageData:
+      type: object
+      required:
+        - destination
+        - description
+        - duration_days
+        - thumbnail
+        - price
+        - destinos
+        - difficulty
+      properties:
+        destination:
+          type: string
+          description: Paquete display title
+        description:
+          type: object
+          additionalProperties: true
+          description: Lexical rich text JSON
+        duration_days:
+          type: integer
+          minimum: 1
+          description: Paquete duration in days
+        thumbnail:
+          type: string
+          format: uri
+          description: OG-size image URL
+        completeThumbnail:
+          $ref: '#/components/schemas/MeiliThumbnail'
+        price:
+          type: number
+          description: Paquete price in USD
+        destinos:
+          type: array
+          items:
+            $ref: '#/components/schemas/DestinationRef'
+          description: Destinations included in this package
+        difficulty:
+          type: string
+          description: Difficulty level
+
+    PackagePublishedV1Payload:
+      type: object
+      required:
+        - id
+        - slug
+        - data
+      properties:
+        id:
+          type: integer
+          description: Payload CMS document ID
+        slug:
+          type: string
+          description: URL-friendly slug
+        data:
+          $ref: '#/components/schemas/PackageData'
+      examples:
+        - id: 57
+          slug: cusco-sacred-valley-package
+          data:
+            destination: 'Cusco & Sacred Valley 5-Day Package'
+            description: { root: { type: root, children: [] } }
+            duration_days: 5
+            thumbnail: 'https://example.com/media/cusco-og.jpg'
+            completeThumbnail:
+              large: 'https://example.com/media/cusco-large.jpg'
+              medium: 'https://example.com/media/cusco-medium.jpg'
+            price: 599.99
+            destinos:
+              - name: Cusco
+              - name: Sacred Valley
+            difficulty: easy
+
+    PackageUpdatedV1Payload:
+      type: object
+      required:
+        - id
+        - slug
+        - data
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+        data:
+          $ref: '#/components/schemas/PackageData'
+
+    PackageDeletedV1Payload:
+      type: object
+      required:
+        - id
+        - slug
+        - deletedAt
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        deletedAt:
+          type: string
+          format: date-time
+
+    # ── Notification Payloads ──────────────────────────────────────────
+    TourNotificationPayload:
+      type: object
+      required:
+        - tourId
+        - tourSlug
+        - channels
+      properties:
+        tourId:
+          type: string
+          description: Payload CMS document ID of the tour
+        tourSlug:
+          type: string
+          description: URL slug of the tour
+        channels:
+          type: array
+          items:
+            type: string
+            enum:
+              - email
+              - webhook
+              - push
+          description: Notification channels to dispatch through
+
+    PackageNotificationPayload:
+      type: object
+      required:
+        - packageId
+        - packageSlug
+        - channels
+      properties:
+        paqueteId:
+          type: string
+        paqueteSlug:
+          type: string
+        channels:
+          type: array
+          items:
+            type: string
+            enum:
+              - email
+              - webhook
+
+    # ── Inbound Payloads ──────────────────────────────────────────────
+    IdentityUserCreatedV1Payload:
+      type: object
+      required:
+        - aggregateId
+        - email
+        - userType
+        - clientRoles
+      properties:
+        aggregateId:
+          type: string
+          description: External identity service user ID (Keycloak sub)
+        email:
+          type: string
+          format: email
+          description: User email address
+        userType:
+          type: string
+          enum: [PASSENGER, ADMIN]
+          description: |
+            High-level user type for event routing. Determines which downstream module processes the event:
+            - PASSENGER: Passenger module creates a passenger record
+            - ADMIN: Admin module handles the user
+            Derived from Keycloak composite role (basic/standard/premium → PASSENGER, editor/admin/super-admin → ADMIN)
+        clientRoles:
+          type: array
+          items:
+            type: string
+            enum: [basic, standard, premium, editor, admin, super-admin]
+          description: |
+            Keycloak composite roles assigned to the user. Used for authorization decisions.
+            - Passenger roles: basic, standard, premium
+            - Admin roles: editor, admin, super-admin
+            These map directly to Keycloak client-level composite roles.
+      examples:
+        - aggregateId: 'f:ab12cd34-5678-90ef-abcd-ef1234567890:123'
+          email: newuser@example.com
+          userType: ADMIN
+          clientRoles:
+            - editor
+
+    IdentityUserDeletedV1Payload:
+      type: object
+      required:
+        - aggregateId
+        - email
+        - userType
+      properties:
+        aggregateId:
+          type: string
+          description: External identity service user ID (Keycloak sub)
+        email:
+          type: string
+          format: email
+          description: Email address of the deleted user
+        userType:
+          type: string
+          enum: [PASSENGER, ADMIN]
+          description: |
+            User type at the time of deletion.
+            Only ADMIN users are deleted from Payload CMS.
+            Derived from Keycloak composite role (basic/standard/premium → PASSENGER, editor/admin/super-admin → ADMIN)
+      examples:
+        - aggregateId: 'f:ab12cd34-5678-90ef-abcd-ef1234567890:123'
+          email: deleted@example.com
+          userType: ADMIN
+
+    # ── Capacity Payloads ──────────────────────────────────────────────
+    CapacityMaxPassengersUpdatedV1Payload:
+      type: object
+      required:
+        - aggregateType
+        - aggregateId
+        - maxPassengers
+      properties:
+        aggregateType:
+          type: string
+          enum: [tour, paquete]
+          description: Which collection the max passengers update applies to
+        aggregateId:
+          type: integer
+          description: Payload CMS document ID of the tour or paquete
+        maxPassengers:
+          type: integer
+          minimum: 1
+          description: New maximum number of passengers
+      examples:
+        - aggregateType: tour
+          aggregateId: 42
+          maxPassengers: 25
+        - aggregateType: paquete
+          aggregateId: 57
+          maxPassengers: 30
+
+    # ── ISR Revalidation Payloads ──────────────────────────────────────
+    RevalidationRequestPayload:
+      type: object
+      required:
+        - paths
+        - tags
+        - secret
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+          description: |
+            Next.js routes to revalidate (path-based).
+            Example: ['/pe/tours/machu-picchu-full-day', '/pe/tours']
+        tags:
+          type: array
+          items:
+            type: string
+          description: |
+            Next.js cache tags to invalidate (tag-based).
+            Example: ['tours-sitemap', 'tours']
+        secret:
+          type: string
+          description: Shared secret token for authentication
+      examples:
+        - paths:
+            - '/pe/tours/machu-picchu-full-day'
+            - '/pe/tours'
+          tags:
+            - tours-sitemap
+            - tours
+          secret: your-secret-token
+
+    RevalidationResponsePayload:
+      type: object
+      properties:
+        revalidated:
+          type: boolean
+          description: Whether revalidation was successful
+        timestamp:
+          type: string
+          format: date-time
+
+  # ── Messages ────────────────────────────────────────────────────────
+  messages:
+
+    # ── Integration Messages ───────────────────────────────────────────
+
+    TourPublishedV1:
+      name: tour.published.v1
+      title: Tour Published V1
+      summary: Tour was published and is now visible to customers
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/EventEnvelope'
+          - properties:
+              payload:
+                $ref: '#/components/schemas/TourPublishedV1Payload'
+      correlationId:
+        $ref: '#/components/correlationIds/eventCorrelationId'
+      bindings:
+        amqp:
+          exchange: tourism.integration
+          routingKey: integration.tour.published.v1
+
+    TourUpdatedV1:
+      name: tour.updated.v1
+      title: Tour Updated V1
+      summary: Previously published tour was re-published after editing
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/EventEnvelope'
+          - properties:
+              payload:
+                $ref: '#/components/schemas/TourUpdatedV1Payload'
+      correlationId:
+        $ref: '#/components/correlationIds/eventCorrelationId'
+      bindings:
+        amqp:
+          exchange: tourism.integration
+          routingKey: integration.tour.updated.v1
+
+    TourDeletedV1:
+      name: tour.deleted.v1
+      title: Tour Deleted V1
+      summary: Tour was permanently deleted
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/EventEnvelope'
+          - properties:
+              payload:
+                $ref: '#/components/schemas/TourDeletedV1Payload'
+      correlationId:
+        $ref: '#/components/correlationIds/eventCorrelationId'
+      bindings:
+        amqp:
+          exchange: tourism.integration
+          routingKey: integration.tour.deleted.v1
+
+    PackagePublishedV1:
+      name: package.published.v1
+      title: Paquete Published V1
+      summary: Paquete was published
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/EventEnvelope'
+          - properties:
+              payload:
+                $ref: '#/components/schemas/PackagePublishedV1Payload'
+      correlationId:
+        $ref: '#/components/correlationIds/eventCorrelationId'
+      bindings:
+        amqp:
+          exchange: tourism.integration
+          routingKey: integration.package.published.v1
+
+    PackageUpdatedV1:
+      name: package.updated.v1
+      title: Paquete Updated V1
+      summary: Previously published package was re-published after editing
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/EventEnvelope'
+          - properties:
+              payload:
+                $ref: '#/components/schemas/PackageUpdatedV1Payload'
+      correlationId:
+        $ref: '#/components/correlationIds/eventCorrelationId'
+      bindings:
+        amqp:
+          exchange: tourism.integration
+          routingKey: integration.package.updated.v1
+
+    PackageDeletedV1:
+      name: package.deleted.v1
+      title: Paquete Deleted V1
+      summary: Package was permanently deleted
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/EventEnvelope'
+          - properties:
+              payload:
+                $ref: '#/components/schemas/PackageDeletedV1Payload'
+      correlationId:
+        $ref: '#/components/correlationIds/eventCorrelationId'
+      bindings:
+        amqp:
+          exchange: tourism.integration
+          routingKey: integration.package.deleted.v1
+
+    # ── Notification Messages ──────────────────────────────────────────
+
+    TourPublishedNotifyV1:
+      name: notify.tour.published.v1
+      title: Tour Published Notification V1
+      summary: Notification that a tour was published
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/EventEnvelope'
+          - properties:
+              payload:
+                $ref: '#/components/schemas/TourNotificationPayload'
+      correlationId:
+        $ref: '#/components/correlationIds/eventCorrelationId'
+      bindings:
+        amqp:
+          exchange: tourism.notify
+          routingKey: notify.tour.published.v1
+
+    TourUpdatedNotifyV1:
+      name: notify.tour.updated.v1
+      title: Tour Updated Notification V1
+      summary: Notification that a published tour was re-published after editing
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/EventEnvelope'
+          - properties:
+              payload:
+                $ref: '#/components/schemas/TourNotificationPayload'
+      correlationId:
+        $ref: '#/components/correlationIds/eventCorrelationId'
+      bindings:
+        amqp:
+          exchange: tourism.notify
+          routingKey: notify.tour.updated.v1
+
+    PackagePublishedNotifyV1:
+      name: notify.package.published.v1
+      title: Paquete Published Notification V1
+      summary: Notification that a package was published
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/EventEnvelope'
+          - properties:
+              payload:
+                $ref: '#/components/schemas/PackageNotificationPayload'
+      correlationId:
+        $ref: '#/components/correlationIds/eventCorrelationId'
+      bindings:
+        amqp:
+          exchange: tourism.notify
+          routingKey: notify.package.published.v1
+
+    PackageUpdatedNotifyV1:
+      name: notify.package.updated.v1
+      title: Paquete Updated Notification V1
+      summary: Notification that a published package was re-published after editing
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/EventEnvelope'
+          - properties:
+              payload:
+                $ref: '#/components/schemas/PackageNotificationPayload'
+      correlationId:
+        $ref: '#/components/correlationIds/eventCorrelationId'
+      bindings:
+        amqp:
+          exchange: tourism.notify
+          routingKey: notify.package.updated.v1
+
+    # ── Inbound Messages ──────────────────────────────────────────────
+
+    IdentityUserCreatedV1:
+      name: identity.user.created.v1
+      title: Identity User Created V1
+      summary: User created in external Keycloak identity service
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/EventEnvelope'
+          - properties:
+              payload:
+                $ref: '#/components/schemas/IdentityUserCreatedV1Payload'
+      correlationId:
+        $ref: '#/components/correlationIds/eventCorrelationId'
+      bindings:
+        amqp:
+          exchange: identity.events
+          routingKey: identity.user.created.v1
+
+    IdentityUserDeletedV1:
+      name: identity.user.deleted.v1
+      title: Identity User Deleted V1
+      summary: User deleted in external Keycloak identity service (AdminEvent DELETE+USER)
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/EventEnvelope'
+          - properties:
+              payload:
+                $ref: '#/components/schemas/IdentityUserDeletedV1Payload'
+      correlationId:
+        $ref: '#/components/correlationIds/eventCorrelationId'
+      bindings:
+        amqp:
+          exchange: identity.events
+          routingKey: identity.user.deleted.v1
+
+    # ── Capacity Messages ──────────────────────────────────────────────
+
+    CapacityMaxPassengersUpdatedV1:
+      name: capacity.max_passengers.updated.v1
+      title: Capacity Max Passengers Updated V1
+      summary: External capacity service updated max passengers for a tour or paquete
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/EventEnvelope'
+          - properties:
+              payload:
+                $ref: '#/components/schemas/CapacityMaxPassengersUpdatedV1Payload'
+      correlationId:
+        $ref: '#/components/correlationIds/eventCorrelationId'
+      bindings:
+        amqp:
+          exchange: capacity.events
+          routingKey: capacity.max_passengers.updated.v1
+
+    # ── ISR Revalidation Messages (HTTP) ────────────────────────────────
+
+    RevalidationRequest:
+      name: RevalidationRequest
+      title: ISR Revalidation Request
+      summary: Request to invalidate Next.js ISR cache
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/RevalidationRequestPayload'
+
+    RevalidationResponse:
+      name: RevalidationResponse
+      title: ISR Revalidation Response
+      summary: Response confirming cache invalidation
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/RevalidationResponsePayload'
+
+  # ── RabbitMQ Topology Extension ─────────────────────────────────────
+  x-rabbitmq-topology:
+    exchanges:
+      - name: tourism.integration
+        type: topic
+        durable: true
+        description: Integration events for cross-service communication
+      - name: tourism.notify
+        type: topic
+        durable: true
+        description: Notification events for user-facing messaging
+      - name: identity.events
+        type: topic
+        durable: true
+        description: Inbound events from external identity service
+      - name: capacity.events
+        type: topic
+        durable: true
+        description: Inbound events from external capacity service
+      - name: tourism.dlx
+        type: fanout
+        durable: true
+        description: Dead-letter exchange for failed messages
+
+    queues:
+      - name: search.integration.queue
+        type: quorum
+        durable: true
+        bindings:
+          - exchange: tourism.integration
+            routingPatterns:
+              - 'integration.tour.#'
+              - 'integration.package.#'
+        deadLetterExchange: tourism.dlx
+        retryQueue:
+          name: search.integration.queue.retry
+          ttl: 30000
+          deadLetterExchange: tourism.integration
+          deadLetterRoutingKey: search.integration.queue
+        dlq: search.integration.queue.dlq
+        consumer: Search Indexer Service
+
+      - name: email.notify.queue
+        type: quorum
+        durable: true
+        bindings:
+          - exchange: tourism.notify
+            routingPatterns:
+              - 'notify.#'
+        deadLetterExchange: tourism.dlx
+        retryQueue:
+          name: email.notify.queue.retry
+          ttl: 30000
+          deadLetterExchange: tourism.notify
+          deadLetterRoutingKey: email.notify.queue
+        dlq: email.notify.queue.dlq
+        consumer: Email Notification Service
+
+      - name: webhook.notify.queue
+        type: quorum
+        durable: true
+        bindings:
+          - exchange: tourism.notify
+            routingPatterns:
+              - 'notify.#'
+        deadLetterExchange: tourism.dlx
+        retryQueue:
+          name: webhook.notify.queue.retry
+          ttl: 30000
+          deadLetterExchange: tourism.notify
+          deadLetterRoutingKey: webhook.notify.queue
+        dlq: webhook.notify.queue.dlq
+        consumer: Webhook Notification Service
+
+      - name: payload.inbound.queue
+        type: quorum
+        durable: true
+        bindings:
+          - exchange: identity.events
+            routingPatterns:
+              - 'identity.user.created.#'
+              - 'identity.user.deleted.#'
+        deadLetterExchange: tourism.dlx
+        retryQueue:
+          name: payload.inbound.queue.retry
+          ttl: 30000
+          deadLetterExchange: identity.events
+          deadLetterRoutingKey: payload.inbound.queue
+         dlq: payload.inbound.queue.dlq
+         consumer: Payload CMS (Inbound Handler)
+
+      - name: payload.capacity.queue
+        type: quorum
+        durable: true
+        bindings:
+          - exchange: capacity.events
+            routingPatterns:
+              - 'capacity.#'
+        deadLetterExchange: tourism.dlx
+        retryQueue:
+          name: payload.capacity.queue.retry
+          ttl: 30000
+          deadLetterExchange: capacity.events
+          deadLetterRoutingKey: payload.capacity.queue
+        dlq: payload.capacity.queue.dlq
+        consumer: Payload CMS (Capacity Handler)
+
+  # ── ISR Revalidation Map Extension ─────────────────────────────────
+  x-isr-revalidation-map:
+    description: |
+      Maps each Payload CMS collection to the paths and tags
+      that are revalidated when content changes.
+    collections:
+      tours:
+        paths:
+          - '/pe/tours/{slug}'
+          - '/pe/tours'
+          - '/pe/categorias'
+          - '/pe/destinos'
+        tags:
+          - tours-sitemap
+          - tours
+        globals:
+          - TourPage
+      paquetes:
+        paths:
+          - '/pe/paquetes/{slug}'
+          - '/pe/paquetes'
+          - '/pe/destinos'
+        tags:
+          - packages-sitemap
+          - packages
+        globals:
+          - PaquetePage
+      post:
+        paths:
+          - '/pe/posts/{slug}'
+          - '/pe/posts'
+          - '/pe/categorias'
+        tags:
+          - posts-sitemap
+          - posts
+        globals:
+          - BlogPage
+      destinations:
+        paths:
+          - '/pe/destino'
+          - '/pe'
+        tags:
+          - destinations
+      pages:
+        paths:
+          - '/pe/{slug}'
+          - '/pe'
+        tags:
+          - pages-sitemap
+    globals:
+      Footer:
+        tags:
+          - global_footer
+      RedesNegocio:
+        tags:
+          - global_redesNegocio
+      TourPage:
+        tags:
+          - tours
+      PaquetePage:
+        tags:
+          - packages
+      BlogPage:
+        tags:
+          - posts

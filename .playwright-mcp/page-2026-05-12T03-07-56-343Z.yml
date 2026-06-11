@@ -1,0 +1,176 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - button "Close Menu" [ref=e4] [cursor=pointer]:
+      - generic "Collapse" [ref=e6]:
+        - img [ref=e7]
+    - generic [ref=e10]:
+      - banner [ref=e11]:
+        - generic [ref=e14]:
+          - generic "Dashboard" [ref=e18]:
+            - img [ref=e19]
+          - link "Account" [ref=e22] [cursor=pointer]:
+            - /url: /admin/account
+            - img "yas" [ref=e23]
+      - generic [ref=e25]:
+        - banner [ref=e26]:
+          - heading "Tours" [level=1] [ref=e27]
+          - link "Create new Tour" [ref=e28] [cursor=pointer]:
+            - /url: /admin/collections/tours/create
+            - generic:
+              - generic: Create New
+        - generic [ref=e30]:
+          - img [ref=e31]
+          - textbox "Search by Title" [ref=e34]
+          - generic [ref=e36]:
+            - button "Columns" [ref=e37] [cursor=pointer]:
+              - generic [ref=e38]: Columns
+              - img [ref=e40]
+            - button "Filters" [ref=e42] [cursor=pointer]:
+              - generic [ref=e43]: Filters
+              - img [ref=e45]
+        - table [ref=e48]:
+          - rowgroup [ref=e49]:
+            - row "Title Sort by Title Ascending Sort by Title Descending Slug Sort by Slug Ascending Sort by Slug Descending Updated At Sort by Updated At Ascending Sort by Updated At Descending" [ref=e50]:
+              - columnheader [ref=e51]:
+                - checkbox [ref=e54]
+              - columnheader "Title Sort by Title Ascending Sort by Title Descending" [ref=e55]:
+                - generic [ref=e56]:
+                  - generic [ref=e58]: Title
+                  - generic [ref=e59]:
+                    - button "Sort by Title Ascending" [ref=e60] [cursor=pointer]:
+                      - img [ref=e61]
+                    - button "Sort by Title Descending" [ref=e63] [cursor=pointer]:
+                      - img [ref=e64]
+              - columnheader "Slug Sort by Slug Ascending Sort by Slug Descending" [ref=e66]:
+                - generic [ref=e67]:
+                  - generic [ref=e69]: Slug
+                  - generic [ref=e70]:
+                    - button "Sort by Slug Ascending" [ref=e71] [cursor=pointer]:
+                      - img [ref=e72]
+                    - button "Sort by Slug Descending" [ref=e74] [cursor=pointer]:
+                      - img [ref=e75]
+              - columnheader "Updated At Sort by Updated At Ascending Sort by Updated At Descending" [ref=e77]:
+                - generic [ref=e78]:
+                  - generic [ref=e80]: Updated At
+                  - generic [ref=e81]:
+                    - button "Sort by Updated At Ascending" [ref=e82] [cursor=pointer]:
+                      - img [ref=e83]
+                    - button "Sort by Updated At Descending" [ref=e85] [cursor=pointer]:
+                      - img [ref=e86]
+          - rowgroup [ref=e88]:
+            - row "TOUR RUTA DEL SOL tour-ruta-del-sol- Loading..." [ref=e89]:
+              - cell [ref=e90]:
+                - checkbox [ref=e93]
+              - cell "TOUR RUTA DEL SOL" [ref=e94]:
+                - link "TOUR RUTA DEL SOL" [ref=e95] [cursor=pointer]:
+                  - /url: /admin/collections/tours/105
+              - cell "tour-ruta-del-sol-" [ref=e96]:
+                - generic [ref=e97]: tour-ruta-del-sol-
+              - cell "Loading..." [ref=e98]:
+                - generic [ref=e99]: Loading...
+            - row "UROS AMANTANI FULL DAY uros-amantani--full-day- Loading..." [ref=e100]:
+              - cell [ref=e101]:
+                - checkbox [ref=e104]
+              - cell "UROS AMANTANI FULL DAY" [ref=e105]:
+                - link "UROS AMANTANI FULL DAY" [ref=e106] [cursor=pointer]:
+                  - /url: /admin/collections/tours/103
+              - cell "uros-amantani--full-day-" [ref=e107]:
+                - generic [ref=e108]: uros-amantani--full-day-
+              - cell "Loading..." [ref=e109]:
+                - generic [ref=e110]: Loading...
+            - row "UROS TAQUILE FULL DAY uros-taquile-full-day Loading..." [ref=e111]:
+              - cell [ref=e112]:
+                - checkbox [ref=e115]
+              - cell "UROS TAQUILE FULL DAY" [ref=e116]:
+                - link "UROS TAQUILE FULL DAY" [ref=e117] [cursor=pointer]:
+                  - /url: /admin/collections/tours/102
+              - cell "uros-taquile-full-day" [ref=e118]:
+                - generic [ref=e119]: uros-taquile-full-day
+              - cell "Loading..." [ref=e120]:
+                - generic [ref=e121]: Loading...
+            - row "RUTA AYMARA ruta-aymara- Loading..." [ref=e122]:
+              - cell [ref=e123]:
+                - checkbox [ref=e126]
+              - cell "RUTA AYMARA" [ref=e127]:
+                - link "RUTA AYMARA" [ref=e128] [cursor=pointer]:
+                  - /url: /admin/collections/tours/101
+              - cell "ruta-aymara-" [ref=e129]:
+                - generic [ref=e130]: ruta-aymara-
+              - cell "Loading..." [ref=e131]:
+                - generic [ref=e132]: Loading...
+            - row "UROS TAQUILE 2D/1N uros-taquile-2d1n- Loading..." [ref=e133]:
+              - cell [ref=e134]:
+                - checkbox [ref=e137]
+              - cell "UROS TAQUILE 2D/1N" [ref=e138]:
+                - link "UROS TAQUILE 2D/1N" [ref=e139] [cursor=pointer]:
+                  - /url: /admin/collections/tours/100
+              - cell "uros-taquile-2d1n-" [ref=e140]:
+                - generic [ref=e141]: uros-taquile-2d1n-
+              - cell "Loading..." [ref=e142]:
+                - generic [ref=e143]: Loading...
+            - row "UROS AMANTANI TAQUILE 2D/1N uros-amantani-taquile-2d1n Loading..." [ref=e144]:
+              - cell [ref=e145]:
+                - checkbox [ref=e148]
+              - cell "UROS AMANTANI TAQUILE 2D/1N" [ref=e149]:
+                - link "UROS AMANTANI TAQUILE 2D/1N" [ref=e150] [cursor=pointer]:
+                  - /url: /admin/collections/tours/99
+              - cell "uros-amantani-taquile-2d1n" [ref=e151]:
+                - generic [ref=e152]: uros-amantani-taquile-2d1n
+              - cell "Loading..." [ref=e153]:
+                - generic [ref=e154]: Loading...
+            - row "UROS LUQUINA TAQUILE 2D/1N uros-luquina-taquile--2d1n Loading..." [ref=e155]:
+              - cell [ref=e156]:
+                - checkbox [ref=e159]
+              - cell "UROS LUQUINA TAQUILE 2D/1N" [ref=e160]:
+                - link "UROS LUQUINA TAQUILE 2D/1N" [ref=e161] [cursor=pointer]:
+                  - /url: /admin/collections/tours/98
+              - cell "uros-luquina-taquile--2d1n" [ref=e162]:
+                - generic [ref=e163]: uros-luquina-taquile--2d1n
+              - cell "Loading..." [ref=e164]:
+                - generic [ref=e165]: Loading...
+            - row "ASCENSO CHACHANI 02D/01N ascenso-chachani-02d01n Loading..." [ref=e166]:
+              - cell [ref=e167]:
+                - checkbox [ref=e170]
+              - cell "ASCENSO CHACHANI 02D/01N" [ref=e171]:
+                - link "ASCENSO CHACHANI 02D/01N" [ref=e172] [cursor=pointer]:
+                  - /url: /admin/collections/tours/96
+              - cell "ascenso-chachani-02d01n" [ref=e173]:
+                - generic [ref=e174]: ascenso-chachani-02d01n
+              - cell "Loading..." [ref=e175]:
+                - generic [ref=e176]: Loading...
+            - row "RAFTING - RIO CHILI rafting---rio-chili Loading..." [ref=e177]:
+              - cell [ref=e178]:
+                - checkbox [ref=e181]
+              - cell "RAFTING - RIO CHILI" [ref=e182]:
+                - link "RAFTING - RIO CHILI" [ref=e183] [cursor=pointer]:
+                  - /url: /admin/collections/tours/94
+              - cell "rafting---rio-chili" [ref=e184]:
+                - generic [ref=e185]: rafting---rio-chili
+              - cell "Loading..." [ref=e186]:
+                - generic [ref=e187]: Loading...
+            - row "City Peatonal + Monasterio de Santa Catalina city-peatonal--monasterio-de-santa-catalina- Loading..." [ref=e188]:
+              - cell [ref=e189]:
+                - checkbox [ref=e192]
+              - cell "City Peatonal + Monasterio de Santa Catalina" [ref=e193]:
+                - link "City Peatonal + Monasterio de Santa Catalina" [ref=e194] [cursor=pointer]:
+                  - /url: /admin/collections/tours/92
+              - cell "city-peatonal--monasterio-de-santa-catalina-" [ref=e195]:
+                - generic [ref=e196]: city-peatonal--monasterio-de-santa-catalina-
+              - cell "Loading..." [ref=e197]:
+                - generic [ref=e198]: Loading...
+        - generic [ref=e199]:
+          - generic [ref=e200]:
+            - button [disabled] [ref=e201]:
+              - img [ref=e202]
+            - button [ref=e204] [cursor=pointer]:
+              - img [ref=e205]
+            - button "1" [ref=e207]
+            - button "2" [ref=e208] [cursor=pointer]
+            - generic [ref=e209]: —
+            - button "6" [ref=e210] [cursor=pointer]
+          - generic [ref=e211]: 1-10 of 53
+          - 'button "Per Page: 10" [ref=e215] [cursor=pointer]':
+            - generic [ref=e216]:
+              - generic [ref=e217]: "Per Page: 10"
+              - img [ref=e218]
+  - region "Notifications alt+T"
