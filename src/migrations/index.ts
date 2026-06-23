@@ -37,6 +37,7 @@ import * as migration_20260306_075255 from './20260306_075255';
 import * as migration_20260401_215422 from './20260401_215422';
 import * as migration_20260519_processed_events from './20260519_processed_events';
 import * as migration_20260605_ofertas_tour_nullable from './20260605_ofertas_tour_nullable';
+import * as migration_20260623_add_thumbnail_datatour from './20260623_add_thumbnail_datatour';
 
 export const migrations = [
   {
@@ -233,5 +234,10 @@ export const migrations = [
     up: migration_20260605_ofertas_tour_nullable.up,
     down: migration_20260605_ofertas_tour_nullable.down,
     name: '20260605_ofertas_tour_nullable',
+  },
+  {
+    up: migration_20260623_add_thumbnail_datatour.up,
+    down: migration_20260623_add_thumbnail_datatour.down,
+    name: '20260623_add_thumbnail_datatour',
   },
 ];
