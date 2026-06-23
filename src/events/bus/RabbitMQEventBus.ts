@@ -5,7 +5,7 @@ import type { ChannelModel, ConfirmChannel, ConsumeMessage, Message, Options } f
 import type { EventCategory, EventEnvelope } from '@/events/envelope'
 import { buildRoutingKey } from '@/events/envelope'
 import { declareTopology } from '@/events/topology'
-import { QUEUE_BINDINGS, type QueueBinding } from '@/events/topology/bindings'
+import { EXCHANGE_CONFIG, QUEUE_BINDINGS, type QueueBinding } from '@/events/topology/bindings'
 import { getTracer, getMeter, withContextAsync } from '@/events/tracing/telemetry'
 import { setSpanContextFromEnvelope } from '@/events/tracing/tracePropagation'
 import { MESSAGING_ATTR, DOMAIN_ATTR } from '@/events/tracing/spanAttributes'
@@ -21,10 +21,10 @@ interface Subscription {
 }
 
 const CATEGORY_EXCHANGE_MAP: Record<EventCategory, string> = {
-  integration: 'tourism.integration',
-  notification: 'tourism.notify',
-  inbound: 'identity.events',
-  capacity: 'capacity.events',
+  integration: EXCHANGE_CONFIG.integration,
+  notification: EXCHANGE_CONFIG.notification,
+  inbound: EXCHANGE_CONFIG.identityEvents,
+  capacity: EXCHANGE_CONFIG.capacityEvents,
 }
 
 const DEFAULT_MAX_RETRIES = 3
@@ -34,14 +34,19 @@ const DEFAULT_RETRY_DELAY_MS = 30000
 /**
  * Maps (consumerGroup, exchange) → QueueBinding so that subscribe()
  * can resolve the correct queue even when a consumer group has
- * queues on multiple exchanges (e.g. identity on tourism.integration
- * AND identity.events).
+ * queues on multiple exchanges (e.g. identity on EXCHANGE_CONFIG.integration
+ * AND EXCHANGE_CONFIG.identityEvents).
  */
 const QUEUE_BY_GROUP_AND_EXCHANGE = new Map<string, QueueBinding>()
 
 for (const binding of QUEUE_BINDINGS) {
   const consumerGroup = binding.queueName.replace(/\.(integration|notify|inbound)\.queue$/, '')
   QUEUE_BY_GROUP_AND_EXCHANGE.set(`${consumerGroup}|${binding.exchange}`, binding)
+}
+
+const QUEUE_DLX_MAP = new Map<string, string>()
+for (const binding of QUEUE_BINDINGS) {
+  QUEUE_DLX_MAP.set(binding.queueName, binding.dlxExchange)
 }
 
 function resolveQueue(consumerGroup: string, category: EventCategory): string {
@@ -464,7 +469,7 @@ export class RabbitMQEventBus implements IEventBus {
     const retryCount = this.getRetryCount(msg) + 1
     const retryQueueName = `${queueName}.retry`
     const dlqName = `${queueName}.dlq`
-    const dlxName = 'tourism.dlx'
+    const dlxName = QUEUE_DLX_MAP.get(queueName) ?? 'cms.dlx'
 
     if (retryCount <= this.maxRetries) {
       await this.publishAndConfirm(channel, '', retryQueueName, msg.content, {

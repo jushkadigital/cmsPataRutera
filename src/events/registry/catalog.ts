@@ -1,4 +1,5 @@
 import { EventRegistry } from './EventRegistry'
+import { EXCHANGE_CONFIG } from '@/events/topology/bindings'
 
 export const eventRegistry = new EventRegistry()
 
@@ -9,7 +10,7 @@ eventRegistry.register({
   aggregateType: 'tour',
   producer: 'catalog',
   description: 'Tour was published and is now visible to customers',
-  exchange: 'tourism.integration',
+  exchange: EXCHANGE_CONFIG.integration,
   routingKeyPattern: 'integration.tour.published.v1',
 })
 
@@ -20,7 +21,7 @@ eventRegistry.register({
   aggregateType: 'tour',
   producer: 'catalog',
   description: 'Published tour was updated',
-  exchange: 'tourism.integration',
+  exchange: EXCHANGE_CONFIG.integration,
   routingKeyPattern: 'integration.tour.updated.v1',
 })
 
@@ -31,7 +32,7 @@ eventRegistry.register({
   aggregateType: 'tour',
   producer: 'catalog',
   description: 'Tour was permanently deleted',
-  exchange: 'tourism.integration',
+  exchange: EXCHANGE_CONFIG.integration,
   routingKeyPattern: 'integration.tour.deleted.v1',
 })
 
@@ -42,7 +43,7 @@ eventRegistry.register({
   aggregateType: 'package',
   producer: 'catalog',
   description: 'Package was published and is now visible to customers',
-  exchange: 'tourism.integration',
+  exchange: EXCHANGE_CONFIG.integration,
   routingKeyPattern: 'integration.package.published.v1',
 })
 
@@ -53,7 +54,7 @@ eventRegistry.register({
   aggregateType: 'package',
   producer: 'catalog',
   description: 'Published package was updated',
-  exchange: 'tourism.integration',
+  exchange: EXCHANGE_CONFIG.integration,
   routingKeyPattern: 'integration.package.updated.v1',
 })
 
@@ -64,7 +65,7 @@ eventRegistry.register({
   aggregateType: 'package',
   producer: 'catalog',
   description: 'Package was permanently deleted',
-  exchange: 'tourism.integration',
+  exchange: EXCHANGE_CONFIG.integration,
   routingKeyPattern: 'integration.package.deleted.v1',
 })
 
@@ -75,7 +76,7 @@ eventRegistry.register({
   aggregateType: 'tour',
   producer: 'catalog',
   description: 'Notification that a tour was published',
-  exchange: 'tourism.notify',
+  exchange: EXCHANGE_CONFIG.notification,
   routingKeyPattern: 'notify.tour.published.v1',
 })
 
@@ -86,7 +87,7 @@ eventRegistry.register({
   aggregateType: 'tour',
   producer: 'catalog',
   description: 'Notification that a published tour was updated',
-  exchange: 'tourism.notify',
+  exchange: EXCHANGE_CONFIG.notification,
   routingKeyPattern: 'notify.tour.updated.v1',
 })
 
@@ -97,7 +98,7 @@ eventRegistry.register({
   aggregateType: 'package',
   producer: 'catalog',
   description: 'Notification that a package was published',
-  exchange: 'tourism.notify',
+  exchange: EXCHANGE_CONFIG.notification,
   routingKeyPattern: 'notify.package.published.v1',
 })
 
@@ -108,7 +109,7 @@ eventRegistry.register({
   aggregateType: 'package',
   producer: 'catalog',
   description: 'Notification that a published package was updated',
-  exchange: 'tourism.notify',
+  exchange: EXCHANGE_CONFIG.notification,
   routingKeyPattern: 'notify.package.updated.v1',
 })
 
@@ -119,7 +120,7 @@ eventRegistry.register({
   aggregateType: 'user',
   producer: 'user-service',
   description: 'User created in external identity service',
-  exchange: 'identity.events',
+  exchange: EXCHANGE_CONFIG.identityEvents,
   routingKeyPattern: 'identity.user.created.v1',
 })
 
@@ -130,7 +131,7 @@ eventRegistry.register({
   aggregateType: 'user',
   producer: 'user-service',
   description: 'User deleted in external identity service',
-  exchange: 'identity.events',
+  exchange: EXCHANGE_CONFIG.identityEvents,
   routingKeyPattern: 'identity.user.deleted.v1',
 })
 
@@ -141,6 +142,6 @@ eventRegistry.register({
   aggregateType: 'tour',
   producer: 'capacity-service',
   description: 'External capacity service updated max passengers for a tour or paquete',
-  exchange: 'capacity.events',
+  exchange: EXCHANGE_CONFIG.capacityEvents,
   routingKeyPattern: 'capacity.max_passengers.updated.v1',
 })

@@ -1,16 +1,22 @@
 import type { ConfirmChannel } from 'amqplib'
 
-import { QUEUE_BINDINGS } from './bindings'
+import { EXCHANGE_CONFIG, QUEUE_BINDINGS } from './bindings'
 
-const DLX_EXCHANGE = 'tourism.dlx'
 const RETRY_DELAY_MS = Number(process.env.RABBITMQ_RETRY_DELAY_MS ?? '30000')
 
 export async function declareTopology(channel: ConfirmChannel): Promise<void> {
-  await channel.assertExchange('tourism.integration', 'topic', { durable: true })
-  await channel.assertExchange('tourism.notify', 'topic', { durable: true })
-  await channel.assertExchange('identity.events', 'topic', { durable: true })
-  await channel.assertExchange('capacity.events', 'topic', { durable: true })
-  await channel.assertExchange(DLX_EXCHANGE, 'fanout', { durable: true })
+  await channel.assertExchange(EXCHANGE_CONFIG.integration, 'topic', { durable: true })
+  await channel.assertExchange(EXCHANGE_CONFIG.notification, 'topic', { durable: true })
+  await channel.assertExchange(EXCHANGE_CONFIG.identityEvents, 'topic', { durable: true })
+  await channel.assertExchange(EXCHANGE_CONFIG.capacityEvents, 'topic', { durable: true })
+
+  const declaredDlx = new Set<string>()
+  for (const binding of QUEUE_BINDINGS) {
+    if (!declaredDlx.has(binding.dlxExchange)) {
+      declaredDlx.add(binding.dlxExchange)
+      await channel.assertExchange(binding.dlxExchange, binding.dlxType, { durable: true })
+    }
+  }
 
   for (const binding of QUEUE_BINDINGS) {
     await channel.assertQueue(binding.dlqName, {
@@ -20,7 +26,11 @@ export async function declareTopology(channel: ConfirmChannel): Promise<void> {
       },
     })
 
-    await channel.bindQueue(binding.dlqName, DLX_EXCHANGE, '')
+    if (binding.dlxType === 'fanout') {
+      await channel.bindQueue(binding.dlqName, binding.dlxExchange, '')
+    } else {
+      await channel.bindQueue(binding.dlqName, binding.dlxExchange, binding.dlqName)
+    }
 
     await channel.assertQueue(binding.retryQueueName, {
       durable: true,
@@ -34,7 +44,7 @@ export async function declareTopology(channel: ConfirmChannel): Promise<void> {
 
     await channel.assertQueue(binding.queueName, {
       durable: true,
-      deadLetterExchange: DLX_EXCHANGE,
+      deadLetterExchange: binding.dlxExchange,
       arguments: {
         'x-queue-type': 'quorum',
       },
